@@ -1,0 +1,51 @@
+.juegosHome{
+    flex: 3;
+    padding: 50px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}
+
+.title{
+    font-weight: bolder;
+    font-size: 24px;
+    color:black;
+}
+
+.progresoList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+li{
+    padding: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+li:hover{
+    color:orangered;
+}
+
+.tendenciasList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+.nuevosList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+.tendenciasWrapper{
+    margin-top: 20px;
+}
+
+.nuevosWrapper{
+    margin-top: 20px;
+}
