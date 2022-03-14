@@ -2,6 +2,7 @@ import React, { useState } from 'react';
 import { Link, Route, BrowserRouter, Routes, Navigate, useNavigate } from 'react-router-dom';
 import Login from './login/login';
 import Home from './home/home';
+import Register from './register/register';
 
 interface IProps { }
 interface IState { }
@@ -24,6 +25,7 @@ const App = () => {
       <Routes>
         <Route path="/" element={<Login />} />
         <Route path="/home" element={<Home />} />
+        <Route path="/register" element={<Register />} />
       </Routes>
     </BrowserRouter>
   );
