@@ -65,12 +65,21 @@
     font-size: 20px;
     font-weight: 500px;
 }
+
+.loginButton:hover {
+    filter: brightness(120%);
+}
+
 .registerButton{
     height: 50px;
     border-radius: 10px;
     border: none;
-    background-color:blue;
+    background-color:lightskyblue;
     color:white;
     font-size: 20px;
     font-weight: 500px;
+}
+
+.registerButton:hover {
+    filter: brightness(120%);
 }

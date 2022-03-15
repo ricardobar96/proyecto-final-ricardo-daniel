@@ -1,0 +1,6 @@
+.trends{
+    flex: 10;
+    padding: 50px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}

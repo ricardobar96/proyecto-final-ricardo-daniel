@@ -1,0 +1,18 @@
+.filter{
+    flex: 7;
+    padding: 50px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}
+
+.filterSlider{
+    width: 30%;
+    padding-top: 15px;
+}
+
+.filterWrapper{
+}
+
+.orderBox{
+    
+}
