@@ -6,6 +6,7 @@ import { Navigate, useNavigate } from 'react-router-dom';
 export default function Login() {
     const nameUser = useRef<HTMLInputElement>(null);
     const passwordUser = useRef<HTMLInputElement>(null);
+    let navigate = useNavigate();
 
     const login = (event: React.FormEvent<HTMLFormElement>) => {
 
@@ -33,28 +34,7 @@ export default function Login() {
     }
 
     const register = (event: React.FormEvent<HTMLFormElement>) => {
-
-        event.preventDefault();
-        let formulario: HTMLFormElement = event.currentTarget;
-
-        let nameI = nameUser.current?.value;
-        let passwordI = passwordUser.current?.value;
-
-        let login = {
-            name: nameI,
-            password: passwordI
-        }
-        const axiospost = async (rutaDeLogin: string) => {
-            try {
-                const { data } = await axios.post(rutaDeLogin, login)
-                localStorage.clear();
-                localStorage.setItem("token", data);
-            } catch (error) {
-                console.log(error);
-            }
-        }
-        alert("Registrar usuario");
-        axiospost("http://localhost:8080/api/login");
+        navigate("/register");
     }
 
     return (

@@ -51,6 +51,7 @@
     font-weight: bolder;
     cursor: pointer;
     padding: 50px;
+    color:white;
 }
 .topbarLink:hover{
     color:orangered;

@@ -4,6 +4,7 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
 export default function Register() {
+    let navigate = useNavigate();
     const nameUser = useRef<HTMLInputElement>(null);
     const passwordUser = useRef<HTMLInputElement>(null);
 
@@ -33,7 +34,7 @@ export default function Register() {
     }
 
     const returnLogin = (event: React.FormEvent<HTMLFormElement>) => {
-        alert("Redireccionar a iniciar sesión");
+        navigate("/");
     }
 
     return (
@@ -45,7 +46,7 @@ export default function Register() {
                 </div>
                 <div className="registerRight">
                     <form onSubmit={register}>
-                        <div className="registerBox">
+                        <div className="registerAccountBox">
                             <input type="text" ref={nameUser} placeholder="Nombre" className="registerInput" />
                             <input type="text" ref={passwordUser} placeholder="Contraseña" className="registerInput" />
                             <button type="submit" className="registerAccountButton">Crear cuenta</button>

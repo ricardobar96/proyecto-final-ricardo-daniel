@@ -4,6 +4,7 @@ import Login from './login/login';
 import Home from './home/home';
 import Register from './register/register';
 import Games from './games/games';
+import InfoGame from './infoGame/infoGame';
 
 interface IProps { }
 interface IState { }
@@ -28,6 +29,7 @@ const App = () => {
         <Route path="/home" element={<Home />} />
         <Route path="/register" element={<Register />} />
         <Route path="/games" element={<Games />} />
+        <Route path="/infoGame" element={<InfoGame />} />
       </Routes>
     </BrowserRouter>
   );

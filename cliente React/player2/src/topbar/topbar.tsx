@@ -2,6 +2,7 @@ import "./topbar.css";
 import { Search, Person, Menu, Chat } from "@material-ui/icons";
 import React, { useRef } from 'react';
 import axios from 'axios';
+import { Link } from 'react-router-dom';
 
 export default function Topbar() {
     return (
@@ -11,9 +12,15 @@ export default function Topbar() {
             </div>
             <div className="topbarCenter">
                 <div className="topbarLinks">
-                    <span className="topbarLink">Home</span>
-                    <span className="topbarLink">Perfil</span>
-                    <span className="topbarLink">Videojuegos</span>
+                    <Link to="/home" style={{textDecoration:"none"}}>
+                        <span className="topbarLink">Home</span>
+                    </Link>
+                    <Link to="/register" style={{textDecoration:"none"}}>
+                        <span className="topbarLink">Perfil</span>
+                    </Link>
+                    <Link to="/" style={{textDecoration:"none"}}>
+                        <span className="topbarLink">Videojuegos</span>
+                    </Link>
                 </div>
             </div>
             <div className="topbarRight">

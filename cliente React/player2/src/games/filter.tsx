@@ -2,7 +2,6 @@ import "./filter.css";
 import React, { useRef, useState } from 'react';
 import axios from 'axios';
 import { Slider } from "@material-ui/core";
-import Combobox from "react-widgets/Combobox";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
