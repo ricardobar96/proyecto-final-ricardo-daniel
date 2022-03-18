@@ -1,10 +1,19 @@
 import "./topbar.css";
-import { Search, Person, Menu, Chat } from "@material-ui/icons";
+import { Search, Person, Menu, Chat, ExitToApp } from "@material-ui/icons";
 import React, { useRef } from 'react';
 import axios from 'axios';
-import { Link } from 'react-router-dom';
+import { Link, Navigate, useNavigate } from 'react-router-dom';
+import Dropdown from 'react-dropdown';
+import 'react-dropdown/style.css';
 
 export default function Topbar() {
+    let navigate = useNavigate();
+
+    function Logout() {
+        localStorage.clear();
+        navigate("/");
+    }
+    
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -12,13 +21,13 @@ export default function Topbar() {
             </div>
             <div className="topbarCenter">
                 <div className="topbarLinks">
-                    <Link to="/home" style={{textDecoration:"none"}}>
+                    <Link to="/home" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Home</span>
                     </Link>
-                    <Link to="/register" style={{textDecoration:"none"}}>
+                    <Link to="/register" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Perfil</span>
                     </Link>
-                    <Link to="/" style={{textDecoration:"none"}}>
+                    <Link to="/games" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Videojuegos</span>
                     </Link>
                 </div>
@@ -36,7 +45,7 @@ export default function Topbar() {
                         <Person />
                     </div>
                     <div className="topbarIconsItem">
-                        <Menu />
+                        <ExitToApp onClick={Logout} />
                     </div>
 
                 </div>

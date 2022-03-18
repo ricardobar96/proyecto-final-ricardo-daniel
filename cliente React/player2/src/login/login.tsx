@@ -25,11 +25,11 @@ export default function Login() {
                 const { data } = await axios.post(rutaDeLogin, login)
                 localStorage.clear();
                 localStorage.setItem("token", data);
+                navigate("/home");
             } catch (error) {
                 console.log(error);
             }
         }
-        alert("Usuario logueado");
         axiospost("http://localhost:8080/api/login");
     }
 
@@ -48,7 +48,7 @@ export default function Login() {
                     <form onSubmit={login}>
                         <div className="loginBox">
                             <input type="text" ref={nameUser} placeholder="Nombre" className="loginInput" />
-                            <input type="text" ref={passwordUser} placeholder="Contraseña" className="loginInput" />
+                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="loginInput" />
                             <button type="submit" className="loginButton">Iniciar sesión</button>
                         </div>
                     </form>
