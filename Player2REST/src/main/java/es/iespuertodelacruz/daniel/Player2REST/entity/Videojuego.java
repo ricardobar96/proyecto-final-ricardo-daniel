@@ -27,6 +27,8 @@ public class Videojuego implements Serializable {
 	private BigInteger fecha;
 
 	private String nombre;
+	
+	private String imagen;
 
 	private float puntuacion;
 
@@ -83,6 +85,14 @@ public class Videojuego implements Serializable {
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
+	}
+	
+	public String getImagen() {
+		return this.imagen;
+	}
+
+	public void setImagen(String imagen) {
+		this.imagen = imagen;
 	}
 
 	public float getPuntuacion() {
