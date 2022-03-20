@@ -5,8 +5,15 @@
     text-align: center;
 }
 
-.gameImage{
-    font-size: 200px;
+.imageGameInfo{
+    width: 200px;
+    height: 200px;
+    text-align: center;
+}
+
+.titleGameInfo{
+    color:blue;
+    text-align: center;
 }
 
 .pistasList{
@@ -27,4 +34,35 @@
 
 .reviewsWrapper{
     padding: 50px;
+}
+
+.buttonForm{
+    margin-top: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 100px;
+    border-radius: 10px;
+    border: none;
+    background-color:coral;
+    color:white;
+    font-size: 20px;
+    font-weight: 500px;
+    margin-bottom: 50px;
+}
+
+.inputForm, textarea{
+    padding: 15px 18px;
+    border-radius: 30px;
+    border-width: 0px;
+    color: #647B7A;
+    background-color: #F9F9F9;
+    font-size: 14px;
+    margin-top: 20px;
+}
+
+.infoP{
+    background-color: lightgoldenrodyellow;
+    padding: 20px;
+    line-height: 2.6;
+    border-radius: 30px;
 }

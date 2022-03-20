@@ -26,13 +26,17 @@
         "id": 1,
         "nombre": "Fallout 4",
         "fecha": "10/11/2015",
-        "puntuacion": 9
+        "puntuacion": 9,
+        "descripcion": "Uno de los mejores videojuegos creados",
+        "imagen": "./images/fallout-4.jpg"
       },
       {
         "id": 2,
         "nombre": "Elden Ring",
         "fecha": "25/2/2022",
-        "puntuacion": 9
+        "puntuacion": 9,
+        "descripcion": "Un juego que no he probado",
+        "imagen": "./images/elden-ring.jpg"
       }
     ],
     "generos": [

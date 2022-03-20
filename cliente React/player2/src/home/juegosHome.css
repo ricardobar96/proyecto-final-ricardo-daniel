@@ -1,3 +1,7 @@
+body{
+    background-color: lightsteelblue
+}
+
 .juegosHome{
     flex: 3;
     padding: 50px;
@@ -33,6 +37,18 @@ li:hover{
     margin: 0;
     list-style: none;
     display: flex;
+}
+
+.imageGameHome{
+    width: 100px;
+    height: 100px;
+    text-align: center;
+}
+
+.titleGameHome{
+    color:blue;
+    text-decoration: none;
+    text-align: center;
 }
 
 .nuevosList{

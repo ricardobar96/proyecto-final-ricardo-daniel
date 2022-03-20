@@ -5,6 +5,7 @@ import Home from './home/home';
 import Register from './register/register';
 import Games from './games/games';
 import InfoGame from './infoGame/infoGame';
+import ChatHome from './home/chat/chatHome';
 
 interface IProps { }
 interface IState { }
@@ -38,9 +39,14 @@ const App = () => {
             <Games/>
           </RequireAuth>
         } />
-        <Route path="/infoGame" element={
+        <Route path="api/v1/videojuego/:id" element={
           <RequireAuth >
             <InfoGame/>
+          </RequireAuth>
+        } />
+        <Route path="/chat" element={
+          <RequireAuth >
+            <ChatHome/>
           </RequireAuth>
         } />
       </Routes>

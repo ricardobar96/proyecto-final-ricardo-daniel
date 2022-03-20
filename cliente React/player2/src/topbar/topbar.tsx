@@ -8,10 +8,20 @@ import 'react-dropdown/style.css';
 
 export default function Topbar() {
     let navigate = useNavigate();
+    const juegoBuscar = useRef<HTMLInputElement>(null);
 
     function Logout() {
         localStorage.clear();
         navigate("/");
+    }
+
+    function SearchGame() {
+        let buscar = juegoBuscar.current?.value;
+        navigate("/game/" + buscar);
+    }
+
+    function goChat() {
+        navigate("/chat");
     }
     
     return (
@@ -34,12 +44,12 @@ export default function Topbar() {
             </div>
             <div className="topbarRight">
                 <div className="searchbar">
-                    <Search className="searchIcon" />
-                    <input placeholder="Busca un videojuego" className="searchInput" />
+                    <Search className="searchIcon" onClick={SearchGame}/>
+                    <input placeholder="Busca un videojuego" className="searchInput" ref={juegoBuscar}/>
                 </div>
                 <div className="topbarIcons">
                     <div className="topbarIconsItem">
-                        <Chat />
+                        <Chat onClick={goChat}/>
                     </div>
                     <div className="topbarIconsItem">
                         <Person />
