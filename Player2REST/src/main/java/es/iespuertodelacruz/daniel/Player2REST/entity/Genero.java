@@ -2,6 +2,9 @@ package es.iespuertodelacruz.daniel.Player2REST.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -16,11 +19,12 @@ public class Genero implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private String nombre;
 
+	@JsonIgnore
 	//bi-directional many-to-many association to Videojuego
 	@ManyToMany(mappedBy="generos")
 	private List<Videojuego> videojuegos;

@@ -33,7 +33,7 @@ public class VideojuegoREST {
 		for (Videojuego videojuego : l) {
 			listaVid.add(new VideojuegoDTO(videojuego));
 		}
-		return new ResponseEntity<>(l, HttpStatus.OK);
+		return new ResponseEntity<>(listaVid, HttpStatus.OK);
 	}
 
 	@DeleteMapping("/{id}")
