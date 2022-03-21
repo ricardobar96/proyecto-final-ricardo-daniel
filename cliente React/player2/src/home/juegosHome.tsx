@@ -58,11 +58,14 @@ export const JuegosHome = () => {
                     {
                         videojuegos?.videojuegos?.map((a: player2.videojuegos) => {
                             return (
+                                <div className='juegosHomeBox'>
                                 <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                    <li><h3 className='titleGameHome'>{a.nombre}</h3>
+                                    <li>
                                         <span><img src={a.imagen} className='imageGameHome' /></span>
+                                        <h5 className='titleGameHome'>{a.nombre}</h5>
                                     </li>
                                 </Link>
+                                </div>
                             );
                         })
                     }
@@ -75,11 +78,14 @@ export const JuegosHome = () => {
                     {
                         videojuegos?.videojuegos?.map((a: player2.videojuegos) => {
                             return (
+                                <div className='juegosHomeBox'>
                                 <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                    <li><h3 className='titleGameHome'>{a.nombre}</h3>
+                                    <li>
                                         <span><img src={a.imagen} className='imageGameHome' /></span>
+                                        <h5 className='titleGameHome'>{a.nombre}</h5>
                                     </li>
                                 </Link>
+                                </div>
                             );
                         })
                     }
@@ -92,11 +98,14 @@ export const JuegosHome = () => {
                     {
                         videojuegos?.videojuegos?.map((a: player2.videojuegos) => {
                             return (
+                                <div className='juegosHomeBox'>
                                 <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                    <li><h3 className='titleGameHome'>{a.nombre}</h3>
+                                    <li>
                                         <span><img src={a.imagen} className='imageGameHome' /></span>
+                                        <h5 className='titleGameHome'>{a.nombre}</h5>
                                     </li>
                                 </Link>
+                                </div>
                             );
                         })
                     }

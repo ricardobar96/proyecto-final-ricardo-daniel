@@ -4,3 +4,8 @@
     height: calc(100vh - 50px);
     background-color: lightsteelblue;
 }
+
+.juegosHomeBoxe{
+    display: flex;
+    align-items: center;
+}
