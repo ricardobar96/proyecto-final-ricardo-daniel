@@ -77,6 +77,12 @@ export default function Topbar() {
         navigate("/chat");
     }
 
+    const handleKeypress = (event: React.KeyboardEvent<HTMLInputElement>) => {
+        if (event.keyCode === 13) {
+            SearchGame();
+        }
+    }
+
     return (
         <div className="topbarContainer">
             <div className="topbarLeft">
@@ -97,9 +103,9 @@ export default function Topbar() {
             </div>
             <div className="topbarRight">
                 <div className="searchbar">
-                    <Toaster position="top-right" gutter={56} />
-                    <Search className="searchIcon" onClick={SearchGame} />
-                    <input placeholder="Busca un videojuego" className="searchInput" ref={juegoBuscar} />
+                    <Toaster position="top-center" gutter={56} />
+                    <Search className="searchIcon" onClick={SearchGame}/>
+                    <input placeholder="Busca un videojuego" className="searchInput" ref={juegoBuscar} onKeyDown={(e) => handleKeypress(e) }/>
                 </div>
                 <div className="topbarIcons">
                     <div className="topbarIconsItem">

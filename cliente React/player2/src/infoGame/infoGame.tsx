@@ -1,5 +1,4 @@
 import "./infoGame.css";
-import { VideogameAsset } from "@material-ui/icons";
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
@@ -66,74 +65,14 @@ export default function InfoGame() {
     const clueTitle = useRef<HTMLInputElement>(null);
     const clueBody = useRef<HTMLTextAreaElement>(null);
 
-    const createClue = async (event: React.FormEvent<HTMLFormElement>) => {
-
-        event.preventDefault();
-        let formulario: HTMLFormElement = event.currentTarget;
-
-        let userC = clueUser.current?.value;
-        let gameC = clueGame.current?.value;
-        let titleC = clueTitle.current?.value;
-        let bodyC = clueBody.current?.value;
-
-        let rutaDeJuego = "http://localhost:8080/api/v1/infoGame/";
-        let { data } = await axios.get(rutaDeJuego + id);
-        let userActual: player2.usuarios = data;
-        let gameActual: player2.videojuegos = data;
-        let fechaActual = new Date();
-
-        const newClue = {
-            "titulo": titleC,
-            "contenido": bodyC,
-            "idusuario": userActual.id,
-            "idvideojuego": gameActual.id,
-            "fecha": fechaActual,
-        }
-
-        let ruta = "http://localhost:8080/api/v1/infogame";
-        try {
-            const { data } = await axios.post(ruta, newClue)
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-
-        }
-        navigate("/infogame/" + gameActual.id);
+    function createReview() {
+        let ruta = "/api/v1/newReview/videojuego/" + stGame.videojuego?.id;
+        navigate(ruta);
     }
 
-    const createReview = async (event: React.FormEvent<HTMLFormElement>) => {
-
-        event.preventDefault();
-        let formulario: HTMLFormElement = event.currentTarget;
-
-        let userR = reviewUser.current?.value;
-        let gameR = reviewGame.current?.value;
-        let titleR = reviewTitle.current?.value;
-        let bodyR = reviewBody.current?.value;
-
-        let rutaDeJuego = "http://localhost:8080/api/v1/infoGame/";
-        let { data } = await axios.get(rutaDeJuego + id);
-        let userActual: player2.usuarios = data;
-        let gameActual: player2.videojuegos = data;
-        let fechaActual = new Date();
-
-        const newClue = {
-            "titulo": titleR,
-            "contenido": bodyR,
-            "idusuario": userActual.id,
-            "idvideojuego": gameActual.id,
-            "fecha": fechaActual,
-        }
-
-        let ruta = "http://localhost:8080/api/v1/infogame";
-        try {
-            const { data } = await axios.post(ruta, newClue)
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-
-        }
-        navigate("/infogame/" + gameActual.id);
+    function createClue() {
+        let ruta = "/api/v1/newClue/videojuego/" + stGame.videojuego?.id;
+        navigate(ruta);
     }
 
     useEffect(() => {
@@ -179,7 +118,7 @@ export default function InfoGame() {
                 <div className="infoGameWrapper">
                     <h2 className='titleGameInfo'>{stGame.videojuego?.nombre}</h2>
                     <span><img src={stGame.videojuego?.imagen} className='imageGameInfo' /></span>
-                    
+
                     <div className="desciption">
                         <h3 className="title">Descripción:</h3>
                         <p className="infoP">
@@ -199,11 +138,7 @@ export default function InfoGame() {
                             })}
                         </ul>
                     </div>
-                    <form onSubmit={createClue} className='formClue'>
-                        <input type="text" ref={clueTitle} placeholder="Título" className="inputForm" /> <br />
-                        <textarea ref={clueBody} placeholder="Escribe aquí una pista" cols={40} rows={10} /> <br />
-                        <button type="submit" className="buttonForm">Crear </button>
-                    </form>
+                    <button type="button" className="buttonForm" onClick={createClue}>Crear Pista</button>
 
                     <div className='infoReviewsWrapper'>
                         <h3 className="title">Reviews:</h3>
@@ -218,11 +153,7 @@ export default function InfoGame() {
                             })}
                         </ul>
                     </div>
-                    <form onSubmit={createReview} className='formReview'>
-                        <input type="text" ref={reviewTitle} placeholder="Título" className="inputForm" /> <br />
-                        <textarea ref={reviewBody} placeholder="Escribe aquí una review" cols={40} rows={10} /><br />
-                        <button type="submit" className="buttonForm">Crear </button>
-                    </form>
+                    <button type="button" className="buttonForm" onClick={createReview}>Crear Review</button>
                 </div>
             </div>
         </>

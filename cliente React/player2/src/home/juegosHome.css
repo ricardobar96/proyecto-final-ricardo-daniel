@@ -45,6 +45,10 @@ li:hover{
     text-align: center;
 }
 
+.titleGameHome:hover{
+    color:orangered;
+}
+
 .titleGameHome{
     color:blue;
     text-decoration: none;

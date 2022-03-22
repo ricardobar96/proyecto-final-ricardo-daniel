@@ -57,10 +57,10 @@ export default function Trends() {
                         {
                             videojuegos?.videojuegos?.map((a: player2.videojuegos) => {
                                 return (
-                                    <div className="juegosHomeBoxe">
+                                    <div className="juegosHomeBox">
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
                                         <li>
-                                            <span><img src={a.imagen} className='imageGameHome' /></span>
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
                                             <h5 className='titleGameHome'>{a.nombre}</h5>
                                         </li>
                                     </Link>
@@ -76,10 +76,10 @@ export default function Trends() {
                         {
                             videojuegos?.videojuegos?.map((a: player2.videojuegos) => {
                                 return (
-                                    <div className="juegosHomeBox">
+                                    <div className="juegosTrendsBox">
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
                                         <li>
-                                            <span><img src={a.imagen} className='imageGameHome' /></span>
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
                                             <h5 className='titleGameHome'>{a.nombre}</h5>
                                         </li>
                                     </Link>

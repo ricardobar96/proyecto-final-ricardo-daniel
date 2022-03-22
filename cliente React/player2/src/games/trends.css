@@ -1,11 +1,12 @@
 .trends{
     flex: 10;
-    padding: 50px;
+    padding: 40px;
     height: calc(100vh - 50px);
     background-color: lightsteelblue;
 }
 
-.juegosHomeBoxe{
-    display: flex;
-    align-items: center;
+.imageGameTrends{
+    width: 120px;
+    height: 120px;
+    text-align: center;
 }
