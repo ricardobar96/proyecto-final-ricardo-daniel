@@ -15,7 +15,7 @@ public class JuegoUsuario implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Id
-	@GeneratedValue(strategy=GenerationType.AUTO)
+	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
 
 	private byte completado;
@@ -31,6 +31,8 @@ public class JuegoUsuario implements Serializable {
 	@ManyToOne
 	@JoinColumn(name="idusuario")
 	private Usuario usuario;
+	
+	private int puntuacion;
 
 	public JuegoUsuario() {
 	}
@@ -74,5 +76,15 @@ public class JuegoUsuario implements Serializable {
 	public void setUsuario(Usuario usuario) {
 		this.usuario = usuario;
 	}
+
+	public int getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+	
+	
 
 }
