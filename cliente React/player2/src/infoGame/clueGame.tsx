@@ -61,29 +61,35 @@ export default function ClueGame() {
         let titleC = clueTitle.current?.value;
         let bodyC = clueBody.current?.value;
 
+        /*
         let rutaDeJuego = "http://localhost:8080/api/v1/infoGame/";
         let { data } = await axios.get(rutaDeJuego + id);
         let userActual: player2.usuarios = data;
         let gameActual: player2.videojuegos = data;
+        */
+
         let fechaActual = new Date();
 
         const newClue = {
             "titulo": titleC,
             "contenido": bodyC,
-            "idusuario": userActual.id,
-            "idvideojuego": gameActual.id,
+            "idusuario": userC,
+            "idvideojuego": gameC,
             "fecha": fechaActual,
         }
 
-        let ruta = "http://localhost:8080/api/v1/infogame";
-        try {
-            const { data } = await axios.post(ruta, newClue)
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-
+        let ruta = "http://localhost:8080/api/v1/videojuego";
+        const axiospost = async (rutaDePista: string) => {
+            try {
+                const { data } = await axios.post(rutaDePista, newClue)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-        navigate("/infogame/" + gameActual.id);
+        axiospost(ruta).then(respuesta => {
+            navigate("/api/v1/videojuego/" + stGame.videojuego?.id)
+        });
     }
 
     useEffect(() => {
@@ -123,7 +129,8 @@ export default function ClueGame() {
             toast.error("Debes rellenar los dos campos");
         }
         else {
-            navigate('/');
+            //createClue();
+            //navigate("/api/v1/videojuego/" + stGame.videojuego?.id);
         }
     }
 
@@ -138,8 +145,8 @@ export default function ClueGame() {
 
                     <form onSubmit={createClue} className='formClue'>
                         <Toaster position="top-center" gutter={56} />
-                        <input type="text" ref={clueTitle} placeholder="Título" className="inputForm" /> <br />
-                        <textarea ref={clueBody} placeholder="Escribe aquí una pista" cols={130} rows={10} /><br />
+                        <input type="text" ref={clueTitle} placeholder="Título" className="inputForm" required /> <br />
+                        <textarea ref={clueBody} placeholder="Escribe aquí una pista" cols={130} rows={10} required /><br />
                         <button type="submit" className="buttonForm" onClick={sendClue}>Crear Pista</button>
                     </form>
                 </div>

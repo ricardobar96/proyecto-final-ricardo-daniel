@@ -3,38 +3,60 @@ import React, { useRef } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 
+declare module player2 {
+
+    export interface usuarios {
+        id: number;
+        nombre: string;
+        password: string;
+        rol: string;
+        avatar: string;
+        color_perfil: string;
+        banner_perfil: string;
+        sobre_mi: string;
+    }
+}
+
 export default function Register() {
     let navigate = useNavigate();
     const nameUser = useRef<HTMLInputElement>(null);
     const passwordUser = useRef<HTMLInputElement>(null);
 
-    const register = (event: React.FormEvent<HTMLFormElement>) => {
+    const returnLogin = (event: React.FormEvent<HTMLFormElement>) => {
+        navigate("/");
+    }
+
+    const registerUser = (event: React.FormEvent<HTMLFormElement>) => {
 
         event.preventDefault();
         let formulario: HTMLFormElement = event.currentTarget;
 
-        let nameI = nameUser.current?.value;
-        let passwordI = passwordUser.current?.value;
+        let name = nameUser.current?.value;
+        let password = passwordUser.current?.value;
 
-        let register = {
-            name: nameI,
-            password: passwordI
+        const newUser = {
+            "nombre": name,
+            "password": password,
+            "rol":"ROLE_USER",
+            "avatar":"",
+            "banner":"",
+            "descripcion":"",
+            "color":"",
+            "activo":1
         }
-        const axiospost = async (rutaDeRegister: string) => {
+
+        let ruta = "http://localhost:8080//api/v1/usuario";
+        const axiospost = async (rutaDeUsuario: string) => {
             try {
-                const { data } = await axios.post(rutaDeRegister, register)
-                localStorage.clear();
-                localStorage.setItem("token", data);
+                const { data } = await axios.post(rutaDeUsuario, newUser)
+                console.log(data);
             } catch (error) {
                 console.log(error);
             }
         }
-        alert("Creada nueva cuenta");
-        axiospost("http://localhost:8080/api/login");
-    }
-
-    const returnLogin = (event: React.FormEvent<HTMLFormElement>) => {
-        navigate("/");
+        axiospost(ruta).then(respuesta => {
+            navigate("/")
+        });
     }
 
     return (
@@ -45,10 +67,10 @@ export default function Register() {
                     <span className="registerInfo">Tu red social de videojuegos</span>
                 </div>
                 <div className="registerRight">
-                    <form onSubmit={register}>
+                    <form onSubmit={registerUser}>
                         <div className="registerAccountBox">
                             <input type="text" ref={nameUser} placeholder="Nombre" className="registerInput" />
-                            <input type="text" ref={passwordUser} placeholder="Contraseña" className="registerInput" />
+                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="registerInput" />
                             <button type="submit" className="registerAccountButton">Crear cuenta</button>
                         </div>
                     </form>

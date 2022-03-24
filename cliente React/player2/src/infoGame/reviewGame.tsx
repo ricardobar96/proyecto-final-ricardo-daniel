@@ -61,29 +61,35 @@ export default function ReviewGame() {
         let titleR = reviewTitle.current?.value;
         let bodyR = reviewBody.current?.value;
 
-        let rutaDeJuego = "http://localhost:8080/api/v1/infoGame/";
+        /*
+        let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
         let { data } = await axios.get(rutaDeJuego + id);
         let userActual: player2.usuarios = data;
         let gameActual: player2.videojuegos = data;
+        */
+
         let fechaActual = new Date();
 
         const newReview = {
             "titulo": titleR,
             "contenido": bodyR,
-            "idusuario": userActual.id,
-            "idvideojuego": gameActual.id,
+            "idusuario": userR,
+            "idvideojuego": gameR,
             "fecha": fechaActual,
         }
 
-        let ruta = "http://localhost:8080/api/v1/infogame";
-        try {
-            const { data } = await axios.post(ruta, newReview)
-            console.log(data);
-        } catch (error) {
-            console.log(error);
-
+        let ruta = "http://localhost:8080/api/v1/videojuego";
+        const axiospost = async (rutaDeJuego: string) => {
+            try {
+                const { data } = await axios.post(rutaDeJuego, newReview)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
         }
-        navigate("/infogame/" + gameActual.id);
+        axiospost(ruta).then(respuesta => {
+            navigate("/api/v1/videojuego/" + stGame.videojuego?.id)
+        });
     }
 
     useEffect(() => {
@@ -124,8 +130,9 @@ export default function ReviewGame() {
         if (actualTitle == '' || actualBody == '') {
             toast.error("Debes rellenar los dos campos");
         }
-        else{
-            navigate('/');
+        else {
+            //createReview();
+            //navigate("/api/v1/videojuego/" + stGame.videojuego?.id);
         }
     }
 
