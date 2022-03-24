@@ -24,9 +24,15 @@ public class Mensaje implements Serializable {
 
 	private BigInteger fecha;
 
-	private int idautor;
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="idautor")
+	private Usuario autor;
 
-	private int iddestinatario;
+	//bi-directional many-to-one association to Usuario
+	@ManyToOne
+	@JoinColumn(name="iddestinatario")
+	private Usuario destinatario;
 
 	public Mensaje() {
 	}
@@ -55,20 +61,20 @@ public class Mensaje implements Serializable {
 		this.fecha = fecha;
 	}
 
-	public int getIdautor() {
-		return this.idautor;
+	public Usuario getAutor() {
+		return this.autor;
 	}
 
-	public void setIdautor(int idautor) {
-		this.idautor = idautor;
+	public void setAutor(Usuario autor) {
+		this.autor = autor;
 	}
 
-	public int getIddestinatario() {
-		return this.iddestinatario;
+	public Usuario getDestinatario() {
+		return this.destinatario;
 	}
 
-	public void setIddestinatario(int iddestinatario) {
-		this.iddestinatario = iddestinatario;
+	public void setDestinatario(Usuario destinatario) {
+		this.destinatario = destinatario;
 	}
 
 }

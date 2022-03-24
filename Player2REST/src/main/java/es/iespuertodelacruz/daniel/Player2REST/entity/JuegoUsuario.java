@@ -3,6 +3,8 @@ package es.iespuertodelacruz.daniel.Player2REST.entity;
 import java.io.Serializable;
 import javax.persistence.*;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 
 /**
  * The persistent class for the juego_usuario database table.
@@ -22,17 +24,19 @@ public class JuegoUsuario implements Serializable {
 
 	private int horas;
 
-	//bi-directional many-to-one association to Videojuego
-	@ManyToOne
-	@JoinColumn(name="idvideojuego")
-	private Videojuego videojuego;
+	private int puntuacion;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="idusuario")
 	private Usuario usuario;
-	
-	private int puntuacion;
+
+	@JsonIgnore
+	//bi-directional many-to-one association to Videojuego
+	@ManyToOne
+	@JoinColumn(name="idvideojuego")
+	private Videojuego videojuego;
 
 	public JuegoUsuario() {
 	}
@@ -61,12 +65,12 @@ public class JuegoUsuario implements Serializable {
 		this.horas = horas;
 	}
 
-	public Videojuego getVideojuego() {
-		return this.videojuego;
+	public int getPuntuacion() {
+		return this.puntuacion;
 	}
 
-	public void setVideojuego(Videojuego videojuego) {
-		this.videojuego = videojuego;
+	public void setPuntuacion(int puntuacion) {
+		this.puntuacion = puntuacion;
 	}
 
 	public Usuario getUsuario() {
@@ -77,14 +81,12 @@ public class JuegoUsuario implements Serializable {
 		this.usuario = usuario;
 	}
 
-	public int getPuntuacion() {
-		return puntuacion;
+	public Videojuego getVideojuego() {
+		return this.videojuego;
 	}
 
-	public void setPuntuacion(int puntuacion) {
-		this.puntuacion = puntuacion;
+	public void setVideojuego(Videojuego videojuego) {
+		this.videojuego = videojuego;
 	}
-	
-	
 
 }

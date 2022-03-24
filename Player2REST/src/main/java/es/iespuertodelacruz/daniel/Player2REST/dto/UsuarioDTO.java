@@ -8,6 +8,7 @@ import javax.persistence.ManyToMany;
 import javax.persistence.OneToMany;
 
 import es.iespuertodelacruz.daniel.Player2REST.entity.JuegoUsuario;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Mensaje;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
@@ -31,12 +32,17 @@ public class UsuarioDTO {
 
 	private List<JuegoUsuario> juegoUsuarios;
 	private List<Pista> pistas;
+	
 
 	private List<Review> reviews;
 
 	private List<Usuario> followers;
 
 	private List<Usuario> followeds;
+	
+	private List<Mensaje> mensajesEnviados;
+	
+	private List<Mensaje> mensajesRecibidos;
 	public UsuarioDTO() {}
 	
 	public UsuarioDTO(Usuario usuario) {
@@ -53,6 +59,8 @@ public class UsuarioDTO {
 		this.reviews = usuario.getReviews();
 		this.followers = usuario.getFollowers();
 		this.followeds = usuario.getFolloweds();
+		this.mensajesEnviados = usuario.getMensajesEnviados();
+		this.mensajesRecibidos = usuario.getMensajesRecibidos();
 	}
 
 	public int getId() {
@@ -158,5 +166,23 @@ public class UsuarioDTO {
 	public void setFolloweds(List<Usuario> followeds) {
 		this.followeds = followeds;
 	}
+
+	public List<Mensaje> getMensajesEnviados() {
+		return mensajesEnviados;
+	}
+
+	public void setMensajesEnviados(List<Mensaje> mensajesEnviados) {
+		this.mensajesEnviados = mensajesEnviados;
+	}
+
+	public List<Mensaje> getMensajesRecibidos() {
+		return mensajesRecibidos;
+	}
+
+	public void setMensajesRecibidos(List<Mensaje> mensajesRecibidos) {
+		this.mensajesRecibidos = mensajesRecibidos;
+	}
+	
+	
 	
 }

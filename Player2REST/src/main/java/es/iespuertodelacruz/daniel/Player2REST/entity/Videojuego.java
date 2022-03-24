@@ -5,6 +5,9 @@ import java.math.BigInteger;
 
 import javax.persistence.*;
 import javax.persistence.JoinColumn;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
 
 
@@ -30,12 +33,13 @@ public class Videojuego implements Serializable {
 	
 	private String imagen;
 
-	private float puntuacion;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to JuegoUsuario
 	@OneToMany(mappedBy="videojuego")
 	private List<JuegoUsuario> juegoUsuarios;
 
+	
 	//bi-directional many-to-one association to Pista
 	@OneToMany(mappedBy="videojuego")
 	private List<Pista> pistas;
@@ -93,14 +97,6 @@ public class Videojuego implements Serializable {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
-	}
-
-	public float getPuntuacion() {
-		return this.puntuacion;
-	}
-
-	public void setPuntuacion(float puntuacion) {
-		this.puntuacion = puntuacion;
 	}
 
 	public List<JuegoUsuario> getJuegoUsuarios() {

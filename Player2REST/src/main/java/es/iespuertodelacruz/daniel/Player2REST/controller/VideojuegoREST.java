@@ -1,4 +1,5 @@
 package es.iespuertodelacruz.daniel.Player2REST.controller;
+import java.math.BigInteger;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -16,7 +17,9 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.daniel.Player2REST.dto.VideojuegoDTO;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Genero;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
+import es.iespuertodelacruz.daniel.Player2REST.service.GeneroService;
 import es.iespuertodelacruz.daniel.Player2REST.service.VideojuegoService;
 
 @RestController
@@ -25,6 +28,8 @@ public class VideojuegoREST {
 	// private Logger logger = (Logger) LoggerFactory.logger(getClass());
 	@Autowired
 	VideojuegoService videojuegoService;
+	@Autowired
+	GeneroService generoService;
 
 	@GetMapping
 	public ResponseEntity<?> getAll() {
@@ -72,14 +77,24 @@ public class VideojuegoREST {
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
-	}
+	}*/
 
 	@PostMapping
-	public ResponseEntity<?> saveVideojuego(@RequestBody Videojuego videojuegoDto) {
+	public ResponseEntity<?> saveVideojuego(@RequestBody VideojuegoDTO videojuegoDto) {
+		List<Genero> generos = new ArrayList<>();
+		for (Genero genero : videojuegoDto.getGeneros()) {
+			Optional<Genero> generoFind = generoService.findById(genero.getId());
+			if (generoFind.isPresent()) {
+				generos.add(generoFind.get());
+			}
+			
+		}
 		Videojuego videojuego = new Videojuego();
 		videojuego.setNombre(videojuegoDto.getNombre());
-		videojuego.setApellidos(videojuegoDto.getApellidos());
-		videojuego.setNacionalidad(videojuegoDto.getNacionalidad());
+		videojuego.setDescripcion(videojuegoDto.getDescripcion());
+		videojuego.setGeneros(generos);
+		videojuego.setImagen(videojuegoDto.getImagen());
+		videojuego.setFecha(BigInteger.valueOf(videojuegoDto.getFecha().getTime()));
 		Videojuego videojuegoC = null;
 		try {
 			videojuegoC = videojuegoService.save(videojuego);
@@ -92,6 +107,6 @@ public class VideojuegoREST {
 			return new ResponseEntity<>("Ya existe esa combinación de valores (Nick, Password)", HttpStatus.CONFLICT);
 		}
 
-	}*/
+	}
 }
 

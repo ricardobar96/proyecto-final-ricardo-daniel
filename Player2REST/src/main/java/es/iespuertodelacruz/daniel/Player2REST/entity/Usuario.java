@@ -2,8 +2,10 @@ package es.iespuertodelacruz.daniel.Player2REST.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.util.List;
-import javax.persistence.JoinColumn;
 
 
 /**
@@ -40,6 +42,16 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<JuegoUsuario> juegoUsuarios;
 
+	@JsonIgnore
+	//bi-directional many-to-one association to Mensaje
+	@OneToMany(mappedBy="autor")
+	private List<Mensaje> mensajesEnviados;
+
+	@JsonIgnore
+	//bi-directional many-to-one association to Mensaje
+	@OneToMany(mappedBy="destinatario")
+	private List<Mensaje> mensajesRecibidos;
+
 	//bi-directional many-to-one association to Pista
 	@OneToMany(mappedBy="usuario")
 	private List<Pista> pistas;
@@ -48,6 +60,7 @@ public class Usuario implements Serializable {
 	@OneToMany(mappedBy="usuario")
 	private List<Review> reviews;
 
+	@JsonIgnore
 	//bi-directional many-to-many association to Usuario
 	@ManyToMany
 	@JoinTable( name="follow",
@@ -56,6 +69,7 @@ public class Usuario implements Serializable {
 	)
 	private List<Usuario> followers;
 
+	@JsonIgnore
 	//bi-directional many-to-many association to Usuario
 	@ManyToMany(mappedBy="followers")
 	private List<Usuario> followeds;
@@ -155,6 +169,50 @@ public class Usuario implements Serializable {
 		juegoUsuario.setUsuario(null);
 
 		return juegoUsuario;
+	}
+
+	public List<Mensaje> getMensajesEnviados() {
+		return this.mensajesEnviados;
+	}
+
+	public void setMensajesEnviados(List<Mensaje> mensajesEnviados) {
+		this.mensajesEnviados = mensajesEnviados;
+	}
+	
+	public List<Mensaje> getMensajesRecibidos() {
+		return this.mensajesRecibidos;
+	}
+
+	public void setMensajesRecibidos(List<Mensaje> mensajesRecibidos) {
+		this.mensajesRecibidos = mensajesRecibidos;
+	}
+
+	public Mensaje addMensajesEnviados(Mensaje mensajesEnviados) {
+		getMensajesEnviados().add(mensajesEnviados);
+		mensajesEnviados.setAutor(this);
+
+		return mensajesEnviados;
+	}
+
+	public Mensaje removeMensajesEnviados(Mensaje mensajesEnviados) {
+		getMensajesEnviados().remove(mensajesEnviados);
+		mensajesEnviados.setAutor(null);
+
+		return mensajesEnviados;
+	}
+
+	public Mensaje addMensajesRecibidos(Mensaje mensajesRecibidos) {
+		getMensajesRecibidos().add(mensajesRecibidos);
+		mensajesRecibidos.setDestinatario(this);
+
+		return mensajesRecibidos;
+	}
+
+	public Mensaje removeMensajesRecibidos(Mensaje mensajesRecibidos) {
+		getMensajesRecibidos().remove(mensajesRecibidos);
+		mensajesRecibidos.setDestinatario(null);
+
+		return mensajesRecibidos;
 	}
 
 	public List<Pista> getPistas() {

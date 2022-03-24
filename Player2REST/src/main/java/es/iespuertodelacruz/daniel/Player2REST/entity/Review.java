@@ -2,6 +2,9 @@ package es.iespuertodelacruz.daniel.Player2REST.entity;
 
 import java.io.Serializable;
 import javax.persistence.*;
+
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import java.math.BigInteger;
 
 
@@ -26,11 +29,13 @@ public class Review implements Serializable {
 
 	private String titulo;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Usuario
 	@ManyToOne
 	@JoinColumn(name="idusuario")
 	private Usuario usuario;
 
+	@JsonIgnore
 	//bi-directional many-to-one association to Videojuego
 	@ManyToOne
 	@JoinColumn(name="idvideojuego")

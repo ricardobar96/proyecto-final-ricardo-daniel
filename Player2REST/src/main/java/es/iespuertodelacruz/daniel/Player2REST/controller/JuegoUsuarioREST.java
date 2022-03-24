@@ -17,7 +17,11 @@ import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.daniel.Player2REST.dto.JuegoUsuarioDTO;
 import es.iespuertodelacruz.daniel.Player2REST.entity.JuegoUsuario;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
 import es.iespuertodelacruz.daniel.Player2REST.service.JuegoUsuarioService;
+import es.iespuertodelacruz.daniel.Player2REST.service.UsuarioService;
+import es.iespuertodelacruz.daniel.Player2REST.service.VideojuegoService;
 
 @RestController
 @RequestMapping("/api/v1/juegousuario")
@@ -25,6 +29,10 @@ public class JuegoUsuarioREST {
 	// private Logger logger = (Logger) LoggerFactory.logger(getClass());
 	@Autowired
 	JuegoUsuarioService juegousuarioService;
+	@Autowired
+	VideojuegoService videojuegoService;
+	@Autowired
+	UsuarioService usuarioService;
 
 	@GetMapping
 	public ResponseEntity<?> getAll() {
@@ -76,23 +84,31 @@ public class JuegoUsuarioREST {
 */
 	@PostMapping
 	public ResponseEntity<?> saveJuegoUsuario(@RequestBody JuegoUsuario juegousuarioDto) {
+		
 		JuegoUsuario juegousuario = new JuegoUsuario();
-		juegousuario.setCompletado(juegousuarioDto.getCompletado());
-		juegousuario.setHoras(juegousuarioDto.getHoras());
-		juegousuario.setVideojuego(juegousuarioDto.getVideojuego());
-		juegousuario.setPuntuacion(juegousuarioDto.getPuntuacion());
-		juegousuario.setPuntuacion(juegousuarioDto.getPuntuacion());
-		JuegoUsuario juegousuarioC = null;
-		try {
-			juegousuarioC = juegousuarioService.save(juegousuario);
-		} catch (Exception e) {
-			e.printStackTrace();
+		Optional<Videojuego> videojuego = videojuegoService.findById(juegousuarioDto.getVideojuego().getId());
+		Optional<Usuario> usuario = usuarioService.findById(juegousuarioDto.getUsuario().getId());
+		if (videojuego.get() != null && usuario.get() != null) {
+			juegousuario.setCompletado(juegousuarioDto.getCompletado());
+			juegousuario.setHoras(juegousuarioDto.getHoras());
+			juegousuario.setVideojuego(videojuego.get());
+			juegousuario.setPuntuacion(juegousuarioDto.getPuntuacion());
+			juegousuario.setUsuario(usuario.get());
+			JuegoUsuario juegousuarioC = null;
+			try {
+				juegousuarioC = juegousuarioService.save(juegousuario);
+			} catch (Exception e) {
+				e.printStackTrace();
+			}
+			if (juegousuarioC != null) {
+				return new ResponseEntity<>(juegousuarioC, HttpStatus.OK);
+			} else {
+				return new ResponseEntity<>("Ya existe esa combinación de valores (Nick, Password)", HttpStatus.CONFLICT);
+			}
+		} else{
+			return new ResponseEntity<>("No se encuentra el videojuego o el usuario en la bbdd", HttpStatus.CONFLICT);
 		}
-		if (juegousuarioC != null) {
-			return new ResponseEntity<>(juegousuarioC, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Ya existe esa combinación de valores (Nick, Password)", HttpStatus.CONFLICT);
-		}
+		
 
 	}
 }

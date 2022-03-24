@@ -23,8 +23,6 @@ public class VideojuegoDTO {
 	
 	private String imagen;
 
-	private float puntuacion;
-
 	private List<JuegoUsuario> juegoUsuarios;
 
 	private List<Pista> pistas;
@@ -40,7 +38,6 @@ public class VideojuegoDTO {
 		this.descripcion = videojuego.getDescripcion();
 		this.nombre = videojuego.getNombre();
 		this.imagen = videojuego.getImagen();
-		this.puntuacion = videojuego.getPuntuacion();
 		this.generos = videojuego.getGeneros();
 		this.juegoUsuarios = videojuego.getJuegoUsuarios();
 		this.pistas = videojuego.getPistas();
@@ -90,14 +87,6 @@ public class VideojuegoDTO {
 
 	public void setImagen(String imagen) {
 		this.imagen = imagen;
-	}
-
-	public float getPuntuacion() {
-		return puntuacion;
-	}
-
-	public void setPuntuacion(float puntuacion) {
-		this.puntuacion = puntuacion;
 	}
 
 	public List<JuegoUsuario> getJuegoUsuarios() {
