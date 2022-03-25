@@ -2,6 +2,7 @@ import "./login.css";
 import React, { useRef } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from "react-hot-toast";
 
 export default function Login() {
     const nameUser = useRef<HTMLInputElement>(null);
@@ -27,6 +28,7 @@ export default function Login() {
                 localStorage.setItem("token", data);
                 navigate("/home");
             } catch (error) {
+                toast.error("No existe usuario con esos datos");
                 console.log(error);
             }
         }
@@ -47,8 +49,9 @@ export default function Login() {
                 <div className="loginRight">
                     <form onSubmit={login}>
                         <div className="loginBox">
-                            <input type="text" ref={nameUser} placeholder="Nombre" className="loginInput" />
-                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="loginInput" />
+                            <input type="text" ref={nameUser} placeholder="Nombre" className="loginInput" required/>
+                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="loginInput" required/>
+                            <Toaster position="top-center" gutter={56} />
                             <button type="submit" className="loginButton">Iniciar sesión</button>
                         </div>
                     </form>

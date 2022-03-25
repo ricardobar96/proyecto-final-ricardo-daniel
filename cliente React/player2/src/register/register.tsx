@@ -2,6 +2,7 @@ import "./register.css";
 import React, { useRef } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
+import toast, { Toaster } from "react-hot-toast";
 
 declare module player2 {
 
@@ -45,12 +46,13 @@ export default function Register() {
             "activo":1
         }
 
-        let ruta = "http://localhost:8080//api/v1/usuario";
+        let ruta = "http://localhost:8080/api/v1/usuario";
         const axiospost = async (rutaDeUsuario: string) => {
             try {
                 const { data } = await axios.post(rutaDeUsuario, newUser)
                 console.log(data);
             } catch (error) {
+                toast.error("Ya existe un usuario con ese nombre");
                 console.log(error);
             }
         }
@@ -69,14 +71,16 @@ export default function Register() {
                 <div className="registerRight">
                     <form onSubmit={registerUser}>
                         <div className="registerAccountBox">
-                            <input type="text" ref={nameUser} placeholder="Nombre" className="registerInput" />
-                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="registerInput" />
+                            <input type="text" ref={nameUser} placeholder="Nombre" className="registerInput" required/>
+                            <input type="password" ref={passwordUser} placeholder="Contraseña" className="registerInput" required/>
+                            <Toaster position="top-center" gutter={56} />
                             <button type="submit" className="registerAccountButton">Crear cuenta</button>
                         </div>
                     </form>
 
                     <form onSubmit={returnLogin}>
                         <div className="returnBox">
+                        <Toaster position="top-center" gutter={56} />
                             <button type="submit" className="returnButton">Regresar a iniciar sesión</button>
                         </div>
                     </form>
