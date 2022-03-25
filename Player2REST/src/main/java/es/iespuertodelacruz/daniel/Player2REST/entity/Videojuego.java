@@ -4,7 +4,6 @@ import java.io.Serializable;
 import java.math.BigInteger;
 
 import javax.persistence.*;
-import javax.persistence.JoinColumn;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
@@ -24,7 +23,8 @@ public class Videojuego implements Serializable {
 	@Id
 	@GeneratedValue(strategy=GenerationType.IDENTITY)
 	private int id;
-
+	
+	@Lob
 	private String descripcion;
 
 	private BigInteger fecha;

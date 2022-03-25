@@ -83,13 +83,13 @@ public class JuegoUsuarioREST {
 	}
 */
 	@PostMapping
-	public ResponseEntity<?> saveJuegoUsuario(@RequestBody JuegoUsuario juegousuarioDto) {
+	public ResponseEntity<?> saveJuegoUsuario(@RequestBody JuegoUsuarioDTO juegousuarioDto) {
 		
 		JuegoUsuario juegousuario = new JuegoUsuario();
 		Optional<Videojuego> videojuego = videojuegoService.findById(juegousuarioDto.getVideojuego().getId());
 		Optional<Usuario> usuario = usuarioService.findById(juegousuarioDto.getUsuario().getId());
 		if (videojuego.get() != null && usuario.get() != null) {
-			juegousuario.setCompletado(juegousuarioDto.getCompletado());
+			juegousuario.setCompletado((byte) (juegousuarioDto.isCompletado() ? 1 : 0));
 			juegousuario.setHoras(juegousuarioDto.getHoras());
 			juegousuario.setVideojuego(videojuego.get());
 			juegousuario.setPuntuacion(juegousuarioDto.getPuntuacion());
