@@ -24,8 +24,10 @@ export default function Login() {
         const axiospost = async (rutaDeLogin: string) => {
             try {
                 const { data } = await axios.post(rutaDeLogin, login)
+                const nombre = nameI!;
                 localStorage.clear();
                 localStorage.setItem("token", data);
+                localStorage.setItem("user", nombre)
                 navigate("/home");
             } catch (error) {
                 toast.error("No existe usuario con esos datos");

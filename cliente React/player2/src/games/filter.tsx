@@ -1,34 +1,59 @@
 import "./filter.css";
-import React, { useRef, useState } from 'react';
+import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Slider } from "@material-ui/core";
 import TextField from '@material-ui/core/TextField';
 import Autocomplete from '@material-ui/lab/Autocomplete';
 
+interface IState { generos?: Array<player2.generos>; }
+
+declare module player2 {
+
+    export interface generos {
+        nombre: string;
+    }
+
+}
+
 export default function Filter() {
     const [val, setVal] = useState([1996, 2022]);
+    const [generos, setGenero] = useState<IState>();
+    const ip: string = "localhost";
+    const puerto: number = 8080;
+    const rutaBase: string = "http://" + ip + ":" + puerto;
+    const rutageneros: string = rutaBase + "/api/v1/genero";
 
-    function orderGames(value: string | null) {
-        if (value === "Año") {
+    let optionsGeneros = generos?.generos?.map((g: player2.generos) =>
+        <option style={{fontSize: "16px"}}>{g.nombre}</option>    
+    );
+
+    useEffect(() => {
+        const getGenero = async () => {
+            let ruta = rutageneros;
+            console.log(ruta);
+            let respuesta = await axios.get(ruta);
+            console.log(respuesta.data);
+            setGenero({ generos: respuesta.data });
+        }
+        getGenero();
+    }, []);
+
+    function orderGames(event: React.ChangeEvent<HTMLSelectElement>) {
+        if (event.currentTarget.value === "Año") {
             alert("Ordenar por año");
         }
-        if (value === "Puntuación") {
+        if (event.currentTarget.value === "Puntuación") {
             alert("Ordenar por puntuación");
         }
-        if (value === "Título") {
+        if (event.currentTarget.value === "Título") {
             alert("Ordenar por título");
         }
     }
 
-    function filterGames(value: string | null) {
-        if (value === "Acción") {
+    function filterGames(event: React.ChangeEvent<HTMLSelectElement>) {
+        event.preventDefault();
+        if (event.currentTarget.value === "Acción") {
             alert("Solo acción");
-        }
-        if (value === "RPG") {
-            alert("Solo RPG");
-        }
-        if (value === "Aventura") {
-            alert("Solo aventura");
         }
     }
 
@@ -36,7 +61,7 @@ export default function Filter() {
         if (value == 2000) {
             alert("Año 2000");
         }
-        if (value == 1996){
+        if (value == 1996) {
             alert("Año 1996");
         }
     }
@@ -46,26 +71,26 @@ export default function Filter() {
             <div className="filterWrapper">
                 <h3 className="title">Ordenar por:</h3>
                 <div className="comboOrder">
-                    <Autocomplete onChange={(event, value) => orderGames(value)}
-                        options={["Puntuación", "Año", "Título"]}
-                        style={{ width: 300 }}
-                        renderInput={(params) =>
-                            <TextField {...params} label="Ordenar por" variant="outlined" />}
-                    />
+                <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding:"10px", border: "groove lightsteelblue"}} 
+                    onChange={orderGames} defaultValue="">
+                        <option>Puntuación</option>
+                        <option>Año</option>
+                        <option>Título</option>
+                        <option hidden value="">Selecciona un método</option>
+                    </select>
                 </div>
                 <h3 className="title">Filtro:</h3>
                 <div className="comboFilter">
-                    <Autocomplete
-                        onChange={(event, value) => filterGames(value)}
-                        options={["Acción", "RPG", "Aventura"]}
-                        style={{ width: 300 }}
-                        renderInput={(params) =>
-                            <TextField {...params} label="Género" variant="outlined" />}
-                    />
+                    <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding:"10px", border: "groove lightsteelblue"}} 
+                    onChange={filterGames} defaultValue="">
+                        {optionsGeneros}
+                        <option hidden value="">Selecciona un género</option>
+                    </select>
                 </div>
                 <h3 className="title">Año:</h3>
                 <div className="filterSlider">
-                    <Slider min={1996} defaultValue={1996} max={2022} step={1} valueLabelDisplay="on" onChangeCommitted={(event, value) => filterTime(value)}/>
+                    <Slider min={1996} defaultValue={1996} max={2022} step={1} valueLabelDisplay="on"
+                    onChangeCommitted={(event, value) => filterTime(value)} />
                 </div>
             </div>
         </div>
