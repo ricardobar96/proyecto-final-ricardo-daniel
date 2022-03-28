@@ -2,6 +2,7 @@ package es.iespuertodelacruz.daniel.Player2REST.controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,7 +92,7 @@ public class PistaREST {
 		Optional<Usuario> usuario = usuarioService.findById(pistaDto.getUsuario().getId());
 		if (videojuego.get() != null && usuario.get() != null) {
 			pista.setContenido(pistaDto.getContenido());
-			pista.setFecha(BigInteger.valueOf(pistaDto.getFecha().getTime()));
+			pista.setFecha(BigInteger.valueOf(new Date().getTime()));
 			pista.setUsuario(usuario.get());
 			pista.setVideojuego(videojuego.get());
 			pista.setTitulo(pistaDto.getTitulo());

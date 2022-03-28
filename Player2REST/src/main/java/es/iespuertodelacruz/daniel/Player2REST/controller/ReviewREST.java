@@ -2,6 +2,7 @@ package es.iespuertodelacruz.daniel.Player2REST.controller;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 import java.util.Optional;
 
@@ -91,7 +92,7 @@ public class ReviewREST {
 		Optional<Usuario> usuario = usuarioService.findById(reviewDto.getUsuario().getId());
 		if (videojuego.get() != null && usuario.get() != null) {
 			review.setContenido(reviewDto.getContenido());
-			review.setFecha(BigInteger.valueOf(reviewDto.getFecha().getTime()));
+			review.setFecha(BigInteger.valueOf(new Date().getTime()));
 			review.setUsuario(usuario.get());
 			review.setVideojuego(videojuego.get());
 			review.setTitulo(reviewDto.getTitulo());
