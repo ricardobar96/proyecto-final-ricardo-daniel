@@ -3,49 +3,12 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Topbar from '../topbar/topbar';
+import { videojuegos } from "../modelo/videojuegos";
+import { pistas } from "../modelo/pistas";
+import { reviews } from "../modelo/reviews";
+import { usuarios } from "../modelo/usuarios";
 
-interface IState { videojuego?: player2.videojuegos, pista?: player2.pistas[], review?: player2.reviews[], usuario?: player2.usuarios; }
-
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        puntuacion: number;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface pistas {
-        id: number;
-        titulo: string;
-        contenido: string;
-        fecha: string;
-        idvideojuego: number;
-        idusuario: number;
-    }
-
-    export interface reviews {
-        id: number;
-        titulo: string;
-        contenido: string;
-        fecha: string;
-        idvideojuego: number;
-        idusuario: number;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        color_perfil: string;
-        banner_perfil: string;
-        sobre_mi: string;
-    }
-}
+interface IState { videojuego?: videojuegos, pista?: pistas[], review?: reviews[], usuario?: usuarios; }
 
 export default function InfoGame() {
     let navigate = useNavigate();
@@ -79,28 +42,28 @@ export default function InfoGame() {
         const getGame = async (id: string | undefined) => {
             let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
-            let videojuego: player2.videojuegos = data;
+            let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
         const getClue = async (id: string | undefined) => {
             let rutadePistas = "http://localhost:8080/api/v1/clues/";
             let { data } = await axios.get(rutadePistas + id + '/clues');
-            let pista: player2.pistas[] = data;
+            let pista: pistas[] = data;
             console.log(pista);
             setStClue({ pista });
         }
         const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v1/reviews/";
-            let { data } = await axios.get(rutadeReviews + id + '/reviews');
-            let review: player2.reviews[] = data;
+            let rutadeReviews = "http://localhost:8080/api/v1/review/";
+            let { data } = await axios.get(rutadeReviews);
+            let review: reviews[] = data;
             console.log(review);
             setStClue({ review });
         }
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/users/";
+            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id + '/users');
-            let usuario: player2.usuarios = data;
+            let usuario: usuarios = data;
             console.log(usuario);
             setStUser({ usuario });
         }
@@ -128,7 +91,7 @@ export default function InfoGame() {
                     <div className='infoPistasWrapper'>
                         <h3 className="title">Pistas:</h3>
                         <ul className='pistasList'>
-                            {stClue.pista?.map((p: player2.pistas) => {
+                            {stClue.pista?.map((p: pistas) => {
                                 return (
                                     <li>
                                         <span>{p.titulo} ({p.fecha})</span>
@@ -143,7 +106,7 @@ export default function InfoGame() {
                     <div className='infoReviewsWrapper'>
                         <h3 className="title">Reviews:</h3>
                         <ul className='reviewsList'>
-                            {stReview.review?.map((r: player2.reviews) => {
+                            {stReview.review?.map((r: reviews) => {
                                 return (
                                     <li>
                                         <span>{r.titulo} ({r.fecha})</span>

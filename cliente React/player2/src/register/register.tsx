@@ -4,20 +4,6 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from "react-hot-toast";
 
-declare module player2 {
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        color_perfil: string;
-        banner_perfil: string;
-        sobre_mi: string;
-    }
-}
-
 export default function Register() {
     let navigate = useNavigate();
     const nameUser = useRef<HTMLInputElement>(null);

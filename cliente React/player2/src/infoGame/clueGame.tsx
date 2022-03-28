@@ -4,40 +4,12 @@ import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'reac
 import axios from 'axios';
 import Topbar from '../topbar/topbar';
 import toast, { Toaster } from "react-hot-toast";
+import { videojuegos } from "../modelo/videojuegos";
+import { pistas } from "../modelo/pistas";
+import { usuarios } from "../modelo/usuarios";
 
-interface IState { videojuego?: player2.videojuegos, pista?: player2.pistas[], usuario?: player2.usuarios; }
+interface IState { videojuego?: videojuegos, pista?: pistas, usuario?: usuarios; }
 
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        puntuacion: number;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface pistas {
-        id: number;
-        titulo: string;
-        contenido: string;
-        fecha: string;
-        idvideojuego: number;
-        idusuario: number;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        color_perfil: string;
-        banner_perfil: string;
-        sobre_mi: string;
-    }
-}
 
 export default function ClueGame() {
     let navigate = useNavigate();
@@ -46,8 +18,8 @@ export default function ClueGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
-    const clueUser = useRef<HTMLInputElement>(null);
-    const clueGame = useRef<HTMLInputElement>(null);
+    //const clueUser = useRef<HTMLInputElement>(null);
+    //const clueGame = useRef<HTMLInputElement>(null);
     const clueTitle = useRef<HTMLInputElement>(null);
     const clueBody = useRef<HTMLTextAreaElement>(null);
 
@@ -56,8 +28,8 @@ export default function ClueGame() {
         event.preventDefault();
         let formulario: HTMLFormElement = event.currentTarget;
 
-        let userC = clueUser.current?.value;
-        let gameC = clueGame.current?.value;
+        //let userC = clueUser.current?.value;
+        //let gameC = clueGame.current?.value;
         let titleC = clueTitle.current?.value;
         let bodyC = clueBody.current?.value;
 
@@ -70,15 +42,33 @@ export default function ClueGame() {
 
         let fechaActual = new Date();
 
+        let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
+        let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
+        let juegoActual: videojuegos = data;
+
+        
+        const userActual = {
+            "id": stUser.usuario?.id,
+            "nombre": stUser.usuario?.nombre,
+            "password": stUser.usuario?.password,
+            "rol": stUser.usuario?.rol,
+            "avatar": stUser.usuario?.avatar,
+            "banner": stUser.usuario?.banner,
+            "descripcion": stUser.usuario?.descripcion,
+            "color": stUser.usuario?.color,
+            "activo": stUser.usuario?.activo,
+        }
+        
+
         const newClue = {
             "titulo": titleC,
             "contenido": bodyC,
-            "idusuario": userC,
-            "idvideojuego": gameC,
+            "usuario": userActual,
+            "videojuego": juegoActual,
             "fecha": fechaActual,
         }
 
-        let ruta = "http://localhost:8080/api/v1/videojuego";
+        let ruta = "http://localhost:8080/api/v1/pista";
         const axiospost = async (rutaDePista: string) => {
             try {
                 const { data } = await axios.post(rutaDePista, newClue)
@@ -96,21 +86,21 @@ export default function ClueGame() {
         const getGame = async (id: string | undefined) => {
             let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
-            let videojuego: player2.videojuegos = data;
+            let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
         const getClue = async (id: string | undefined) => {
-            let rutadePistas = "http://localhost:8080/api/v1/clues/";
+            let rutadePistas = "http://localhost:8080/api/v1/pista/";
             let { data } = await axios.get(rutadePistas + id + '/clues');
-            let pista: player2.pistas[] = data;
+            let pista: pistas = data;
             console.log(pista);
             setStClue({ pista });
         }
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/users/";
-            let { data } = await axios.get(rutadeUsuarios + id + '/users');
-            let usuario: player2.usuarios = data;
+            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let { data } = await axios.get(rutadeUsuarios + id);
+            let usuario: usuarios = data;
             console.log(usuario);
             setStUser({ usuario });
         }

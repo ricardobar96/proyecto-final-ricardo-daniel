@@ -4,40 +4,11 @@ import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'reac
 import axios from 'axios';
 import Topbar from '../topbar/topbar';
 import toast, { Toaster } from "react-hot-toast";
+import { videojuegos } from "../modelo/videojuegos";
+import { reviews } from "../modelo/reviews";
+import { usuarios } from "../modelo/usuarios";
 
-interface IState { videojuego?: player2.videojuegos, review?: player2.reviews[], usuario?: player2.usuarios; }
-
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        puntuacion: number;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface reviews {
-        id: number;
-        titulo: string;
-        contenido: string;
-        fecha: string;
-        idvideojuego: number;
-        idusuario: number;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        color_perfil: string;
-        banner_perfil: string;
-        sobre_mi: string;
-    }
-}
+interface IState { videojuego?: videojuegos, review?: reviews, usuario?: usuarios; }
 
 export default function ReviewGame() {
     let navigate = useNavigate();
@@ -46,8 +17,8 @@ export default function ReviewGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
-    const reviewUser = useRef<HTMLInputElement>(null);
-    const reviewGame = useRef<HTMLInputElement>(null);
+    //const reviewUser = useRef<HTMLInputElement>(null);
+    //const reviewGame = useRef<HTMLInputElement>(null);
     const reviewTitle = useRef<HTMLInputElement>(null);
     const reviewBody = useRef<HTMLTextAreaElement>(null);
 
@@ -56,38 +27,63 @@ export default function ReviewGame() {
         event.preventDefault();
         let formulario: HTMLFormElement = event.currentTarget;
 
-        let userR = reviewUser.current?.value;
-        let gameR = reviewGame.current?.value;
+        //let userR = reviewUser.current?.value;
+        //let gameR = reviewGame.current?.value;
         let titleR = reviewTitle.current?.value;
         let bodyR = reviewBody.current?.value;
 
         /*
-        let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
-        let { data } = await axios.get(rutaDeJuego + id);
-        let userActual: player2.usuarios = data;
-        let gameActual: player2.videojuegos = data;
+        let nameUser = (localStorage.getItem('user') || '{}');
+        let idUser = 0;
+        stUser?.usuario?.map((u: player2.usuarios) => {
+            if (u.nombre == nameUser) {
+                idUser = u.id;
+                console.log("ID USUARIO: " + idUser);
+            }
+        });
         */
 
-        let fechaActual = new Date();
+        var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+
+        let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
+        let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
+        let juegoActual: videojuegos = data;
+
+        /*
+        let rutaDeUser = "http://localhost:8080/api/v1/user/";
+        let { data } = await axios.get(rutaDeUser + stUser.usuario?.id);
+        let userActual: player2.videojuegos = data;
+        */
+
+        const userActual = {
+            "id": usuarioActual.id,
+            "nombre": usuarioActual.id,
+            "password": usuarioActual.password,
+            "rol": usuarioActual.rol,
+            "avatar": usuarioActual.avatar,
+            "banner": usuarioActual.banner,
+            "descripcion": usuarioActual.descripcion,
+            "color": usuarioActual.color,
+            "activo": usuarioActual.activo,
+        }
 
         const newReview = {
             "titulo": titleR,
             "contenido": bodyR,
-            "idusuario": userR,
-            "idvideojuego": gameR,
-            "fecha": fechaActual,
+            "usuario": usuarioActual,
+            "videojuego": juegoActual,
         }
 
-        let ruta = "http://localhost:8080/api/v1/videojuego";
-        const axiospost = async (rutaDeJuego: string) => {
+        let rutaReview = "http://localhost:8080/api/v1/review";
+        const axiospost = async (rutaReview: string) => {
             try {
-                const { data } = await axios.post(rutaDeJuego, newReview)
+                const { data } = await axios.post(rutaReview, newReview)
                 console.log(data);
             } catch (error) {
                 console.log(error);
             }
         }
-        axiospost(ruta).then(respuesta => {
+        axiospost(rutaReview).then(respuesta => {
             navigate("/api/v1/videojuego/" + stGame.videojuego?.id)
         });
     }
@@ -96,23 +92,23 @@ export default function ReviewGame() {
         const getGame = async (id: string | undefined) => {
             let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
-            let videojuego: player2.videojuegos = data;
+            let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
 
         const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v1/reviews/";
-            let { data } = await axios.get(rutadeReviews + id + '/reviews');
-            let review: player2.reviews[] = data;
+            let rutadeReviews = "http://localhost:8080/api/v1/review/";
+            let { data } = await axios.get(rutadeReviews + id);
+            let review: reviews = data;
             console.log(review);
             setStReview({ review });
         }
 
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/users/";
-            let { data } = await axios.get(rutadeUsuarios + id + '/users');
-            let usuario: player2.usuarios = data;
+            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let { data } = await axios.get(rutadeUsuarios + id);
+            let usuario: usuarios = data;
             console.log(usuario);
             setStUser({ usuario });
         }

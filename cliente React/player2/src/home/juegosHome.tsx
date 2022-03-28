@@ -2,43 +2,13 @@ import React, { useState, useEffect } from 'react'
 import './juegosHome.css'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
+import { videojuegos } from '../modelo/videojuegos';
+import { usuarios } from '../modelo/usuarios';
+import { juegosUsuario } from '../modelo/juegosUsuario';
 
 interface IProps { }
 
-interface IState { videojuegos?: Array<player2.videojuegos>, usuario?: player2.usuarios, juegosUsuario?: Array<player2.juegosUsuario>; }
-
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        activo: number;
-        color: string;
-        banner: string;
-        descripcion: string;
-    }
-
-    export interface juegosUsuario {
-        id: number;
-        completado: number;
-        horas: number;
-        usuario: usuarios;
-        videojuego: videojuegos;
-        puntuacion: number;
-    }
-
-}
+interface IState { videojuegos?: videojuegos[], usuario?: usuarios, juegosUsuario?: juegosUsuario[]; }
 
 export const JuegosHome = () => {
     const [videojuegos, setVideojuego] = useState<IState>();
@@ -50,7 +20,6 @@ export const JuegosHome = () => {
     const { id } = useParams();
 
     let nameUser = (localStorage.getItem('user') || '{}');
-    console.log("NOMBRE DEL USER:" + nameUser);
 
     useEffect(() => {
         const getVideojuego = async () => {
@@ -88,7 +57,7 @@ export const JuegosHome = () => {
             <div className='tendenciasWrapper'>
                 <ul className='tendenciasList'>
                     {
-                        videojuegos?.videojuegos?.slice(0, 5).map((a: player2.videojuegos) => {
+                        videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
@@ -108,7 +77,7 @@ export const JuegosHome = () => {
             <div className='nuevosWrapper'>
                 <ul className='nuevosList'>
                     {
-                        videojuegos?.videojuegos?.slice(0, 5).map((a: player2.videojuegos) => {
+                        videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
@@ -128,7 +97,7 @@ export const JuegosHome = () => {
             <div className='progresoWrapper'>
                 <ul className='progresoList'>
                     {
-                        juegosUsuario?.juegosUsuario?.slice(0, 5).map((v: player2.juegosUsuario) => {
+                        juegosUsuario?.juegosUsuario?.slice(0, 5).map((v: juegosUsuario) => {
                             if ((v.usuario.nombre === nameUser) && (v.completado == 0))
                                 return (
                                     <div className='juegosHomeBox'>
