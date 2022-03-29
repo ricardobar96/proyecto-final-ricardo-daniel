@@ -4,8 +4,6 @@ import java.math.BigInteger;
 import java.util.Date;
 
 import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
-import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
-import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
 
 public class PistaDTO {
 	private int id;
@@ -16,9 +14,9 @@ public class PistaDTO {
 
 	private String titulo;
 
-	private Videojuego videojuego;
+	private VideojuegoDTO videojuego;
 	
-	private Usuario usuario;
+	private UsuarioDTO usuario;
 	
 	public PistaDTO() {}
 	
@@ -27,8 +25,8 @@ public class PistaDTO {
 		this.contenido = pista.getContenido();
 		this.fecha = new Date(pista.getFecha().longValue());
 		this.titulo = pista.getTitulo();
-		this.videojuego = pista.getVideojuego();
-		this.usuario = pista.getUsuario();
+		this.videojuego = new VideojuegoDTO(pista.getVideojuego());
+		this.usuario = new UsuarioDTO(pista.getUsuario());
 	}
 
 	public int getId() {
@@ -63,19 +61,19 @@ public class PistaDTO {
 		this.titulo = titulo;
 	}
 
-	public Videojuego getVideojuego() {
+	public VideojuegoDTO getVideojuego() {
 		return videojuego;
 	}
 
-	public void setVideojuego(Videojuego videojuego) {
+	public void setVideojuego(VideojuegoDTO videojuego) {
 		this.videojuego = videojuego;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 	

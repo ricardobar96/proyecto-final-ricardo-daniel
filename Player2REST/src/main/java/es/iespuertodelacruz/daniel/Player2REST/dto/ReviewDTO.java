@@ -17,9 +17,9 @@ public class ReviewDTO {
 
 	private String titulo;
 
-	private Usuario usuario;
+	private UsuarioDTO usuario;
 
-	private Videojuego videojuego;
+	private VideojuegoDTO videojuego;
 	
 	public ReviewDTO() {}
 	
@@ -28,8 +28,8 @@ public class ReviewDTO {
 		this.contenido = review.getContenido();
 		this.fecha = new Date(review.getFecha().longValue());
 		this.titulo = review.getTitulo();
-		this.usuario = review.getUsuario();
-		this.videojuego = review.getVideojuego();
+		this.usuario = new UsuarioDTO(review.getUsuario());
+		this.videojuego = new VideojuegoDTO(review.getVideojuego());
 	}
 
 	public int getId() {
@@ -64,19 +64,19 @@ public class ReviewDTO {
 		this.titulo = titulo;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 
-	public Videojuego getVideojuego() {
+	public VideojuegoDTO getVideojuego() {
 		return videojuego;
 	}
 
-	public void setVideojuego(Videojuego videojuego) {
+	public void setVideojuego(VideojuegoDTO videojuego) {
 		this.videojuego = videojuego;
 	}
 	
