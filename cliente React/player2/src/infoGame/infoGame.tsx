@@ -7,6 +7,7 @@ import { videojuegos } from "../modelo/videojuegos";
 import { pistas } from "../modelo/pistas";
 import { reviews } from "../modelo/reviews";
 import { usuarios } from "../modelo/usuarios";
+import { Checkbox } from "@material-ui/core";
 
 interface IState { videojuego?: videojuegos, pista?: pistas[], review?: reviews[], usuario?: usuarios; }
 
@@ -28,6 +29,8 @@ export default function InfoGame() {
     const clueTitle = useRef<HTMLInputElement>(null);
     const clueBody = useRef<HTMLTextAreaElement>(null);
 
+    const [checkedCompleted, setCheckedCompleted] = React.useState(false);
+
     function createReview() {
         let ruta = "/api/v1/newReview/videojuego/" + stGame.videojuego?.id;
         navigate(ruta);
@@ -36,6 +39,10 @@ export default function InfoGame() {
     function createClue() {
         let ruta = "/api/v1/newClue/videojuego/" + stGame.videojuego?.id;
         navigate(ruta);
+    }
+
+    function handleChangeCompleted() {
+        setCheckedCompleted(!checkedCompleted);
     }
 
     useEffect(() => {
@@ -48,14 +55,14 @@ export default function InfoGame() {
         }
         const getClue = async (id: string | undefined) => {
             let rutadePistas = "http://localhost:8080/api/v1/clues/";
-            let { data } = await axios.get(rutadePistas + id + '/clues');
+            let { data } = await axios.get(rutadePistas + id);
             let pista: pistas[] = data;
             console.log(pista);
             setStClue({ pista });
         }
         const getReview = async (id: string | undefined) => {
             let rutadeReviews = "http://localhost:8080/api/v1/review/";
-            let { data } = await axios.get(rutadeReviews);
+            let { data } = await axios.get(rutadeReviews + id);
             let review: reviews[] = data;
             console.log(review);
             setStClue({ review });
@@ -81,6 +88,15 @@ export default function InfoGame() {
                 <div className="infoGameWrapper">
                     <h2 className='titleGameInfo'>{stGame.videojuego?.nombre}</h2>
                     <span><img src={stGame.videojuego?.imagen} className='imageGameInfo' /></span>
+                    <br/>
+                    <br/>
+                    <br/>
+                    <span style={{marginLeft:"50px", color: "orangered", fontWeight: "bolder"}}>¿Completado?</span>
+                    <Checkbox
+                        value={checkedCompleted}
+                        onChange={handleChangeCompleted}
+                        style={{marginLeft:"5px"}}
+                    />
 
                     <div className="desciption">
                         <h3 className="title">Descripción:</h3>
@@ -93,9 +109,12 @@ export default function InfoGame() {
                         <ul className='pistasList'>
                             {stClue.pista?.map((p: pistas) => {
                                 return (
-                                    <li>
-                                        <span>{p.titulo} ({p.fecha})</span>
-                                        <p>{p.contenido}</p>
+                                    <li className="pistasItem">
+                                        <span className="pistasLeft"><img src={p.usuario.avatar} /> {p.usuario.nombre}</span>
+                                        <div className="pistasRight">
+                                            <span>{p.titulo} ({p.fecha})</span>
+                                            <p>{p.contenido}</p>
+                                        </div>
                                     </li>
                                 );
                             })}

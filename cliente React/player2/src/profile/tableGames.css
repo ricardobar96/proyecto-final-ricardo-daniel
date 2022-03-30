@@ -1,0 +1,32 @@
+.gamesProfile{
+    flex: 20;
+    padding: 40px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}
+
+.imageGameProfile{
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.gamesProfileList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 4;
+}
+
+.itemGameProfile{
+    list-style: none;
+    text-align: center;
+}
+
+.titleGameProfile{
+    color:blue;
+    text-decoration: none;
+}
+
+.titleGameProfile:hover{
+    color:orangered;
+}

@@ -3,6 +3,8 @@ import React, { useRef } from 'react';
 import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from "react-hot-toast";
+import { usuarios } from "../modelo/usuarios";
+import Password from "antd/lib/input/Password";
 
 export default function Register() {
     let navigate = useNavigate();
@@ -21,6 +23,8 @@ export default function Register() {
         let name = nameUser.current?.value;
         let password = passwordUser.current?.value;
 
+        const newUser = new usuarios(1, name!, password!, "ROLE_USER", "", 1, "", "", "");
+        /*
         const newUser = {
             "nombre": name,
             "password": password,
@@ -31,7 +35,7 @@ export default function Register() {
             "color":"",
             "activo":1
         }
-
+        */
         let ruta = "http://localhost:8080/api/v1/usuario";
         const axiospost = async (rutaDeUsuario: string) => {
             try {

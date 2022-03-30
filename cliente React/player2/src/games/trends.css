@@ -1,5 +1,5 @@
 .trends{
-    flex: 10;
+    flex: 20;
     padding: 40px;
     height: calc(100vh - 50px);
     background-color: lightsteelblue;
@@ -8,5 +8,30 @@
 .imageGameTrends{
     width: 120px;
     height: 120px;
+    text-align: center;
+}
+
+.tendenciasTrendsList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 5;
+    list-style: none;
+}
+
+.nuevosTrendsList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 5;
+    list-style: none;
+}
+
+.todosTrendsList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 5;
+    list-style: none;
+}
+
+.itemTrends{
     text-align: center;
 }

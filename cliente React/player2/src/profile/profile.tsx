@@ -4,6 +4,7 @@ import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'reac
 import axios from 'axios';
 import Topbar from '../topbar/topbar';
 import toast, { Toaster } from "react-hot-toast";
+import TopbarProfile from './topbarProfile';
 
 interface IState { videojuego?: player2.videojuegos, review?: player2.reviews[], usuario?: player2.usuarios; }
 
@@ -91,6 +92,8 @@ export default function Profile() {
 
     return (
         <>
+            <Topbar/>
+            <TopbarProfile/>
             Nombre usuario: {stUser.usuario?.nombre}
         </>
     )

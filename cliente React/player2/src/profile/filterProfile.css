@@ -1,0 +1,11 @@
+.filter{
+    flex: 7;
+    padding: 40px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}
+
+.filterSlider{
+    width: 40%;
+    padding-top: 15px;
+}

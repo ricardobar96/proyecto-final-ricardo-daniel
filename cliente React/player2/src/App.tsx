@@ -9,6 +9,7 @@ import ChatHome from './home/chat/chatHome';
 import ReviewGame from './infoGame/reviewGame';
 import ClueGame from './infoGame/clueGame';
 import Profile from './profile/profile';
+import GamesProfile from './profile/gamesProfile';
 
 interface IProps { }
 interface IState { }
@@ -50,6 +51,11 @@ const App = () => {
         <Route path="api/v1/usuario/:id" element={
           <RequireAuth >
             <Profile/>
+          </RequireAuth>
+        } />
+        <Route path="api/v1/usuario/:id/gamesProfile" element={
+          <RequireAuth >
+            <GamesProfile/>
           </RequireAuth>
         } />
         <Route path="/chat" element={

@@ -32,17 +32,6 @@ export default function ReviewGame() {
         let titleR = reviewTitle.current?.value;
         let bodyR = reviewBody.current?.value;
 
-        /*
-        let nameUser = (localStorage.getItem('user') || '{}');
-        let idUser = 0;
-        stUser?.usuario?.map((u: player2.usuarios) => {
-            if (u.nombre == nameUser) {
-                idUser = u.id;
-                console.log("ID USUARIO: " + idUser);
-            }
-        });
-        */
-
         var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
         let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
@@ -50,11 +39,6 @@ export default function ReviewGame() {
         let juegoActual: videojuegos = data;
 
         /*
-        let rutaDeUser = "http://localhost:8080/api/v1/user/";
-        let { data } = await axios.get(rutaDeUser + stUser.usuario?.id);
-        let userActual: player2.videojuegos = data;
-        */
-
         const userActual = {
             "id": usuarioActual.id,
             "nombre": usuarioActual.id,
@@ -66,13 +50,10 @@ export default function ReviewGame() {
             "color": usuarioActual.color,
             "activo": usuarioActual.activo,
         }
+        */
+        const newReview = new reviews(1, titleR!, bodyR!, new Date(), juegoActual, usuarioActual);
 
-        const newReview = {
-            "titulo": titleR,
-            "contenido": bodyR,
-            "usuario": usuarioActual,
-            "videojuego": juegoActual,
-        }
+        //console.log("USUARIO: " + newReview.usuario.nombre + " VIDEOJUEGO: " + newReview.videojuego.nombre + " FECHA: " + newReview.fecha);
 
         let rutaReview = "http://localhost:8080/api/v1/review";
         const axiospost = async (rutaReview: string) => {

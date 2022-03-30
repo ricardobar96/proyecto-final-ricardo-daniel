@@ -3,32 +3,9 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
 import { VideogameAsset } from "@material-ui/icons";
+import { videojuegos } from "../modelo/videojuegos";
 
-interface IState { videojuegos?: Array<player2.videojuegos>; }
-
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        puntuacion: number;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        color_perfil: string;
-        banner_perfil: string;
-        sobre_mi: string;
-    }
-
-}
+interface IState { videojuegos?: videojuegos[]; }
 
 export default function Trends() {
     const [videojuegos, setVideojuego] = useState<IState>();
@@ -53,13 +30,13 @@ export default function Trends() {
             <div className="trendsWrapper">
                 <h3 className="title">Tendencias:</h3>
                 <div className='tendenciasWrapper'>
-                    <ul className='tendenciasList'>
+                    <ul className='tendenciasTrendsList'>
                         {
-                            videojuegos?.videojuegos?.slice(0,5).map((a: player2.videojuegos) => {
+                            videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
-                                    <div className="juegosHomeBox">
+                                    <div className="juegosTrendsBox">
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                        <li>
+                                        <li className="itemTrends">
                                             <span><img src={a.imagen} className='imageGameTrends' /></span>
                                             <h5 className='titleGameHome'>{a.nombre}</h5>
                                         </li>
@@ -72,13 +49,32 @@ export default function Trends() {
                 </div>
                 <h3 className="title">Nuevos:</h3>
                 <div className='nuevosWrapper'>
-                    <ul className='nuevosList'>
+                    <ul className='nuevosTrendsList'>
                         {
-                            videojuegos?.videojuegos?.slice(0,5).map((a: player2.videojuegos) => {
+                            videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                        <li>
+                                        <li className="itemTrends">
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                            <h5 className='titleGameHome'>{a.nombre}</h5>
+                                        </li>
+                                    </Link>
+                                    </div>
+                                );
+                            })
+                        }
+                    </ul>
+                </div>
+                <h3 className="title">Todos:</h3>
+                <div className='todosWrapper'>
+                    <ul className='todosTrendsList'>
+                        {
+                            videojuegos?.videojuegos?.map((a: videojuegos) => {
+                                return (
+                                    <div className="juegosTrendsBox">
+                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                        <li className="itemTrends">
                                             <span><img src={a.imagen} className='imageGameTrends' /></span>
                                             <h5 className='titleGameHome'>{a.nombre}</h5>
                                         </li>

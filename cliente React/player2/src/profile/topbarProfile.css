@@ -1,0 +1,27 @@
+.topbarProfileContainer{
+    height: 50px;
+    width: 100%;
+    background-color: darkslategray;
+    display: flex;
+    align-items: center;
+    position: sticky;
+    top: 0;
+    text-align: center;
+}
+.topbarCenter{
+    flex: 5;
+    align-items: center;
+    justify-content: space-between;
+    color: white;
+}
+.topbarProfileLink{
+    margin-right: 10px;
+    font-size: 25px;
+    font-weight: bolder;
+    cursor: pointer;
+    padding: 50px;
+    color: lightyellow;
+}
+.topbarProfileLink:hover{
+    color:orangered;
+}
