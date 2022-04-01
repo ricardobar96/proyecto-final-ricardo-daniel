@@ -86,7 +86,7 @@ public class UsuarioREST {
 		Usuario usuario = new Usuario();
 		usuario.setNombre(usuarioDto.getNombre());
 		usuario.setPassword(BCrypt.hashpw(usuarioDto.getPassword(), BCrypt.gensalt(10)));
-		usuario.setRol(usuarioDto.getRol());
+		usuario.setRol("ROLE_USER");
 		usuario.setActivo((byte) 1);
 		Usuario usuarioC = null;
 		try {

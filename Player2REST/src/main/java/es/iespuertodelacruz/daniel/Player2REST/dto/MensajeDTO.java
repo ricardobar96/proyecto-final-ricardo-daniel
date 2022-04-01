@@ -17,16 +17,16 @@ public class MensajeDTO {
 
 	private Date fecha;
 
-	private Usuario autor;
+	private UsuarioDTO autor;
 
-	private Usuario destinatario;
+	private UsuarioDTO destinatario;
 	public MensajeDTO() {}
 	public MensajeDTO(Mensaje mensaje) {
 		this.id = mensaje.getId();
 		this.contenido = mensaje.getContenido();
 		this.fecha = new Date(mensaje.getFecha().longValue());
-		this.autor = mensaje.getAutor();
-		this.destinatario = mensaje.getDestinatario();
+		this.autor = new UsuarioDTO(mensaje.getAutor());
+		this.destinatario = new UsuarioDTO(mensaje.getDestinatario());
 	}
 	public int getId() {
 		return id;
@@ -46,16 +46,16 @@ public class MensajeDTO {
 	public void setFecha(Date fecha) {
 		this.fecha = fecha;
 	}
-	public Usuario getAutor() {
+	public UsuarioDTO getAutor() {
 		return autor;
 	}
-	public void setAutor(Usuario autor) {
+	public void setAutor(UsuarioDTO autor) {
 		this.autor = autor;
 	}
-	public Usuario getDestinatario() {
+	public UsuarioDTO getDestinatario() {
 		return destinatario;
 	}
-	public void setDestinatario(Usuario destinatario) {
+	public void setDestinatario(UsuarioDTO destinatario) {
 		this.destinatario = destinatario;
 	}
 	

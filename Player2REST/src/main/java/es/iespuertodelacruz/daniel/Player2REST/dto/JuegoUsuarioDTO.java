@@ -12,9 +12,9 @@ public class JuegoUsuarioDTO {
 	
 	private int horas;
 	
-	private Videojuego videojuego;
+	private VideojuegoDTO videojuego;
 
-	private Usuario usuario;
+	private UsuarioDTO usuario;
 	
 	private int puntuacion;
 	
@@ -24,8 +24,8 @@ public class JuegoUsuarioDTO {
 		this.id = juegoUsuario.getId();
 		this.completado = juegoUsuario.getCompletado() == 1 ? true : false;
 		this.horas = juegoUsuario.getHoras();
-		this.videojuego = juegoUsuario.getVideojuego();
-		this.usuario = juegoUsuario.getUsuario();
+		this.videojuego = new VideojuegoDTO(juegoUsuario.getVideojuego());
+		this.usuario = new UsuarioDTO(juegoUsuario.getUsuario());
 		this.puntuacion = juegoUsuario.getPuntuacion();
 	}
 
@@ -53,19 +53,19 @@ public class JuegoUsuarioDTO {
 		this.horas = horas;
 	}
 
-	public Videojuego getVideojuego() {
+	public VideojuegoDTO getVideojuego() {
 		return videojuego;
 	}
 
-	public void setVideojuego(Videojuego videojuego) {
+	public void setVideojuego(VideojuegoDTO videojuego) {
 		this.videojuego = videojuego;
 	}
 
-	public Usuario getUsuario() {
+	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
 
-	public void setUsuario(Usuario usuario) {
+	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
 
