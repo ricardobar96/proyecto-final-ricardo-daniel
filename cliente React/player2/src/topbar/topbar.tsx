@@ -19,6 +19,8 @@ export default function Topbar() {
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
 
+    var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+    let avatar = usuarioActual.avatar;
     let nameUser = (localStorage.getItem('user') || '{}');
     let idUser = 0;
     usuario?.usuario?.map((u: usuarios) => {
@@ -113,7 +115,7 @@ export default function Topbar() {
                         <Chat onClick={goChat} />
                     </div>
                     <div className="topbarIconsItem">
-                        <Person onClick={goProfile} />
+                        <img src={avatar} className="topbarAvatar" onClick={goProfile} />
                     </div>
                     <div className="topbarIconsItem">
                         <ExitToApp onClick={Logout} />

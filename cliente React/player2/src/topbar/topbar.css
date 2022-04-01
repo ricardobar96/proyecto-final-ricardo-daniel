@@ -10,6 +10,12 @@
 .topbarLeft{
     flex: 3;
 }
+.topbarAvatar{
+    background-color: white; 
+    border: solid yellow;
+    width: 20px;
+    height: 20px;
+}
 .topbarCenter{
     flex: 5;
     align-items: center;
@@ -19,6 +25,10 @@
 .topbarRight{
     flex: 4;
     display: flex;
+}
+.imageAvatar{
+    width: 15px;
+    height: 15px;
 }
 .logo{
     font-size: 30px;
