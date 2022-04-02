@@ -17,8 +17,6 @@ export default function ReviewGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
-    //const reviewUser = useRef<HTMLInputElement>(null);
-    //const reviewGame = useRef<HTMLInputElement>(null);
     const reviewTitle = useRef<HTMLInputElement>(null);
     const reviewBody = useRef<HTMLTextAreaElement>(null);
 
@@ -27,8 +25,6 @@ export default function ReviewGame() {
         event.preventDefault();
         let formulario: HTMLFormElement = event.currentTarget;
 
-        //let userR = reviewUser.current?.value;
-        //let gameR = reviewGame.current?.value;
         let titleR = reviewTitle.current?.value;
         let bodyR = reviewBody.current?.value;
 
@@ -38,22 +34,7 @@ export default function ReviewGame() {
         let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
         let juegoActual: videojuegos = data;
 
-        /*
-        const userActual = {
-            "id": usuarioActual.id,
-            "nombre": usuarioActual.id,
-            "password": usuarioActual.password,
-            "rol": usuarioActual.rol,
-            "avatar": usuarioActual.avatar,
-            "banner": usuarioActual.banner,
-            "descripcion": usuarioActual.descripcion,
-            "color": usuarioActual.color,
-            "activo": usuarioActual.activo,
-        }
-        */
         const newReview = new reviews(1, titleR!, bodyR!, new Date(), juegoActual, usuarioActual);
-
-        //console.log("USUARIO: " + newReview.usuario.nombre + " VIDEOJUEGO: " + newReview.videojuego.nombre + " FECHA: " + newReview.fecha);
 
         let rutaReview = "http://localhost:8080/api/v1/review";
         const axiospost = async (rutaReview: string) => {
@@ -65,7 +46,7 @@ export default function ReviewGame() {
             }
         }
         axiospost(rutaReview).then(respuesta => {
-            navigate("/api/v1/videojuego/" + stGame.videojuego?.id)
+            navigate(-1)
         });
     }
 

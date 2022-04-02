@@ -103,7 +103,7 @@ export default function FilterProfile() {
                 <div className="searchbar">
                     <Toaster position="top-center" gutter={56} />
                     <Search className="searchIcon" onClick={SearchGame} />
-                    <input placeholder="Escribe nombre a filtrar" className="searchInput" ref={juegoBuscar} onKeyDown={(e) => handleKeypress(e)} />
+                    <input placeholder="Nombre a filtrar" className="searchInput" ref={juegoBuscar} onKeyDown={(e) => handleKeypress(e)} />
                 </div>
 
                 <h3 className="title">Ordenar por:</h3>

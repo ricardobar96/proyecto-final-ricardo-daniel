@@ -38,6 +38,7 @@
 .pistasLeft{
     background-color: white; 
     border: solid;
+    width: 70px;
 }
 
 .pistasRight{
@@ -93,4 +94,9 @@
     padding: 20px;
     line-height: 2.6;
     border-radius: 30px;
+}
+
+.avatarInfo{
+    width: 70px;
+    height: 70px;
 }

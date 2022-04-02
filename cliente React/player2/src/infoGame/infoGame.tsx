@@ -80,7 +80,7 @@ export default function InfoGame() {
                 }
             }
             axiosput(ruta).then(respuesta => {
-                navigate("/api/v1/videojuego/" + juegoUsuarioActual.videojuego.id)
+                navigate(0)
             });
 
             completado = true;
@@ -97,7 +97,7 @@ export default function InfoGame() {
                 }
             }
             axiosput(ruta).then(respuesta => {
-                navigate("/api/v1/videojuego/" + juegoUsuarioActual.videojuego.id)
+                navigate(0)
             });
 
             completado = false;
@@ -118,24 +118,23 @@ export default function InfoGame() {
                 }
             }
             axiospost(ruta).then(respuesta => {
-                navigate("/api/v1/videojuego/" + juegoUsuarioActual.videojuego.id)
+                navigate(0)
             });
 
             completado = true;
         }
         if (progress == true) {
-            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
                 try {
-                    const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario)
+                    const { data } = await axios.delete(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id)
                     console.log(data);
                 } catch (error) {
                     console.log(error);
                 }
             }
             axiosput(ruta).then(respuesta => {
-                navigate("/api/v1/videojuego/" + juegoUsuarioActual.videojuego.id)
+                navigate(0)
             });
 
             completado = false;
@@ -163,19 +162,21 @@ export default function InfoGame() {
             console.log(videojuego);
             setStGame({ videojuego });
         }
-        const getClue = async (id: string | undefined) => {
-            let rutadePistas = "http://localhost:8080/api/v1/clues/";
-            let { data } = await axios.get(rutadePistas + id);
-            let pista: pistas[] = data;
-            console.log(pista);
-            setStClue({ pista });
+        const getClue = async () => {
+            const rutaPistas: string = rutaBase + "/api/v1/pista";
+            let ruta = rutaPistas;
+            console.log(ruta);
+            let respuesta = await axios.get(ruta);
+            console.log(respuesta.data);
+            setStClue({ pista: respuesta.data });
         }
-        const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v1/review/";
-            let { data } = await axios.get(rutadeReviews + id);
-            let review: reviews[] = data;
-            console.log(review);
-            setStClue({ review });
+        const getReview = async () => {
+            const rutaReviews: string = rutaBase + "/api/v1/review";
+            let ruta = rutaReviews;
+            console.log(ruta);
+            let respuesta = await axios.get(ruta);
+            console.log(respuesta.data);
+            setStReview({ review: respuesta.data });
         }
         const getUser = async (id: string | undefined) => {
             let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
@@ -193,8 +194,8 @@ export default function InfoGame() {
             setStUserGames({ juegosUsuario: respuesta.data });
         }
         getUser(id);
-        getReview(id);
-        getClue(id);
+        getReview();
+        getClue();
         getGame(id);
         getJuegosUsuario();
     },
@@ -220,7 +221,7 @@ export default function InfoGame() {
                         style={{ marginLeft: "5px" }}
                     />
 
-                    <br/>
+                    <br />
 
                     {initialCheckComplete == 1 ?
                         <span style={{ color: "orangered", fontWeight: "bolder" }}>¿Completado?</span>
@@ -250,9 +251,11 @@ export default function InfoGame() {
                             {stClue.pista?.map((p: pistas) => {
                                 return (
                                     <li className="pistasItem">
-                                        <span className="pistasLeft"><img src={p.usuario.avatar} /> {p.usuario.nombre}</span>
+                                        <Link to={{ pathname: "/api/v1/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
+                                            <span className="pistasLeft"><img src={p.usuario.avatar} className="avatarInfo" /> {p.usuario.nombre}</span>
+                                        </Link>
                                         <div className="pistasRight">
-                                            <span>{p.titulo} ({p.fecha})</span>
+                                            <h3>{p.titulo} ({p.fecha})</h3>
                                             <p>{p.contenido}</p>
                                         </div>
                                     </li>
@@ -267,10 +270,15 @@ export default function InfoGame() {
                         <ul className='reviewsList'>
                             {stReview.review?.map((r: reviews) => {
                                 return (
-                                    <li>
-                                        <span>{r.titulo} ({r.fecha})</span>
+                                    <li className="pistasItem">
+                                    <Link to={{ pathname: "/api/v1/usuario/" + r.usuario.id }} style={{ textDecoration: "none" }}>
+                                        <span className="pistasLeft"><img src={r.usuario.avatar} className="avatarInfo" /> {r.usuario.nombre}</span>
+                                    </Link>
+                                    <div className="pistasRight">
+                                        <h3>{r.titulo} ({r.fecha})</h3>
                                         <p>{r.contenido}</p>
-                                    </li>
+                                    </div>
+                                </li>
                                 );
                             })}
                         </ul>

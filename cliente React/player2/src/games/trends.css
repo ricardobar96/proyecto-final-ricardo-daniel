@@ -35,3 +35,23 @@
 .itemTrends{
     text-align: center;
 }
+
+.titleGameTrends{
+    color:white;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+}
+
+.titleGameTrends:hover{
+    color:orangered;
+}
+
+.titleTrendsBox{
+    width: 120px;
+    height: 60px;
+    position: relative;
+    background-color: darkslategray;
+    display: flex;
+ 
+}

@@ -1,5 +1,5 @@
 import "./topbar.css";
-import { Search, Person, Menu, Chat, ExitToApp } from "@material-ui/icons";
+import { Search, Person, Menu, Chat, ExitToApp, PowerSettingsNew } from "@material-ui/icons";
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
@@ -118,7 +118,7 @@ export default function Topbar() {
                         <img src={avatar} className="topbarAvatar" onClick={goProfile} />
                     </div>
                     <div className="topbarIconsItem">
-                        <ExitToApp onClick={Logout} />
+                        <PowerSettingsNew onClick={Logout} />
                     </div>
 
                 </div>

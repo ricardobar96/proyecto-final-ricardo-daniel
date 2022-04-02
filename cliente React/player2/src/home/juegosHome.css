@@ -19,7 +19,10 @@ body{
     padding: 0;
     margin: 0;
     list-style: none;
-    display: flex;
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 5;
+    column-gap:0ch
 }
 
 li{
@@ -50,9 +53,19 @@ li:hover{
 }
 
 .titleGameHome{
-    color:blue;
+    color:white;
     text-decoration: none;
     text-align: center;
+    flex: 1;
+}
+
+.titleHomeBox{
+    width: 100px;
+    height: 60px;
+    position: relative;
+    background-color: darkslategray;
+    display: flex;
+ 
 }
 
 .juegosHomeBox{

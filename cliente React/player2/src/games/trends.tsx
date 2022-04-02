@@ -35,12 +35,14 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <h5 className='titleGameHome'>{a.nombre}</h5>
-                                        </li>
-                                    </Link>
+                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                            <li className="itemTrends">
+                                                <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                                <div className='titleTrendsBox'>
+                                                    <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
                                     </div>
                                 );
                             })
@@ -54,12 +56,14 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <h5 className='titleGameHome'>{a.nombre}</h5>
-                                        </li>
-                                    </Link>
+                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                            <li className="itemTrends">
+                                                <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                                <div className='titleTrendsBox'>
+                                                    <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
                                     </div>
                                 );
                             })
@@ -73,12 +77,14 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <h5 className='titleGameHome'>{a.nombre}</h5>
-                                        </li>
-                                    </Link>
+                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                            <li className="itemTrends">
+                                                <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                                <div className='titleTrendsBox'>
+                                                    <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
                                     </div>
                                 );
                             })

@@ -18,8 +18,10 @@ export const JuegosHome = () => {
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
     const { id } = useParams();
+    let contadorProgreso = 0;
 
-    let nameUser = (localStorage.getItem('user') || '{}');
+    var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+    let nameUser = usuarioActual.nombre;
 
     useEffect(() => {
         const getVideojuego = async () => {
@@ -63,7 +65,9 @@ export const JuegosHome = () => {
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
-                                            <h5 className='titleGameHome'>{a.nombre}</h5>
+                                            <div className='titleHomeBox'>
+                                                    <h5 className='titleGameHome'>{a.nombre}</h5>
+                                                </div>
                                         </li>
                                     </Link>
                                 </div>
@@ -83,7 +87,9 @@ export const JuegosHome = () => {
                                     <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
-                                            <h5 className='titleGameHome'>{a.nombre}</h5>
+                                            <div className='titleHomeBox'>
+                                                    <h5 className='titleGameHome'>{a.nombre}</h5>
+                                                </div>
                                         </li>
                                     </Link>
                                 </div>
@@ -94,21 +100,25 @@ export const JuegosHome = () => {
             </div>
 
             <h3 className='title'>Tus juegos en progreso:</h3>
-            <div className='progresoWrapper'>
-                <ul className='progresoList'>
+            <div className='nuevosWrapper'>
+                <ul className='nuevosList'>
                     {
-                        juegosUsuario?.juegosUsuario?.slice(0, 5).map((v: juegosUsuario) => {
-                            if ((v.usuario.nombre === nameUser) && (v.completado == 0))
+                        juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
+                            if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 4)){
+                                contadorProgreso = contadorProgreso+1
                                 return (
                                     <div className='juegosHomeBox'>
                                         <Link to={{ pathname: "/api/v1/videojuego/" + v.videojuego.id }}>
                                             <li>
                                                 <span><img src={v.videojuego.imagen} className='imageGameHome' /></span>
-                                                <h5 className='titleGameHome'>{v.videojuego.nombre}</h5>
+                                                <div className='titleHomeBox'>
+                                                    <h5 className='titleGameHome'>{v.videojuego.nombre}</h5>
+                                                </div>
                                             </li>
                                         </Link>
                                     </div>
                                 );
+                            }                       
                         })
                     }
                 </ul>

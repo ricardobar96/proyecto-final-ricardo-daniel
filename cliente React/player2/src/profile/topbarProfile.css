@@ -4,7 +4,6 @@
     background-color: darkslategray;
     display: flex;
     align-items: center;
-    position: sticky;
     top: 0;
     text-align: center;
 }

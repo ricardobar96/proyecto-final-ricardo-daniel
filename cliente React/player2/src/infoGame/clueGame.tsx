@@ -18,8 +18,6 @@ export default function ClueGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
-    //const clueUser = useRef<HTMLInputElement>(null);
-    //const clueGame = useRef<HTMLInputElement>(null);
     const clueTitle = useRef<HTMLInputElement>(null);
     const clueBody = useRef<HTMLTextAreaElement>(null);
 
@@ -28,45 +26,16 @@ export default function ClueGame() {
         event.preventDefault();
         let formulario: HTMLFormElement = event.currentTarget;
 
-        //let userC = clueUser.current?.value;
-        //let gameC = clueGame.current?.value;
         let titleC = clueTitle.current?.value;
         let bodyC = clueBody.current?.value;
 
-        /*
-        let rutaDeJuego = "http://localhost:8080/api/v1/infoGame/";
-        let { data } = await axios.get(rutaDeJuego + id);
-        let userActual: player2.usuarios = data;
-        let gameActual: player2.videojuegos = data;
-        */
-
-        let fechaActual = new Date();
+        var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
         let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
         let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
         let juegoActual: videojuegos = data;
 
-        
-        const userActual = {
-            "id": stUser.usuario?.id,
-            "nombre": stUser.usuario?.nombre,
-            "password": stUser.usuario?.password,
-            "rol": stUser.usuario?.rol,
-            "avatar": stUser.usuario?.avatar,
-            "banner": stUser.usuario?.banner,
-            "descripcion": stUser.usuario?.descripcion,
-            "color": stUser.usuario?.color,
-            "activo": stUser.usuario?.activo,
-        }
-        
-
-        const newClue = {
-            "titulo": titleC,
-            "contenido": bodyC,
-            "usuario": userActual,
-            "videojuego": juegoActual,
-            "fecha": fechaActual,
-        }
+        const newClue = new pistas(1, titleC!, bodyC!, new Date(), juegoActual, usuarioActual);
 
         let ruta = "http://localhost:8080/api/v1/pista";
         const axiospost = async (rutaDePista: string) => {
@@ -78,7 +47,7 @@ export default function ClueGame() {
             }
         }
         axiospost(ruta).then(respuesta => {
-            navigate("/api/v1/videojuego/" + stGame.videojuego?.id)
+            navigate(-1)
         });
     }
 
@@ -92,7 +61,7 @@ export default function ClueGame() {
         }
         const getClue = async (id: string | undefined) => {
             let rutadePistas = "http://localhost:8080/api/v1/pista/";
-            let { data } = await axios.get(rutadePistas + id + '/clues');
+            let { data } = await axios.get(rutadePistas + id);
             let pista: pistas = data;
             console.log(pista);
             setStClue({ pista });
