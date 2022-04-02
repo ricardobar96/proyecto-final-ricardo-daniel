@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.daniel.Player2REST.controller;
+package es.iespuertodelacruz.daniel.Player2REST.controller.v2;
 
 import java.math.BigInteger;
 import java.util.ArrayList;
@@ -26,8 +26,8 @@ import es.iespuertodelacruz.daniel.Player2REST.service.UsuarioService;
 import es.iespuertodelacruz.daniel.Player2REST.service.VideojuegoService;
 
 @RestController
-@RequestMapping("/api/v0/review")
-public class ReviewREST {
+@RequestMapping("/api/v2/review")
+public class ReviewRESTv2 {
 	// private Logger logger = (Logger) LoggerFactory.logger(getClass());
 	@Autowired
 	ReviewService reviewService;
@@ -36,24 +36,33 @@ public class ReviewREST {
 	@Autowired
 	UsuarioService usuarioService;
 
-	@GetMapping
-	public ResponseEntity<?> getAll() {
-		List<Review> l = (List<Review>) reviewService.findAll();
-		List<ReviewDTO> listaVid = new ArrayList<>();
-		for (Review review : l) {
-			listaVid.add(new ReviewDTO(review));
+
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
+		Optional<Review> optM = reviewService.findById(id);
+		if (optM.isPresent()) {
+			reviewService.deleteById(id);
+			return ResponseEntity.ok("review borrado");
+		} else {
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el id del review no existe");
 		}
-		return new ResponseEntity<>(listaVid, HttpStatus.OK);
+
 	}
 
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getReviewById(@PathVariable("id") Integer id) {
-		
-		Optional<Review> optReview = reviewService.findById(id);
-		if (optReview.isPresent()) {
-			return ResponseEntity.ok(new ReviewDTO(optReview.get()));
+	/*
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ReviewDTO reviewIn) {
+		Optional<Review> optOp = reviewService.findById(id);
+		if (optOp.isPresent()) {
+			Review review = optOp.get();
+			review.setNombre(reviewIn.getNombre());
+			review.setApellidos(reviewIn.getApellidos());
+			review.setNacionalidad(reviewIn.getNacionalidad());
+			return ResponseEntity.ok(reviewService.save(review));
 		} else {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
 	}
+*/
 }

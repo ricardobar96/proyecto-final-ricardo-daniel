@@ -20,7 +20,7 @@ import es.iespuertodelacruz.daniel.Player2REST.entity.Genero;
 import es.iespuertodelacruz.daniel.Player2REST.service.GeneroService;
 
 @RestController
-@RequestMapping("/api/v1/genero")
+@RequestMapping("/api/v0/genero")
 public class GeneroREST {
 	// private Logger logger = (Logger) LoggerFactory.logger(getClass());
 	@Autowired
@@ -32,18 +32,6 @@ public class GeneroREST {
 		return new ResponseEntity<>(l, HttpStatus.OK);
 	}
 
-	@DeleteMapping("/{id}")
-	public ResponseEntity<?> delete(@PathVariable Integer id) {
-		Optional<Genero> optM = generoService.findById(id);
-		if (optM.isPresent()) {
-			generoService.deleteById(id);
-			return ResponseEntity.ok("genero borrado");
-		} else {
-			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el id del genero no existe");
-		}
-
-	}
-
 	@GetMapping("/{id}")
 	public ResponseEntity<?> getGeneroById(@PathVariable("id") Integer id) {
 
@@ -53,35 +41,5 @@ public class GeneroREST {
 		} else {
 			return ResponseEntity.notFound().build();
 		}
-	}
-
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody Genero generoIn) {
-		Optional<Genero> optOp = generoService.findById(id);
-		if (optOp.isPresent()) {
-			Genero genero = optOp.get();
-			genero.setNombre(generoIn.getNombre());
-			return ResponseEntity.ok(generoService.save(genero));
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del Genero no existe");
-		}
-	}
-
-	@PostMapping
-	public ResponseEntity<?> saveGenero(@RequestBody Genero generoDto) {
-		Genero genero = new Genero();
-		genero.setNombre(generoDto.getNombre());
-		Genero generoC = null;
-		try {
-			generoC = generoService.save(genero);
-		} catch (Exception e) {
-			e.printStackTrace();
-		}
-		if (generoC != null) {
-			return new ResponseEntity<>(generoC, HttpStatus.OK);
-		} else {
-			return new ResponseEntity<>("Ya existe ese género.", HttpStatus.CONFLICT);
-		}
-
 	}
 }

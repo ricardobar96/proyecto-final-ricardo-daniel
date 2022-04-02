@@ -1,4 +1,4 @@
-package es.iespuertodelacruz.daniel.Player2REST.controller;
+package es.iespuertodelacruz.daniel.Player2REST.controller.v2;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -24,30 +24,41 @@ import es.iespuertodelacruz.daniel.Player2REST.service.UsuarioService;
 import es.iespuertodelacruz.daniel.Player2REST.service.VideojuegoService;
 
 @RestController
-@RequestMapping("/api/v0/juegousuario")
-public class JuegoUsuarioREST {
+@RequestMapping("/api/v2/juegousuario")
+public class JuegoUsuarioRESTv2 {
 	// private Logger logger = (Logger) LoggerFactory.logger(getClass());
 	@Autowired
 	JuegoUsuarioService juegousuarioService;
+	@Autowired
+	VideojuegoService videojuegoService;
+	@Autowired
+	UsuarioService usuarioService;
 
-	@GetMapping
-	public ResponseEntity<?> getAll() {
-		List<JuegoUsuario> l = (List<JuegoUsuario>) juegousuarioService.findAll();
-		List<JuegoUsuarioDTO> listaVid = new ArrayList<>();
-		for (JuegoUsuario juegousuario : l) {
-			listaVid.add(new JuegoUsuarioDTO(juegousuario));
-		}
-		return new ResponseEntity<>(listaVid, HttpStatus.OK);
-	}
-
-	@GetMapping("/{id}")
-	public ResponseEntity<?> getJuegoUsuarioById(@PathVariable("id") Integer id) {
-
-		Optional<JuegoUsuario> optJuegoUsuario = juegousuarioService.findById(id);
-		if (optJuegoUsuario.isPresent()) {
-			return ResponseEntity.ok(new JuegoUsuarioDTO(optJuegoUsuario.get()));
+	@DeleteMapping("/{id}")
+	public ResponseEntity<?> delete(@PathVariable Integer id) {
+		Optional<JuegoUsuario> optM = juegousuarioService.findById(id);
+		if (optM.isPresent()) {
+			juegousuarioService.deleteById(id);
+			return ResponseEntity.ok("juegousuario borrado");
 		} else {
-			return ResponseEntity.notFound().build();
+			return ResponseEntity.status(HttpStatus.NOT_FOUND).body("el id del juegousuario no existe");
+		}
+
+	}
+	/*
+
+	@PutMapping("/{id}")
+	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody JuegoUsuarioDTO juegousuarioIn) {
+		Optional<JuegoUsuario> optOp = juegousuarioService.findById(id);
+		if (optOp.isPresent()) {
+			JuegoUsuario juegousuario = optOp.get();
+			juegousuario.setNombre(juegousuarioIn.getNombre());
+			juegousuario.setApellidos(juegousuarioIn.getApellidos());
+			juegousuario.setNacionalidad(juegousuarioIn.getNacionalidad());
+			return ResponseEntity.ok(juegousuarioService.save(juegousuario));
+		} else {
+			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
 	}
+*/
 }

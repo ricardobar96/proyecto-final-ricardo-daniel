@@ -15,6 +15,7 @@ import org.springframework.security.config.annotation.web.builders.WebSecurity;
 import org.springframework.security.config.annotation.web.configuration.EnableWebSecurity;
 import org.springframework.security.config.annotation.web.configuration.WebSecurityConfigurerAdapter;
 import org.springframework.security.web.authentication.UsernamePasswordAuthenticationFilter;
+import org.springframework.security.web.context.request.async.WebAsyncManagerIntegrationFilter;
 import org.springframework.web.cors.CorsUtils;
 
 import es.iespuertodelacruz.daniel.Player2REST.security.FiltroJWT;
@@ -37,24 +38,23 @@ public class Player2RestApplication {
 			webSecurity
 			.ignoring()
 			.antMatchers(HttpMethod.POST, "/api/login")
-			.antMatchers("/api/v1/**");
+			.antMatchers(HttpMethod.GET, "/api/v0/**");
+			//.antMatchers("/api/v1/**");
 			//.antMatchers("/**");
 		}
 		@Override
 	    protected void configure(HttpSecurity http) throws Exception {
 	    	
 			
-			http 
-	    		//.addFilterBefore(new CustomCorsFilter(), WebAsyncManagerIntegrationFilter.class)
-			.csrf().disable()
-			.addFilterBefore(new FiltroJWT(), UsernamePasswordAuthenticationFilter.class)
-			.authorizeRequests()
-			.requestMatchers(CorsUtils::isCorsRequest).permitAll()
-			.antMatchers(HttpMethod.OPTIONS, "**").permitAll()				
-			.antMatchers("/api/v3/**").hasRole("ADMIN")
-			.antMatchers("/api/v2/**").hasRole("USER")
-			.anyRequest().authenticated()
-			;
+			http
+            .addFilterBefore(new CustomCorsFilter(), WebAsyncManagerIntegrationFilter.class)
+            .csrf().disable()
+            .addFilterBefore(new FiltroJWT(), UsernamePasswordAuthenticationFilter.class)
+            .authorizeRequests()
+            .antMatchers("/api/v1/**").hasRole("USER")
+            .antMatchers("/api/v1/**").hasRole("ADMIN")
+            .antMatchers("/api/v2/**").hasRole("ADMIN")
+            .anyRequest().authenticated();
 	    	
 	    	
 	    	http
