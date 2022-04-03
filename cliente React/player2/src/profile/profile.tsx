@@ -61,7 +61,7 @@ export default function Profile() {
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
-            let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
+            let rutaDeJuego = "http://localhost:8080/api/v0/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
             let videojuego: player2.videojuegos = data;
             console.log(videojuego);
@@ -69,15 +69,15 @@ export default function Profile() {
         }
 
         const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v1/reviews/";
-            let { data } = await axios.get(rutadeReviews + id + '/reviews');
+            let rutadeReviews = "http://localhost:8080/api/v0/review/";
+            let { data } = await axios.get(rutadeReviews + id);
             let review: player2.reviews[] = data;
             console.log(review);
             setStReview({ review });
         }
 
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id);
             let usuario: player2.usuarios = data;
             console.log(usuario);

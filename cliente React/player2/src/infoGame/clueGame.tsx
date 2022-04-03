@@ -18,6 +18,11 @@ export default function ClueGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
+    const token = localStorage.getItem("token") as string;
+    const headers = {
+        headers: { Authorization: token }
+    };
+
     const clueTitle = useRef<HTMLInputElement>(null);
     const clueBody = useRef<HTMLTextAreaElement>(null);
 
@@ -31,7 +36,7 @@ export default function ClueGame() {
 
         var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
-        let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
+        let rutaDeVideojuego = "http://localhost:8080/api/v0/videojuego/";
         let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
         let juegoActual: videojuegos = data;
 
@@ -40,7 +45,7 @@ export default function ClueGame() {
         let ruta = "http://localhost:8080/api/v1/pista";
         const axiospost = async (rutaDePista: string) => {
             try {
-                const { data } = await axios.post(rutaDePista, newClue)
+                const { data } = await axios.post(rutaDePista, newClue, headers)
                 console.log(data);
             } catch (error) {
                 console.log(error);
@@ -53,21 +58,21 @@ export default function ClueGame() {
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
-            let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
+            let rutaDeJuego = "http://localhost:8080/api/v0/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
             let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
         const getClue = async (id: string | undefined) => {
-            let rutadePistas = "http://localhost:8080/api/v1/pista/";
+            let rutadePistas = "http://localhost:8080/api/v0/pista/";
             let { data } = await axios.get(rutadePistas + id);
             let pista: pistas = data;
             console.log(pista);
             setStClue({ pista });
         }
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id);
             let usuario: usuarios = data;
             console.log(usuario);

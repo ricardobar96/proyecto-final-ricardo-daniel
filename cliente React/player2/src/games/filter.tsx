@@ -14,7 +14,7 @@ export default function Filter() {
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
-    const rutageneros: string = rutaBase + "/api/v1/genero";
+    const rutageneros: string = rutaBase + "/api/v0/genero";
 
     let optionsGeneros = generos?.generos?.map((g: generos) =>
         <option style={{fontSize: "16px"}}>{g.nombre}</option>    

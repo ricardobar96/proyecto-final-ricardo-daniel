@@ -30,25 +30,14 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
+      <Route path="/home" element={<Home />} />
         <Route path="/" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
-        <Route path="/home" element={
-          <RequireAuth >
-            <Home />
-          </RequireAuth>
-        } />
-        <Route path="/games" element={
-          <RequireAuth >
-            <Games/>
-          </RequireAuth>
-        } />
-        <Route path="api/v1/videojuego/:id" element={
-          <RequireAuth >
-            <InfoGame/>
-          </RequireAuth>
-        } />
-        <Route path="api/v1/usuario/:id" element={
+        <Route path="/games" element={<Games/>} />
+        <Route path="api/v0/videojuego/:id" element={<InfoGame/>} />
+
+        <Route path="api/v0/usuario/:id" element={
           <RequireAuth >
             <Profile/>
           </RequireAuth>

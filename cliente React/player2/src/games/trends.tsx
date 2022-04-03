@@ -12,7 +12,7 @@ export default function Trends() {
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
-    const rutajuegosHome: string = rutaBase + "/api/v1/videojuego";
+    const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
 
     useEffect(() => {
         const getVideojuego = async () => {
@@ -35,7 +35,7 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
                                             <li className="itemTrends">
                                                 <span><img src={a.imagen} className='imageGameTrends' /></span>
                                                 <div className='titleTrendsBox'>
@@ -56,7 +56,7 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
                                             <li className="itemTrends">
                                                 <span><img src={a.imagen} className='imageGameTrends' /></span>
                                                 <div className='titleTrendsBox'>
@@ -77,7 +77,7 @@ export default function Trends() {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
-                                        <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
                                             <li className="itemTrends">
                                                 <span><img src={a.imagen} className='imageGameTrends' /></span>
                                                 <div className='titleTrendsBox'>

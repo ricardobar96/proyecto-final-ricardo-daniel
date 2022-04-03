@@ -55,7 +55,7 @@ export default function Login() {
 
     useEffect(() => {
         const getUsuario = async () => {
-            const rutaUsuario: string = rutaBase + "/api/v1/usuario";
+            const rutaUsuario: string = rutaBase + "/api/v0/usuario";
             let ruta = rutaUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);

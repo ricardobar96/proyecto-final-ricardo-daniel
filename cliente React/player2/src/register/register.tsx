@@ -24,19 +24,8 @@ export default function Register() {
         let password = passwordUser.current?.value;
 
         const newUser = new usuarios(1, name!, password!, "ROLE_USER", "", 1, "", "", "");
-        /*
-        const newUser = {
-            "nombre": name,
-            "password": password,
-            "rol":"ROLE_USER",
-            "avatar":"",
-            "banner":"",
-            "descripcion":"",
-            "color":"",
-            "activo":1
-        }
-        */
-        let ruta = "http://localhost:8080/api/v1/usuario";
+
+        let ruta = "http://localhost:8080/api/v0/usuario";
         const axiospost = async (rutaDeUsuario: string) => {
             try {
                 const { data } = await axios.post(rutaDeUsuario, newUser)

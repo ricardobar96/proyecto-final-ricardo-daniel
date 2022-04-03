@@ -19,7 +19,7 @@ export default function FilterProfile() {
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
-    const rutageneros: string = rutaBase + "/api/v1/genero";
+    const rutageneros: string = rutaBase + "/api/v0/genero";
 
     let optionsGeneros = generos?.generos?.map((g: generos) =>
         <option style={{ fontSize: "16px" }}>{g.nombre}</option>
@@ -27,7 +27,7 @@ export default function FilterProfile() {
 
     useEffect(() => {
         const getVideojuego = async () => {
-            const rutajuegosHome: string = rutaBase + "/api/v1/videojuego";
+            const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
             let ruta = rutajuegosHome;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -89,7 +89,7 @@ export default function FilterProfile() {
         });
 
         if (idBuscar > 0) {
-            navigate("/api/v1/videojuego/" + idBuscar);
+            navigate("/api/v0/videojuego/" + idBuscar);
         }
         else {
             toast.error("No se ha podido encontrar el juego");

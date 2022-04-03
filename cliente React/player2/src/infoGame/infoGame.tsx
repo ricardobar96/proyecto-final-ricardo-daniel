@@ -21,6 +21,11 @@ export default function InfoGame() {
     const [stUserGames, setStUserGames] = useState<IState>({});
     const { id } = useParams();
 
+    const token = localStorage.getItem("token") as string;
+    const headers = {
+        headers: { Authorization: token }
+    };
+
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
@@ -73,7 +78,7 @@ export default function InfoGame() {
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
                 try {
-                    const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario)
+                    const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
                     console.log(data);
                 } catch (error) {
                     console.log(error);
@@ -90,7 +95,7 @@ export default function InfoGame() {
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
                 try {
-                    const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario)
+                    const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
                     console.log(data);
                 } catch (error) {
                     console.log(error);
@@ -111,7 +116,7 @@ export default function InfoGame() {
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiospost = async (rutaDeJuegoUsuario: string) => {
                 try {
-                    const { data } = await axios.post(rutaDeJuegoUsuario, newJuegoUsuario)
+                    const { data } = await axios.post(rutaDeJuegoUsuario, newJuegoUsuario, headers)
                     console.log(data);
                 } catch (error) {
                     console.log(error);
@@ -125,15 +130,15 @@ export default function InfoGame() {
         }
         if (progress == true) {
             let ruta = "http://localhost:8080/api/v1/juegousuario";
-            const axiosput = async (rutaDeJuegoUsuario: string) => {
+            const axiosdelete = async (rutaDeJuegoUsuario: string) => {
                 try {
-                    const { data } = await axios.delete(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id)
+                    const { data } = await axios.delete(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, headers)
                     console.log(data);
                 } catch (error) {
                     console.log(error);
                 }
             }
-            axiosput(ruta).then(respuesta => {
+            axiosdelete(ruta).then(respuesta => {
                 navigate(0)
             });
 
@@ -156,14 +161,14 @@ export default function InfoGame() {
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
-            let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
+            let rutaDeJuego = "http://localhost:8080/api/v0/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
             let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
         const getClue = async () => {
-            const rutaPistas: string = rutaBase + "/api/v1/pista";
+            const rutaPistas: string = rutaBase + "/api/v0/pista";
             let ruta = rutaPistas;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -171,7 +176,7 @@ export default function InfoGame() {
             setStClue({ pista: respuesta.data });
         }
         const getReview = async () => {
-            const rutaReviews: string = rutaBase + "/api/v1/review";
+            const rutaReviews: string = rutaBase + "/api/v0/review";
             let ruta = rutaReviews;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -179,14 +184,14 @@ export default function InfoGame() {
             setStReview({ review: respuesta.data });
         }
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id);
             let usuario: usuarios = data;
             console.log(usuario);
             setStUser({ usuario });
         }
         const getJuegosUsuario = async () => {
-            const rutaJuegosUsuario: string = rutaBase + "/api/v1/juegousuario";
+            const rutaJuegosUsuario: string = rutaBase + "/api/v0/juegousuario";
             let ruta = rutaJuegosUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -249,9 +254,10 @@ export default function InfoGame() {
                         <h3 className="title">Pistas:</h3>
                         <ul className='pistasList'>
                             {stClue.pista?.map((p: pistas) => {
+                                if(p.videojuego.id == stGame.videojuego?.id)
                                 return (
                                     <li className="pistasItem">
-                                        <Link to={{ pathname: "/api/v1/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
+                                        <Link to={{ pathname: "/api/v0/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
                                             <span className="pistasLeft"><img src={p.usuario.avatar} className="avatarInfo" /> {p.usuario.nombre}</span>
                                         </Link>
                                         <div className="pistasRight">
@@ -269,9 +275,10 @@ export default function InfoGame() {
                         <h3 className="title">Reviews:</h3>
                         <ul className='reviewsList'>
                             {stReview.review?.map((r: reviews) => {
+                                if(r.videojuego.id == stGame.videojuego?.id)
                                 return (
                                     <li className="pistasItem">
-                                    <Link to={{ pathname: "/api/v1/usuario/" + r.usuario.id }} style={{ textDecoration: "none" }}>
+                                    <Link to={{ pathname: "/api/v0/usuario/" + r.usuario.id }} style={{ textDecoration: "none" }}>
                                         <span className="pistasLeft"><img src={r.usuario.avatar} className="avatarInfo" /> {r.usuario.nombre}</span>
                                     </Link>
                                     <div className="pistasRight">

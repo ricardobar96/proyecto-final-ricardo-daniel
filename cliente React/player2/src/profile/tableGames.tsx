@@ -17,8 +17,8 @@ export default function TableGames() {
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
-    const rutajuegosHome: string = rutaBase + "/api/v1/videojuego";
-    const rutaJuegosUsuario: string = rutaBase + "/api/v1/juegousuario";
+    const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
+    const rutaJuegosUsuario: string = rutaBase + "/api/v0/juegousuario";
 
     useEffect(() => {
         const getVideojuego = async () => {
@@ -50,7 +50,7 @@ export default function TableGames() {
                                 if ((v.usuario.nombre === nameUser) && (v.completado == 0))
                                     return (
                                         <div className="juegosHomeBox">
-                                            <Link to={{ pathname: "/api/v1/videojuego/" + v.videojuego.id }}>
+                                            <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>
                                                 <li className="itemGameProfile">
                                                     <span><img src={v.videojuego.imagen} className='imageGameProfile' /></span>
                                                     <div className='titleProfileBox'>
@@ -73,7 +73,7 @@ export default function TableGames() {
                                 if ((v.usuario.nombre === nameUser) && (v.completado == 1))
                                     return (
                                         <div className="juegosHomeBox">
-                                            <Link to={{ pathname: "/api/v1/videojuego/" + v.videojuego.id }}>
+                                            <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>
                                                 <li className="itemGameProfile">
                                                     <span><img src={v.videojuego.imagen} className='imageGameProfile' /></span>
                                                     <div className='titleProfileBox'>

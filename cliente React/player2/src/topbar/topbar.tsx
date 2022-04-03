@@ -31,7 +31,7 @@ export default function Topbar() {
 
     useEffect(() => {
         const getVideojuego = async () => {
-            const rutajuegosHome: string = rutaBase + "/api/v1/videojuego";
+            const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
             let ruta = rutajuegosHome;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -39,7 +39,7 @@ export default function Topbar() {
             setVideojuego({ videojuegos: respuesta.data });
         }
         const getUsuario = async () => {
-            const rutaUsuario: string = rutaBase + "/api/v1/usuario";
+            const rutaUsuario: string = rutaBase + "/api/v0/usuario";
             let ruta = rutaUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -65,7 +65,7 @@ export default function Topbar() {
         });
 
         if (idBuscar > 0) {
-            navigate("/api/v1/videojuego/" + idBuscar);
+            navigate("/api/v0/videojuego/" + idBuscar);
         }
         else {
             toast.error("No se ha podido encontrar el juego");
@@ -77,7 +77,7 @@ export default function Topbar() {
     }
 
     function goProfile() {
-        navigate("/api/v1/usuario/" + idUser);
+        navigate("/api/v0/usuario/" + idUser);
     }
 
     const handleKeypress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -96,7 +96,7 @@ export default function Topbar() {
                     <Link to="/home" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Home</span>
                     </Link>
-                    <Link to={{ pathname: "/api/v1/usuario/" + idUser }} style={{ textDecoration: "none" }}>
+                    <Link to={{ pathname: "/api/v0/usuario/" + idUser }} style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Perfil</span>
                     </Link>
                     <Link to="/games" style={{ textDecoration: "none" }}>
@@ -115,7 +115,11 @@ export default function Topbar() {
                         <Chat onClick={goChat} />
                     </div>
                     <div className="topbarIconsItem">
+                    {usuarioActual.nombre != null ?
                         <img src={avatar} className="topbarAvatar" onClick={goProfile} />
+                        : <ExitToApp onClick={goProfile}/>
+                    }
+                        
                     </div>
                     <div className="topbarIconsItem">
                         <PowerSettingsNew onClick={Logout} />

@@ -17,6 +17,11 @@ export default function ReviewGame() {
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
+    const token = localStorage.getItem("token") as string;
+    const headers = {
+        headers: { Authorization: token }
+    };
+
     const reviewTitle = useRef<HTMLInputElement>(null);
     const reviewBody = useRef<HTMLTextAreaElement>(null);
 
@@ -30,7 +35,7 @@ export default function ReviewGame() {
 
         var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
-        let rutaDeVideojuego = "http://localhost:8080/api/v1/videojuego/";
+        let rutaDeVideojuego = "http://localhost:8080/api/v0/videojuego/";
         let { data } = await axios.get(rutaDeVideojuego + stGame.videojuego?.id);
         let juegoActual: videojuegos = data;
 
@@ -39,7 +44,7 @@ export default function ReviewGame() {
         let rutaReview = "http://localhost:8080/api/v1/review";
         const axiospost = async (rutaReview: string) => {
             try {
-                const { data } = await axios.post(rutaReview, newReview)
+                const { data } = await axios.post(rutaReview, newReview, headers)
                 console.log(data);
             } catch (error) {
                 console.log(error);
@@ -52,7 +57,7 @@ export default function ReviewGame() {
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
-            let rutaDeJuego = "http://localhost:8080/api/v1/videojuego/";
+            let rutaDeJuego = "http://localhost:8080/api/v0/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
             let videojuego: videojuegos = data;
             console.log(videojuego);
@@ -60,7 +65,7 @@ export default function ReviewGame() {
         }
 
         const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v1/review/";
+            let rutadeReviews = "http://localhost:8080/api/v0/review/";
             let { data } = await axios.get(rutadeReviews + id);
             let review: reviews = data;
             console.log(review);
@@ -68,7 +73,7 @@ export default function ReviewGame() {
         }
 
         const getUser = async (id: string | undefined) => {
-            let rutadeUsuarios = "http://localhost:8080/api/v1/usuario/";
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id);
             let usuario: usuarios = data;
             console.log(usuario);

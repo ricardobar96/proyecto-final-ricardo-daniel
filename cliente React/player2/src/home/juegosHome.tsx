@@ -25,7 +25,7 @@ export const JuegosHome = () => {
 
     useEffect(() => {
         const getVideojuego = async () => {
-            const rutajuegosHome: string = rutaBase + "/api/v1/videojuego";
+            const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
             let ruta = rutajuegosHome;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -33,7 +33,7 @@ export const JuegosHome = () => {
             setVideojuego({ videojuegos: respuesta.data });
         }
         const getUsuario = async () => {
-            const rutaUsuario: string = rutaBase + "/api/v1/usuario";
+            const rutaUsuario: string = rutaBase + "/api/v0/usuario";
             let ruta = rutaUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -41,7 +41,7 @@ export const JuegosHome = () => {
             setUsuario({ usuario: respuesta.data });
         }
         const getJuegosUsuario = async () => {
-            const rutaJuegosUsuario: string = rutaBase + "/api/v1/juegousuario";
+            const rutaJuegosUsuario: string = rutaBase + "/api/v0/juegousuario";
             let ruta = rutaJuegosUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
@@ -62,7 +62,7 @@ export const JuegosHome = () => {
                         videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
-                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
                                             <div className='titleHomeBox'>
@@ -84,7 +84,7 @@ export const JuegosHome = () => {
                         videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
-                                    <Link to={{ pathname: "/api/v1/videojuego/" + a.id }}>
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
                                             <div className='titleHomeBox'>
@@ -108,7 +108,7 @@ export const JuegosHome = () => {
                                 contadorProgreso = contadorProgreso+1
                                 return (
                                     <div className='juegosHomeBox'>
-                                        <Link to={{ pathname: "/api/v1/videojuego/" + v.videojuego.id }}>
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>
                                             <li>
                                                 <span><img src={v.videojuego.imagen} className='imageGameHome' /></span>
                                                 <div className='titleHomeBox'>
