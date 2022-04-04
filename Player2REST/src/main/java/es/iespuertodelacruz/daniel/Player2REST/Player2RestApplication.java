@@ -51,8 +51,7 @@ public class Player2RestApplication {
             .csrf().disable()
             .addFilterBefore(new FiltroJWT(), UsernamePasswordAuthenticationFilter.class)
             .authorizeRequests()
-            .antMatchers("/api/v1/**").hasRole("USER")
-            .antMatchers("/api/v1/**").hasRole("ADMIN")
+            .antMatchers("/api/v1/**").hasAnyRole("ADMIN","USER")
             .antMatchers("/api/v2/**").hasRole("ADMIN")
             .anyRequest().authenticated();
 	    	
