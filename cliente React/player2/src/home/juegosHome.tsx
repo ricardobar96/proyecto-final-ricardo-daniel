@@ -66,8 +66,8 @@ export const JuegosHome = () => {
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
                                             <div className='titleHomeBox'>
-                                                    <h5 className='titleGameHome'>{a.nombre}</h5>
-                                                </div>
+                                                <h5 className='titleGameHome'>{a.nombre}</h5>
+                                            </div>
                                         </li>
                                     </Link>
                                 </div>
@@ -88,8 +88,8 @@ export const JuegosHome = () => {
                                         <li>
                                             <span><img src={a.imagen} className='imageGameHome' /></span>
                                             <div className='titleHomeBox'>
-                                                    <h5 className='titleGameHome'>{a.nombre}</h5>
-                                                </div>
+                                                <h5 className='titleGameHome'>{a.nombre}</h5>
+                                            </div>
                                         </li>
                                     </Link>
                                 </div>
@@ -99,13 +99,17 @@ export const JuegosHome = () => {
                 </ul>
             </div>
 
-            <h3 className='title'>Tus juegos en progreso:</h3>
+            {usuarioActual.nombre != null ?
+                <h3 className='title'>Tus juegos en progreso:</h3>
+                : null
+            }
+
             <div className='nuevosWrapper'>
                 <ul className='nuevosList'>
                     {
                         juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
-                            if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 4)){
-                                contadorProgreso = contadorProgreso+1
+                            if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 4)) {
+                                contadorProgreso = contadorProgreso + 1
                                 return (
                                     <div className='juegosHomeBox'>
                                         <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>
@@ -118,7 +122,7 @@ export const JuegosHome = () => {
                                         </Link>
                                     </div>
                                 );
-                            }                       
+                            }
                         })
                     }
                 </ul>

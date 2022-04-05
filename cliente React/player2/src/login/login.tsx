@@ -44,7 +44,7 @@ export default function Login() {
                 localStorage.setItem("token", data);
                 localStorage.setItem("user", nombre);
                 localStorage.setItem("usuarioActual", JSON.stringify(usuarioActual));
-                navigate("/home");
+                navigate("/");
             } catch (error) {
                 toast.error("No existe usuario con esos datos");
                 console.log(error);
@@ -69,6 +69,10 @@ export default function Login() {
         navigate("/register");
     }
 
+    function goHome() {
+        navigate("/");
+    }
+
     return (
         <div className="login">
             <div className="loginWrapper">
@@ -91,6 +95,12 @@ export default function Login() {
                             <button type="submit" className="registerButton">Registrarse</button>
                         </div>
                     </form>
+
+                    <div className="loginRight">
+                        <div className="guestBox">
+                            <button type="button" className="guestButton" onClick={goHome}>Continuar como invitado</button>
+                        </div>                      
+                    </div>
                 </div>
             </div>
         </div>

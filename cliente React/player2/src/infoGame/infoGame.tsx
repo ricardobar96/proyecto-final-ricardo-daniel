@@ -217,14 +217,20 @@ export default function InfoGame() {
                     <br />
                     <br />
 
-                    <span style={{ color: "orangered", fontWeight: "bolder" }}>¿En progreso?</span>
+                    {usuarioActual.nombre != null ?
+                        <span style={{ color: "orangered", fontWeight: "bolder" }}>¿En progreso?</span>
+                        : null
+                    }
 
-                    <Checkbox
-                        value={checkedProgress}
-                        checked={progress}
-                        onClick={handleChangeProgress}
-                        style={{ marginLeft: "5px" }}
-                    />
+                    {usuarioActual.nombre != null ?
+                        <Checkbox
+                            value={checkedProgress}
+                            checked={progress}
+                            onClick={handleChangeProgress}
+                            style={{ marginLeft: "5px" }}
+                        />
+                        : null
+                    }
 
                     <br />
 
@@ -254,18 +260,18 @@ export default function InfoGame() {
                         <h3 className="title">Pistas:</h3>
                         <ul className='pistasList'>
                             {stClue.pista?.map((p: pistas) => {
-                                if(p.videojuego.id == stGame.videojuego?.id)
-                                return (
-                                    <li className="pistasItem">
-                                        <Link to={{ pathname: "/api/v0/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
-                                            <span className="pistasLeft"><img src={p.usuario.avatar} className="avatarInfo" /> {p.usuario.nombre}</span>
-                                        </Link>
-                                        <div className="pistasRight">
-                                            <h3>{p.titulo} ({p.fecha})</h3>
-                                            <p>{p.contenido}</p>
-                                        </div>
-                                    </li>
-                                );
+                                if (p.videojuego.id == stGame.videojuego?.id)
+                                    return (
+                                        <li className="pistasItem">
+                                            <Link to={{ pathname: "/api/v0/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
+                                                <span className="pistasLeft"><img src={p.usuario.avatar} className="avatarInfo" /> {p.usuario.nombre}</span>
+                                            </Link>
+                                            <div className="pistasRight">
+                                                <h3>{p.titulo} ({p.fecha})</h3>
+                                                <p>{p.contenido}</p>
+                                            </div>
+                                        </li>
+                                    );
                             })}
                         </ul>
                     </div>
@@ -275,18 +281,18 @@ export default function InfoGame() {
                         <h3 className="title">Reviews:</h3>
                         <ul className='reviewsList'>
                             {stReview.review?.map((r: reviews) => {
-                                if(r.videojuego.id == stGame.videojuego?.id)
-                                return (
-                                    <li className="pistasItem">
-                                    <Link to={{ pathname: "/api/v0/usuario/" + r.usuario.id }} style={{ textDecoration: "none" }}>
-                                        <span className="pistasLeft"><img src={r.usuario.avatar} className="avatarInfo" /> {r.usuario.nombre}</span>
-                                    </Link>
-                                    <div className="pistasRight">
-                                        <h3>{r.titulo} ({r.fecha})</h3>
-                                        <p>{r.contenido}</p>
-                                    </div>
-                                </li>
-                                );
+                                if (r.videojuego.id == stGame.videojuego?.id)
+                                    return (
+                                        <li className="pistasItem">
+                                            <Link to={{ pathname: "/api/v0/usuario/" + r.usuario.id }} style={{ textDecoration: "none" }}>
+                                                <span className="pistasLeft"><img src={r.usuario.avatar} className="avatarInfo" /> {r.usuario.nombre}</span>
+                                            </Link>
+                                            <div className="pistasRight">
+                                                <h3>{r.titulo} ({r.fecha})</h3>
+                                                <p>{r.contenido}</p>
+                                            </div>
+                                        </li>
+                                    );
                             })}
                         </ul>
                     </div>

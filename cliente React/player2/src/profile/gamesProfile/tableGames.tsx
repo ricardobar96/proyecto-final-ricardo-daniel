@@ -2,10 +2,9 @@ import "./tableGames.css";
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Link, useParams } from 'react-router-dom';
-import { VideogameAsset } from "@material-ui/icons";
-import { videojuegos } from "../modelo/videojuegos";
-import { usuarios } from "../modelo/usuarios";
-import { juegosUsuario } from "../modelo/juegosUsuario";
+import { videojuegos } from "../../modelo/videojuegos";
+import { usuarios } from "../../modelo/usuarios";
+import { juegosUsuario } from "../../modelo/juegosUsuario";
 
 interface IState { videojuegos?: videojuegos[]; usuario?: usuarios, juegosUsuario?: juegosUsuario[]; }
 

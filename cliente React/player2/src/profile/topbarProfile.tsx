@@ -14,7 +14,7 @@ export default function TopbarProfile() {
         <div className="topbarProfileContainer">
             <div className="topbarCenter">
                 <div className="topbarLinks">
-                    <Link to="/home" style={{ textDecoration: "none" }}>
+                    <Link to="/" style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Principal</span>
                     </Link>
                     <Link to={{ pathname: "/api/v1/usuario/" + idUser + "/gamesProfile" }} style={{ textDecoration: "none" }}>
@@ -23,7 +23,7 @@ export default function TopbarProfile() {
                     <Link to="/games" style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Social</span>
                     </Link>
-                    <Link to="/games" style={{ textDecoration: "none" }}>
+                    <Link to={{ pathname: "/api/v1/usuario/" + idUser + "/reviewsProfile" }} style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Reviews</span>
                     </Link>
                 </div>

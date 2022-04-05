@@ -3,10 +3,10 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Slider } from "@material-ui/core";
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { generos } from "../modelo/generos";
+import { generos } from "../../modelo/generos";
 import toast, { Toaster } from "react-hot-toast";
 import { Search } from "@material-ui/icons";
-import { videojuegos } from "../modelo/videojuegos";
+import { videojuegos } from "../../modelo/videojuegos";
 
 interface IState { videojuegos?: videojuegos[], generos?: generos[]; }
 

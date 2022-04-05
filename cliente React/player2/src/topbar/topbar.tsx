@@ -52,7 +52,7 @@ export default function Topbar() {
 
     function Logout() {
         localStorage.clear();
-        navigate("/");
+        navigate("/login");
     }
 
     function SearchGame() {
@@ -93,12 +93,17 @@ export default function Topbar() {
             </div>
             <div className="topbarCenter">
                 <div className="topbarLinks">
-                    <Link to="/home" style={{ textDecoration: "none" }}>
+                    <Link to="/" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Home</span>
                     </Link>
-                    <Link to={{ pathname: "/api/v0/usuario/" + idUser }} style={{ textDecoration: "none" }}>
-                        <span className="topbarLink">Perfil</span>
-                    </Link>
+
+                    {usuarioActual.nombre != null ?
+                        <Link to={{ pathname: "/api/v0/usuario/" + idUser }} style={{ textDecoration: "none" }}>
+                            <span className="topbarLink">Perfil</span>
+                        </Link>
+                        : null
+                    }
+
                     <Link to="/games" style={{ textDecoration: "none" }}>
                         <span className="topbarLink">Videojuegos</span>
                     </Link>
@@ -115,11 +120,11 @@ export default function Topbar() {
                         <Chat onClick={goChat} />
                     </div>
                     <div className="topbarIconsItem">
-                    {usuarioActual.nombre != null ?
-                        <img src={avatar} className="topbarAvatar" onClick={goProfile} />
-                        : <ExitToApp onClick={goProfile}/>
-                    }
-                        
+                        {usuarioActual.nombre != null ?
+                            <img src={avatar} className="topbarAvatar" onClick={goProfile} />
+                            : <ExitToApp onClick={goProfile} />
+                        }
+
                     </div>
                     <div className="topbarIconsItem">
                         <PowerSettingsNew onClick={Logout} />

@@ -47,6 +47,14 @@
     flex-direction: column;
     justify-content: space-between;
 }
+.guestBox{
+    height: 50px;
+    padding: 20px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
 .loginInput{
     height: 30px;
     border-radius: 10px;
@@ -78,6 +86,20 @@
     color:white;
     font-size: 20px;
     font-weight: 500px;
+}
+
+.guestButton{
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color:#77BC75;
+    color:white;
+    font-size: 20px;
+    font-weight: 500px;
+}
+
+.guestButton:hover {
+    filter: brightness(120%);
 }
 
 .registerButton:hover {

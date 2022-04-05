@@ -4,7 +4,6 @@ import axios from 'axios';
 import { Navigate, useNavigate } from 'react-router-dom';
 import toast, { Toaster } from "react-hot-toast";
 import { usuarios } from "../modelo/usuarios";
-import Password from "antd/lib/input/Password";
 
 export default function Register() {
     let navigate = useNavigate();
@@ -12,7 +11,7 @@ export default function Register() {
     const passwordUser = useRef<HTMLInputElement>(null);
 
     const returnLogin = (event: React.FormEvent<HTMLFormElement>) => {
-        navigate("/");
+        navigate("/login");
     }
 
     const registerUser = (event: React.FormEvent<HTMLFormElement>) => {
@@ -31,12 +30,13 @@ export default function Register() {
                 const { data } = await axios.post(rutaDeUsuario, newUser)
                 console.log(data);
             } catch (error) {
+                console.log(name+ " " +password);
                 toast.error("Ya existe un usuario con ese nombre");
                 console.log(error);
             }
         }
         axiospost(ruta).then(respuesta => {
-            navigate("/")
+            navigate("/login")
         });
     }
 

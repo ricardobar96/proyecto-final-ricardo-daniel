@@ -9,7 +9,8 @@ import ChatHome from './home/chat/chatHome';
 import ReviewGame from './infoGame/reviewGame';
 import ClueGame from './infoGame/clueGame';
 import Profile from './profile/profile';
-import GamesProfile from './profile/gamesProfile';
+import GamesProfile from './profile/gamesProfile/gamesProfile';
+import ReviewsProfile from './profile/reviewsProfile';
 
 interface IProps { }
 interface IState { }
@@ -22,7 +23,7 @@ export const RequireAuth = ({ children }: IProps) => {
   if (autorizado) {
     return children
   }
-  return <Navigate to="/" />
+  return <Navigate to="/login" />
 }
 
 const App = () => {
@@ -30,8 +31,8 @@ const App = () => {
   return (
     <BrowserRouter>
       <Routes>
-      <Route path="/home" element={<Home />} />
-        <Route path="/" element={<Login />} />
+      <Route path="/" element={<Home />} />
+        <Route path="/login" element={<Login />} />
         <Route path="/register" element={<Register />} />
 
         <Route path="/games" element={<Games/>} />
@@ -45,6 +46,11 @@ const App = () => {
         <Route path="api/v1/usuario/:id/gamesProfile" element={
           <RequireAuth >
             <GamesProfile/>
+          </RequireAuth>
+        } />
+        <Route path="api/v1/usuario/:id/reviewsProfile" element={
+          <RequireAuth >
+            <ReviewsProfile/>
           </RequireAuth>
         } />
         <Route path="/chat" element={

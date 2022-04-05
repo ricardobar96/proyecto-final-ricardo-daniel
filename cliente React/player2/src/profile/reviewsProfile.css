@@ -1,0 +1,47 @@
+.reviewsProfileWrapper{
+    margin-top: 50px;
+    width: 500px;
+    text-align: center;
+    margin-left: auto; 
+    margin-right: auto;
+}
+
+.reviewProfileGame{
+    font-weight: bolder;
+    font-size: 24px;
+    color:blue;
+}
+
+.reviewProfileTitle{
+    font-weight: 700;
+    font-size: 20px;
+    color:black;
+}
+
+.reviewsProfileList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.reviewProfileItem{
+    padding: 50px;
+}
+
+.reviewProfileContent{
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+    justify-content: space-between;
+}
+
+.reviewProfileImage{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.reviewProfileGameImage{
+    width: 70px;
+    height: 70px;
+}
