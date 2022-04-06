@@ -1,0 +1,25 @@
+.buttonsSocialProfile{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.socialProfileBox{
+    align-items: center;
+    margin: auto;
+}
+
+.socialProfileWrapper{
+    margin-top: 20px;
+}
+
+.socialProfileList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 6;
+    list-style: none;
+}
+
+.itemSocialProfile{
+    list-style: none;
+    text-align: center;
+}

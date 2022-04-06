@@ -11,6 +11,7 @@ import ClueGame from './infoGame/clueGame';
 import Profile from './profile/profile';
 import GamesProfile from './profile/gamesProfile/gamesProfile';
 import ReviewsProfile from './profile/reviewsProfile';
+import SocialProfile from './profile/socialProfile';
 
 interface IProps { }
 interface IState { }
@@ -51,6 +52,11 @@ const App = () => {
         <Route path="api/v1/usuario/:id/reviewsProfile" element={
           <RequireAuth >
             <ReviewsProfile/>
+          </RequireAuth>
+        } />
+        <Route path="api/v1/usuario/:id/socialProfile" element={
+          <RequireAuth >
+            <SocialProfile/>
           </RequireAuth>
         } />
         <Route path="/chat" element={

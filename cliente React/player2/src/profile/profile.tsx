@@ -3,98 +3,142 @@ import React, { useState, useEffect, useRef } from 'react';
 import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
 import Topbar from '../topbar/topbar';
-import toast, { Toaster } from "react-hot-toast";
+import { Checkbox } from "@material-ui/core";
 import TopbarProfile from './topbarProfile';
+import { usuarios } from "../modelo/usuarios";
+import { videojuegos } from "../modelo/videojuegos";
 
-interface IState { videojuego?: player2.videojuegos, review?: player2.reviews[], usuario?: player2.usuarios; }
-
-declare module player2 {
-
-    export interface videojuegos {
-        id: number;
-        nombre: string;
-        fecha: string;
-        puntuacion: number;
-        descripcion: string;
-        imagen: string;
-    }
-
-    export interface reviews {
-        id: number;
-        titulo: string;
-        contenido: string;
-        fecha: string;
-        videojuego: videojuegos;
-        usuario: usuarios;
-    }
-
-    export interface juegosUsuario {
-        id: number;
-        completado: number;
-        horas: number;
-        usuario: usuarios;
-        videojuego: videojuegos;
-        puntuacion: number;
-    }
-
-    export interface usuarios {
-        id: number;
-        nombre: string;
-        password: string;
-        rol: string;
-        avatar: string;
-        activo: number;
-        color: string;
-        banner: string;
-        descripcion: string;
-    }
-}
+interface IState { videojuego?: videojuegos, usuario?: usuarios; }
 
 export default function Profile() {
     let navigate = useNavigate();
     const [stGame, setStGame] = useState<IState>({});
-    const [stReview, setStReview] = useState<IState>({});
     const [stUser, setStUser] = useState<IState>({});
     const { id } = useParams();
 
-    var usuarioActual: player2.usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+    const token = localStorage.getItem("token") as string;
+    const headers = {
+        headers: { Authorization: token }
+    };
+
+    var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+    let initialCheckFollowing: any = 0;
+    let following = false;
+
+    /* check para comprobar si usuario esta en lista de following
+    stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
+        if (j.videojuego.id === stGame.videojuego?.id) {
+            if (j.usuario.id === usuarioActual.id) {
+                juegoUsuarioActual = j;
+                initialCheckComplete = 1;
+                progress = true;
+                if (j.completado == 1) {
+                    completado = true;
+                }
+            }
+        }
+    });
+    */
+
+    const [checkedFollowing, setCheckedFollowing] = React.useState(false);
+
+    function handleChangeFollowing() {
+        if (following == false) {
+            //CREAR NUEVO FOLLOWER POST const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
+            let ruta = "http://localhost:8080/api/v1/juegousuario";
+            const axiosput = async (rutaDeJuegoUsuario: string) => {
+                try {
+                    //const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
+                    //console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            axiosput(ruta).then(respuesta => {
+                navigate(0)
+            });
+
+            following = true;
+        }
+        if (following == true) {
+            //const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
+            let ruta = "http://localhost:8080/api/v1/juegousuario";
+            const axiosput = async (rutaDeJuegoUsuario: string) => {
+                try {
+                    //const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
+                    //console.log(data);
+                } catch (error) {
+                    console.log(error);
+                }
+            }
+            axiosput(ruta).then(respuesta => {
+                navigate(0)
+            });
+
+            following = false;
+        }
+        setCheckedFollowing(!checkedFollowing);
+    }
+
+    /*
+    function checkUserHasGame() {
+        stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
+            if (j.videojuego.id === stGame.videojuego?.id) {
+                if (j.usuario.id === usuarioActual.id) {
+                    initialCheckComplete = 1;
+                }
+            }
+            console.log("EL VALOR ES " + initialCheckComplete);
+        });
+    }
+    */
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
             let rutaDeJuego = "http://localhost:8080/api/v0/videojuego/";
             let { data } = await axios.get(rutaDeJuego + id);
-            let videojuego: player2.videojuegos = data;
+            let videojuego: videojuegos = data;
             console.log(videojuego);
             setStGame({ videojuego });
         }
-
-        const getReview = async (id: string | undefined) => {
-            let rutadeReviews = "http://localhost:8080/api/v0/review/";
-            let { data } = await axios.get(rutadeReviews + id);
-            let review: player2.reviews[] = data;
-            console.log(review);
-            setStReview({ review });
-        }
-
         const getUser = async (id: string | undefined) => {
             let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
             let { data } = await axios.get(rutadeUsuarios + id);
-            let usuario: player2.usuarios = data;
+            let usuario: usuarios = data;
             console.log(usuario);
             setStUser({ usuario });
         }
         getUser(id);
-        getReview(id);
         getGame(id);
     },
         [id]
     )
-
     return (
         <>
-            <Topbar/>
-            <TopbarProfile/>
-            Nombre usuario: {stUser.usuario?.nombre}
+            <Topbar />
+            <TopbarProfile />
+            <div className="infoGame">
+                <div className="infoGameWrapper">
+
+                    {usuarioActual.id != stUser.usuario?.id ?
+                        <span style={{ color: "orangered", fontWeight: "bolder" }}>Follow</span>
+                        : null
+                    }
+
+                    {usuarioActual.id != stUser.usuario?.id ?
+                        <Checkbox
+                            value={checkedFollowing}
+                            checked={following}
+                            onClick={handleChangeFollowing}
+                            style={{ marginLeft: "5px" }}
+                        />
+                        : null
+                    }
+
+                    <br />
+                    NOMBRE: {stUser.usuario?.id}
+                </div>
+            </div>
         </>
     )
 }

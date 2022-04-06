@@ -10,17 +10,17 @@ export default function TopbarProfile() {
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
     var idUser = usuarioActual.id;
 
-    return (
-        <div className="topbarProfileContainer">
+    return (    
+            <><img className="topbarProfileBanner" src={usuarioActual.banner} /><div className="topbarProfileContainer">
             <div className="topbarCenter">
                 <div className="topbarLinks">
-                    <Link to="/" style={{ textDecoration: "none" }}>
+                <Link to={{ pathname: "/api/v0/usuario/" + idUser }} style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Principal</span>
                     </Link>
                     <Link to={{ pathname: "/api/v1/usuario/" + idUser + "/gamesProfile" }} style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Videojuegos</span>
                     </Link>
-                    <Link to="/games" style={{ textDecoration: "none" }}>
+                    <Link to={{ pathname: "/api/v1/usuario/" + idUser + "/socialProfile" }} style={{ textDecoration: "none" }}>
                         <span className="topbarProfileLink">Social</span>
                     </Link>
                     <Link to={{ pathname: "/api/v1/usuario/" + idUser + "/reviewsProfile" }} style={{ textDecoration: "none" }}>
@@ -28,6 +28,7 @@ export default function TopbarProfile() {
                     </Link>
                 </div>
             </div>
-        </div>
+        </div></>
+        
     )
 }

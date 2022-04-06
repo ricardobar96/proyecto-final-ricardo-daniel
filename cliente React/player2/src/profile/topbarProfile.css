@@ -24,3 +24,12 @@
 .topbarProfileLink:hover{
     color:orangered;
 }
+.topbarProfileBanner{
+    height: 100px;
+    width: 100%;
+    background-color: darkslategray;
+    display: flex;
+    align-items: center;
+    top: 0;
+    text-align: center;
+}
