@@ -46,21 +46,6 @@ public class UsuarioRESTv2 {
 		}
 
 	}
-	/*
-
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody UsuarioDTO usuarioIn) {
-		Optional<Usuario> optOp = usuarioService.findById(id);
-		if (optOp.isPresent()) {
-			Usuario usuario = optOp.get();
-			usuario.setNombre(usuarioIn.getNombre());
-			usuario.setApellidos(usuarioIn.getApellidos());
-			usuario.setNacionalidad(usuarioIn.getNacionalidad());
-			return ResponseEntity.ok(usuarioService.save(usuario));
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
-		}
-	}*/
 	
 	@PostMapping
 	public ResponseEntity<?> saveAdmin(@RequestBody Usuario usuarioDto) {

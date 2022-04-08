@@ -13,7 +13,9 @@ import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
+import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -21,9 +23,11 @@ import es.iespuertodelacruz.daniel.Player2REST.dto.ReviewDTO;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
+import es.iespuertodelacruz.daniel.Player2REST.security.GestorDeJWT;
 import es.iespuertodelacruz.daniel.Player2REST.service.ReviewService;
 import es.iespuertodelacruz.daniel.Player2REST.service.UsuarioService;
 import es.iespuertodelacruz.daniel.Player2REST.service.VideojuegoService;
+import io.jsonwebtoken.Claims;
 
 @RestController
 @RequestMapping("/api/v2/review")
@@ -48,21 +52,4 @@ public class ReviewRESTv2 {
 		}
 
 	}
-
-	/*
-
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ReviewDTO reviewIn) {
-		Optional<Review> optOp = reviewService.findById(id);
-		if (optOp.isPresent()) {
-			Review review = optOp.get();
-			review.setNombre(reviewIn.getNombre());
-			review.setApellidos(reviewIn.getApellidos());
-			review.setNacionalidad(reviewIn.getNacionalidad());
-			return ResponseEntity.ok(reviewService.save(review));
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
-		}
-	}
-*/
 }

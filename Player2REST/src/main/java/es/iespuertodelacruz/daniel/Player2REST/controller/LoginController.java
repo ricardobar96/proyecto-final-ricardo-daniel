@@ -77,34 +77,37 @@ public class LoginController {
 		
 		Usuario usuario = usuarioService.findByNombre(username);
 		
-        
-        String passwordUsuarioEnHash = "";
-        boolean autenticado = false;
-        
-        if(usuario != null) { 
-        	passwordUsuarioEnHash = usuario.getPassword();
-        	
-        	autenticado = BCrypt.checkpw(passTextoPlanoRecibida, passwordUsuarioEnHash);
-        	
-        }
-        
-   
-      
-		if(autenticado) {
+		if (usuario.getActivo() == 1) {
+			String passwordUsuarioEnHash = "";
+	        boolean autenticado = false;
+	        
+	        if(usuario != null) { 
+	        	passwordUsuarioEnHash = usuario.getPassword();
+	        	
+	        	autenticado = BCrypt.checkpw(passTextoPlanoRecibida, passwordUsuarioEnHash);
+	        	
+	        }
+	        
+	   
+	      
+			if(autenticado) {
 
+					
+				String rol = usuario.getRol();
+				List<String> roles = new ArrayList<String>(); 
+				roles.add(rol);
+				logger.info("los roles obtenidos: " + roles);
 				
-			String rol = usuario.getRol();
-			List<String> roles = new ArrayList<String>(); 
-			roles.add(rol);
-			logger.info("los roles obtenidos: " + roles);
-			
 
-			int duracionMinutos = 600;
-			
-			String token = gestorDeJWT.generarToken(username, roles, duracionMinutos);
-			
-			respuesta = gestorDeJWT.BEARERPREFIX + token;			
+				int duracionMinutos = 600;
+				
+				String token = gestorDeJWT.generarToken(username, roles, duracionMinutos);
+				
+				respuesta = gestorDeJWT.BEARERPREFIX + token;			
+			}
 		}
+        
+        
 		
 		return respuesta;
 

@@ -1,6 +1,9 @@
 package es.iespuertodelacruz.daniel.Player2REST.entity;
 
 import java.io.Serializable;
+import java.math.BigInteger;
+import java.util.Date;
+
 import javax.persistence.*;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
@@ -25,6 +28,8 @@ public class JuegoUsuario implements Serializable {
 	private int horas;
 
 	private int puntuacion;
+	
+	private BigInteger fecha;
 
 	@JsonIgnore
 	//bi-directional many-to-one association to Usuario
@@ -88,5 +93,15 @@ public class JuegoUsuario implements Serializable {
 	public void setVideojuego(Videojuego videojuego) {
 		this.videojuego = videojuego;
 	}
+
+	public BigInteger getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(BigInteger fecha) {
+		this.fecha = fecha;
+	}
+	
+	
 
 }

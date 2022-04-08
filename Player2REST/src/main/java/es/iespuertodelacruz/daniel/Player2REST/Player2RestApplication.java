@@ -38,7 +38,8 @@ public class Player2RestApplication {
 			webSecurity
 			.ignoring()
 			.antMatchers(HttpMethod.POST, "/api/login")
-			.antMatchers(HttpMethod.GET, "/api/v0/**");
+			.antMatchers(HttpMethod.GET, "/api/v0/**")
+			.antMatchers(HttpMethod.POST, "/api/v0/**");
 			//.antMatchers("/api/v1/**");
 			//.antMatchers("/**");
 		}

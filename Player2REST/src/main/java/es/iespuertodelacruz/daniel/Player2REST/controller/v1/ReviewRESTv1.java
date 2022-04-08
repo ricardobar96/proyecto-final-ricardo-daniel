@@ -10,6 +10,7 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -55,23 +56,40 @@ public class ReviewRESTv1 {
 		}
 
 	}
-	/*
+	
 
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ReviewDTO reviewIn) {
+	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody ReviewDTO reviewIn, @RequestHeader (name="Authorization") String token) {
 		Optional<Review> optOp = reviewService.findById(id);
 		if (optOp.isPresent()) {
 			Review review = optOp.get();
-			review.setNombre(reviewIn.getNombre());
-			review.setApellidos(reviewIn.getApellidos());
-			review.setNacionalidad(reviewIn.getNacionalidad());
-			return ResponseEntity.ok(reviewService.save(review));
+			GestorDeJWT gestorDeJwt = GestorDeJWT.getInstance();
+			String tokenCorregido = token.split(" ")[1].trim();
+			Claims claimsGestor = gestorDeJwt.getClaims(tokenCorregido);
+			String username = claimsGestor.getSubject();
+			if (review.getUsuario().getNombre().equals(username)) {
+				review.setContenido(reviewIn.getContenido());
+				review.setFecha(BigInteger.valueOf(new Date().getTime()));
+				review.setTitulo(reviewIn.getTitulo());
+				Review reviewC = null;
+				try {
+					reviewC = reviewService.save(review);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (reviewC != null) {
+					return new ResponseEntity<>(reviewC, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>("Ya existe esa combinación de valores (Nick, Password)", HttpStatus.CONFLICT);
+				}
+			} else {
+				return new ResponseEntity<>("Solo el usuario propietario puede crear nuevas entradas", HttpStatus.UNAUTHORIZED);
+			}
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
 	}
-*/
 	@PostMapping
 	public ResponseEntity<?> saveReview(@RequestBody ReviewDTO reviewDto, @RequestHeader (name="Authorization") String token) {
 		

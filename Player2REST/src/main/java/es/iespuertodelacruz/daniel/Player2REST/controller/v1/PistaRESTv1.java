@@ -10,13 +10,16 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestHeader;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
 import es.iespuertodelacruz.daniel.Player2REST.dto.PistaDTO;
+import es.iespuertodelacruz.daniel.Player2REST.dto.ReviewDTO;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
 import es.iespuertodelacruz.daniel.Player2REST.security.GestorDeJWT;
@@ -55,22 +58,40 @@ public class PistaRESTv1 {
 		}
 
 	}
-	/*
+
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody PistaDTO pistaIn) {
+	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody PistaDTO pistaIn, @RequestHeader (name="Authorization") String token) {
 		Optional<Pista> optOp = pistaService.findById(id);
 		if (optOp.isPresent()) {
 			Pista pista = optOp.get();
-			pista.setNombre(pistaIn.getNombre());
-			pista.setApellidos(pistaIn.getApellidos());
-			pista.setNacionalidad(pistaIn.getNacionalidad());
-			return ResponseEntity.ok(pistaService.save(pista));
+			GestorDeJWT gestorDeJwt = GestorDeJWT.getInstance();
+			String tokenCorregido = token.split(" ")[1].trim();
+			Claims claimsGestor = gestorDeJwt.getClaims(tokenCorregido);
+			String username = claimsGestor.getSubject();
+			if (pista.getUsuario().getNombre().equals(username)) {
+				pista.setContenido(pistaIn.getContenido());
+				pista.setFecha(BigInteger.valueOf(new Date().getTime()));
+				pista.setTitulo(pistaIn.getTitulo());
+				Pista pistaC = null;
+				try {
+					pistaC = pistaService.save(pista);
+				} catch (Exception e) {
+					e.printStackTrace();
+				}
+				if (pistaC != null) {
+					return new ResponseEntity<>(pistaC, HttpStatus.OK);
+				} else {
+					return new ResponseEntity<>("Ya existe esa combinación de valores (Nick, Password)", HttpStatus.CONFLICT);
+				}
+			} else {
+				return new ResponseEntity<>("Solo el usuario propietario puede crear nuevas entradas", HttpStatus.UNAUTHORIZED);
+			}
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
 	}
-*/
+	
 	@PostMapping
 	public ResponseEntity<?> savePista(@RequestBody PistaDTO pistaDto, @RequestHeader (name="Authorization") String token) {
 		

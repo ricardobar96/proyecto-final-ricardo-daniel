@@ -43,20 +43,30 @@ public class VideojuegoRESTv2 {
 		}
 
 	}
-	/*
+	
 
 	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody VideojuegoDTO videojuegoIn) {
+	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody VideojuegoDTO videojuegoDto) {
 		Optional<Videojuego> optOp = videojuegoService.findById(id);
 		if (optOp.isPresent()) {
+			List<Genero> generos = new ArrayList<>();
+			for (Genero genero : videojuegoDto.getGeneros()) {
+				Optional<Genero> generoFind = generoService.findById(genero.getId());
+				if (generoFind.isPresent()) {
+					generos.add(generoFind.get());
+				}
+				
+			}
 			Videojuego videojuego = optOp.get();
-			videojuego.setNombre(videojuegoIn.getNombre());
-			videojuego.setApellidos(videojuegoIn.getApellidos());
-			videojuego.setNacionalidad(videojuegoIn.getNacionalidad());
+			videojuego.setNombre(videojuegoDto.getNombre());
+			videojuego.setDescripcion(videojuegoDto.getDescripcion());
+			videojuego.setGeneros(generos);
+			videojuego.setImagen(videojuegoDto.getImagen());
+			videojuego.setFecha(BigInteger.valueOf(videojuegoDto.getFecha().getTime()));
 			return ResponseEntity.ok(videojuegoService.save(videojuego));
 		} else {
 			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
 		}
-	}*/
+	}
 }
 

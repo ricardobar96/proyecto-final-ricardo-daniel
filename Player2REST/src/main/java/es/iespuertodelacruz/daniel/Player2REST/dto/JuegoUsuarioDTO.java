@@ -1,6 +1,8 @@
 package es.iespuertodelacruz.daniel.Player2REST.dto;
 
 
+import java.util.Date;
+
 import es.iespuertodelacruz.daniel.Player2REST.entity.JuegoUsuario;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
@@ -18,6 +20,8 @@ public class JuegoUsuarioDTO {
 	
 	private int puntuacion;
 	
+	private Date fecha;
+	
 	public JuegoUsuarioDTO() {}
 	
 	public JuegoUsuarioDTO(JuegoUsuario juegoUsuario) {
@@ -27,6 +31,7 @@ public class JuegoUsuarioDTO {
 		this.videojuego = new VideojuegoDTO(juegoUsuario.getVideojuego());
 		this.usuario = new UsuarioDTO(juegoUsuario.getUsuario());
 		this.puntuacion = juegoUsuario.getPuntuacion();
+		this.fecha = new Date(juegoUsuario.getFecha().longValue());
 	}
 
 	public int getId() {

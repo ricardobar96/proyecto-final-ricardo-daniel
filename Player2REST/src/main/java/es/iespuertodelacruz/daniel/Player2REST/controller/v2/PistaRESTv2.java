@@ -47,20 +47,4 @@ public class PistaRESTv2 {
 		}
 
 	}
-	/*
-
-	@PutMapping("/{id}")
-	public ResponseEntity<?> update(@PathVariable Integer id, @RequestBody PistaDTO pistaIn) {
-		Optional<Pista> optOp = pistaService.findById(id);
-		if (optOp.isPresent()) {
-			Pista pista = optOp.get();
-			pista.setNombre(pistaIn.getNombre());
-			pista.setApellidos(pistaIn.getApellidos());
-			pista.setNacionalidad(pistaIn.getNacionalidad());
-			return ResponseEntity.ok(pistaService.save(pista));
-		} else {
-			return ResponseEntity.status(HttpStatus.BAD_REQUEST).body("el id del registro no existe");
-		}
-	}
-*/
 }
