@@ -64,8 +64,8 @@ public class Usuario implements Serializable {
 	//bi-directional many-to-many association to Usuario
 	@ManyToMany
 	@JoinTable( name="follow",
-		joinColumns = @JoinColumn(name="idusuariofollower"),
-		inverseJoinColumns = @JoinColumn(name="idusuariofollowed")
+		joinColumns = @JoinColumn(name="idusuariofollowed"),
+		inverseJoinColumns = @JoinColumn(name="idusuariofollower")
 	)
 	private List<Usuario> followers;
 
