@@ -74,7 +74,9 @@ export default function InfoGame() {
 
     function handleChangeCompleted() {
         if (completado == false) {
-            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
+            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas, 
+                juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion,
+                juegoUsuarioActual.fecha);
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
                 try {
@@ -88,10 +90,11 @@ export default function InfoGame() {
                 navigate(0)
             });
 
-            completado = true;
+            //completado = true;
         }
         if (completado == true) {
-            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
+            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, 
+                juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion, juegoUsuarioActual.fecha);
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
                 try {
@@ -105,14 +108,14 @@ export default function InfoGame() {
                 navigate(0)
             });
 
-            completado = false;
+            //completado = false;
         }
         setCheckedCompleted(!checkedCompleted);
     }
 
     function handleChangeProgress() {
         if (progress == false) {
-            const newJuegoUsuario = new juegosUsuario(1, 0, 0, usuarioActual, stGame.videojuego!, 5);
+            const newJuegoUsuario = new juegosUsuario(1, 0, 0, usuarioActual, stGame.videojuego!, 5, new Date());
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiospost = async (rutaDeJuegoUsuario: string) => {
                 try {

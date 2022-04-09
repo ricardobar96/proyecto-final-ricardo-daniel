@@ -4,10 +4,11 @@ import { videojuegos } from "./videojuegos";
 export class juegosUsuario {
     constructor(
         public id: number,
-        public completado: number,
+        public completado: any,
         public horas: number,
         public usuario: usuarios,
         public videojuego: videojuegos,
-        public puntuacion: number
+        public puntuacion: number,
+        public fecha: any
     ) { }
 }

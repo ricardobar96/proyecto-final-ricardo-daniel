@@ -97,7 +97,7 @@ export default function FilterProfile() {
     }
 
     return (
-        <div className="filter">
+        <div className="filterProfile">
             <div className="filterWrapper">
                 <h3 className="title">Nombre:</h3>
                 <div className="searchbar">

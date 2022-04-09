@@ -1,3 +1,5 @@
+import { generos } from "./generos";
+
 export class videojuegos {
     constructor(
         public id: number,
@@ -5,6 +7,7 @@ export class videojuegos {
         public fecha: any,
         public puntuacion: number,
         public descripcion: string,
-        public imagen: string
+        public imagen: string,
+        public generos: generos[] 
     ) { }
 }

@@ -2,11 +2,13 @@ import "./profile.css";
 import React, { useState, useEffect, useRef } from 'react';
 import { Link, Route, BrowserRouter, Routes, useNavigate, useParams } from 'react-router-dom';
 import axios from 'axios';
-import Topbar from '../topbar/topbar';
+import Topbar from '../../topbar/topbar';
 import { Checkbox } from "@material-ui/core";
-import TopbarProfile from './topbarProfile';
-import { usuarios } from "../modelo/usuarios";
-import { videojuegos } from "../modelo/videojuegos";
+import TopbarProfile from '../topbarProfile';
+import { usuarios } from "../../modelo/usuarios";
+import { videojuegos } from "../../modelo/videojuegos";
+import ProfileLeft from './profileLeft';
+import ProfileRight from './profileRight';
 
 interface IState { videojuego?: videojuegos, usuario?: usuarios; }
 
@@ -114,14 +116,16 @@ export default function Profile() {
         [id]
     )
     return (
-        <>
+        <div style={{
+            backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
+          }}>
             <Topbar />
             <TopbarProfile />
-            <div className="infoGame">
-                <div className="infoGameWrapper">
-
+            <div className="profileMain">
+                <div className="followWrapper">
+                    <br/>
                     {usuarioActual.id != stUser.usuario?.id ?
-                        <span style={{ color: "orangered", fontWeight: "bolder" }}>Follow</span>
+                        <span style={{ color: "orangered", fontWeight: "bolder" }}>Follow {stUser.usuario?.nombre}</span>
                         : null
                     }
 
@@ -134,11 +138,12 @@ export default function Profile() {
                         />
                         : null
                     }
-
-                    <br />
-                    NOMBRE: {stUser.usuario?.id}
                 </div>
             </div>
-        </>
+            <div className="profileContainer">
+                <ProfileLeft />
+                <ProfileRight/>
+            </div>
+        </div>
     )
 }

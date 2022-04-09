@@ -12,6 +12,9 @@ interface IState { videojuego?: videojuegos, review?: reviews[], usuario?: usuar
 
 export default function ReviewsProfile() {
     let navigate = useNavigate();
+    let contadorReviewUser = 0;
+    let numeroReviews = 0;
+
     const [stGame, setStGame] = useState<IState>({});
     const [stReview, setStReview] = useState<IState>({});
 
@@ -28,7 +31,7 @@ export default function ReviewsProfile() {
             console.log(ruta);
             let respuesta = await axios.get(ruta);
             console.log(respuesta.data);
-            setStGame({ review: respuesta.data });
+            setStGame({ videojuego: respuesta.data });
         }
         const getReview = async () => {
             const rutaReviews: string = rutaBase + "/api/v0/review";
@@ -44,30 +47,45 @@ export default function ReviewsProfile() {
         []
     )
     return (
-        <>
+        <div style={{
+            backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
+            height: "100vh"
+        }}>
             <Topbar />
             <TopbarProfile />
             <div className='reviewsProfileWrapper'>
                 <ul className='reviewsProfileList'>
                     {stReview.review?.map((r: reviews) => {
-                        if(r.usuario.id == usuarioActual.id)
-                        return (
-                            <li className="reviewProfileItem">
-                                <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                    <span className="reviewProfileImage"><img src={r.videojuego.imagen} className="reviewProfileGameImage" /></span>
-                                </Link>
-                                <div className="reviewProfileContent">
+                        numeroReviews += 1
+                        if (r.usuario.id == usuarioActual.id) {
+                            contadorReviewUser += 1
+                            return (
+                                <li className="reviewProfileItem">
                                     <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                        <h3 className="reviewProfileGame">{r.videojuego.nombre}</h3>
-                                        <h2 className="reviewProfileTitle">{r.titulo}</h2>
+                                        <span className="reviewProfileImage"><img src={r.videojuego.imagen} className="reviewProfileGameImage" /></span>
                                     </Link>
-                                    
+                                    <div className="reviewProfileContent">
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
+                                            <h3 className="reviewProfileGame">{r.videojuego.nombre}</h3>
+                                            <h2 className="reviewProfileTitle">{r.titulo}</h2>
+                                        </Link>
+
+                                    </div>
+                                </li>
+                            );
+                        }
+                        if ((contadorReviewUser === 0) && (stReview.review?.length === numeroReviews))
+                            return (
+                                <div>
+                                    <br />
+                                    <br />
+                                    <br />
+                                    <h1 className="titleNoReview">El usuario no ha escrito reviews</h1>
                                 </div>
-                            </li>
-                        );
+                            );
                     })}
                 </ul>
             </div>
-        </>
+        </div>
     )
 }

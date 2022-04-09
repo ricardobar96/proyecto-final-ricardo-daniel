@@ -1,0 +1,9 @@
+.profileContainer{
+    display: flex;
+    width: 100%;
+}
+
+.profileMain{
+    height: 100%;
+    text-align: center;
+}

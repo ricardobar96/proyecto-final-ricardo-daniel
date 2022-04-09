@@ -48,7 +48,10 @@ export default function SocialProfile() {
     }
 
     return (
-        <>
+        <div style={{
+            backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
+            height: "100vh"
+        }}>
             <Topbar />
             <TopbarProfile />
             <div className="buttonsSocialProfile">
@@ -63,31 +66,31 @@ export default function SocialProfile() {
             </div>
 
             <div className='socialProfileWrapper'>
-                    <ul className='socialProfileList'>
-                        {
-                            stUser?.usuario?.map((u: usuarios) => {
-                                if (checkedF==0)
-                                    return (
-                                        <div className="socialProfileBox">
-                                            <Link to={{ pathname: "/api/v0/usuario/" + u.id }}>
-                                                <li className="itemSocialProfile">
-                                                    <span><img src={u.avatar} className='imageGameProfile' /></span>
-                                                    <div className='titleProfileBox'>
-                                                        <h5 className='titleGameProfile'>{u.nombre}</h5>
-                                                    </div>
-                                                </li>
-                                            </Link>
-                                        </div>
-                                    );
+                <ul className='socialProfileList'>
+                    {
+                        stUser?.usuario?.map((u: usuarios) => {
+                            if (checkedF == 0)
+                                return (
+                                    <div className="socialProfileBox">
+                                        <Link to={{ pathname: "/api/v0/usuario/" + u.id }}>
+                                            <li className="itemSocialProfile">
+                                                <span><img src={u.avatar} className='imageGameProfile' /></span>
+                                                <div className='titleProfileBox'>
+                                                    <h5 className='titleGameProfile'>{u.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
+                                    </div>
+                                );
 
-                                    if (checkedF==1)
-                                    return (
-                                        <p>FOLLOWING</p>
-                                    );
-                            })
-                        }
-                    </ul>
-                </div>
-        </>
+                            if (checkedF == 1)
+                                return (
+                                    <p>FOLLOWING</p>
+                                );
+                        })
+                    }
+                </ul>
+            </div>
+        </div>
     )
 }

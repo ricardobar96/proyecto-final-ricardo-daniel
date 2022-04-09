@@ -8,10 +8,11 @@ import InfoGame from './infoGame/infoGame';
 import ChatHome from './home/chat/chatHome';
 import ReviewGame from './infoGame/reviewGame';
 import ClueGame from './infoGame/clueGame';
-import Profile from './profile/profile';
+import Profile from './profile/mainProfile/profile';
 import GamesProfile from './profile/gamesProfile/gamesProfile';
 import ReviewsProfile from './profile/reviewsProfile';
 import SocialProfile from './profile/socialProfile';
+import Settings from './profile/settings';
 
 interface IProps { }
 interface IState { }
@@ -72,6 +73,11 @@ const App = () => {
         <Route path="api/v1/newClue/videojuego/:id" element={
           <RequireAuth >
             <ClueGame/>
+          </RequireAuth>
+        } />
+        <Route path="api/v1/usuario/:id/settings" element={
+          <RequireAuth >
+            <Settings/>
           </RequireAuth>
         } />
       </Routes>
