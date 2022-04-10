@@ -31,6 +31,8 @@ public class VideojuegoDTO {
 
 	private List<Genero> generos;
 	
+	private float puntuacion;
+	
 	public VideojuegoDTO() {}
 	
 	public VideojuegoDTO(Videojuego videojuego) {
@@ -47,6 +49,17 @@ public class VideojuegoDTO {
 			Date fecha = new Date(videojuego.getFecha().longValue());
 			this.fecha = fecha;
 		}
+		Integer puntuacionTotal = 0;
+		Integer total = juegoUsuarios.size();
+		for (JuegoUsuario juegoUsuario : juegoUsuarios) {
+			puntuacionTotal += Integer.valueOf(juegoUsuario.getPuntuacion());
+		}
+		
+		if (juegoUsuarios.size() != 0) {
+			Integer puntuacion = puntuacionTotal / total;
+			this.puntuacion = puntuacion.floatValue();
+		}
+		
 	}
 
 	public int getId() {
@@ -120,6 +133,16 @@ public class VideojuegoDTO {
 	public void setGeneros(List<Genero> generos) {
 		this.generos = generos;
 	}
+
+	public float getPuntuacion() {
+		return puntuacion;
+	}
+
+	public void setPuntuacion(float puntuacion) {
+		this.puntuacion = puntuacion;
+	}
+	
+	
 	
 	
 }
