@@ -23,6 +23,30 @@ export const JuegosHome = () => {
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
     let nameUser = usuarioActual.nombre;
 
+    let dateThirtyDays = new Date();
+    dateThirtyDays.setDate(dateThirtyDays.getDate() - 3000);
+
+    let newerGames: videojuegos[] = [];
+    let currentDateGame: Date;
+
+    videojuegos?.videojuegos?.map((v: videojuegos) => {
+        currentDateGame = v.fecha;
+        if (currentDateGame < new Date())
+            newerGames.push(v);
+    });
+
+    let popularGames: videojuegos[] = [];
+
+    videojuegos?.videojuegos?.map((v: videojuegos) => {
+        if(v.puntuacion >= 7){
+            popularGames.push(v);
+        }
+    });
+
+    popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
+
+    popularGames.reverse();
+
     useEffect(() => {
         const getVideojuego = async () => {
             const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
@@ -59,7 +83,7 @@ export const JuegosHome = () => {
             <div className='tendenciasWrapper'>
                 <ul className='tendenciasList'>
                     {
-                        videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
+                        popularGames.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
@@ -81,7 +105,7 @@ export const JuegosHome = () => {
             <div className='nuevosWrapper'>
                 <ul className='nuevosList'>
                     {
-                        videojuegos?.videojuegos?.slice(0, 5).map((a: videojuegos) => {
+                        newerGames.slice(0, 5).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>

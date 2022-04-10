@@ -73,6 +73,7 @@
     font-size: 15px;
     font-weight: 500px;
     margin-bottom: 50px;
+    cursor:pointer;
 }
 
 .buttonForm:hover{
@@ -99,4 +100,10 @@
 .avatarInfo{
     width: 70px;
     height: 70px;
+}
+
+.rateSlider{
+    margin: auto;
+    width: 30%;
+    padding-top: 15px;
 }

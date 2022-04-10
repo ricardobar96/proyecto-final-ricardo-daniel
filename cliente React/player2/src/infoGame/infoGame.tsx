@@ -9,6 +9,8 @@ import { reviews } from "../modelo/reviews";
 import { usuarios } from "../modelo/usuarios";
 import { Checkbox } from "@material-ui/core";
 import { juegosUsuario } from '../modelo/juegosUsuario';
+import { format } from 'date-fns';
+import { Slider } from "@material-ui/core";
 
 interface IState { videojuego?: videojuegos, pista?: pistas[], review?: reviews[], usuario?: usuarios; juegosUsuario?: juegosUsuario[]; }
 
@@ -20,6 +22,8 @@ export default function InfoGame() {
     const [stUser, setStUser] = useState<IState>({});
     const [stUserGames, setStUserGames] = useState<IState>({});
     const { id } = useParams();
+
+    const [val, setVal] = useState([0, 10]);
 
     const token = localStorage.getItem("token") as string;
     const headers = {
@@ -74,7 +78,7 @@ export default function InfoGame() {
 
     function handleChangeCompleted() {
         if (completado == false) {
-            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas, 
+            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas,
                 juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion,
                 juegoUsuarioActual.fecha);
             let ruta = "http://localhost:8080/api/v1/juegousuario";
@@ -93,7 +97,7 @@ export default function InfoGame() {
             //completado = true;
         }
         if (completado == true) {
-            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, 
+            const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario,
                 juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion, juegoUsuarioActual.fecha);
             let ruta = "http://localhost:8080/api/v1/juegousuario";
             const axiosput = async (rutaDeJuegoUsuario: string) => {
@@ -149,6 +153,27 @@ export default function InfoGame() {
         }
     }
 
+    function rateGame(value: any) {
+
+        let puntuacion:number = parseInt(value);
+
+        const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario,
+            juegoUsuarioActual.videojuego, puntuacion, juegoUsuarioActual.fecha);
+        let ruta = "http://localhost:8080/api/v1/juegousuario";
+        const axiosput = async (rutaDeJuegoUsuario: string) => {
+            try {
+                const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        axiosput(ruta).then(respuesta => {
+            navigate(0)
+        });
+
+    }
+    
     /*
     function checkUserHasGame() {
         stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
@@ -209,6 +234,7 @@ export default function InfoGame() {
     },
         [id]
     )
+
     return (
         <>
             <Topbar />
@@ -250,6 +276,29 @@ export default function InfoGame() {
                             onClick={handleChangeCompleted}
                             style={{ marginLeft: "5px" }}
                         />
+                        : null
+                    }
+
+                    <br />
+                    <br />
+                    <br />
+                    <br />
+
+                    {initialCheckComplete == 1 ?
+                        <span style={{ color: "blue", fontWeight: "bolder" }}>PUNTUAR</span>
+                        : null
+                    }
+
+                    <br />
+                    <br />
+                    <br />
+
+                    {initialCheckComplete == 1 ?
+
+                        <div className="rateSlider">
+                            <Slider min={0} defaultValue={5} max={10} step={1} valueLabelDisplay="on"
+                                onChangeCommitted={(event, value) => rateGame(value)} />
+                        </div>
                         : null
                     }
 

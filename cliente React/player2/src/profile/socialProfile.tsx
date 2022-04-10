@@ -2,7 +2,7 @@ import "./socialProfile.css";
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Link, Navigate, useNavigate } from 'react-router-dom';
-import { usuarios } from "../modelo/usuarios";
+import { usuarios } from '../modelo/usuarios';
 import Topbar from "../topbar/topbar";
 import TopbarProfile from "./topbarProfile";
 
@@ -54,6 +54,8 @@ export default function SocialProfile() {
         }}>
             <Topbar />
             <TopbarProfile />
+            <h3 className="titleSocial">Seguidores: {usuarioActual.followers.length}</h3>
+            <h3 className="titleSocial">Siguiendo: {usuarioActual.followeds.length}</h3>
             <div className="buttonsSocialProfile">
                 <button type="button" className="buttonForm" onClick={showFollowers}>Followers</button>
                 &nbsp;
@@ -68,7 +70,7 @@ export default function SocialProfile() {
             <div className='socialProfileWrapper'>
                 <ul className='socialProfileList'>
                     {
-                        stUser?.usuario?.map((u: usuarios) => {
+                        usuarioActual.followers.map((u: usuarios) => {
                             if (checkedF == 0)
                                 return (
                                     <div className="socialProfileBox">
@@ -82,10 +84,33 @@ export default function SocialProfile() {
                                         </Link>
                                     </div>
                                 );
-
+                            /*        
                             if (checkedF == 1)
                                 return (
                                     <p>FOLLOWING</p>
+                                );
+                            */
+                        })
+                    }
+                </ul>
+            </div>
+
+            <div className='socialProfileWrapper'>
+                <ul className='socialProfileList'>
+                    {
+                        usuarioActual.followeds.map((u: usuarios) => {
+                            if (checkedF == 1)
+                                return (
+                                    <div className="socialProfileBox">
+                                        <Link to={{ pathname: "/api/v0/usuario/" + u.id }}>
+                                            <li className="itemSocialProfile">
+                                                <span><img src={u.avatar} className='imageGameProfile' /></span>
+                                                <div className='titleProfileBox'>
+                                                    <h5 className='titleGameProfile'>{u.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
+                                    </div>
                                 );
                         })
                     }

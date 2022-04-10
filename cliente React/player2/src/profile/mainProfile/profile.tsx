@@ -24,60 +24,86 @@ export default function Profile() {
     };
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+
     let initialCheckFollowing: any = 0;
     let following = false;
 
-    /* check para comprobar si usuario esta en lista de following
-    stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
-        if (j.videojuego.id === stGame.videojuego?.id) {
-            if (j.usuario.id === usuarioActual.id) {
-                juegoUsuarioActual = j;
-                initialCheckComplete = 1;
-                progress = true;
-                if (j.completado == 1) {
-                    completado = true;
-                }
-            }
+
+    usuarioActual.followeds.map((f: usuarios) => {
+        if (f.id === stUser.usuario?.id) {
+            following = true;
         }
-    });
-    */
+    })
 
     const [checkedFollowing, setCheckedFollowing] = React.useState(false);
 
     function handleChangeFollowing() {
         if (following == false) {
-            //CREAR NUEVO FOLLOWER POST const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 1, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
-            let ruta = "http://localhost:8080/api/v1/juegousuario";
-            const axiosput = async (rutaDeJuegoUsuario: string) => {
+
+            const newFollow = {
+                "idusuariofollower": usuarioActual.id,
+                "idusuariofollowed": stUser.usuario?.id
+            }
+
+            let ruta = "http://localhost:8080/api/v1/usuario/";
+            const axiospost = async (rutaDeUsuario: string) => {
                 try {
-                    //const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
-                    //console.log(data);
+                    const { data } = await axios.post(rutaDeUsuario + usuarioActual.id + "/follow/" + stUser.usuario?.id,
+                        newFollow, headers)
+                    console.log(data);
                 } catch (error) {
                     console.log(error);
                 }
             }
-            axiosput(ruta).then(respuesta => {
+
+            const usuarioFollowed = new usuarios(stUser.usuario!.id, "", "", "", "", 1, "", "", "", [], []);
+            let followeds: usuarios[] = usuarioActual.followeds;
+            followeds.push(usuarioFollowed);
+
+            const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
+                usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion,
+                followeds, usuarioActual.followers);
+
+            axiospost(ruta).then(respuesta => {
                 navigate(0)
+                localStorage.setItem("usuarioActual", JSON.stringify(newUsuario));
             });
 
-            following = true;
+            //following = true;
         }
         if (following == true) {
-            //const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario, juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion);
-            let ruta = "http://localhost:8080/api/v1/juegousuario";
-            const axiosput = async (rutaDeJuegoUsuario: string) => {
+
+            let ruta = "http://localhost:8080/api/v1/usuario/";
+            const axiosdelete = async (rutaDeUsuario: string) => {
                 try {
-                    //const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
-                    //console.log(data);
+                    const { data } = await axios.delete(rutaDeUsuario + usuarioActual.id + "/follow/" + stUser.usuario?.id,
+                        headers)
+                    console.log(data);
                 } catch (error) {
                     console.log(error);
                 }
             }
-            axiosput(ruta).then(respuesta => {
-                navigate(0)
-            });
 
-            following = false;
+            const usuarioFollowed = new usuarios(stUser.usuario!.id, "", "", "", "", 1, "", "", "", [], []);
+            let followeds: usuarios[] = usuarioActual.followeds;
+
+            let indiceF:number = 0;
+            indiceF = followeds.findIndex(usuarios => usuarios.id === stUser.usuario!.id);
+
+            followeds.splice(2, 1);
+            
+            
+            //followeds.filter(usuarios => usuarios.id == usuarioFollowed.id);
+            //people.filter(person => person.age < 60)
+
+            const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
+                usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion,
+                followeds, usuarioActual.followers);
+
+            axiosdelete(ruta).then(respuesta => {
+                navigate(0)
+                localStorage.setItem("usuarioActual", JSON.stringify(newUsuario));
+            });
         }
         setCheckedFollowing(!checkedFollowing);
     }
@@ -118,12 +144,13 @@ export default function Profile() {
     return (
         <div style={{
             backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
-          }}>
+            height: "100%"
+        }}>
             <Topbar />
             <TopbarProfile />
             <div className="profileMain">
                 <div className="followWrapper">
-                    <br/>
+                    <br />
                     {usuarioActual.id != stUser.usuario?.id ?
                         <span style={{ color: "orangered", fontWeight: "bolder" }}>Follow {stUser.usuario?.nombre}</span>
                         : null
@@ -142,7 +169,7 @@ export default function Profile() {
             </div>
             <div className="profileContainer">
                 <ProfileLeft />
-                <ProfileRight/>
+                <ProfileRight />
             </div>
         </div>
     )

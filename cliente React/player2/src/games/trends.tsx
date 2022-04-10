@@ -14,6 +14,18 @@ export default function Trends() {
     const rutaBase: string = "http://" + ip + ":" + puerto;
     const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
 
+    let popularGames: videojuegos[] = [];
+
+    videojuegos?.videojuegos?.map((v: videojuegos) => {
+        if(v.puntuacion >= 7){
+            popularGames.push(v);
+        }
+    });
+
+    popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
+
+    popularGames.reverse();
+
     useEffect(() => {
         const getVideojuego = async () => {
             let ruta = rutajuegosHome;
@@ -32,7 +44,7 @@ export default function Trends() {
                 <div className='tendenciasWrapper'>
                     <ul className='tendenciasTrendsList'>
                         {
-                            videojuegos?.videojuegos?.map((a: videojuegos) => {
+                            popularGames.map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                         <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>

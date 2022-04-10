@@ -1,7 +1,7 @@
 import "./profileLeft.css";
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
-import { Link, Navigate, useNavigate } from 'react-router-dom';
+import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { reviews } from "../../modelo/reviews";
 import { usuarios } from "../../modelo/usuarios";
 import { videojuegos } from '../../modelo/videojuegos';
@@ -10,16 +10,19 @@ import TopbarProfile from "../topbarProfile";
 import { juegosUsuario } from '../../modelo/juegosUsuario';
 import { generos } from '../../modelo/generos';
 
-interface IState { videojuego?: videojuegos[], juegosUsuario?: juegosUsuario[], usuario?: usuarios; generos?: generos[];}
+interface IState { videojuego?: videojuegos[], juegosUsuario?: juegosUsuario[], usuario?: usuarios; generos?: generos[]; }
 
 export default function ProfileLeft() {
     let navigate = useNavigate();
     let contadorGamesUser = 0;
     let numeroGames = 0;
 
+    const { id } = useParams();
+
     const [stGame, setStGame] = useState<IState>({});
     const [stUserGames, setStUserGames] = useState<IState>({});
     const [stGeneros, setStGenero] = useState<IState>();
+    const [stUser, setStUser] = useState<IState>({});
 
     const ip: string = "localhost";
     const puerto: number = 8080;
@@ -39,36 +42,48 @@ export default function ProfileLeft() {
     let contadorShooter = 0;
     let contadorLucha = 0;
 
-    let contadores:any = [stGeneros?.generos?.length];
+    let contadores: any = [stGeneros?.generos?.length];
 
     //for(let i=0; i<contadores.length; i++){
-      //  contadores.push(0);
-   // }
+    //  contadores.push(0);
+    // }
 
     //let generosPosibles = [stGeneros?.generos?.length];
-/*
-    stGeneros?.generos?.map((g: generos) =>{
-        generosPosibles.push(g.nombre);
-    })
-
-    stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
-        if (j.usuario.id === usuarioActual.id) {
-                j.videojuego.generos.map((g: generos) =>{
-                    for(let i=0; i<=generos.length; i++){
-                        if(g.nombre == generosPosibles[i]){
-                            contadores[i]++;
+    /*
+        stGeneros?.generos?.map((g: generos) =>{
+            generosPosibles.push(g.nombre);
+        })
+    
+        stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
+            if (j.usuario.id === usuarioActual.id) {
+                    j.videojuego.generos.map((g: generos) =>{
+                        for(let i=0; i<=generos.length; i++){
+                            if(g.nombre == generosPosibles[i]){
+                                contadores[i]++;
+                            }
                         }
-                    }
-
-                })
+    
+                    })
+                }
             }
+        );
+    /*
+        console.log("Accion:" + contadores[1]);
+        console.log("Aventura: "+ contadores[2]);
+        console.log("Shooter: " + contadores[11]);
+    */
+
+    let popularGames: juegosUsuario[] = [];
+
+    stUserGames?.juegosUsuario?.map((j: juegosUsuario) => {
+        console.log("LDFSSSSSSSSSSSSSSSSSSSS");
+        if (j.puntuacion >= 7) {
+            popularGames.push(j);
         }
-    );
-/*
-    console.log("Accion:" + contadores[1]);
-    console.log("Aventura: "+ contadores[2]);
-    console.log("Shooter: " + contadores[11]);
-*/
+    });
+
+    popularGames.reverse();
+
     useEffect(() => {
         const getGame = async () => {
             const rutaGames: string = rutaBase + "/api/v0/videojuego";
@@ -94,6 +109,14 @@ export default function ProfileLeft() {
             console.log(respuesta.data);
             setStGenero({ generos: respuesta.data });
         }
+        const getUser = async (id: string | undefined) => {
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
+            let { data } = await axios.get(rutadeUsuarios + id);
+            let usuario: usuarios = data;
+            console.log(usuario);
+            setStUser({ usuario });
+        }
+        getUser(id);
         getGenero();
         getGame();
         getUserGames();
@@ -104,29 +127,51 @@ export default function ProfileLeft() {
         <div className="profileLeft">
             <h3 className="title">Géneros favoritos:</h3>
             <ul className='reviewsProfileList'>
-                    {stGame.videojuego?.map((v: videojuegos) => {
-                        numeroGames += 1
-                        /*
-                        if (r.usuario.id == usuarioActual.id) {
-                            contadorGamesUser += 1
-                            return (
-                                <li className="reviewProfileItem">
+                {stGame.videojuego?.map((v: videojuegos) => {
+                    numeroGames += 1
+                    /*
+                    if (r.usuario.id == usuarioActual.id) {
+                        contadorGamesUser += 1
+                        return (
+                            <li className="reviewProfileItem">
+                                <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
+                                    <span className="reviewProfileImage"><img src={r.videojuego.imagen} className="reviewProfileGameImage" /></span>
+                                </Link>
+                                <div className="reviewProfileContent">
                                     <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                        <span className="reviewProfileImage"><img src={r.videojuego.imagen} className="reviewProfileGameImage" /></span>
+                                        <h3 className="reviewProfileGame">{r.videojuego.nombre}</h3>
+                                        <h2 className="reviewProfileTitle">{r.titulo}</h2>
                                     </Link>
-                                    <div className="reviewProfileContent">
-                                        <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                            <h3 className="reviewProfileGame">{r.videojuego.nombre}</h3>
-                                            <h2 className="reviewProfileTitle">{r.titulo}</h2>
-                                        </Link>
 
-                                    </div>
-                                </li>
+                                </div>
+                            </li>
+                        );
+                    }
+                    */
+                })}
+            </ul>
+
+            <h3 className="title">Tu Top 3 videojuegos:</h3>
+            <div className='tendenciasWrapper'>
+                <ul className='tendenciasList'>
+                    {
+                        popularGames.slice(0, 3).map((t: juegosUsuario) => {
+                            return (
+                                <div className='juegosHomeBox'>
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + t.videojuego.id }}>
+                                        <li>
+                                            <span><img src={t.videojuego.imagen} className='imageGameHome' /></span>
+                                            <div className='titleHomeBox'>
+                                                <h5 className='titleGameHome'>{t.videojuego.nombre}</h5>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                </div>
                             );
-                        }
-                        */
-                    })}
+                        })
+                    }
                 </ul>
+            </div>
         </div>
     )
 }

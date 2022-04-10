@@ -8,6 +8,8 @@ export class usuarios {
         public activo: number,
         public color: string,
         public banner: string,
-        public descripcion: string
+        public descripcion: string,
+        public followeds: usuarios[],
+        public followers: usuarios[]
     ) { }
 }

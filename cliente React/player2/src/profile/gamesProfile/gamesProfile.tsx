@@ -11,6 +11,7 @@ export default function GamesProfile() {
     return (
         <div style={{
             backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
+            height: "100%"
           }}>
             <Topbar />
             <TopbarProfile/>

@@ -11,6 +11,11 @@
     margin-right: 30px;
     border: 1px solid black;
     background-color: LightCoral;
+    cursor:pointer;
+}
+
+.rojo:hover {
+    filter: brightness(120%);
 }
 
 .azul{
@@ -21,6 +26,11 @@
     margin-right: 30px;
     border: 1px solid black;
     background-color: lightsteelblue;
+    cursor:pointer;
+}
+
+.azul:hover {
+    filter: brightness(120%);
 }
 
 .verde{
@@ -31,6 +41,11 @@
     margin-right: 30px;
     border: 1px solid black;
     background-color: DarkSeaGreen;
+    cursor:pointer;
+}
+
+.verde:hover {
+    filter: brightness(120%);
 }
 
 .inputAvatar{
