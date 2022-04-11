@@ -102,8 +102,25 @@
     height: 70px;
 }
 
+.buttonHours{
+    color: white;
+    font-weight: bolder;
+    width: 70px;
+    margin-left: 10px; 
+    background-color: orange; 
+    padding: 5px;
+    border-radius: 30px;
+    border-width: 0px;
+}
+
+.buttonHours:hover{
+    background-color: orangered;
+    cursor: pointer;
+}
+
 .rateSlider{
     margin: auto;
     width: 30%;
     padding-top: 15px;
 }
+

@@ -27,13 +27,12 @@ export const JuegosHome = () => {
     dateThirtyDays.setDate(dateThirtyDays.getDate() - 3000);
 
     let newerGames: videojuegos[] = [];
-    let currentDateGame: Date;
 
     videojuegos?.videojuegos?.map((v: videojuegos) => {
-        currentDateGame = v.fecha;
-        if (currentDateGame < new Date())
             newerGames.push(v);
     });
+
+    newerGames.sort((a, b) => (a.fecha) - (b.fecha));
 
     let popularGames: videojuegos[] = [];
 
@@ -83,7 +82,7 @@ export const JuegosHome = () => {
             <div className='tendenciasWrapper'>
                 <ul className='tendenciasList'>
                     {
-                        popularGames.slice(0, 5).map((a: videojuegos) => {
+                        popularGames.slice(0, 4).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
@@ -105,7 +104,7 @@ export const JuegosHome = () => {
             <div className='nuevosWrapper'>
                 <ul className='nuevosList'>
                     {
-                        newerGames.slice(0, 5).map((a: videojuegos) => {
+                        newerGames.slice(0, 4).map((a: videojuegos) => {
                             return (
                                 <div className='juegosHomeBox'>
                                     <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
@@ -132,7 +131,7 @@ export const JuegosHome = () => {
                 <ul className='nuevosList'>
                     {
                         juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
-                            if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 4)) {
+                            if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 3)) {
                                 contadorProgreso = contadorProgreso + 1
                                 return (
                                     <div className='juegosHomeBox'>

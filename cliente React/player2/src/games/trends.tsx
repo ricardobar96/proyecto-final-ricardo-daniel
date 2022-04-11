@@ -26,6 +26,15 @@ export default function Trends() {
 
     popularGames.reverse();
 
+
+    let newerGames: videojuegos[] = [];
+
+    videojuegos?.videojuegos?.map((v: videojuegos) => {
+            newerGames.push(v);
+    });
+
+    newerGames.sort((a, b) => (a.fecha) - (b.fecha));
+
     useEffect(() => {
         const getVideojuego = async () => {
             let ruta = rutajuegosHome;
@@ -44,7 +53,7 @@ export default function Trends() {
                 <div className='tendenciasWrapper'>
                     <ul className='tendenciasTrendsList'>
                         {
-                            popularGames.map((a: videojuegos) => {
+                            popularGames.slice(0, 5).map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                         <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
@@ -65,7 +74,7 @@ export default function Trends() {
                 <div className='nuevosWrapper'>
                     <ul className='nuevosTrendsList'>
                         {
-                            videojuegos?.videojuegos?.map((a: videojuegos) => {
+                            newerGames.slice(0, 4).map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                         <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>

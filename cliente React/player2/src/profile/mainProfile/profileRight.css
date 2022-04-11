@@ -1,6 +1,25 @@
 .profileRight{
     flex: 5;
     padding: 50px;
-    height: calc(100vh - 50px);
+    height: calc(100vh);
     text-align: center;
+}
+
+.statsContent{
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    justify-content: space-between;
+    display: flex;
+}
+
+.valueStats{
+    font-weight: bold;
+    font-size: 34px;
+    color: blue
+}
+
+.statsList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
 }

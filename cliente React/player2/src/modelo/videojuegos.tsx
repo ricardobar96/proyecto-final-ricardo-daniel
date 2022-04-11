@@ -1,4 +1,5 @@
 import { generos } from "./generos";
+import { juegosUsuario } from './juegosUsuario';
 
 export class videojuegos {
     constructor(
@@ -8,6 +9,7 @@ export class videojuegos {
         public puntuacion: number,
         public descripcion: string,
         public imagen: string,
-        public generos: generos[] 
+        public generos: generos[]
+        //public juegoUsuarios: juegosUsuario[]
     ) { }
 }

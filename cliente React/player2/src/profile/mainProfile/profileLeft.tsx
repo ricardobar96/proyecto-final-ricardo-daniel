@@ -2,11 +2,8 @@ import "./profileLeft.css";
 import React, { useEffect, useRef, useState } from 'react';
 import axios from 'axios';
 import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
-import { reviews } from "../../modelo/reviews";
 import { usuarios } from "../../modelo/usuarios";
 import { videojuegos } from '../../modelo/videojuegos';
-import Topbar from "../../topbar/topbar";
-import TopbarProfile from "../topbarProfile";
 import { juegosUsuario } from '../../modelo/juegosUsuario';
 import { generos } from '../../modelo/generos';
 
@@ -20,13 +17,22 @@ export default function ProfileLeft() {
     const { id } = useParams();
 
     const [stGame, setStGame] = useState<IState>({});
-    const [stUserGames, setStUserGames] = useState<IState>({});
+    const [juegosUsuario, setJuegosUsuario] = useState<IState>();
     const [stGeneros, setStGenero] = useState<IState>();
     const [stUser, setStUser] = useState<IState>({});
 
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
+
+    let descripcion;
+
+    if(stUser.usuario?.descripcion == null){
+        descripcion = "El usuario no ha escrito nada"
+    }
+    else{
+        descripcion = stUser.usuario.descripcion;
+    }
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
@@ -75,13 +81,16 @@ export default function ProfileLeft() {
 
     let popularGames: juegosUsuario[] = [];
 
-    stUserGames?.juegosUsuario?.map((j: juegosUsuario) => {
-        console.log("LDFSSSSSSSSSSSSSSSSSSSS");
-        if (j.puntuacion >= 7) {
-            popularGames.push(j);
+    juegosUsuario?.juegosUsuario?.map((j: juegosUsuario) => {
+        if (j.usuario.id === stUser.usuario?.id) {
+            if (j.puntuacion >= 7) {
+                popularGames.push(j);
+            }
         }
     });
 
+    popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
+    
     popularGames.reverse();
 
     useEffect(() => {
@@ -93,13 +102,13 @@ export default function ProfileLeft() {
             console.log(respuesta.data);
             setStGame({ videojuego: respuesta.data });
         }
-        const getUserGames = async () => {
-            const rutaUserGames: string = rutaBase + "/api/v0/juegosusuario";
-            let ruta = rutaUserGames;
+        const getJuegosUsuario = async () => {
+            const rutaJuegosUsuario: string = rutaBase + "/api/v0/juegousuario";
+            let ruta = rutaJuegosUsuario;
             console.log(ruta);
             let respuesta = await axios.get(ruta);
             console.log(respuesta.data);
-            setStUserGames({ juegosUsuario: respuesta.data });
+            setJuegosUsuario({ juegosUsuario: respuesta.data });
         }
         const getGenero = async () => {
             const rutaGeneros: string = rutaBase + "/api/v0/genero";
@@ -119,12 +128,24 @@ export default function ProfileLeft() {
         getUser(id);
         getGenero();
         getGame();
-        getUserGames();
+        getJuegosUsuario();
     },
         []
     )
     return (
         <div className="profileLeft">
+            <div className="pistasItem">
+                <span className="descriptionMainLeft">{stUser.usuario?.nombre}</span>
+                <div className="descriptionBox">
+                    <img src={stUser.usuario?.avatar} className="avatarInfo" />
+                    <div className="contentDescription">
+                        <h3>Sobre mí</h3>
+                        <p>{descripcion}</p>
+                    </div>
+                </div>
+            </div>
+
+            <br />
             <h3 className="title">Géneros favoritos:</h3>
             <ul className='reviewsProfileList'>
                 {stGame.videojuego?.map((v: videojuegos) => {
@@ -150,14 +171,15 @@ export default function ProfileLeft() {
                     */
                 })}
             </ul>
+            <br />
 
-            <h3 className="title">Tu Top 3 videojuegos:</h3>
+            <h3 className="title">Videojuegos mejor puntuados:</h3>
             <div className='tendenciasWrapper'>
-                <ul className='tendenciasList'>
+                <ul className='topGamesList'>
                     {
                         popularGames.slice(0, 3).map((t: juegosUsuario) => {
                             return (
-                                <div className='juegosHomeBox'>
+                                <div className='topGamesBox'>
                                     <Link to={{ pathname: "/api/v0/videojuego/" + t.videojuego.id }}>
                                         <li>
                                             <span><img src={t.videojuego.imagen} className='imageGameHome' /></span>

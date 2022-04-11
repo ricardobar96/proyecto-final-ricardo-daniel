@@ -50,7 +50,8 @@ export default function SocialProfile() {
     return (
         <div style={{
             backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
-            height: "100vh"
+            height: "100%",
+            paddingBottom: "10px"
         }}>
             <Topbar />
             <TopbarProfile />

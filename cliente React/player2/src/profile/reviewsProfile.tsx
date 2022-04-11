@@ -49,7 +49,7 @@ export default function ReviewsProfile() {
     return (
         <div style={{
             backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
-            height: "100vh"
+            height: "100%"
         }}>
             <Topbar />
             <TopbarProfile />

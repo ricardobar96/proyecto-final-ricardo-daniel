@@ -34,15 +34,7 @@ export default function InfoGame() {
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
 
-    const reviewUser = useRef<HTMLInputElement>(null);
-    const reviewGame = useRef<HTMLInputElement>(null);
-    const reviewTitle = useRef<HTMLInputElement>(null);
-    const reviewBody = useRef<HTMLTextAreaElement>(null);
-
-    const clueUser = useRef<HTMLInputElement>(null);
-    const clueGame = useRef<HTMLInputElement>(null);
-    const clueTitle = useRef<HTMLInputElement>(null);
-    const clueBody = useRef<HTMLTextAreaElement>(null);
+    const hoursPlayed = useRef<HTMLInputElement>(null);
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
     let initialCheckComplete: any = 0;
@@ -155,7 +147,7 @@ export default function InfoGame() {
 
     function rateGame(value: any) {
 
-        let puntuacion:number = parseInt(value);
+        let puntuacion: number = parseInt(value);
 
         const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario,
             juegoUsuarioActual.videojuego, puntuacion, juegoUsuarioActual.fecha);
@@ -173,7 +165,28 @@ export default function InfoGame() {
         });
 
     }
-    
+
+    function changeHours(){
+        let horas = hoursPlayed?.current?.value;
+
+        let horasFinal: number = Number(horas);
+
+        const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, horasFinal, juegoUsuarioActual.usuario,
+            juegoUsuarioActual.videojuego, juegoUsuarioActual.puntuacion, juegoUsuarioActual.fecha);
+        let ruta = "http://localhost:8080/api/v1/juegousuario";
+        const axiosput = async (rutaDeJuegoUsuario: string) => {
+            try {
+                const { data } = await axios.put(rutaDeJuegoUsuario + "/" + juegoUsuarioActual.id, newJuegoUsuario, headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+        axiosput(ruta).then(respuesta => {
+            navigate(0)
+        });
+    }
+
     /*
     function checkUserHasGame() {
         stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
@@ -276,6 +289,20 @@ export default function InfoGame() {
                             onClick={handleChangeCompleted}
                             style={{ marginLeft: "5px" }}
                         />
+                        : null
+                    }
+
+                    <br />
+
+                    {initialCheckComplete == 1 ?
+                        <>
+                            <span style={{ color: "orangered", fontWeight: "bolder" }}>Horas jugadas:</span>
+                            <form>
+                                <input type="number" ref={hoursPlayed} style={{ color: "blue", fontWeight: "bolder", width: "60px", 
+                                marginTop: "10px", height: "25px" }} required/>
+                                <button type="button" onClick={changeHours} className="buttonHours">Enviar</button>
+                            </form>
+                        </>
                         : null
                     }
 
