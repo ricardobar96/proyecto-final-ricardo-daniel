@@ -51,7 +51,7 @@ export default function Trends() {
             <div className="trendsWrapper">
                 <h3 className="title">Tendencias:</h3>
                 <div className='tendenciasWrapper'>
-                    <ul className='tendenciasTrendsList'>
+                    <ul className='nuevosList'>
                         {
                             popularGames.slice(0, 5).map((a: videojuegos) => {
                                 return (
@@ -72,7 +72,7 @@ export default function Trends() {
                 </div>
                 <h3 className="title">Nuevos:</h3>
                 <div className='nuevosWrapper'>
-                    <ul className='nuevosTrendsList'>
+                    <ul className='nuevosList'>
                         {
                             newerGames.slice(0, 4).map((a: videojuegos) => {
                                 return (
@@ -93,7 +93,7 @@ export default function Trends() {
                 </div>
                 <h3 className="title">Todos:</h3>
                 <div className='todosWrapper'>
-                    <ul className='todosTrendsList'>
+                    <ul className='nuevosList'>
                         {
                             videojuegos?.videojuegos?.map((a: videojuegos) => {
                                 return (

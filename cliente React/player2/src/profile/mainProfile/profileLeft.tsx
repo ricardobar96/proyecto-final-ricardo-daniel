@@ -11,8 +11,6 @@ interface IState { videojuego?: videojuegos[], juegosUsuario?: juegosUsuario[], 
 
 export default function ProfileLeft() {
     let navigate = useNavigate();
-    let contadorGamesUser = 0;
-    let numeroGames = 0;
 
     const { id } = useParams();
 
@@ -27,57 +25,97 @@ export default function ProfileLeft() {
 
     let descripcion;
 
-    if(stUser.usuario?.descripcion == null){
+    if (stUser.usuario?.descripcion == null) {
         descripcion = "El usuario no ha escrito nada"
     }
-    else{
+    else {
         descripcion = stUser.usuario.descripcion;
     }
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
-    let contadorAccion = 0;
-    let contadorAventura = 0;
-    let contadorCarreras = 0;
-    let contadorEstrategia = 0;
-    let contadorSimulacion = 0;
-    let contadorDeporte = 0;
-    let contadorRol = 0;
-    let contadorPuzzle = 0;
-    let contadorPlataforma = 0;
-    let contadorShooter = 0;
-    let contadorLucha = 0;
+    let popularGenres: string[] = [];
 
-    let contadores: any = [stGeneros?.generos?.length];
+    juegosUsuario?.juegosUsuario?.map((j: juegosUsuario) => {
+        if (j.usuario.id === stUser.usuario?.id) {
+            j.videojuego.generos.map((g: generos) => {
+                popularGenres.push(g.nombre);
+            })
+        }
+    });
 
-    //for(let i=0; i<contadores.length; i++){
-    //  contadores.push(0);
-    // }
+    var map:any = [];
+    var genre1 = popularGenres[0];
 
-    //let generosPosibles = [stGeneros?.generos?.length];
-    /*
-        stGeneros?.generos?.map((g: generos) =>{
-            generosPosibles.push(g.nombre);
-        })
-    
-        stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
-            if (j.usuario.id === usuarioActual.id) {
-                    j.videojuego.generos.map((g: generos) =>{
-                        for(let i=0; i<=generos.length; i++){
-                            if(g.nombre == generosPosibles[i]){
-                                contadores[i]++;
-                            }
-                        }
-    
-                    })
-                }
+    for (var i = 0; i < popularGenres.length; i++) {
+        if (!map[popularGenres[i]]) {
+            map[popularGenres[i]] = 1;
+        } else {
+            ++map[popularGenres[i]];
+            if (map[popularGenres[i]] > map[genre1]) {
+                genre1 = popularGenres[i];
             }
-        );
-    /*
-        console.log("Accion:" + contadores[1]);
-        console.log("Aventura: "+ contadores[2]);
-        console.log("Shooter: " + contadores[11]);
-    */
+        }
+    }
+
+
+    let contadorGenre1 = 0;
+
+    popularGenres.map((g: string) =>{
+        if(g === genre1){
+            contadorGenre1 += 1;
+            var index = popularGenres.indexOf(g);
+            popularGenres.splice(index, 1);
+        }
+    })
+
+
+    var map2:any = [];
+    var genre2 = popularGenres[0];
+
+    for (var i = 0; i < popularGenres.length; i++) {
+        if (!map2[popularGenres[i]]) {
+            map2[popularGenres[i]] = 1;
+        } else {
+            ++map2[popularGenres[i]];
+            if (map2[popularGenres[i]] > map2[genre2]) {
+                genre2 = popularGenres[i];
+            }
+        }
+    }
+
+    let contadorGenre2 = 0;
+
+    popularGenres.map((g: string) =>{
+        if(g === genre2){
+            contadorGenre2 += 1;
+            var index = popularGenres.indexOf(g);
+            popularGenres.splice(index, 1);
+        }
+    })
+
+
+    var map3:any = [];
+    var genre3 = popularGenres[0];
+
+    for (var i = 0; i < popularGenres.length; i++) {
+        if (!map3[popularGenres[i]]) {
+            map3[popularGenres[i]] = 1;
+        } else {
+            ++map3[popularGenres[i]];
+            if (map3[popularGenres[i]] > map3[genre3]) {
+                genre3 = popularGenres[i];
+            }
+        }
+    }
+
+    let contadorGenre3 = 0;
+
+    popularGenres.map((g: string) =>{
+        if(g === genre3){
+            contadorGenre3 += 1;
+        }
+    })
 
     let popularGames: juegosUsuario[] = [];
 
@@ -90,7 +128,7 @@ export default function ProfileLeft() {
     });
 
     popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
-    
+
     popularGames.reverse();
 
     useEffect(() => {
@@ -147,30 +185,29 @@ export default function ProfileLeft() {
 
             <br />
             <h3 className="title">Géneros favoritos:</h3>
-            <ul className='reviewsProfileList'>
-                {stGame.videojuego?.map((v: videojuegos) => {
-                    numeroGames += 1
-                    /*
-                    if (r.usuario.id == usuarioActual.id) {
-                        contadorGamesUser += 1
-                        return (
-                            <li className="reviewProfileItem">
-                                <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                    <span className="reviewProfileImage"><img src={r.videojuego.imagen} className="reviewProfileGameImage" /></span>
-                                </Link>
-                                <div className="reviewProfileContent">
-                                    <Link to={{ pathname: "/api/v0/videojuego/" + r.videojuego.id }} style={{ textDecoration: "none" }}>
-                                        <h3 className="reviewProfileGame">{r.videojuego.nombre}</h3>
-                                        <h2 className="reviewProfileTitle">{r.titulo}</h2>
-                                    </Link>
+            <div className="genresContent">
+                <ul>
+                    <li className="genresList">
+                        <span className="valueGenres">{contadorGenre1}</span>
+                        <h4 className="title">{genre1}</h4>
+                    </li>
+                </ul>
 
-                                </div>
-                            </li>
-                        );
-                    }
-                    */
-                })}
-            </ul>
+                <ul>
+                    <li className="genresList">
+                    <span className="valueGenres">{contadorGenre2}</span>
+                        <h4 className="title">{genre2}</h4>
+                    </li>
+                </ul>
+
+                <ul>
+                    <li className="genresList">
+                    <span className="valueGenres">{contadorGenre3}</span>
+                        <h4 className="title">{genre3}</h4>
+                    </li>
+                </ul>
+            </div>
+            <br />
             <br />
 
             <h3 className="title">Videojuegos mejor puntuados:</h3>

@@ -1,7 +1,7 @@
 .profileLeft{
     flex: 5;
     padding: 20px;
-    height: calc(100vh);
+    height: calc(100%);
     text-align:center;
 }
 
@@ -44,4 +44,23 @@
     justify-content: space-between;
     width: 600px;
     margin-top: -40px;
+}
+
+.genresContent{
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.valueGenres{
+    font-weight: bold;
+    font-size: 34px;
+    color: orangered
+}
+
+.genresList{
+    padding: 0;
+    margin-left: -50px;
+    list-style: none;
 }

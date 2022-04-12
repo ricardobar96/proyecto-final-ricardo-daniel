@@ -1,7 +1,7 @@
 .gamesProfile{
     flex: 20;
     padding: 40px;
-    height: calc(100vh - 50px);
+    height: calc(100%);
 }
 
 .imageGameProfile{
@@ -39,5 +39,10 @@
     position: relative;
     background-color: darkslategray;
     display: flex;
- 
+}
+
+.gameProfileWrapper{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 4;
 }

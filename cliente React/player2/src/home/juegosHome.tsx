@@ -132,7 +132,7 @@ export const JuegosHome = () => {
                     {
                         juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
                             if ((v.usuario.nombre === nameUser) && (v.completado == 0) && (contadorProgreso <= 3)) {
-                                contadorProgreso = contadorProgreso + 1
+                                //contadorProgreso = contadorProgreso + 1
                                 return (
                                     <div className='juegosHomeBox'>
                                         <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>

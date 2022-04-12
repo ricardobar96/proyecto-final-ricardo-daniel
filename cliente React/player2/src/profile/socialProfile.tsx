@@ -69,7 +69,7 @@ export default function SocialProfile() {
             </div>
 
             <div className='socialProfileWrapper'>
-                <ul className='socialProfileList'>
+                <ul className='nuevosList'>
                     {
                         usuarioActual.followers.map((u: usuarios) => {
                             if (checkedF == 0)
@@ -97,7 +97,7 @@ export default function SocialProfile() {
             </div>
 
             <div className='socialProfileWrapper'>
-                <ul className='socialProfileList'>
+                <ul className='nuevosList'>
                     {
                         usuarioActual.followeds.map((u: usuarios) => {
                             if (checkedF == 1)

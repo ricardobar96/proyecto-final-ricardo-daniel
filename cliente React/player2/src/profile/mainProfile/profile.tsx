@@ -56,7 +56,9 @@ export default function Profile() {
                 }
             }
 
-            const usuarioFollowed = new usuarios(stUser.usuario!.id, "", "", "", "", 1, "", "", "", [], []);
+            const usuarioFollowed = new usuarios(stUser.usuario!.id, stUser.usuario!.nombre, stUser.usuario!.password, stUser.usuario!.rol,
+                stUser.usuario!.avatar, 1, stUser.usuario!.color, stUser.usuario!.banner, stUser.usuario!.descripcion, 
+                stUser.usuario!.followeds, stUser.usuario!.followers);
             let followeds: usuarios[] = usuarioActual.followeds;
             followeds.push(usuarioFollowed);
 
@@ -83,18 +85,13 @@ export default function Profile() {
                     console.log(error);
                 }
             }
-
-            const usuarioFollowed = new usuarios(stUser.usuario!.id, "", "", "", "", 1, "", "", "", [], []);
+                
             let followeds: usuarios[] = usuarioActual.followeds;
 
             let indiceF:number = 0;
             indiceF = followeds.findIndex(usuarios => usuarios.id === stUser.usuario!.id);
 
-            followeds.splice(2, 1);
-            
-            
-            //followeds.filter(usuarios => usuarios.id == usuarioFollowed.id);
-            //people.filter(person => person.age < 60)
+            followeds.splice(indiceF, 1);
 
             const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
                 usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion,

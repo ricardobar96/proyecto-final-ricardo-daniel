@@ -43,7 +43,7 @@ export default function TableGames() {
             <div className="trendsWrapper">
                 <h3 className="title">Juegos en progreso:</h3>
                 <div className='tendenciasWrapper'>
-                    <ul className='gamesProfileList'>
+                    <ul className='nuevosList'>
                         {
                             juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
                                 if ((v.usuario.nombre === nameUser) && (v.completado == 0))
@@ -66,14 +66,14 @@ export default function TableGames() {
 
                 <h3 className="title">Juegos completados:</h3>
                 <div className='tendenciasWrapper'>
-                    <ul className='gamesProfileList'>
+                    <ul className='nuevosList'>
                         {
                             juegosUsuario?.juegosUsuario?.map((v: juegosUsuario) => {
                                 if ((v.usuario.nombre === nameUser) && (v.completado == 1))
                                     return (
                                         <div className="juegosHomeBox">
                                             <Link to={{ pathname: "/api/v0/videojuego/" + v.videojuego.id }}>
-                                                <li className="itemGameProfile">
+                                                <li>
                                                     <span><img src={v.videojuego.imagen} className='imageGameProfile' /></span>
                                                     <div className='titleProfileBox'>
                                                         <h5 className='titleGameProfile'>{v.videojuego.nombre}</h5>

@@ -1,7 +1,7 @@
 .profileRight{
     flex: 5;
     padding: 50px;
-    height: calc(100vh);
+    height: calc(100%);
     text-align: center;
 }
 
