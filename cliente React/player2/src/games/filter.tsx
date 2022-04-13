@@ -2,8 +2,6 @@ import "./filter.css";
 import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Slider } from "@material-ui/core";
-import TextField from '@material-ui/core/TextField';
-import Autocomplete from '@material-ui/lab/Autocomplete';
 import { generos } from "../modelo/generos";
 
 interface IState { generos?: generos[]; }

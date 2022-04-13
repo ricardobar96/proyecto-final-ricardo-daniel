@@ -1,3 +1,6 @@
+import { juegosUsuario } from './juegosUsuario';
+import { reviews } from './reviews';
+import { pistas } from './pistas';
 export class usuarios {
     constructor(
         public id: number,
@@ -10,6 +13,9 @@ export class usuarios {
         public banner: string,
         public descripcion: string,
         public followeds: usuarios[],
-        public followers: usuarios[]
+        public followers: usuarios[],
+        public juegosUsuario: juegosUsuario[],
+        public reviews: reviews[],
+        public pistas: pistas[]       
     ) { }
 }
