@@ -82,5 +82,14 @@ public class JuegoUsuarioDTO {
 		this.puntuacion = puntuacion;
 	}
 
+	public Date getFecha() {
+		return fecha;
+	}
+
+	public void setFecha(Date fecha) {
+		this.fecha = fecha;
+	}
+
+	
 	
 }
