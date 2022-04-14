@@ -6,7 +6,7 @@ export class reviews {
         public id: number,
         public titulo: string,
         public contenido: string,
-        public fecha: Date,
+        public fecha: any,
         public videojuego: videojuegos,
         public usuario: usuarios
     ) { }

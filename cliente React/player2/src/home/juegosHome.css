@@ -90,3 +90,26 @@ li:hover{
 .itemHome{
     text-align: center;
 }
+
+.buttonCreate{
+    margin-top: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color:limegreen;
+    color:white;
+    font-size: 15px;
+    font-weight: 500px;
+    margin-bottom: 50px;
+    cursor:pointer;
+}
+
+.buttonCreate:hover {
+    filter: brightness(150%);
+}
+
+.buttonCreateBox{
+    text-align: center;
+}

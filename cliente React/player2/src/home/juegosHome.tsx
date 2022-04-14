@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import './juegosHome.css'
 import axios from 'axios';
-import { Link, useParams } from 'react-router-dom';
+import { Link, useParams, Navigate, useNavigate } from 'react-router-dom';
 import { videojuegos } from '../modelo/videojuegos';
 import { usuarios } from '../modelo/usuarios';
 import { juegosUsuario } from '../modelo/juegosUsuario';
@@ -18,6 +18,7 @@ export const JuegosHome = () => {
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
     const { id } = useParams();
+    let navigate = useNavigate();
     let contadorProgreso = 0;
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
@@ -29,7 +30,7 @@ export const JuegosHome = () => {
     let newerGames: videojuegos[] = [];
 
     videojuegos?.videojuegos?.map((v: videojuegos) => {
-            newerGames.push(v);
+        newerGames.push(v);
     });
 
     newerGames.sort((a, b) => (a.fecha) - (b.fecha));
@@ -37,7 +38,7 @@ export const JuegosHome = () => {
     let popularGames: videojuegos[] = [];
 
     videojuegos?.videojuegos?.map((v: videojuegos) => {
-        if(v.puntuacion >= 7){
+        if (v.puntuacion >= 7) {
             popularGames.push(v);
         }
     });
@@ -45,6 +46,10 @@ export const JuegosHome = () => {
     popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
 
     popularGames.reverse();
+
+    function goCreateGame() {
+        navigate("/api/v1/createGame");
+    }
 
     useEffect(() => {
         const getVideojuego = async () => {
@@ -78,6 +83,13 @@ export const JuegosHome = () => {
 
     return (
         <div className="juegosHome">
+            <div className='buttonCreateBox'>
+                {usuarioActual.rol == "ROLE_ADMIN" ?
+                    <button className="buttonCreate" onClick={goCreateGame}>Crear juego</button>
+                    : null
+                }
+            </div>
+
             <h3 className='title'>Videojuegos en tendencias:</h3>
             <div className='tendenciasWrapper'>
                 <ul className='tendenciasList'>

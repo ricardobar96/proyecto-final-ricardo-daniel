@@ -57,7 +57,7 @@ export default function Profile() {
             }
 
             const usuarioFollowed = new usuarios(stUser.usuario!.id, stUser.usuario!.nombre, stUser.usuario!.password, stUser.usuario!.rol,
-                stUser.usuario!.avatar, 1, stUser.usuario!.color, stUser.usuario!.banner, stUser.usuario!.descripcion, 
+                stUser.usuario!.avatar, 1, stUser.usuario!.color, stUser.usuario!.banner, stUser.usuario!.descripcion,
                 stUser.usuario!.followeds, stUser.usuario!.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
                 stUser.usuario!.pistas);
             let followeds: usuarios[] = usuarioActual.followeds;
@@ -87,10 +87,10 @@ export default function Profile() {
                     console.log(error);
                 }
             }
-                
+
             let followeds: usuarios[] = usuarioActual.followeds;
 
-            let indiceF:number = 0;
+            let indiceF: number = 0;
             indiceF = followeds.findIndex(usuarios => usuarios.id === stUser.usuario!.id);
 
             followeds.splice(indiceF, 1);
@@ -106,6 +106,23 @@ export default function Profile() {
             });
         }
         setCheckedFollowing(!checkedFollowing);
+    }
+
+    function deleteUser() {
+        let ruta = "http://localhost:8080/api/v2/usuario/";
+        const axiosdelete = async (rutaDeUsuario: string) => {
+            try {
+                const { data } = await axios.delete(rutaDeUsuario + stUser.usuario?.id,
+                    headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        axiosdelete(ruta).then(respuesta => {
+            navigate("/")
+        });
     }
 
     /*
@@ -163,6 +180,12 @@ export default function Profile() {
                             onClick={handleChangeFollowing}
                             style={{ marginLeft: "5px" }}
                         />
+                        : null
+                    }
+
+                    <br />
+                    {usuarioActual.rol == "ROLE_ADMIN" && stUser.usuario?.rol != "ROLE_ADMIN" ?
+                        <button className="buttonDelete" onClick={deleteUser}>Eliminar usuario</button>
                         : null
                     }
                 </div>

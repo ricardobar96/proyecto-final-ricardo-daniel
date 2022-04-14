@@ -9,7 +9,6 @@ import { reviews } from "../modelo/reviews";
 import { usuarios } from "../modelo/usuarios";
 import { Checkbox } from "@material-ui/core";
 import { juegosUsuario } from '../modelo/juegosUsuario';
-import { format } from 'date-fns';
 import { Slider } from "@material-ui/core";
 
 interface IState { videojuego?: videojuegos, pista?: pistas[], review?: reviews[], usuario?: usuarios; juegosUsuario?: juegosUsuario[]; }
@@ -85,8 +84,6 @@ export default function InfoGame() {
             axiosput(ruta).then(respuesta => {
                 navigate(0)
             });
-
-            //completado = true;
         }
         if (completado == true) {
             const newJuegoUsuario = new juegosUsuario(juegoUsuarioActual.id, 0, juegoUsuarioActual.horas, juegoUsuarioActual.usuario,
@@ -103,8 +100,6 @@ export default function InfoGame() {
             axiosput(ruta).then(respuesta => {
                 navigate(0)
             });
-
-            //completado = false;
         }
         setCheckedCompleted(!checkedCompleted);
     }
@@ -166,7 +161,7 @@ export default function InfoGame() {
 
     }
 
-    function changeHours(){
+    function changeHours() {
         let horas = hoursPlayed?.current?.value;
 
         let horasFinal: number = Number(horas);
@@ -187,18 +182,56 @@ export default function InfoGame() {
         });
     }
 
-    /*
-    function checkUserHasGame() {
-        stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
-            if (j.videojuego.id === stGame.videojuego?.id) {
-                if (j.usuario.id === usuarioActual.id) {
-                    initialCheckComplete = 1;
-                }
+    function deleteGame() {
+        let ruta = "http://localhost:8080/api/v2/videojuego/";
+        const axiosdelete = async (rutaDeJuego: string) => {
+            try {
+                const { data } = await axios.delete(rutaDeJuego + stGame.videojuego?.id,
+                    headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
             }
-            console.log("EL VALOR ES " + initialCheckComplete);
+        }
+
+        axiosdelete(ruta).then(respuesta => {
+            navigate("/")
         });
     }
-    */
+
+    function deleteClue( idPista:number) {
+        let ruta = "http://localhost:8080/api/v2/pista/";
+        const axiosdelete = async (rutaDeJuego: string) => {
+            try {
+                const { data } = await axios.delete(rutaDeJuego + idPista,
+                    headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        axiosdelete(ruta).then(respuesta => {
+            navigate(0)
+        });
+    }
+
+    function deleteReview( idReview:number) {
+        let ruta = "http://localhost:8080/api/v2/review/";
+        const axiosdelete = async (rutaDeJuego: string) => {
+            try {
+                const { data } = await axios.delete(rutaDeJuego + idReview,
+                    headers)
+                console.log(data);
+            } catch (error) {
+                console.log(error);
+            }
+        }
+
+        axiosdelete(ruta).then(respuesta => {
+            navigate(0)
+        });
+    }
 
     useEffect(() => {
         const getGame = async (id: string | undefined) => {
@@ -252,6 +285,10 @@ export default function InfoGame() {
         <>
             <Topbar />
             <div className="infoGame">
+                {usuarioActual.rol == "ROLE_ADMIN" ?
+                    <button className="buttonDelete" onClick={deleteGame}>Eliminar videojuego</button>
+                    : null
+                }
                 <div className="infoGameWrapper">
                     <h2 className='titleGameInfo'>{stGame.videojuego?.nombre}</h2>
                     <span><img src={stGame.videojuego?.imagen} className='imageGameInfo' /></span>
@@ -298,8 +335,10 @@ export default function InfoGame() {
                         <>
                             <span style={{ color: "orangered", fontWeight: "bolder" }}>Horas jugadas:</span>
                             <form>
-                                <input type="number" ref={hoursPlayed} style={{ color: "blue", fontWeight: "bolder", width: "60px", 
-                                marginTop: "10px", height: "25px" }} required/>
+                                <input type="number" ref={hoursPlayed} style={{
+                                    color: "blue", fontWeight: "bolder", width: "60px",
+                                    marginTop: "10px", height: "25px"
+                                }} required />
                                 <button type="button" onClick={changeHours} className="buttonHours">Enviar</button>
                             </form>
                         </>
@@ -339,18 +378,23 @@ export default function InfoGame() {
                         <h3 className="title">Pistas:</h3>
                         <ul className='pistasList'>
                             {stClue.pista?.map((p: pistas) => {
-                                if (p.videojuego.id == stGame.videojuego?.id)
+                                if (p.videojuego.id == stGame.videojuego?.id) {
                                     return (
                                         <li className="pistasItem">
                                             <Link to={{ pathname: "/api/v0/usuario/" + p.usuario.id }} style={{ textDecoration: "none" }}>
                                                 <span className="pistasLeft"><img src={p.usuario.avatar} className="avatarInfo" /> {p.usuario.nombre}</span>
                                             </Link>
                                             <div className="pistasRight">
-                                                <h3>{p.titulo} ({p.fecha})</h3>
+                                                <h3>{p.titulo} ({p.fecha.slice(0, 10)})</h3>
                                                 <p>{p.contenido}</p>
                                             </div>
+                                            {usuarioActual.rol == "ROLE_ADMIN" ?
+                                                <button className="buttonDelete" onClick={() => deleteClue(p.id)}>Eliminar pista</button>
+                                                : null
+                                            }
                                         </li>
                                     );
+                                }
                             })}
                         </ul>
                     </div>
@@ -367,9 +411,13 @@ export default function InfoGame() {
                                                 <span className="pistasLeft"><img src={r.usuario.avatar} className="avatarInfo" /> {r.usuario.nombre}</span>
                                             </Link>
                                             <div className="pistasRight">
-                                                <h3>{r.titulo} ({r.fecha})</h3>
+                                                <h3>{r.titulo} ({r.fecha.slice(0, 10)})</h3>
                                                 <p>{r.contenido}</p>
                                             </div>
+                                            {usuarioActual.rol == "ROLE_ADMIN" ?
+                                                <button className="buttonDelete" onClick={() => deleteReview(r.id)}>Eliminar review</button>
+                                                : null
+                                            }
                                         </li>
                                     );
                             })}

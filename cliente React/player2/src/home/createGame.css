@@ -1,0 +1,15 @@
+.inputCreate{
+    padding: 15px 50px;
+    border-radius: 30px;
+    border-width: 0px;
+    color: #647B7A;
+    background-color: #F9F9F9;
+    font-size: 14px;
+    margin-top: 20px;
+    text-align: left;
+}
+
+.titleCreate{
+    text-align: center;
+    font-size: 30px;
+}

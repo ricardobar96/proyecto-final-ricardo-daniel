@@ -13,6 +13,7 @@ import GamesProfile from './profile/gamesProfile/gamesProfile';
 import ReviewsProfile from './profile/reviewsProfile';
 import SocialProfile from './profile/socialProfile';
 import Settings from './profile/settings';
+import CreateGame from './home/createGame';
 
 interface IProps { }
 interface IState { }
@@ -78,6 +79,11 @@ const App = () => {
         <Route path="api/v1/usuario/:id/settings" element={
           <RequireAuth >
             <Settings/>
+          </RequireAuth>
+        } />
+        <Route path="api/v1/createGame" element={
+          <RequireAuth >
+            <CreateGame/>
           </RequireAuth>
         } />
       </Routes>
