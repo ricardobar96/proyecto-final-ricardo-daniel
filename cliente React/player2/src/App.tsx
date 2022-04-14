@@ -14,6 +14,7 @@ import ReviewsProfile from './profile/reviewsProfile';
 import SocialProfile from './profile/socialProfile';
 import Settings from './profile/settings';
 import CreateGame from './home/createGame';
+import ModifyGame from './infoGame/modifyGame';
 
 interface IProps { }
 interface IState { }
@@ -84,6 +85,11 @@ const App = () => {
         <Route path="api/v1/createGame" element={
           <RequireAuth >
             <CreateGame/>
+          </RequireAuth>
+        } />
+        <Route path="api/v2/modifyGame/videojuego/:id" element={
+          <RequireAuth >
+            <ModifyGame/>
           </RequireAuth>
         } />
       </Routes>

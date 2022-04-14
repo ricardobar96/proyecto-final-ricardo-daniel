@@ -124,3 +124,21 @@
     padding-top: 15px;
 }
 
+.buttonModify{
+    margin-top: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color:orange;
+    color:white;
+    font-size: 15px;
+    font-weight: 500px;
+    margin-bottom: 50px;
+    cursor:pointer;
+}
+
+.buttonModify:hover {
+    filter: brightness(110%);
+}

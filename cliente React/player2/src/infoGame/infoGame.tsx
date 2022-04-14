@@ -199,7 +199,7 @@ export default function InfoGame() {
         });
     }
 
-    function deleteClue( idPista:number) {
+    function deleteClue(idPista: number) {
         let ruta = "http://localhost:8080/api/v2/pista/";
         const axiosdelete = async (rutaDeJuego: string) => {
             try {
@@ -216,7 +216,7 @@ export default function InfoGame() {
         });
     }
 
-    function deleteReview( idReview:number) {
+    function deleteReview(idReview: number) {
         let ruta = "http://localhost:8080/api/v2/review/";
         const axiosdelete = async (rutaDeJuego: string) => {
             try {
@@ -231,6 +231,11 @@ export default function InfoGame() {
         axiosdelete(ruta).then(respuesta => {
             navigate(0)
         });
+    }
+
+    function goModifyGame() {
+        let ruta = "/api/v2/modifyGame/videojuego/" + stGame.videojuego?.id;
+        navigate(ruta);
     }
 
     useEffect(() => {
@@ -289,6 +294,14 @@ export default function InfoGame() {
                     <button className="buttonDelete" onClick={deleteGame}>Eliminar videojuego</button>
                     : null
                 }
+
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                {usuarioActual.rol == "ROLE_ADMIN" ?
+                    <button className="buttonModify" onClick={goModifyGame}>Editar videojuego</button>
+                    : null
+                }
+
                 <div className="infoGameWrapper">
                     <h2 className='titleGameInfo'>{stGame.videojuego?.nombre}</h2>
                     <span><img src={stGame.videojuego?.imagen} className='imageGameInfo' /></span>

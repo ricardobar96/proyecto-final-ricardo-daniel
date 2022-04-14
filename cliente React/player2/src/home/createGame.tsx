@@ -5,8 +5,9 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { usuarios } from "../modelo/usuarios";
 import Topbar from "../topbar/topbar";
 import { videojuegos } from '../modelo/videojuegos';
+import { generos } from '../modelo/generos';
 
-interface IState { videojuegos?: videojuegos }
+interface IState { videojuegos?: videojuegos, generos?: generos[]; }
 
 export default function CreateGame() {
     let navigate = useNavigate();
@@ -22,12 +23,18 @@ export default function CreateGame() {
     };
 
     const [videojuegos, setVideojuego] = useState<IState>();
+    const [generos, setGenero] = useState<IState>();
 
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
 
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+
+    let genres: any = [];
+    generos?.generos?.map((g: generos) => {
+        genres.push(g.nombre);
+    })
 
     useEffect(() => {
         const getVideojuego = async (id: string | undefined) => {
@@ -38,6 +45,15 @@ export default function CreateGame() {
             console.log(respuesta.data);
             setVideojuego({ videojuegos: respuesta.data });
         }
+        const getGenero = async () => {
+            const rutageneros: string = rutaBase + "/api/v0/genero";
+            let ruta = rutageneros;
+            console.log(ruta);
+            let respuesta = await axios.get(ruta);
+            console.log(respuesta.data);
+            setGenero({ generos: respuesta.data });
+        }
+        getGenero();
         getVideojuego(id);
     },
         [id]
@@ -49,19 +65,20 @@ export default function CreateGame() {
         let fecha = fechaGame.current?.value;
         let imagen = imagenGame.current?.value;
 
-        //const newGame = new videojuegos(1, nombre, fecha, descripcion, imagen);
+        //const newGame:videojuegos = new videojuegos(1, nombre, fecha, descripcion, imagen);
 
         let newGame = {
             nombre: nombre,
             fecha: fecha,
             descripcion: descripcion,
-            imagen: imagen
+            imagen: imagen,
+            generos: [],
         }
 
         let ruta = "http://localhost:8080/api/v1/videojuego";
         const axiospost = async (rutaGame: string) => {
             try {
-                const { data } = await axios.put(rutaGame, newGame, headers)
+                const { data } = await axios.post(rutaGame, newGame, headers)
                 console.log(data);
             } catch (error) {
                 console.log(error);
@@ -70,6 +87,10 @@ export default function CreateGame() {
         axiospost(ruta).then(respuesta => {
             navigate("/")
         });
+
+    }
+
+    function updateGenres() {
 
     }
 
@@ -84,8 +105,20 @@ export default function CreateGame() {
                         <input placeholder="Nombre" className="inputCreate" ref={nombreGame} required /> <br />
                         <input placeholder="Fecha (yyyy-MM-dd)" className="inputCreate" ref={fechaGame} required /> <br />
                         <input placeholder="Dirección imagen" className="inputCreate" ref={imagenGame} required /> <br />
-                        <textarea placeholder="Descripción" className="inputCreate" ref={descripcionGame} cols={80} rows={10} required /> <br />
-                        <button type="button" className="buttonForm" onClick={createGame}>Crear</button>
+                        <br />
+                        <div className="columnForm">
+                            <div className="genresBox">
+                                {generos?.generos?.map((g: generos) => (
+                                    <div key={g.id}>
+                                        <input value={g.nombre} type="checkbox" />
+                                        <span>{g.nombre}</span>
+                                    </div>
+                                ))}
+                            </div>
+                            <br />
+                            <textarea placeholder="Descripción" className="inputCreate" ref={descripcionGame} cols={80} rows={10} required /> <br />
+                            <button type="button" className="buttonForm" onClick={createGame}>Crear</button>
+                        </div>
                     </form>
                 </div>
             </div>
