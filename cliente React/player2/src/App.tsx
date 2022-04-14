@@ -15,6 +15,8 @@ import SocialProfile from './profile/socialProfile';
 import Settings from './profile/settings';
 import CreateGame from './home/createGame';
 import ModifyGame from './infoGame/modifyGame';
+import ModifyGenres from './games/modifyGenres';
+import AddAdmin from './games/addAdmin';
 
 interface IProps { }
 interface IState { }
@@ -90,6 +92,16 @@ const App = () => {
         <Route path="api/v2/modifyGame/videojuego/:id" element={
           <RequireAuth >
             <ModifyGame/>
+          </RequireAuth>
+        } />
+        <Route path="api/v2/modifyGenres" element={
+          <RequireAuth >
+            <ModifyGenres/>
+          </RequireAuth>
+        } />
+        <Route path="api/v2/addAdmin" element={
+          <RequireAuth >
+            <AddAdmin/>
           </RequireAuth>
         } />
       </Routes>

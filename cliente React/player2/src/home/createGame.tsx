@@ -25,6 +25,8 @@ export default function CreateGame() {
     const [videojuegos, setVideojuego] = useState<IState>();
     const [generos, setGenero] = useState<IState>();
 
+    const [checked, setChecked] = useState<string[]>([]);
+
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
@@ -65,14 +67,22 @@ export default function CreateGame() {
         let fecha = fechaGame.current?.value;
         let imagen = imagenGame.current?.value;
 
-        //const newGame:videojuegos = new videojuegos(1, nombre, fecha, descripcion, imagen);
+        let newGenres: generos[] = [];
+
+        generos?.generos?.map((genero: generos) =>{
+            checked.map((g: string)=>{
+                if(g == genero.nombre){
+                    newGenres.push(genero);
+                }
+            })
+        })
 
         let newGame = {
             nombre: nombre,
             fecha: fecha,
             descripcion: descripcion,
             imagen: imagen,
-            generos: [],
+            generos: newGenres,
         }
 
         let ruta = "http://localhost:8080/api/v1/videojuego";
@@ -90,9 +100,16 @@ export default function CreateGame() {
 
     }
 
-    function updateGenres() {
-
-    }
+    const handleCheck = (event: React.ChangeEvent<HTMLInputElement>) => {
+        var updatedList = [...checked];
+        if (event.target.checked) {
+            updatedList = [...checked, event.target.value];
+            console.log("LISTA: " + updatedList);
+        } else {
+            updatedList.splice(checked.indexOf(event.target.value), 1);
+        }
+        setChecked(updatedList);
+    };
 
     return (
         <div>
@@ -108,17 +125,20 @@ export default function CreateGame() {
                         <br />
                         <div className="columnForm">
                             <div className="genresBox">
+                                <h3 className="titleGenre">Géneros:</h3>
                                 {generos?.generos?.map((g: generos) => (
                                     <div key={g.id}>
-                                        <input value={g.nombre} type="checkbox" />
+                                        <input value={g.nombre} type="checkbox" onChange={handleCheck} />
                                         <span>{g.nombre}</span>
                                     </div>
                                 ))}
                             </div>
                             <br />
-                            <textarea placeholder="Descripción" className="inputCreate" ref={descripcionGame} cols={80} rows={10} required /> <br />
-                            <button type="button" className="buttonForm" onClick={createGame}>Crear</button>
+                            <div className="textAreaAdmin">
+                                <textarea placeholder="Descripción" className="inputCreate" ref={descripcionGame} cols={80} rows={10} required /> <br />
+                            </div>
                         </div>
+                        <button type="button" className="buttonForm" onClick={createGame}>Crear</button>
                     </form>
                 </div>
             </div>

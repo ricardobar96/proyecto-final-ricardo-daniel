@@ -3,6 +3,8 @@ import React, { useState, useEffect, useRef } from 'react'
 import axios from 'axios';
 import { Slider } from "@material-ui/core";
 import { generos } from "../modelo/generos";
+import { usuarios } from "../modelo/usuarios";
+import { useNavigate } from "react-router-dom";
 
 interface IState { generos?: generos[]; }
 
@@ -13,10 +15,13 @@ export default function Filter() {
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
     const rutageneros: string = rutaBase + "/api/v0/genero";
+    let navigate = useNavigate();
 
     let optionsGeneros = generos?.generos?.map((g: generos) =>
-        <option style={{fontSize: "16px"}}>{g.nombre}</option>    
+        <option style={{ fontSize: "16px" }}>{g.nombre}</option>
     );
+
+    var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
 
     useEffect(() => {
         const getGenero = async () => {
@@ -57,13 +62,23 @@ export default function Filter() {
         }
     }
 
+    function goToGenres() {
+        let ruta = "/api/v2/modifyGenres";
+        navigate(ruta);
+    }
+
+    function goToAddAdmin() {
+        let ruta = "/api/v2/addAdmin";
+        navigate(ruta);
+    }
+
     return (
         <div className="filter">
             <div className="filterWrapper">
                 <h3 className="title">Ordenar por:</h3>
                 <div className="comboOrder">
-                <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding:"10px", border: "groove lightsteelblue"}} 
-                    onChange={orderGames} defaultValue="">
+                    <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding: "10px", border: "groove lightsteelblue" }}
+                        onChange={orderGames} defaultValue="">
                         <option>Puntuación</option>
                         <option>Año</option>
                         <option>Título</option>
@@ -72,8 +87,8 @@ export default function Filter() {
                 </div>
                 <h3 className="title">Filtro:</h3>
                 <div className="comboFilter">
-                    <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding:"10px", border: "groove lightsteelblue"}} 
-                    onChange={filterGames} defaultValue="">
+                    <select style={{ width: 300, backgroundColor: "lightsteelblue", height: "60px", fontSize: "16px", padding: "10px", border: "groove lightsteelblue" }}
+                        onChange={filterGames} defaultValue="">
                         {optionsGeneros}
                         <option hidden value="">Selecciona un género</option>
                     </select>
@@ -81,7 +96,20 @@ export default function Filter() {
                 <h3 className="title">Año:</h3>
                 <div className="filterSlider">
                     <Slider min={1996} defaultValue={1996} max={2022} step={1} valueLabelDisplay="on"
-                    onChangeCommitted={(event, value) => filterTime(value)} />
+                        onChangeCommitted={(event, value) => filterTime(value)} />
+                </div>
+                <div className="boxButtonGenre">
+                    {usuarioActual.rol == "ROLE_ADMIN" ?
+                        <button className="buttonModify" onClick={goToGenres}>Modificar géneros</button>
+                        : null
+                    }
+
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+
+                    {usuarioActual.rol == "ROLE_ADMIN" ?
+                        <button className="buttonCreate" onClick={goToAddAdmin}>Agregar Admin</button>
+                        : null
+                    }
                 </div>
             </div>
         </div>
