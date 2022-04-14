@@ -3,6 +3,8 @@ package es.iespuertodelacruz.daniel.Player2REST.dto;
 import java.math.BigInteger;
 import java.util.Date;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
+
 import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;

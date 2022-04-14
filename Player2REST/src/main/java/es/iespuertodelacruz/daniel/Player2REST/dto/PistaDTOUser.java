@@ -7,7 +7,7 @@ import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
 
-public class PistaDTO {
+public class PistaDTOUser {
 	private int id;
 
 	private String contenido;
@@ -20,15 +20,15 @@ public class PistaDTO {
 	
 	private UsuarioDTO usuario;
 	
-	public PistaDTO() {}
+	public PistaDTOUser() {}
 	
-	public PistaDTO(Pista pista) {
+	public PistaDTOUser(Pista pista) {
 		this.id = pista.getId();
 		this.contenido = pista.getContenido();
 		this.fecha = new Date(pista.getFecha().longValue());
 		this.titulo = pista.getTitulo();
 		this.videojuego = new VideojuegoDTO(pista.getVideojuego());
-		this.usuario = new UsuarioDTO(pista.getUsuario());
+		//this.usuario = new UsuarioDTO(pista.getUsuario());
 	}
 
 	public int getId() {

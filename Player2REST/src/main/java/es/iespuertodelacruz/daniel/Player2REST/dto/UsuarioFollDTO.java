@@ -14,7 +14,7 @@ import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
 import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
 
-public class UsuarioDTO {
+public class UsuarioFollDTO {
 	private int id;
 
 	private boolean activo;
@@ -36,17 +36,13 @@ public class UsuarioDTO {
 	
 
 	private List<ReviewDTOUser> reviews = new ArrayList<>();
-
-	private List<UsuarioFollDTO> followers = new ArrayList<>();
-
-	private List<UsuarioFollDTO> followeds = new ArrayList<>();
 	
 	private List<MensajeDTOUser> mensajesEnviados = new ArrayList<>();
 	
 	private List<MensajeDTOUser> mensajesRecibidos = new ArrayList<>();
-	public UsuarioDTO() {}
+	public UsuarioFollDTO() {}
 	
-	public UsuarioDTO(Usuario usuario) {
+	public UsuarioFollDTO(Usuario usuario) {
 		this.id = usuario.getId();
 		this.activo = (usuario.getActivo() == 1) ? true : false;
 		this.avatar = usuario.getAvatar();
@@ -76,17 +72,6 @@ public class UsuarioDTO {
 			}
 		}
 		
-		if (usuario.getFollowers() != null) {
-			for (Usuario follower : usuario.getFollowers()) {
-				this.followers.add(new UsuarioFollDTO(follower));
-			}
-		}
-		
-		if (usuario.getFolloweds() != null) {
-			for (Usuario followed : usuario.getFolloweds()) {
-				this.followeds.add(new UsuarioFollDTO(followed));
-			}
-		}
 		
 		if (usuario.getMensajesEnviados() != null) {
 			for (Mensaje mensaje : usuario.getMensajesEnviados()) {
@@ -188,22 +173,6 @@ public class UsuarioDTO {
 
 	public void setReviews(List<ReviewDTOUser> reviews) {
 		this.reviews = reviews;
-	}
-
-	public List<UsuarioFollDTO> getFollowers() {
-		return followers;
-	}
-
-	public void setFollowers(List<UsuarioFollDTO> followers) {
-		this.followers = followers;
-	}
-
-	public List<UsuarioFollDTO> getFolloweds() {
-		return followeds;
-	}
-
-	public void setFolloweds(List<UsuarioFollDTO> followeds) {
-		this.followeds = followeds;
 	}
 
 	public List<MensajeDTOUser> getMensajesEnviados() {

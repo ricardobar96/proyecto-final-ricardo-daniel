@@ -5,9 +5,12 @@ import java.util.Date;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
-import es.iespuertodelacruz.daniel.Player2REST.entity.Pista;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Review;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Usuario;
+import es.iespuertodelacruz.daniel.Player2REST.entity.Videojuego;
 
-public class PistaDTO {
+public class ReviewDTOUser {
+
 	private int id;
 
 	private String contenido;
@@ -16,19 +19,19 @@ public class PistaDTO {
 
 	private String titulo;
 
+	private UsuarioDTO usuario;
+
 	private VideojuegoDTO videojuego;
 	
-	private UsuarioDTO usuario;
+	public ReviewDTOUser() {}
 	
-	public PistaDTO() {}
-	
-	public PistaDTO(Pista pista) {
-		this.id = pista.getId();
-		this.contenido = pista.getContenido();
-		this.fecha = new Date(pista.getFecha().longValue());
-		this.titulo = pista.getTitulo();
-		this.videojuego = new VideojuegoDTO(pista.getVideojuego());
-		this.usuario = new UsuarioDTO(pista.getUsuario());
+	public ReviewDTOUser(Review review) {
+		this.id = review.getId();
+		this.contenido = review.getContenido();
+		this.fecha = new Date(review.getFecha().longValue());
+		this.titulo = review.getTitulo();
+		//this.usuario = new UsuarioDTO(review.getUsuario());
+		this.videojuego = new VideojuegoDTO(review.getVideojuego());
 	}
 
 	public int getId() {
@@ -63,14 +66,6 @@ public class PistaDTO {
 		this.titulo = titulo;
 	}
 
-	public VideojuegoDTO getVideojuego() {
-		return videojuego;
-	}
-
-	public void setVideojuego(VideojuegoDTO videojuego) {
-		this.videojuego = videojuego;
-	}
-
 	public UsuarioDTO getUsuario() {
 		return usuario;
 	}
@@ -78,5 +73,14 @@ public class PistaDTO {
 	public void setUsuario(UsuarioDTO usuario) {
 		this.usuario = usuario;
 	}
+
+	public VideojuegoDTO getVideojuego() {
+		return videojuego;
+	}
+
+	public void setVideojuego(VideojuegoDTO videojuego) {
+		this.videojuego = videojuego;
+	}
+	
 	
 }
