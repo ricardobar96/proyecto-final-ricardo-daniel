@@ -14,7 +14,7 @@ export class usuarios {
         public descripcion: string,
         public followeds: usuarios[],
         public followers: usuarios[],
-        public juegosUsuario: juegosUsuario[],
+        public juegoUsuarios: juegosUsuario[],
         public reviews: reviews[],
         public pistas: pistas[]       
     ) { }

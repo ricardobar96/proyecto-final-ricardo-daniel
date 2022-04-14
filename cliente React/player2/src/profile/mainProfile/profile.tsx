@@ -58,14 +58,14 @@ export default function Profile() {
 
             const usuarioFollowed = new usuarios(stUser.usuario!.id, stUser.usuario!.nombre, stUser.usuario!.password, stUser.usuario!.rol,
                 stUser.usuario!.avatar, 1, stUser.usuario!.color, stUser.usuario!.banner, stUser.usuario!.descripcion, 
-                stUser.usuario!.followeds, stUser.usuario!.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+                stUser.usuario!.followeds, stUser.usuario!.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
                 stUser.usuario!.pistas);
             let followeds: usuarios[] = usuarioActual.followeds;
             followeds.push(usuarioFollowed);
 
             const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
                 usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion,
-                followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+                followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
                 stUser.usuario!.pistas);
 
             axiospost(ruta).then(respuesta => {
@@ -97,7 +97,7 @@ export default function Profile() {
 
             const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
                 usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion,
-                followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+                followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
                 stUser.usuario!.pistas);
 
             axiosdelete(ruta).then(respuesta => {

@@ -47,7 +47,7 @@ export default function Settings() {
         
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             avatar!, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, usuarioActual.descripcion, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
             
         let ruta = "http://localhost:8080/api/v1/usuario";
@@ -70,7 +70,7 @@ export default function Settings() {
 
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, banner!, usuarioActual.descripcion, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
             
         let ruta = "http://localhost:8080/api/v1/usuario";
@@ -93,7 +93,7 @@ export default function Settings() {
 
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             usuarioActual.avatar, usuarioActual.activo, usuarioActual.color, usuarioActual.banner, descripcion!, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
 
         let ruta = "http://localhost:8080/api/v1/usuario";
@@ -114,7 +114,7 @@ export default function Settings() {
     function colorRed() {
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             usuarioActual.avatar, usuarioActual.activo, "LightSalmon", usuarioActual.banner, usuarioActual.descripcion, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
 
         let ruta = "http://localhost:8080/api/v1/usuario";
@@ -135,7 +135,7 @@ export default function Settings() {
     function colorBlue() {
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             usuarioActual.avatar, usuarioActual.activo, "lightsteelblue", usuarioActual.banner, usuarioActual.descripcion, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
 
         let ruta = "http://localhost:8080/api/v1/usuario";
@@ -156,7 +156,7 @@ export default function Settings() {
     function colorGreen() {
         const newUsuario = new usuarios(usuarioActual.id, usuarioActual.nombre, usuarioActual.password, usuarioActual.rol,
             usuarioActual.avatar, usuarioActual.activo, "DarkSeaGreen", usuarioActual.banner, usuarioActual.descripcion, 
-            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegosUsuario, stUser.usuario!.reviews,
+            usuarioActual.followeds, usuarioActual.followers, stUser.usuario!.juegoUsuarios, stUser.usuario!.reviews,
             stUser.usuario!.pistas);
 
         let ruta = "http://localhost:8080/api/v1/usuario";
