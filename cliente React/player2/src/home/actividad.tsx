@@ -14,61 +14,48 @@ export default function Actividad() {
     
     let actividades: actividad[] = [];
 
-    console.log(usuarioActual);
     usuarioActual.followeds.map((followed: usuarios) => {
         console.log(followed);
         followed.juegoUsuarios.map((juegoU: juegosUsuario) => {
-            let actividadNew = new actividad("juegoU", juegoU.fecha, followed, juegoU.videojuego);
+            let actividadNew = new actividad("juegoU", new Date(juegoU.fecha), followed, juegoU.videojuego);
             actividades.push(actividadNew);
         });
     
         followed.reviews.map((review: reviews) => {
-            let actividadNew = new actividad("review", review.fecha, followed, review.videojuego);
-            console.log(review.videojuego);
+            let actividadNew = new actividad("review", new Date(review.fecha), followed, review.videojuego);
             actividades.push(actividadNew);
         });
     
         followed.pistas.map((pista: pistas) => {
-            let actividadNew = new actividad("pista", pista.fecha, followed, pista.videojuego);
+            let actividadNew = new actividad("pista", new Date(pista.fecha), followed, pista.videojuego);
             actividades.push(actividadNew);
         });
     });
     
-    //actividades.sort((a, b) => (a.fecha) - (b.fecha));
+    function EstimarTiempo(milisegundos: number) {
+        let tiempo = "";
+        let segundos = Math.trunc(milisegundos / 1000);
+        if (segundos > 60) {
+            let minutos = Math.trunc(segundos / 60);
+            if (minutos > 60) {
+                let horas = Math.trunc(minutos / 60);
+                if (horas > 24) {
+                    let dias = Math.trunc(horas / 24);
+                    tiempo = "Han  pasado "  + dias + " días.";
+                } else {
+                    tiempo = "Han  pasado "  + horas + " horas.";
+                }
+            } else {
+                tiempo = "Han  pasado "  + minutos + " minutos.";
+            }
+        } else {
+            tiempo = "Han  pasado "  + segundos + " segundos.";
+        } 
 
-    /*return (
-        <div className="actividad">
-            <h3 className='title'>Actividad</h3>
-            <div className="actividadWrapper">
-                <ul className="actividadList">
-                    <li className="actividadItem">
-                        <img src={avatar}  className="actividadLeft" />
-                        <div className="actividadRight">
-                            <span className="actividadTiempo">Hace 5 minutos</span>
-                            <span className="actividadNombreUser">Usuario A</span>
-                            <span className="actividadAccion">Acción 1</span>
-                        </div>
-                    </li>
-                    <li className="actividadItem">
-                        <img src={usuarioActual.avatar}  className="actividadLeft" />
-                        <div className="actividadRight">
-                            <span className="actividadTiempo">Hace 10 minutos</span>
-                            <span className="actividadNombreUser">Usuario B</span>
-                            <span className="actividadAccion">Acción 2</span>
-                        </div>
-                    </li>
-                    <li className="actividadItem">
-                        <img src={usuarioActual.avatar}  className="actividadLeft" />
-                        <div className="actividadRight">
-                            <span className="actividadTiempo">Hace 15 minutos</span>
-                            <span className="actividadNombreUser">Usuario C</span>
-                            <span className="actividadAccion">Acción 3</span>
-                        </div>
-                    </li>
-                </ul>
-            </div>
-        </div>
-    )*/
+        return tiempo;
+    }
+    actividades.sort((a, b) => (b.fecha.getTime()) - (a.fecha.getTime()));
+
     return (
         <div className="actividad">
             <h3 className='title'>Actividad</h3>
@@ -77,9 +64,11 @@ export default function Actividad() {
                     {actividades.map((actividad: actividad) => {
                         return (
                             <li className="actividadItem">
-                        <img src={actividad.usuario.avatar}  className="actividadLeft" />
+                                <Link to={{ pathname: "/api/v0/usuario/" + actividad.usuario.id }}>
+                                    <img src={actividad.usuario.avatar}  className="actividadLeft" />
+                                </Link>
                         <div className="actividadRight">
-                            <span className="actividadTiempo">Hace {actividad.fecha} minutos</span>
+                            <span className="actividadTiempo">{EstimarTiempo(new Date().getTime() - actividad.fecha.getTime())}</span>
                             <Link to={{ pathname: "/api/v0/usuario/" + actividad.usuario.id }}>
                                 <span className="actividadNombreUser">{actividad.usuario.nombre}</span>
                             </Link>

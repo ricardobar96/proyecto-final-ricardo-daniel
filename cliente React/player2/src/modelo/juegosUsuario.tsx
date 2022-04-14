@@ -9,6 +9,6 @@ export class juegosUsuario {
         public usuario: usuarios,
         public videojuego: videojuegos,
         public puntuacion: number,
-        public fecha: any
+        public fecha: Date
     ) { }
 }

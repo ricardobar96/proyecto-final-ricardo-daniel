@@ -8,11 +8,12 @@ import { usuarios } from "../modelo/usuarios";
 
 export default function Home() {
     let usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
+    console.log(typeof usuarioActual);
     return (
         <>
             <Topbar />
             <div className="homeContainer">
-                {typeof usuarioActual !== 'undefined' ? (<Actividad />) : null
+                {typeof usuarioActual.nombre !== 'undefined' ? (<Actividad />) : null
                 }
                 
                 <JuegosHome/>
