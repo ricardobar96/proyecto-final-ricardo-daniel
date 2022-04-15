@@ -1,4 +1,4 @@
-import React from 'react'
+import React, { useEffect, useState } from 'react'
 import './actividad.css'
 import { Person } from "@material-ui/icons";
 import { usuarios } from '../modelo/usuarios';
@@ -7,14 +7,32 @@ import { juegosUsuario } from '../modelo/juegosUsuario';
 import { reviews } from '../modelo/reviews';
 import { Link } from 'react-router-dom';
 import { pistas } from '../modelo/pistas';
+import axios from 'axios';
+
+interface IState { usuario?: usuarios }
 
 export default function Actividad() {
     var usuarioActual: usuarios = JSON.parse(localStorage.getItem('usuarioActual') || '{}');
     let avatar = usuarioActual.avatar;
     
+    const [stUser, setStUser] = useState<IState>({});
+
+    useEffect(() => {
+
+        const getUser = async (id: number) => {
+            let rutadeUsuarios = "http://localhost:8080/api/v0/usuario/";
+            let { data } = await axios.get(rutadeUsuarios + id);
+            let usuario: usuarios = data;
+            console.log(usuario);
+            setStUser({ usuario });
+        }
+        getUser(usuarioActual.id);
+    },
+        []
+    );
     let actividades: actividad[] = [];
 
-    usuarioActual.followeds.map((followed: usuarios) => {
+    stUser.usuario?.followeds.map((followed: usuarios) => {
         console.log(followed);
         followed.juegoUsuarios.map((juegoU: juegosUsuario) => {
             let actividadNew = new actividad("juegoU", new Date(juegoU.fecha), followed, juegoU.videojuego);

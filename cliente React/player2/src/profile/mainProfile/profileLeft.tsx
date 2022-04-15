@@ -189,21 +189,21 @@ export default function ProfileLeft() {
                 <ul>
                     <li className="genresList">
                         <span className="valueGenres">{contadorGenre1}</span>
-                        <h4 className="title">{genre1}</h4>
+                        <h4 className="titleFav">{genre1}</h4>
                     </li>
                 </ul>
 
                 <ul>
                     <li className="genresList">
                     <span className="valueGenres">{contadorGenre2}</span>
-                        <h4 className="title">{genre2}</h4>
+                        <h4 className="titleFav">{genre2}</h4>
                     </li>
                 </ul>
 
                 <ul>
                     <li className="genresList">
                     <span className="valueGenres">{contadorGenre3}</span>
-                        <h4 className="title">{genre3}</h4>
+                        <h4 className="titleFav">{genre3}</h4>
                     </li>
                 </ul>
             </div>

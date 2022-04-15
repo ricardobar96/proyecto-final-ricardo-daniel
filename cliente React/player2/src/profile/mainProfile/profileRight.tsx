@@ -5,8 +5,8 @@ import { Link, Navigate, useNavigate, useParams } from 'react-router-dom';
 import { usuarios } from "../../modelo/usuarios";
 import { videojuegos } from "../../modelo/videojuegos";
 import { juegosUsuario } from '../../modelo/juegosUsuario';
-
-interface IState { videojuegos?: videojuegos[]; usuario?: usuarios; juegosUsuario?: juegosUsuario[]; }
+import { Actividad } from "./actividad";
+interface IState { videojuegos?: videojuegos[]; usuario?: usuarios | undefined; juegosUsuario?: juegosUsuario[]; }
 
 export default function ProfileRight() {
     let navigate = useNavigate();
@@ -17,6 +17,9 @@ export default function ProfileRight() {
     const [videojuegos, setVideojuego] = useState<IState>();
     const [juegosUsuario, setJuegosUsuario] = useState<IState>();
     const [stUser, setStUser] = useState<IState>({});
+
+
+    let usuario:usuarios = stUser.usuario!; 
 
     const { id } = useParams();
 
@@ -102,6 +105,8 @@ export default function ProfileRight() {
             <br/>
 
             <h3 className="title">Actividad:</h3>
+            {(typeof usuario !== 'undefined') ? (<Actividad usuario={usuario}/>) : null}
+            
         </div>
     )
 }

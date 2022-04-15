@@ -49,7 +49,7 @@ export default function ReviewsProfile() {
     return (
         <div style={{
             backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
-            height: "100vh"
+            height: "100%"
         }}>
             <Topbar />
             <TopbarProfile />
@@ -76,7 +76,10 @@ export default function ReviewsProfile() {
                         }
                         if ((contadorReviewUser === 0) && (stReview.review?.length === numeroReviews))
                             return (
-                                <div>
+                                <div style={{
+                                    backgroundColor: usuarioActual.color != "Azul" ? usuarioActual.color : 'lightsteelblue',
+                                    height: "100vh"
+                                }}>
                                     <br />
                                     <br />
                                     <br />
