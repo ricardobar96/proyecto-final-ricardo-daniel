@@ -4,17 +4,24 @@ import axios from 'axios';
 import { Slider } from "@material-ui/core";
 import { generos } from "../modelo/generos";
 import { usuarios } from "../modelo/usuarios";
-import { useNavigate } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
+import { videojuegos } from "../modelo/videojuegos";
 
-interface IState { generos?: generos[]; }
+interface IState { generos?: generos[]; videojuegos?: videojuegos[]; }
 
-export default function Filter() {
+    export function Filter() {
+    const [filteredGenre, setFilteredGenre] = useState<any>();
+    const [filteredOrder, setFilteredOrder] = useState<any>();
+    const [filteredYear, setFilteredYear] = useState<any>();
+
     const [val, setVal] = useState([1996, 2022]);
     const [generos, setGenero] = useState<IState>();
+    const [videojuegos, setVideojuego] = useState<IState>();
     const ip: string = "localhost";
     const puerto: number = 8080;
     const rutaBase: string = "http://" + ip + ":" + puerto;
     const rutageneros: string = rutaBase + "/api/v0/genero";
+    const rutajuegosHome: string = rutaBase + "/api/v0/videojuego";
     let navigate = useNavigate();
 
     let optionsGeneros = generos?.generos?.map((g: generos) =>
@@ -31,35 +38,201 @@ export default function Filter() {
             console.log(respuesta.data);
             setGenero({ generos: respuesta.data });
         }
+        const getVideojuego = async () => {
+            let ruta = rutajuegosHome;
+            console.log(ruta);
+            let respuesta = await axios.get(ruta);
+            console.log(respuesta.data);
+            setVideojuego({ videojuegos: respuesta.data });
+        }
+        getVideojuego();
         getGenero();
     }, []);
 
     function orderGames(event: React.ChangeEvent<HTMLSelectElement>) {
+
+        let order:string = event.currentTarget.value;
+
+        setFilteredOrder({ order });
+
         if (event.currentTarget.value === "Año") {
-            alert("Ordenar por año");
+
+            let newerGames: videojuegos[] = [];
+
+            videojuegos?.videojuegos?.map((v: videojuegos) => {
+                newerGames.push(v);
+            });
+
+            newerGames.sort((a, b) => (a.fecha) - (b.fecha));
+
+            <div className='nuevosWrapper'>
+                <ul className='nuevosList'>
+                    {
+                        newerGames.map((a: videojuegos) => {
+                            return (
+                                <div className="juegosTrendsBox">
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
+                                        <li className="itemTrends">
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                            <div className='titleTrendsBox'>
+                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                </div>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
         }
+
         if (event.currentTarget.value === "Puntuación") {
-            alert("Ordenar por puntuación");
+
+            let popularGames: videojuegos[] = [];
+
+            videojuegos?.videojuegos?.map((v: videojuegos) => {
+                popularGames.push(v);
+            });
+
+            popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
+
+            <div className='nuevosWrapper'>
+                <ul className='nuevosList'>
+                    {
+                        popularGames.map((a: videojuegos) => {
+                            return (
+                                <div className="juegosTrendsBox">
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
+                                        <li className="itemTrends">
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                            <div className='titleTrendsBox'>
+                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                </div>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
         }
+
         if (event.currentTarget.value === "Título") {
-            alert("Ordenar por título");
+
+            let alphabetGames: videojuegos[] = [];
+
+            videojuegos?.videojuegos?.map((v: videojuegos) => {
+                alphabetGames.push(v);
+            });
+
+            alphabetGames.sort((a, b) => a.nombre.localeCompare(b.nombre));
+
+            <div className='nuevosWrapper'>
+                <ul className='nuevosList'>
+                    {
+                        alphabetGames.map((a: videojuegos) => {
+                            return (
+                                <div className="juegosTrendsBox">
+                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
+                                        <li className="itemTrends">
+                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                            <div className='titleTrendsBox'>
+                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                            </div>
+                                        </li>
+                                    </Link>
+                                </div>
+                            );
+                        })
+                    }
+                </ul>
+            </div>
+
         }
     }
 
     function filterGames(event: React.ChangeEvent<HTMLSelectElement>) {
         event.preventDefault();
+
+        let genero:string = event.currentTarget.value;
+
+        setFilteredGenre({ genero });
+
+        <div className='todosWrapper'>
+            <ul className='nuevosList'>
+                {
+                    videojuegos?.videojuegos?.map((a: videojuegos) => {
+                        a.generos.map((g: generos) => {
+                            if (g.nombre == event.currentTarget.value)
+                                return (
+                                    <div className="juegosTrendsBox">
+                                        <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
+                                            <li className="itemTrends">
+                                                <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                                <div className='titleTrendsBox'>
+                                                    <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                                </div>
+                                            </li>
+                                        </Link>
+                                    </div>
+                                );
+                        })
+                    })
+                }
+            </ul>
+        </div>
+
+        /*
         if (event.currentTarget.value === "Acción") {
             alert("Solo acción");
         }
+        */
     }
 
     function filterTime(value: number | number[]) {
+
+        let year:any = value;
+
+        setFilteredYear({ year });
+
+        let yearGames: videojuegos[] = [];
+
+        videojuegos?.videojuegos?.map((v: videojuegos) => {
+            if (v.fecha >= value) {
+                yearGames.push(v);
+            }
+        });
+
+        yearGames.sort((a, b) => (a.fecha) - (b.fecha));
+
+        <div className='nuevosWrapper'>
+            <ul className='nuevosList'>
+                {
+                    yearGames.map((a: videojuegos) => {
+                        return (
+                            <div className="juegosTrendsBox">
+                                <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
+                                    <li className="itemTrends">
+                                        <span><img src={a.imagen} className='imageGameTrends' /></span>
+                                        <div className='titleTrendsBox'>
+                                            <h5 className='titleGameTrends'>{a.nombre}</h5>
+                                        </div>
+                                    </li>
+                                </Link>
+                            </div>
+                        );
+                    })
+                }
+            </ul>
+        </div>
+
+        /*
         if (value == 2000) {
             alert("Año 2000");
         }
-        if (value == 1996) {
-            alert("Año 1996");
-        }
+        */
     }
 
     function goToGenres() {

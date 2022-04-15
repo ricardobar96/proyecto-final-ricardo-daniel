@@ -76,7 +76,7 @@ export default function Actividad() {
 
     return (
         <div className="actividad">
-            <h3 className='title'>Actividad</h3>
+            <h3 className='title'>Actividad:</h3>
             <div className="actividadWrapper">
                 <ul className="actividadList">
                     {actividades.map((actividad: actividad) => {

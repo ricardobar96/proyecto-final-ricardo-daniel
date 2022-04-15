@@ -53,7 +53,7 @@ export default function Trends() {
                 <div className='tendenciasWrapper'>
                     <ul className='nuevosList'>
                         {
-                            popularGames.slice(0, 5).map((a: videojuegos) => {
+                            popularGames.slice(0, 6).map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                         <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
@@ -74,7 +74,7 @@ export default function Trends() {
                 <div className='nuevosWrapper'>
                     <ul className='nuevosList'>
                         {
-                            newerGames.slice(0, 4).map((a: videojuegos) => {
+                            newerGames.slice(0, 6).map((a: videojuegos) => {
                                 return (
                                     <div className="juegosTrendsBox">
                                         <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>

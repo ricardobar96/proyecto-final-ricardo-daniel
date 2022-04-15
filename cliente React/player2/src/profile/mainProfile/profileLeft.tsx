@@ -185,25 +185,25 @@ export default function ProfileLeft() {
 
             <br />
             <h3 className="title">Géneros favoritos:</h3>
-            <div className="genresContent">
+            <div className="statsContent">
                 <ul>
-                    <li className="genresList">
-                        <span className="valueGenres">{contadorGenre1}</span>
-                        <h4 className="titleFav">{genre1}</h4>
+                    <li className="statsList">
+                        <span className="valueStats">{contadorGenre1}</span>
+                        <h4 className="title">{genre1}</h4>
                     </li>
                 </ul>
 
                 <ul>
-                    <li className="genresList">
-                    <span className="valueGenres">{contadorGenre2}</span>
-                        <h4 className="titleFav">{genre2}</h4>
+                    <li className="statsList">
+                    <span className="valueStats">{contadorGenre2}</span>
+                        <h4 className="title">{genre2}</h4>
                     </li>
                 </ul>
 
                 <ul>
-                    <li className="genresList">
-                    <span className="valueGenres">{contadorGenre3}</span>
-                        <h4 className="titleFav">{genre3}</h4>
+                    <li className="statsList">
+                    <span className="valueStats">{contadorGenre3}</span>
+                        <h4 className="title">{genre3}</h4>
                     </li>
                 </ul>
             </div>
