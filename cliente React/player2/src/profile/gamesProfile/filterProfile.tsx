@@ -10,7 +10,24 @@ import { videojuegos } from "../../modelo/videojuegos";
 
 interface IState { videojuegos?: videojuegos[], generos?: generos[]; }
 
-export default function FilterProfile() {
+interface IProps {
+    genre: any,
+    order: any,
+    year: any,
+    search: any
+}
+
+export default function FilterProfile(props: IProps) {
+    const [filteredGenre, setFilteredGenre] = useState<any>();
+    const [filteredOrder, setFilteredOrder] = useState<any>();
+    const [filteredYear, setFilteredYear] = useState<any>();
+    const [filteredSearch, setFilteredSearch] = useState<any>();
+
+    let { genre } = props.genre;
+    let { year } = props.year;
+    let { order } = props.order;
+    let { search } = props.search;
+
     let navigate = useNavigate();
     const juegoBuscar = useRef<HTMLInputElement>(null);
     const [val, setVal] = useState([1996, 2022]);
@@ -46,31 +63,31 @@ export default function FilterProfile() {
     }, []);
 
     function orderGames(event: React.ChangeEvent<HTMLSelectElement>) {
-        if (event.currentTarget.value === "Año") {
-            alert("Ordenar por año");
-        }
-        if (event.currentTarget.value === "Puntuación") {
-            alert("Ordenar por puntuación");
-        }
-        if (event.currentTarget.value === "Título") {
-            alert("Ordenar por título");
-        }
+
+        let order: string = event.currentTarget.value;
+
+        setFilteredOrder({ order });
+
+        props.order(event.currentTarget.value);
     }
 
     function filterGames(event: React.ChangeEvent<HTMLSelectElement>) {
         event.preventDefault();
-        if (event.currentTarget.value === "Acción") {
-            alert("Solo acción");
-        }
+
+        let genero: string = event.currentTarget.value;
+
+        props.genre(event.currentTarget.value);
+
+        setFilteredGenre({ genero });
     }
 
     function filterTime(value: number | number[]) {
-        if (value == 2000) {
-            alert("Año 2000");
-        }
-        if (value == 1996) {
-            alert("Año 1996");
-        }
+
+        let year: any = value;
+
+        props.year(value);
+
+        setFilteredYear({ year });
     }
 
     const handleKeypress = (event: React.KeyboardEvent<HTMLInputElement>) => {
@@ -81,19 +98,10 @@ export default function FilterProfile() {
 
     function SearchGame() {
         let buscar = juegoBuscar.current?.value;
-        let idBuscar = 0;
-        videojuegos?.videojuegos?.map((a: videojuegos) => {
-            if (a.nombre.toUpperCase() == buscar?.toUpperCase()) {
-                idBuscar = a.id;
-            }
-        });
+        
+        props.search(buscar);
 
-        if (idBuscar > 0) {
-            navigate("/api/v0/videojuego/" + idBuscar);
-        }
-        else {
-            toast.error("No se ha podido encontrar el juego");
-        }
+        setFilteredSearch({ buscar });
     }
 
     return (

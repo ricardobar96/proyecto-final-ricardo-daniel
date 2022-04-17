@@ -9,10 +9,20 @@ import { videojuegos } from "../modelo/videojuegos";
 
 interface IState { generos?: generos[]; videojuegos?: videojuegos[]; }
 
-    export function Filter() {
+interface IProps {
+    genre: any,
+    order: any,
+    year: any
+}
+
+export function Filter(props: IProps) {
     const [filteredGenre, setFilteredGenre] = useState<any>();
     const [filteredOrder, setFilteredOrder] = useState<any>();
     const [filteredYear, setFilteredYear] = useState<any>();
+
+    let { genre } = props.genre;
+    let { year } = props.year;
+    let { order } = props.order;
 
     const [val, setVal] = useState([1996, 2022]);
     const [generos, setGenero] = useState<IState>();
@@ -51,188 +61,30 @@ interface IState { generos?: generos[]; videojuegos?: videojuegos[]; }
 
     function orderGames(event: React.ChangeEvent<HTMLSelectElement>) {
 
-        let order:string = event.currentTarget.value;
+        let order: string = event.currentTarget.value;
 
         setFilteredOrder({ order });
 
-        if (event.currentTarget.value === "Año") {
-
-            let newerGames: videojuegos[] = [];
-
-            videojuegos?.videojuegos?.map((v: videojuegos) => {
-                newerGames.push(v);
-            });
-
-            newerGames.sort((a, b) => (a.fecha) - (b.fecha));
-
-            <div className='nuevosWrapper'>
-                <ul className='nuevosList'>
-                    {
-                        newerGames.map((a: videojuegos) => {
-                            return (
-                                <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <div className='titleTrendsBox'>
-                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
-                                            </div>
-                                        </li>
-                                    </Link>
-                                </div>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-        }
-
-        if (event.currentTarget.value === "Puntuación") {
-
-            let popularGames: videojuegos[] = [];
-
-            videojuegos?.videojuegos?.map((v: videojuegos) => {
-                popularGames.push(v);
-            });
-
-            popularGames.sort((a, b) => (a.puntuacion) - (b.puntuacion));
-
-            <div className='nuevosWrapper'>
-                <ul className='nuevosList'>
-                    {
-                        popularGames.map((a: videojuegos) => {
-                            return (
-                                <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <div className='titleTrendsBox'>
-                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
-                                            </div>
-                                        </li>
-                                    </Link>
-                                </div>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-        }
-
-        if (event.currentTarget.value === "Título") {
-
-            let alphabetGames: videojuegos[] = [];
-
-            videojuegos?.videojuegos?.map((v: videojuegos) => {
-                alphabetGames.push(v);
-            });
-
-            alphabetGames.sort((a, b) => a.nombre.localeCompare(b.nombre));
-
-            <div className='nuevosWrapper'>
-                <ul className='nuevosList'>
-                    {
-                        alphabetGames.map((a: videojuegos) => {
-                            return (
-                                <div className="juegosTrendsBox">
-                                    <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
-                                        <li className="itemTrends">
-                                            <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                            <div className='titleTrendsBox'>
-                                                <h5 className='titleGameTrends'>{a.nombre}</h5>
-                                            </div>
-                                        </li>
-                                    </Link>
-                                </div>
-                            );
-                        })
-                    }
-                </ul>
-            </div>
-
-        }
+        props.order(event.currentTarget.value);
     }
 
     function filterGames(event: React.ChangeEvent<HTMLSelectElement>) {
         event.preventDefault();
 
-        let genero:string = event.currentTarget.value;
+        let genero: string = event.currentTarget.value;
+
+        props.genre(event.currentTarget.value);
 
         setFilteredGenre({ genero });
-
-        <div className='todosWrapper'>
-            <ul className='nuevosList'>
-                {
-                    videojuegos?.videojuegos?.map((a: videojuegos) => {
-                        a.generos.map((g: generos) => {
-                            if (g.nombre == event.currentTarget.value)
-                                return (
-                                    <div className="juegosTrendsBox">
-                                        <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
-                                            <li className="itemTrends">
-                                                <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                                <div className='titleTrendsBox'>
-                                                    <h5 className='titleGameTrends'>{a.nombre}</h5>
-                                                </div>
-                                            </li>
-                                        </Link>
-                                    </div>
-                                );
-                        })
-                    })
-                }
-            </ul>
-        </div>
-
-        /*
-        if (event.currentTarget.value === "Acción") {
-            alert("Solo acción");
-        }
-        */
     }
 
     function filterTime(value: number | number[]) {
 
-        let year:any = value;
+        let year: any = value;
+
+        props.year(value);
 
         setFilteredYear({ year });
-
-        let yearGames: videojuegos[] = [];
-
-        videojuegos?.videojuegos?.map((v: videojuegos) => {
-            if (v.fecha >= value) {
-                yearGames.push(v);
-            }
-        });
-
-        yearGames.sort((a, b) => (a.fecha) - (b.fecha));
-
-        <div className='nuevosWrapper'>
-            <ul className='nuevosList'>
-                {
-                    yearGames.map((a: videojuegos) => {
-                        return (
-                            <div className="juegosTrendsBox">
-                                <Link to={{ pathname: "/api/v0/videojuego/" + a.id }}>
-                                    <li className="itemTrends">
-                                        <span><img src={a.imagen} className='imageGameTrends' /></span>
-                                        <div className='titleTrendsBox'>
-                                            <h5 className='titleGameTrends'>{a.nombre}</h5>
-                                        </div>
-                                    </li>
-                                </Link>
-                            </div>
-                        );
-                    })
-                }
-            </ul>
-        </div>
-
-        /*
-        if (value == 2000) {
-            alert("Año 2000");
-        }
-        */
     }
 
     function goToGenres() {
