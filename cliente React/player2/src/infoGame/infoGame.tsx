@@ -41,11 +41,16 @@ export default function InfoGame() {
     let progress = false;
     let juegoUsuarioActual: juegosUsuario;
 
+    let defaultSlider = 5;
+    let defaultHours = 0;
+
     stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
         if (j.videojuego.id === stGame.videojuego?.id) {
             if (j.usuario.id === usuarioActual.id) {
                 juegoUsuarioActual = j;
                 initialCheckComplete = 1;
+                defaultSlider = j.puntuacion;
+                defaultHours = j.horas;
                 progress = true;
                 if (j.completado == 1) {
                     completado = true;
@@ -310,7 +315,7 @@ export default function InfoGame() {
                     <br />
 
                     {usuarioActual.nombre != null ?
-                        <span style={{ color: "orangered", fontWeight: "bolder" }}>¿En progreso?</span>
+                        <span style={{ color: "orangered", fontWeight: "bolder" }}>Añadir a lista</span>
                         : null
                     }
 
@@ -348,10 +353,10 @@ export default function InfoGame() {
                         <>
                             <span style={{ color: "orangered", fontWeight: "bolder" }}>Horas jugadas:</span>
                             <form>
-                                <input type="number" ref={hoursPlayed} style={{
+                                <input type="number" ref={hoursPlayed} defaultValue={defaultHours} style={{
                                     color: "blue", fontWeight: "bolder", width: "60px",
                                     marginTop: "10px", height: "25px"
-                                }} required />
+                                }} required/>
                                 <button type="button" onClick={changeHours} className="buttonHours">Enviar</button>
                             </form>
                         </>
@@ -375,7 +380,7 @@ export default function InfoGame() {
                     {initialCheckComplete == 1 ?
 
                         <div className="rateSlider">
-                            <Slider min={0} defaultValue={5} max={10} step={1} valueLabelDisplay="on"
+                            <Slider min={0} defaultValue={defaultSlider} max={10} step={1} valueLabelDisplay="on"
                                 onChangeCommitted={(event, value) => rateGame(value)} />
                         </div>
                         : null

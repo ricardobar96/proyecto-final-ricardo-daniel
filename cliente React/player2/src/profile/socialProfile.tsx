@@ -80,7 +80,7 @@ export default function SocialProfile() {
             height: "100vh",
             paddingBottom: "10px"
         }}>
-            <Topbar />
+            <Topbar/>
             <TopbarProfile />
             <h3 className="titleSocial">Seguidores: {usuarioActual.followers.length}</h3>
             <h3 className="titleSocial">Siguiendo: {usuarioActual.followeds.length}</h3>
