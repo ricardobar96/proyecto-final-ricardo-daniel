@@ -10,6 +10,7 @@ import { usuarios } from "../modelo/usuarios";
 import { Checkbox } from "@material-ui/core";
 import { juegosUsuario } from '../modelo/juegosUsuario';
 import { Slider } from "@material-ui/core";
+import { generos } from '../modelo/generos';
 
 interface IState { videojuego?: videojuegos, pista?: pistas[], review?: reviews[], usuario?: usuarios; juegosUsuario?: juegosUsuario[]; }
 
@@ -43,6 +44,15 @@ export default function InfoGame() {
 
     let defaultSlider = 5;
     let defaultHours = 0;
+
+    let genresInfo: any = [];
+    let checkGenres = 0;
+    stGame.videojuego?.generos.map((g: generos) => {
+        genresInfo.push(g.nombre);
+        checkGenres += 1;
+    })
+
+    genresInfo = genresInfo.join(', ');
 
     stUserGames.juegosUsuario?.map((j: juegosUsuario) => {
         if (j.videojuego.id === stGame.videojuego?.id) {
@@ -310,12 +320,17 @@ export default function InfoGame() {
                 <div className="infoGameWrapper">
                     <h2 className='titleGameInfo'>{stGame.videojuego?.nombre}</h2>
                     <span><img src={stGame.videojuego?.imagen} className='imageGameInfo' /></span>
-                    <br />
+                    <h3 className='titleGameInfo'>Nota media: {stGame.videojuego?.puntuacion}</h3>
+                    {checkGenres > 0 ?
+                        <span style={{ fontWeight: "bold" }}>Géneros: {genresInfo}</span>
+                        : null
+                    }
                     <br />
                     <br />
 
                     {usuarioActual.nombre != null ?
-                        <span style={{ color: "orangered", fontWeight: "bolder" }}>Añadir a lista</span>
+                        <span style={{ color: "orangered", fontWeight: "bolder" }}>&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                            Añadir a lista</span>
                         : null
                     }
 
@@ -329,7 +344,7 @@ export default function InfoGame() {
                         : null
                     }
 
-                    <br />
+                    &nbsp;&nbsp;&nbsp;&nbsp;
 
                     {initialCheckComplete == 1 ?
                         <span style={{ color: "orangered", fontWeight: "bolder" }}>¿Completado?</span>
@@ -348,6 +363,7 @@ export default function InfoGame() {
                     }
 
                     <br />
+                    <br />
 
                     {initialCheckComplete == 1 ?
                         <>
@@ -356,7 +372,7 @@ export default function InfoGame() {
                                 <input type="number" ref={hoursPlayed} defaultValue={defaultHours} style={{
                                     color: "blue", fontWeight: "bolder", width: "60px",
                                     marginTop: "10px", height: "25px"
-                                }} required/>
+                                }} required />
                                 <button type="button" onClick={changeHours} className="buttonHours">Enviar</button>
                             </form>
                         </>
@@ -365,11 +381,9 @@ export default function InfoGame() {
 
                     <br />
                     <br />
-                    <br />
-                    <br />
 
                     {initialCheckComplete == 1 ?
-                        <span style={{ color: "blue", fontWeight: "bolder" }}>PUNTUAR</span>
+                        <span style={{ color: "blue", fontWeight: "bolder" }}>TU PUNTUACIÓN:</span>
                         : null
                     }
 

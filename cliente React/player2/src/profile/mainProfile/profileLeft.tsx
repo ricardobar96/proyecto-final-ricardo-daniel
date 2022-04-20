@@ -188,8 +188,8 @@ export default function ProfileLeft() {
             <div className="statsContent">
                 <ul>
                     <li className="statsList">
-                        <span className="valueStats">{contadorGenre1}</span>
-                        <h4 className="title">{genre1}</h4>
+                        <span className="valueStats">&nbsp;&nbsp;&nbsp;&nbsp;{contadorGenre1}</span>
+                        <h4 className="title">&nbsp;&nbsp;&nbsp;&nbsp;{genre1}</h4>
                     </li>
                 </ul>
 
@@ -202,8 +202,8 @@ export default function ProfileLeft() {
 
                 <ul>
                     <li className="statsList">
-                    <span className="valueStats">{contadorGenre3}</span>
-                        <h4 className="title">{genre3}</h4>
+                    <span className="valueStats">{contadorGenre3}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</span>
+                        <h4 className="title">{genre3}&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</h4>
                     </li>
                 </ul>
             </div>

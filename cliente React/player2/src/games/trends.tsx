@@ -186,7 +186,7 @@ export default function Trends(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }
@@ -212,7 +212,7 @@ export default function Trends(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }
@@ -238,7 +238,7 @@ export default function Trends(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }

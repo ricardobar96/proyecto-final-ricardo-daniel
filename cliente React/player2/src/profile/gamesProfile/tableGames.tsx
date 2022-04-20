@@ -239,7 +239,7 @@ export default function TableGames(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }
@@ -265,7 +265,7 @@ export default function TableGames(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }
@@ -291,7 +291,7 @@ export default function TableGames(props: IProps) {
                                     </div>
                                 );
                             })
-                        })
+                        }
                     </ul>
                     : null
                 }
