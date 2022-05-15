@@ -1,0 +1,11 @@
+<resources>
+    <string name="app_name">Player2Android</string>
+    <string-array name="menu_resources">
+        <item>Login</item>
+        <item>Logout</item>
+        <item>Home</item>
+        <item>Perfil</item>
+        <item>Juegos</item>
+        <item>Ajustes</item>
+    </string-array>
+</resources>
