@@ -11,7 +11,7 @@
 	<groupId>es.iespuertodelacruz.daniel</groupId>
 	<artifactId>Player2REST</artifactId>
 	<version>0.0.1-SNAPSHOT</version>
-	<packaging>war</packaging>
+	<packaging>jar</packaging>
 	<name>Player2REST</name>
 	<description>REST project to work with Player2.db</description>
 	<properties>

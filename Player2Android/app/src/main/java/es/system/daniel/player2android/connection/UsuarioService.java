@@ -17,19 +17,23 @@ import retrofit2.http.Path;
 
 public interface UsuarioService {
 
-    @GET("/v0/usuario")
+    @Headers("Content-Type: multipart/form-data")
+    @POST("login")
+    Call<String> login(@Body UsuarioInscribirse usuario);
+
+    @GET("v0/usuario")
     Call<List<Usuario>> getUsuarios();
 
-    @GET("/v1/usuario/{id}/mensajes")
+    @GET("v1/usuario/{id}/mensajes")
     Call<List<Mensaje>> getMensajes(@Path("id") Integer usuarioId, @Header("Authorization") String authHeader);
 
     @Headers("Content-Type: application/json")
-    @POST("/v0/usuario")
+    @POST("v0/usuario")
     Call<Usuario> addUsuario(@Body UsuarioInscribirse usuario);
 
-    @PUT("/v1/usuario/{id}")
+    @PUT("v1/usuario/{id}")
     Call<Usuario> updateUsuario(@Path("id") Integer id, @Body Usuario usuario, @Header("Authorization") String authHeader);
 
-    @DELETE("/v1/usuario/{id}")
+    @DELETE("v1/usuario/{id}")
     Call<Usuario> deleteUsuario(@Path("id") Integer id, @Header("Authorization") String authHeader);
 }

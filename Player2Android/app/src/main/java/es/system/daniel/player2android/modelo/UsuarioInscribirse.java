@@ -1,20 +1,20 @@
 package es.system.daniel.player2android.modelo;
 
 public class UsuarioInscribirse {
-    private String nombre, password;
+    private String name, password;
     public UsuarioInscribirse() {}
 
-    public UsuarioInscribirse(String nombre, String password) {
-        this.nombre = nombre;
+    public UsuarioInscribirse(String name, String password) {
+        this.name = name;
         this.password = password;
     }
 
-    public String getNombre() {
-        return nombre;
+    public String getName() {
+        return name;
     }
 
-    public void setNombre(String nombre) {
-        this.nombre = nombre;
+    public void setName(String name) {
+        this.name = name;
     }
 
     public String getPassword() {

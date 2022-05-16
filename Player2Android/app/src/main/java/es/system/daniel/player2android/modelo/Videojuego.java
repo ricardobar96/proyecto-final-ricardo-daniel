@@ -17,11 +17,11 @@ public class Videojuego {
 
     private String imagen;
 
-    private List<JuegoUsuario> juegoUsuarios;
+    //private List<JuegoUsuario> juegoUsuarios;
 
-    private List<Pista> pistas;
+    //private List<Pista> pistas;
 
-    private List<Review> reviews;
+    //private List<Review> reviews;
 
     private List<Genero> generos;
 
@@ -36,9 +36,9 @@ public class Videojuego {
         this.fecha = fecha;
         this.nombre = nombre;
         this.imagen = imagen;
-        this.juegoUsuarios = juegoUsuarios;
+        /*this.juegoUsuarios = juegoUsuarios;
         this.pistas = pistas;
-        this.reviews = reviews;
+        this.reviews = reviews;*/
         this.generos = generos;
         this.puntuacion = puntuacion;
     }
@@ -83,7 +83,7 @@ public class Videojuego {
         this.imagen = imagen;
     }
 
-    public List<JuegoUsuario> getJuegoUsuarios() {
+    /*public List<JuegoUsuario> getJuegoUsuarios() {
         return juegoUsuarios;
     }
 
@@ -105,7 +105,7 @@ public class Videojuego {
 
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
-    }
+    }*/
 
     public List<Genero> getGeneros() {
         return generos;

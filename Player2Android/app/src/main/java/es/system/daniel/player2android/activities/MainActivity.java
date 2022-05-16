@@ -1,6 +1,7 @@
-package es.system.daniel.player2android;
+package es.system.daniel.player2android.activities;
 
 import androidx.appcompat.app.AppCompatActivity;
+import es.system.daniel.player2android.R;
 import es.system.daniel.player2android.adapter.UsuarioAdapter;
 import es.system.daniel.player2android.connection.APIUtils;
 import es.system.daniel.player2android.connection.UsuarioService;
@@ -33,6 +34,29 @@ public class MainActivity extends AppCompatActivity {
         getUsuariosList();
     }
 
+    public void login(){
+
+
+        /*Call<List<Usuario>> call = usuarioService.getUsuarios();
+        call.enqueue(new Callback<List<Usuario>>() {
+            @Override
+            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                if(response.isSuccessful()){
+                    list = response.body();
+
+                    listView.setAdapter(
+                            new UsuarioAdapter(MainActivity.this,
+                                    R.layout.tarjeta_actividad, list));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+            }
+        });*/
+    }
+
 
     public void getUsuariosList(){
 
@@ -61,8 +85,8 @@ public class MainActivity extends AppCompatActivity {
         super.onNewIntent(intent);
         getUsuariosList();
     }
-    public void addUsuario(View view) {
-        //Intent myIntent = new Intent(MainActivity.this,AddUsuarioActivity.class);
-        //startActivity(myIntent);
+    public void goLoginUsuario(View view) {
+        Intent myIntent = new Intent(MainActivity.this, LoginActivity.class);
+        startActivity(myIntent);
     }
 }
