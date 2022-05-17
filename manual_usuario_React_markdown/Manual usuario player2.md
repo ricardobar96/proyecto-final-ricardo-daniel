@@ -1,101 +1,81 @@
-﻿**Manual de usuario**
+<h1 align="center">Manual de usuario</h1>
+<br/>
+<h2 align="center">Red social de videojuegos, “Player2”</h1>
+<br/>
+<h2 align="center">IES Puerto de la Cruz - Telesforo Bravo</h1>
+
+<br/>
+<br/>
+<h2 align="center">Autores:</h1>
+<h4 align="center">Ricardo Baloira Armas</h4>
+<h4 align="center">Daniel Barroso Rocío</h4>
+
+<br/>
+<br/>
+
+## **Índice:**
 
 
+[**1. Introducción**](#id1)
 
-**Red social de videojuegos,**
+[1.1 Usuario no logueado](#id1.1)
 
-**“Player2”**
+[1.2 Login](#id1.2)
 
+[1.3 Registro](#id1.3)
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_**
+[1.4 Cerrar sesión](#id1.4)
 
-**IES Puerto de la Cruz - Telesforo Bravo**
+[**2. Vista Home**](#id2)
 
+[2.1 Actividad](#id2.1)
 
+[2.2 Videojuegos en tendencias](#id2.2)
 
+[2.3 Nuevos videojuegos](#id2.3)
 
+[2.4 Tus juegos en progreso](#id2.4)
 
-**Autores:**
+[**3. Vista Videojuegos**](#id3)
 
-Ricardo Baloira Armas
+[3.1 Listados](#id3.1)
 
-Daniel Barroso Rocío
+[3.2 Opciones de filtro](#id3.2)
 
+[**4. Ficha de un juego**](#id4)
 
+[4.1 Introducción](#id4.1)
 
+[4.2 Agregar a lista y puntuar](#id4.2)
 
+[4.3 Ver y publicar pistas](#id4.3)
 
+[4.4 Ver y publicar reviews](#id4.4)
 
+[**5. Vista Perfil**](#id5)
 
+[5.1 Introducción](#id5.1)
 
+[5.2 Vista Principal](#id5.2)
 
+[5.3 Vista Videojuegos](#id5.3)
 
+[5.4 Vista Social](#id5.4)
 
+[5.5 Vista Reviews](#id5.5)
 
-**Índice**
+[5.6 Vista Ajustes](#id5.6)
 
+[**6. Vista Chat**](#id6)
 
-[**1. Introducción](#_x9jlvaribk55)	**3****
-
-[**1.1 Usuario no logueado](#_lrpxujbsa5c6)	**3****
-
-[1.2 Login](#_gdzs3hiammkj)	5
-
-[1.3 Registro](#_o6iur7xh5a0p)	6
-
-[1.4 Cerrar sesión](#_4sim39clu6cm)	7
-
-[**2. Vista Home](#_39d4xl19tnkn)	**8****
-
-[2.1 Actividad](#_ywrdr1rbl1u)	8
-
-[2.2 Videojuegos en tendencias](#_6cslzo62ki10)	9
-
-[2.3 Nuevos videojuegos](#_59kj2ysuqavb)	10
-
-[2.4 Tus juegos en progreso](#_1rubfghad7w5)	11
-
-[**3. Vista Videojuegos](#_uu9zy18hk6f9)	**12****
-
-[3.1 Listados](#_u8urnkhu1ugb)	12
-
-[3.2 Opciones de filtro](#_2elifg9hfeit)	13
-
-[**4. Ficha de un juego](#_4ou98xdkwwet)	**16****
-
-[4.1 Introducción](#_ys2sqrkcyxtt)	16
-
-[4.2 Agregar a lista y puntuar](#_d88lr46cy15u)	17
-
-[4.3 Ver y publicar pistas](#_3qcraeizopdo)	19
-
-[4.4 Ver y publicar reviews](#_omh0j26w6p1i)	20
-
-[**5. Vista Perfil](#_4vcjtj512sok)	**21****
-
-[5.1 Introducción](#_bfxsdoo11uyo)	21
-
-[5.2 Vista Principal](#_j6pkpzjhil1)	22
-
-[5.3 Vista Videojuegos](#_kvrlpaa19fe1)	25
-
-[5.4 Vista Social](#_505tn8jvhiyu)	27
-
-[5.5 Vista Reviews](#_3d5jiij3ybos)	29
-
-[5.6 Vista Ajustes](#_3z7s9qxapmkn)	30
-
-[**6. Vista Chat](#_zieq2rc6fa7)	**32****
-
-[6.1 Introducción](#_c061c8754ptw)	32
+[6.1 Introducción](#id6.1)
 
 
 
 
+# **1. Introducción** <a name="id1"></a>
 
-# **1. Introducción**
-
-## **1.1 Usuario no logueado**
+## **1.1 Usuario no logueado** <a name="id1.1"></a>
 
 
 Al acceder a Player2 el usuario entrará automáticamente a la vista “Home” de la página como un usuario no logueado, donde podrá observar tanto los videojuegos en tendencia como los más recientes de Player2 y, clicando en cualquier de ellos, consultar su ficha (página x del manual).
@@ -125,10 +105,7 @@ Como invitado, el usuario no logueado no tendrá permiso para acceder al chat, a
 
 
 
-
-
-
-## **1.2 Login**
+## **1.2 Login** <a name="id1.2"></a>
 
 En esta vista el usuario podrá realizar las siguientes acciones:
 
@@ -142,7 +119,7 @@ En esta vista el usuario podrá realizar las siguientes acciones:
 
 
 
-## **1.3 Registro**
+## **1.3 Registro** <a name="id1.3"></a>
 
 En esta vista el usuario podrá realizar las siguientes acciones:
 
@@ -158,7 +135,7 @@ En esta vista el usuario podrá realizar las siguientes acciones:
 
 
 
-## **1.4 Cerrar sesión**
+## **1.4 Cerrar sesión** <a name="id1.4"></a>
 
 Para cerrar sesión el usuario deberá clicar sobre sobre el último icono listado en la barra superior de la página, visible en todas las vistas de Player2.
 
@@ -180,9 +157,9 @@ Para cerrar sesión el usuario deberá clicar sobre sobre el último icono lista
 
 
 
-# **2. Vista Home**
+# **2. Vista Home** <a name="id2"></a>
 
-## **2.1 Actividad**
+## **2.1 Actividad** <a name="id2.1"></a>
 
 En esta sección de la vista se muestran las actividades realizadas en la página por aquellos usuarios que sigue el propio usuario. Estas actividades, que se encuentran ordenadas de más reciente a más antigua, incluyen las siguientes acciones:
 
@@ -193,7 +170,7 @@ En esta sección de la vista se muestran las actividades realizadas en la págin
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.006.png)
 
 Haciendo clic en el avatar del usuario, situado en la esquina superior izquierda del bloque de la actividad en cuestión, el usuario será redirigido al perfil de dicho usuario, al igual que si clica sobre el nombre de dicho usuario. Por otra parte, al hacer clic sobre la acción realizada el usuario accederá directamente a la ficha del juego relacionado con la acción listada. 
-## **2.2 Videojuegos en tendencias**
+## **2.2 Videojuegos en tendencias** <a name="id2.2"></a>
 
 En esta sección se muestran un máximo de cuatro videojuegos seleccionados de entre el resto por ser los que, en base a su puntuación media, superan a los demás juegos de la página. Esta puntuación media se obtiene al dividir el total de puntuaciones dadas por los usuarios de un juego entre el número de usuarios que han puntuado dicho juego.
 
@@ -207,7 +184,7 @@ Cabe destacar que para ser considerado un juego como juego en tendencia, aparte 
 
 
 
-## **2.3 Nuevos videojuegos**
+## **2.3 Nuevos videojuegos** <a name="id2.3"></a>
 
 En esta sección se muestran un máximo de cuatro juegos considerados más recientes de la página, en base a su valor de fecha de salida.
 
@@ -223,7 +200,7 @@ En esta sección se muestran un máximo de cuatro juegos considerados más recie
 
 
 
-## **2.4 Tus juegos en progreso**
+## **2.4 Tus juegos en progreso** <a name="id2.4"></a>
 
 En esta sección se mostrarán listados todos aquellos juegos que el usuario haya agregado a su lista de juegos pero no haya marcado aún como completados desde la ficha de dicho juego (consultar página x del manual). En caso de no contar con ningún juego en su lista que no haya sido completado, no aparecerá listado ningún juego en esta sección.
 
@@ -233,9 +210,9 @@ En esta sección se mostrarán listados todos aquellos juegos que el usuario hay
 
 
 
-# **3. Vista Videojuegos**
+# **3. Vista Videojuegos** <a name="id3"></a>
 
-## **3.1 Listados**
+## **3.1 Listados** <a name="id3.1"></a>
 
 En esta sección de la vista se muestran listados los juegos de Player2 en base a distintos parámetros:
 
@@ -251,7 +228,7 @@ En esta sección de la vista se muestran listados los juegos de Player2 en base 
 
 
 
-## **3.2 Opciones de filtro**
+## **3.2 Opciones de filtro** <a name="id3.2"></a>
 
 Aparte de mostrar juegos seleccionados según su novedad o popularidad, esta vista permite al usuario ordenar y seleccionar los juegos a mostrar en base a los siguientes parámetros:
 
@@ -280,9 +257,9 @@ Aparte de mostrar juegos seleccionados según su novedad o popularidad, esta vis
 
 
 
-# **4. Ficha de un juego**
+# **4. Ficha de un juego** <a name="id4"></a>
 
-## **4.1 Introducción**
+## **4.1 Introducción** <a name="id4.1"></a>
 
 
 En esta vista, a la que el usuario podrá acceder al hacer clic sobre el nombre o imagen de uno de los juegos listados en las distintas vistas de Player2, el usuario podrá observar los siguientes datos de dicho juego:
@@ -302,7 +279,7 @@ En esta vista, a la que el usuario podrá acceder al hacer clic sobre el nombre 
 
 
 
-## **4.2 Agregar a lista y puntuar**
+## **4.2 Agregar a lista y puntuar** <a name="id4.2"></a>
 
 
 Clicando sobre el checkbox mencionado en la sección anterior, “Añadir a lista”, el usuario agregará el juego a su lista personal, apareciendo por consiguiente este junto al resto de juegos de su lista en la sección “Tus juegos en progreso” de la vista Home y también en la vista “Videojuegos” del perfil del usuario.
@@ -313,19 +290,8 @@ Al hacer clic sobre este checkbox aparecerá el checkbox para clasificar este ju
 
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.015.png)
 
-##
-##
-##
-##
-##
-##
-##
-##
 
-
-
-
-## **4.3 Ver y publicar pistas**
+## **4.3 Ver y publicar pistas** <a name="id4.3"></a>
 
 
 Bajo el título “Pistas” se mostrarán listadas las pistas publicadas por los usuarios de Player2 del juego en cuestión, mostrándose el título dado a la pista, autor, fecha de publicación y contenido. Clicando sobre el avatar o nombre del autor el usuario será redirigido al perfil de dicho usuario.
@@ -335,7 +301,7 @@ Bajo el título “Pistas” se mostrarán listadas las pistas publicadas por lo
 Al final del listado el usuario tendrá opción de publicar una pista pulsando sobre el botón “Crear Pista”. Al hacerlo será redirigido a una vista en la que para crear la pista deberá rellenar los campos del título (el campo superior) y contenido (el campo inferior) de la pista para seguidamente pulsar en “Crear Pista”. Si se ha creado la pista el usuario será enviado directamente a la ficha del juego del que creó la pista, en tanto que si ha ocurrido un error se mostrará un mensaje de alerta en la misma vista de crear pista.
 
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.017.png)
-## **4.4 Ver y publicar reviews**
+## **4.4 Ver y publicar reviews** <a name="id4.4"></a>
 
 
 Bajo el título “Reviews” se mostrarán listadas las reviews publicadas por los usuarios de Player2 del juego en cuestión, mostrándose el título dado a la review, autor, fecha de publicación y contenido. Clicando sobre el avatar o nombre del autor el usuario será redirigido al perfil de dicho usuario.
@@ -350,9 +316,9 @@ Al final del listado el usuario tendrá opción de publicar una review pulsando 
 
 
 
-# **5. Vista Perfil**
+# **5. Vista Perfil** <a name="id5"></a>
 
-## **5.1 Introducción**
+## **5.1 Introducción** <a name="id5.1"></a>
 
 
 Para acceder al perfil el usuario podrá, en la barra superior visible en todas las vistas de Player2, clicar sobre “Perfil” o sobre su propio avatar, situado en la esquina superior derecha junto al botón para cerrar sesión.
@@ -373,7 +339,7 @@ Al hacerlo el usuario será dirigido a la vista Principal de su perfil
 
 
 
-## **5.2 Vista Principal**
+## **5.2 Vista Principal** <a name="id5.2"></a>
 
 
 Esta vista, a la que el usuario accederá por defecto al visitar su perfil y también clicando sobre “Principal” en la barra superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes cinco secciones:
@@ -402,7 +368,7 @@ Por último, señalar que en caso de visitar el usuario el perfil de otro usuari
 
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.025.png)
 
-## **5.3 Vista Videojuegos**
+## **5.3 Vista Videojuegos** <a name="id5.3"></a>
 
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Videojuegos” en la barra superior de las vistas encuadradas dentro del perfil, está compuesta por dos secciones:
@@ -423,7 +389,7 @@ Esta vista, a la que el usuario podrá acceder al clicar sobre “Videojuegos”
 
 
 
-## **5.4 Vista Social**
+## **5.4 Vista Social** <a name="id5.4"></a>
 
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Social” en la barra superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes secciones:
@@ -452,14 +418,14 @@ Esta vista, a la que el usuario podrá acceder al clicar sobre “Social” en l
 
 
 
-## **5.5 Vista Reviews**
+## **5.5 Vista Reviews** <a name="id5.5"></a>
 
 
 En esta vista, a la que el usuario podrá acceder al clicar sobre “Reviews” en la barra superior de las vistas encuadradas dentro del perfil, aparecen listadas todas las reviews publicadas por el usuario de más reciente a más antigua, mostrándose su título, y el título e imagen del juego del que se ha realizado la review, a cuya ficha se puede acceder haciendo clic sobre cualquiera de los dos elementos, título e imagen. En caso de no haber realizado el usuario ninguna review se mostrará en su lugar un texto informando de ello.
 
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.031.png)
 
-## **5.6 Vista Ajustes**
+## **5.6 Vista Ajustes** <a name="id5.6"></a>
 
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Ajustes” en la barra superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes secciones:
@@ -481,9 +447,9 @@ Esta vista, a la que el usuario podrá acceder al clicar sobre “Ajustes” en 
 - Sobre mí: en esta sección el usuario podrá cambiar la descripción de sí mismo que se mostrará en la sección “Sobre mí” de la vista Principal de su perfil, teniendo para ello que introducir rellenar el campo dispuesto para ello y pulsar sobre el botón “Cambiar”.
 
 ![](Aspose.Words.58826c24-0b06-4fb8-8b96-a24275c9a21e.036.png)
-# **6. Vista Chat**
+# **6. Vista Chat** <a name="id6"></a>
 
-## **6.1 Introducción**
+## **6.1 Introducción** <a name="id6.1"></a>
 
 
 Para acceder a esta vista el usuario deberá pulsar sobre el siguiente icono situado en la barra superior visible en todas las vistas de Player2:
