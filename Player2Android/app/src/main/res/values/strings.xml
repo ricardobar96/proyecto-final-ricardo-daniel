@@ -1,5 +1,3 @@
 <resources>
     <string name="app_name">Player2Android</string>
-    <string name="nombre">Nombre</string>
-    <string name="pwd">Contraseña</string>
 </resources>
