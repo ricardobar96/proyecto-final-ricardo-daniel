@@ -55,7 +55,8 @@ public class LoginActivity extends AppCompatActivity {
         String json = gson.toJson(usuario);
         Log.i("Clicko", json);
 
-
+        //Intent myIntent = new Intent(LoginActivity.this,MainActivity.class);
+        //startActivity(myIntent);
         Call<String> call = usuarioService.login(usuario);
         call.enqueue(new Callback<String>() {
             @Override
