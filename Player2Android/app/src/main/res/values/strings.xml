@@ -2,4 +2,14 @@
     <string name="app_name">Player2Android</string>
     <string name="nombre">Nombre</string>
     <string name="pwd">Contraseña</string>
+    <string-array name="spinnerOrder_resources">
+        <item>Título</item>
+        <item>Fecha</item>
+        <item>Nombre</item>
+    </string-array>
+    <string-array name="spinnerGenre_resources">
+        <item>Acción</item>
+        <item>Aventuras</item>
+        <item>Carreras</item>
+    </string-array>
 </resources>

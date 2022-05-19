@@ -51,16 +51,15 @@ public class LoginActivity extends AppCompatActivity {
 
 
         UsuarioInscribirse usuario = new UsuarioInscribirse(nombre, pwd);
-        Gson gson = new Gson();
+        /*Gson gson = new Gson();
         String json = gson.toJson(usuario);
-        Log.i("Clicko", json);
+        Log.i("Clicko", json);*/
 
-        //Intent myIntent = new Intent(LoginActivity.this,MainActivity.class);
-        //startActivity(myIntent);
         Call<String> call = usuarioService.login(usuario);
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
+                Log.i("¿Funciona?", response.body());
                 if(response.isSuccessful()){
                     txtToken.setText(response.body());
                     Log.i("Funciona", response.body());
@@ -78,8 +77,6 @@ public class LoginActivity extends AppCompatActivity {
                     } finally {
                         try {
                             fileOutputStream.close();
-                            //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
-                            //startActivity(myIntent);
 
                             //****PRUEBA CARGAR DATOS GUARDADOS:****//
                             try {
@@ -94,6 +91,9 @@ public class LoginActivity extends AppCompatActivity {
                                 String passCode = buffer.substring(buffer.indexOf(" ")+1);
                                 Log.i("Nombre guardado:", nombreCode);
                                 Log.i("Password guardado:", passCode);
+
+                                Intent myIntent = new Intent(LoginActivity.this,MainActivity.class);
+                                startActivity(myIntent);
                             } catch (Exception e) {
                                 e.printStackTrace();
                             }
@@ -109,8 +109,6 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.e("ERROR: ", t.getMessage());
-                //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
-                //startActivity(myIntent);
             }
         });
     }
