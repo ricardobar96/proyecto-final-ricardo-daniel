@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".activities.MainProfileActivity">
+    <item
+        android:id="@+id/menuMainProfile"
+        android:orderInCategory="1"
+        android:title="Perfil"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/menuGamesProfile"
+        android:orderInCategory="2"
+        android:title="Videojuegos"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/menuSocialProfile"
+        android:orderInCategory="3"
+        android:title="Social"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/menuReviewsProfile"
+        android:orderInCategory="4"
+        android:title="Reviews"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/menuSettingsProfile"
+        android:orderInCategory="5"
+        android:title="Ajustes"
+        app:showAsAction="" />
+
+    <item
+        android:id="@+id/menuReturnHome"
+        android:orderInCategory="6"
+        android:title="Regresar a Home"
+        app:showAsAction="" />
+</menu>
