@@ -14,4 +14,7 @@ public class APIUtils {
         return RetrofitClient.getClient(API_URL).create(UsuarioService.class);
     }
 
+    public static GameService getGameService(){
+        return RetrofitClient.getClient(API_URL).create(GameService.class);
+    }
 }

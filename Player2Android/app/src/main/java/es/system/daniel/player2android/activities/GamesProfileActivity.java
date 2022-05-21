@@ -3,6 +3,7 @@ package es.system.daniel.player2android.activities;
 import android.content.Intent;
 import android.graphics.Color;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -10,10 +11,23 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
+
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.adapter.GameAdapter;
+import es.system.daniel.player2android.adapter.UsuarioAdapter;
 import es.system.daniel.player2android.connection.APIUtils;
+import es.system.daniel.player2android.connection.GameService;
+import es.system.daniel.player2android.connection.UsuarioService;
+import es.system.daniel.player2android.modelo.Usuario;
+import es.system.daniel.player2android.modelo.Videojuego;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
 
 import android.widget.Spinner;
+
+import java.util.ArrayList;
+import java.util.List;
 
 public class GamesProfileActivity extends AppCompatActivity {
 
@@ -23,24 +37,82 @@ public class GamesProfileActivity extends AppCompatActivity {
     Spinner spinnerGenreP;
     ArrayAdapter<CharSequence> adapterGenre;
 
+    ListView listViewProgress;
+    ListView listViewCompleted;
+
+    GameService gameService;
+    List<Videojuego> listGame = new ArrayList<Videojuego>();
+
+    UsuarioService usuarioService;
+    List<Usuario> list = new ArrayList<Usuario>();
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_gamesprofile);
 
-        adapterOrder=ArrayAdapter.createFromResource(this,
+        adapterOrder = ArrayAdapter.createFromResource(this,
                 R.array.spinnerOrder_resources, android.R.layout.simple_spinner_item);
         adapterOrder.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerOrderP = findViewById(R.id.SpinnerOrderProfile);
         spinnerOrderP.setAdapter(adapterOrder);
 
-        adapterGenre=ArrayAdapter.createFromResource(this,
+        adapterGenre = ArrayAdapter.createFromResource(this,
                 R.array.spinnerGenre_resources, android.R.layout.simple_spinner_item);
         adapterGenre.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerGenreP = findViewById(R.id.SpinnerGenreProfile);
         spinnerGenreP.setAdapter(adapterGenre);
 
-        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        getWindow().getDecorView().setBackgroundColor((Color.rgb(139, 230, 146)));
+
+        listViewProgress = (ListView) findViewById(R.id.progressGamesListView);
+        listViewCompleted = (ListView) findViewById(R.id.completedGamesListView);
+        usuarioService = APIUtils.getUsuarioService();
+        gameService = APIUtils.getGameService();
+        getProgressList();
+        getCompletedList();
+    }
+
+    public void getProgressList() {
+        Call<List<Videojuego>> call = gameService.getGames();
+        call.enqueue(new Callback<List<Videojuego>>() {
+            @Override
+            public void onResponse(Call<List<Videojuego>> call, Response<List<Videojuego>> response) {
+                if (response.isSuccessful()) {
+                    listGame = response.body();
+
+                    listViewProgress.setAdapter(
+                            new GameAdapter(GamesProfileActivity.this,
+                                    R.layout.tarjeta_actividad, listGame));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Videojuego>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+            }
+        });
+    }
+
+    public void getCompletedList() {
+        Call<List<Videojuego>> call = gameService.getGames();
+        call.enqueue(new Callback<List<Videojuego>>() {
+            @Override
+            public void onResponse(Call<List<Videojuego>> call, Response<List<Videojuego>> response) {
+                if (response.isSuccessful()) {
+                    listGame = response.body();
+
+                    listViewCompleted.setAdapter(
+                            new GameAdapter(GamesProfileActivity.this,
+                                    R.layout.tarjeta_actividad, listGame));
+                }
+            }
+
+            @Override
+            public void onFailure(Call<List<Videojuego>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+            }
+        });
     }
 
     @Override
@@ -50,8 +122,8 @@ public class GamesProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menuGamesProfile:
                 Intent intentGames = new Intent(GamesProfileActivity.this, GamesProfileActivity.class);
                 startActivity(intentGames);
