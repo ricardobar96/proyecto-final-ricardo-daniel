@@ -92,7 +92,7 @@ public class LoginActivity extends AppCompatActivity {
                                 Log.i("Nombre guardado:", nombreCode);
                                 Log.i("Password guardado:", passCode);
 
-                                Intent myIntent = new Intent(LoginActivity.this,MainActivity.class);
+                                Intent myIntent = new Intent(LoginActivity.this,MainProfileActivity.class);
                                 startActivity(myIntent);
                             } catch (Exception e) {
                                 e.printStackTrace();

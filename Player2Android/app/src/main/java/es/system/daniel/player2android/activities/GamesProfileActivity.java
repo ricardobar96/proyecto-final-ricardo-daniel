@@ -1,6 +1,7 @@
 package es.system.daniel.player2android.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -38,6 +39,8 @@ public class GamesProfileActivity extends AppCompatActivity {
         adapterGenre.setDropDownViewResource(android.R.layout.simple_spinner_item);
         spinnerGenreP = findViewById(R.id.SpinnerGenreProfile);
         spinnerGenreP.setAdapter(adapterGenre);
+
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
     }
 
     @Override

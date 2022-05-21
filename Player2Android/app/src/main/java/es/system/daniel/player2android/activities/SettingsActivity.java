@@ -1,10 +1,12 @@
 package es.system.daniel.player2android.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -17,6 +19,7 @@ public class SettingsActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
     }
 
     @Override
@@ -54,5 +57,17 @@ public class SettingsActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void greenProfile(View view) {
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+    }
+
+    public void redProfile(View view) {
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+    }
+
+    public void blueProfile(View view) {
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
     }
 }

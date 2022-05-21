@@ -19,6 +19,34 @@
                 android:layout_marginTop="10dp"
                 android:orientation="vertical">
 
+                <RelativeLayout
+                    android:id="@+id/LinearLayout02"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+                    <EditText
+                        android:id="@+id/idSearchUserIntro"
+                        android:layout_width="200dp"
+                        android:layout_height="50dp"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginRight="30px"
+                        android:hint="Busca un usuario"
+                        android:minHeight="18dp" />
+
+                    <Button
+                        android:id="@+id/idButtonSearchUser"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="25dp"
+                        android:layout_marginBottom="25dp"
+                        android:layout_toRightOf="@id/idSearchUserIntro"
+                        android:backgroundTint="#FF9800"
+                        android:text="Buscar" />
+
+                </RelativeLayout>
+
                 <TextView
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"

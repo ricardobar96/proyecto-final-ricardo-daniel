@@ -1,6 +1,7 @@
 package es.system.daniel.player2android.activities;
 
 import android.content.Intent;
+import android.graphics.Color;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -17,6 +18,7 @@ public class MainProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainprofile);
+        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
     }
 
     @Override
