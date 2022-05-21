@@ -30,9 +30,9 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
     @Override
     public View getView(final int pos, View convertView, ViewGroup parent){
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
-        View rowView = inflater.inflate(R.layout.tarjeta_actividad, parent, false);
+        View rowView = inflater.inflate(R.layout.tarjeta_usuario, parent, false);
 
-        TextView txtusuario = (TextView) rowView.findViewById(R.id.usuarioTextView);
+        TextView txtusuario = (TextView) rowView.findViewById(R.id.profileUserTextView);
 
         txtusuario.setText(String.format("%s, %s", usuarios.get(pos).getNombre(), usuarios.get(pos).getNombre()));
 
