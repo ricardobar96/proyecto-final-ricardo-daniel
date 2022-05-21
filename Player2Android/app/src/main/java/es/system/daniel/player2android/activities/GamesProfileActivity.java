@@ -43,9 +43,6 @@ public class GamesProfileActivity extends AppCompatActivity {
     GameService gameService;
     List<Videojuego> listGame = new ArrayList<Videojuego>();
 
-    UsuarioService usuarioService;
-    List<Usuario> list = new ArrayList<Usuario>();
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -67,7 +64,6 @@ public class GamesProfileActivity extends AppCompatActivity {
 
         listViewProgress = (ListView) findViewById(R.id.progressGamesListView);
         listViewCompleted = (ListView) findViewById(R.id.completedGamesListView);
-        usuarioService = APIUtils.getUsuarioService();
         gameService = APIUtils.getGameService();
         getProgressList();
         getCompletedList();
