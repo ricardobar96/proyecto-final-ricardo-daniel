@@ -17,7 +17,9 @@ import java.util.List;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.activities.VideojuegoActivity;
 import es.system.daniel.player2android.modelo.Actividad;
+import es.system.daniel.player2android.modelo.Videojuego;
 
 
 public class ActividadAdapter extends ArrayAdapter<Actividad> {
@@ -40,6 +42,14 @@ public class ActividadAdapter extends ArrayAdapter<Actividad> {
         TextView txtUsuario = (TextView) rowView.findViewById(R.id.usuarioTextView);
         TextView txtTiempo = (TextView) rowView.findViewById(R.id.tiempoTextView);
         ImageView imgAvatar = (ImageView) rowView.findViewById(R.id.avatarImageView);
+        imgAvatar.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, VideojuegoActivity.class);
+                intent.putExtra("actividad", actividades.get(pos));
+                context.startActivity(intent);
+            }
+        });
 
         if (actividades.get(pos).getTipo() == "juegoU") {
             txtActividad.setText(String.format("Ha añadido %s a sus videojuegos jugados.", actividades.get(pos).getVideojuego().getNombre()));
@@ -62,9 +72,9 @@ public class ActividadAdapter extends ArrayAdapter<Actividad> {
             @Override
             public void onClick(View v) {
                 //start Activity actividad Form
-                //Intent intent = new Intent(context, actividadActivity.class);
-                //intent.putExtra("actividad", actividades.get(pos));
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, VideojuegoActivity.class);
+                intent.putExtra("actividad", actividades.get(pos));
+                context.startActivity(intent);
             }
         });
 
@@ -82,7 +92,12 @@ public class ActividadAdapter extends ArrayAdapter<Actividad> {
                 int horas = minutos / 60;
                 if (horas > 24) {
                     int dias = horas / 24;
-                    tiempoStr = "Han pasado " + dias + " días.";
+                    if (dias > 7) {
+                        int semanas = dias / 7;
+                        tiempoStr = "Han pasado " + semanas + " semanas.";
+                    } else {
+                        tiempoStr = "Han pasado " + dias + " días.";
+                    }
                 } else {
                     tiempoStr = "Han pasado " + horas + " horas.";
                 }

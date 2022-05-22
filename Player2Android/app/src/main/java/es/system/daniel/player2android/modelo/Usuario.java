@@ -1,9 +1,10 @@
 package es.system.daniel.player2android.modelo;
 
+import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.List;
 
-public class Usuario {
+public class Usuario implements Serializable {
     private int id;
 
     private boolean activo;

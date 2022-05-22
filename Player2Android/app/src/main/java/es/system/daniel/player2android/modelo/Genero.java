@@ -1,6 +1,8 @@
 package es.system.daniel.player2android.modelo;
 
-public class Genero {
+import java.io.Serializable;
+
+public class Genero implements Serializable {
     private int id;
     private String nombre;
 

@@ -17,6 +17,8 @@ import androidx.annotation.NonNull;
 import com.squareup.picasso.Picasso;
 
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.activities.MainProfileActivity;
+import es.system.daniel.player2android.activities.VideojuegoActivity;
 import es.system.daniel.player2android.modelo.Usuario;
 
 
@@ -32,7 +34,7 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
     }
 
     @Override
-    public View getView(final int pos, View convertView, ViewGroup parent){
+    public View getView(final int pos, View convertView, ViewGroup parent) {
         LayoutInflater inflater = (LayoutInflater) context.getSystemService(Context.LAYOUT_INFLATER_SERVICE);
         View rowView = inflater.inflate(R.layout.tarjeta_usuario, parent, false);
 
@@ -46,10 +48,10 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                //start Activity usuario Form
-                //Intent intent = new Intent(context, usuarioActivity.class);
-                //intent.putExtra("usuario", usuarios.get(pos));
-                //context.startActivity(intent);
+                //start Activity actividad Form
+                Intent intent = new Intent(context, MainProfileActivity.class);
+                intent.putExtra("usuario", usuarios.get(pos));
+                context.startActivity(intent);
             }
         });
 

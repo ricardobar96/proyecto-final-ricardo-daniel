@@ -2,10 +2,11 @@ package es.system.daniel.player2android.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Videojuego {
+public class Videojuego implements Serializable {
     private int id;
 
     private String descripcion;
@@ -86,23 +87,18 @@ public class Videojuego {
     /*public List<JuegoUsuario> getJuegoUsuarios() {
         return juegoUsuarios;
     }
-
     public void setJuegoUsuarios(List<JuegoUsuario> juegoUsuarios) {
         this.juegoUsuarios = juegoUsuarios;
     }
-
     public List<Pista> getPistas() {
         return pistas;
     }
-
     public void setPistas(List<Pista> pistas) {
         this.pistas = pistas;
     }
-
     public List<Review> getReviews() {
         return reviews;
     }
-
     public void setReviews(List<Review> reviews) {
         this.reviews = reviews;
     }*/

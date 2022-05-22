@@ -114,7 +114,8 @@ public class LoginActivity extends AppCompatActivity {
                             e.printStackTrace();
                         }
                     }
-                    FIN DE PRUEBA CARGAR DATOS GUARDADOS*/
+                    FIN DE PRUEBA CARGAR DATOS GUARDADOS
+                    */
 
                 }
             }

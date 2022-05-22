@@ -2,9 +2,10 @@ package es.system.daniel.player2android.modelo;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class JuegoUsuario {
+public class JuegoUsuario implements Serializable {
     private int id;
 
     private boolean completado;

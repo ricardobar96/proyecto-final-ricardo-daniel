@@ -1,8 +1,9 @@
 package es.system.daniel.player2android.modelo;
 
+import java.io.Serializable;
 import java.util.Date;
 
-public class Actividad implements Comparable<Actividad> {
+public class Actividad implements Comparable<Actividad>, Serializable {
     public String tipo;
     public Date fecha;
     public Usuario usuario;
