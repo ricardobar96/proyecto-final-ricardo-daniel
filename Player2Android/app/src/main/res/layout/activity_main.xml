@@ -19,7 +19,7 @@
         app:layout_constraintTop_toTopOf="parent" />
 
     <ListView
-        android:id="@+id/actividadesListView"
+        android:id="@+id/usuariosListView"
         android:layout_width="314dp"
         android:layout_height="506dp"
         android:layout_marginStart="1dp"

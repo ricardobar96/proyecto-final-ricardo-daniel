@@ -64,7 +64,7 @@ public class Usuario {
         this.id = id;
     }
 
-    public boolean isActivo() {
+    public boolean getActivo() {
         return activo;
     }
 

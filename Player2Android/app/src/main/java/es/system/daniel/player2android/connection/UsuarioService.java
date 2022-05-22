@@ -26,6 +26,9 @@ public interface UsuarioService {
     @GET("v0/usuario")
     Call<List<Usuario>> getUsuarios();
 
+    @GET("v0/usuario/{id}")
+    Call<Usuario> getUsuarioById(@Path("id") Integer usuarioId);
+
     @GET("v1/usuario/{id}/mensajes")
     Call<List<Mensaje>> getMensajes(@Path("id") Integer usuarioId, @Header("Authorization") String authHeader);
 

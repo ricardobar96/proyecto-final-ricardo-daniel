@@ -11,7 +11,9 @@ import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 
+import android.content.Context;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
@@ -25,6 +27,7 @@ import java.util.List;
 public class LoginActivity extends AppCompatActivity {
 
     UsuarioService usuarioService;
+    Usuario usuarioActual = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -54,11 +57,11 @@ public class LoginActivity extends AppCompatActivity {
                 if(response.isSuccessful()){
                     txtToken.setText(response.body());
                     Log.i("Funciona", response.body());
-                    //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
-                    //startActivity(myIntent);
+                    getUsuarioActual(nombre);
+                    Intent myIntent = new Intent(LoginActivity.this,PrincipalActivity.class);
+                    startActivity(myIntent);
                 }
             }
-
             @Override
             public void onFailure(Call<String> call, Throwable t) {
                 Log.e("ERROR: ", t.getMessage());
@@ -66,6 +69,42 @@ public class LoginActivity extends AppCompatActivity {
                 //startActivity(myIntent);
             }
         });
+    }
+
+    public Usuario getUsuarioActual(String nombreUsuario) {
+        Call<List<Usuario>> call = usuarioService.getUsuarios();
+
+        call.enqueue(new Callback<List<Usuario>>() {
+            @Override
+            public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
+                //Log.i("¿Funciona?", response.body());
+                if(response.isSuccessful()){
+                    for (Usuario usuario : response.body()) {
+                        Log.i("Nombre usuario_", usuario.getNombre());
+                        Log.i("Nombre utilizado", nombreUsuario);
+                        if (usuario.getNombre().equals(nombreUsuario)) {
+                            Log.i("Hecho", usuario.getNombre());
+                            usuarioActual = usuario;
+                            break;
+                        }
+                    }
+                    SharedPreferences preferences = getSharedPreferences("usuario",
+                            Context.MODE_PRIVATE);
+                    SharedPreferences.Editor editor = preferences.edit();
+                    editor.putInt("usuarioId", usuarioActual.getId());
+                    editor.commit();
+                    //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
+                    //startActivity(myIntent);
+                }
+            }
+            @Override
+            public void onFailure(Call<List<Usuario>> call, Throwable t) {
+                Log.e("ERROR: ", t.getMessage());
+                //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
+                //startActivity(myIntent);
+            }
+        });
+        return usuarioActual;
     }
 
 
