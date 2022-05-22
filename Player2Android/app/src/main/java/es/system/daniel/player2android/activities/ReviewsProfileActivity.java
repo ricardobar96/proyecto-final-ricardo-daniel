@@ -46,12 +46,23 @@ public class ReviewsProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviewsprofile);
-        getWindow().getDecorView().setBackgroundColor((Color.rgb(139, 230, 146)));
+
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        String color = usuarioLogin.getColor();
+
+        if(color.equals("LightSalmon")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+        }
+        if(color.equals("lightsteelblue")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+        }
+        if(color.equals("DarkSeaGreen")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        }
 
         listViewReviews = (ListView) findViewById(R.id.reviewsProfileListView);
         reviewService = APIUtils.getReviewService();
-
-        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
 
         getReviewsList();
     }

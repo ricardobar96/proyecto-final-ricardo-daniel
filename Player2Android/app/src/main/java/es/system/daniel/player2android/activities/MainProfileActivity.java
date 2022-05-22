@@ -9,6 +9,8 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -39,14 +41,30 @@ public class MainProfileActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainprofile);
-        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
-
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        Button buttonFolow = (Button) this.findViewById(R.id.idButtonFollowUser);
+        buttonFolow.setVisibility(View.GONE);
 
         usuarioAjeno = (Usuario) getIntent().getSerializableExtra("usuario");
         usuarioService = APIUtils.getUsuarioService();
 
         if(usuarioAjeno!=null){
+
+            String color = usuarioAjeno.getColor();
+
+            if(color.equals("LightSalmon")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+            }
+            if(color.equals("lightsteelblue")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+            }
+            if(color.equals("DarkSeaGreen")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+            }
+
+            buttonFolow.setVisibility(View.VISIBLE);
+
             TextView infoTextView = (TextView) this.findViewById(R.id.idMainInfoUser);
             infoTextView.setText(usuarioAjeno.getDescripcion());
 
@@ -55,7 +73,18 @@ public class MainProfileActivity extends AppCompatActivity {
 
         }
         if(usuarioAjeno==null){
-            //usuarioActual = getUsuarioActual("ramon");
+
+            String color = usuarioLogin.getColor();
+
+            if(color.equals("LightSalmon")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+            }
+            if(color.equals("lightsteelblue")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+            }
+            if(color.equals("DarkSeaGreen")){
+                getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+            }
 
             TextView infoTextView = (TextView) this.findViewById(R.id.idMainInfoUser);
             infoTextView.setText(usuarioLogin.getDescripcion());

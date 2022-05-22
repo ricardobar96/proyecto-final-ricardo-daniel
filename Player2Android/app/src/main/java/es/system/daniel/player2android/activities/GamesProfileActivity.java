@@ -70,7 +70,17 @@ public class GamesProfileActivity extends AppCompatActivity {
         spinnerGenreP = findViewById(R.id.SpinnerGenreProfile);
         spinnerGenreP.setAdapter(adapterGenre);
 
-        getWindow().getDecorView().setBackgroundColor((Color.rgb(139, 230, 146)));
+        String color = usuarioLogin.getColor();
+
+        if(color.equals("LightSalmon")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+        }
+        if(color.equals("lightsteelblue")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+        }
+        if(color.equals("DarkSeaGreen")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        }
 
         listViewProgress = (ListView) findViewById(R.id.progressGamesListView);
         listViewCompleted = (ListView) findViewById(R.id.completedGamesListView);

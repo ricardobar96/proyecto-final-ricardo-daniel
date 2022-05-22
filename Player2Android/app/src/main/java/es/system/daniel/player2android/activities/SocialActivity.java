@@ -53,7 +53,6 @@ public class SocialActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
-        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
 
         listViewFollowers = (ListView) findViewById(R.id.FollowersProfileListView);
         listViewFollowing = (ListView)findViewById(R.id.FollowingProfileListView);
@@ -63,6 +62,18 @@ public class SocialActivity extends AppCompatActivity {
         listViewFollowing.setVisibility(View.GONE);
 
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        String color = usuarioLogin.getColor();
+
+        if(color.equals("LightSalmon")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+        }
+        if(color.equals("lightsteelblue")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+        }
+        if(color.equals("DarkSeaGreen")){
+            getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        }
     }
 
     @Override

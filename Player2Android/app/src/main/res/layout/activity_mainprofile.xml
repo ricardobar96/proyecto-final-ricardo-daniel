@@ -36,9 +36,9 @@
                     android:id="@+id/avatarUserImageProfileView"
                     android:layout_width="50dp"
                     android:layout_height="70dp"
+                    android:layout_marginLeft="25dp"
                     android:layout_marginTop="0dp"
                     android:layout_marginRight="50dp"
-                    android:layout_marginLeft="25dp"
                     android:layout_toLeftOf="@id/textTitleInfoUser"
                     app:layout_constraintEnd_toEndOf="parent"
                     app:layout_constraintHorizontal_bias="0.104"
@@ -46,15 +46,27 @@
                     app:layout_constraintTop_toTopOf="parent"
                     tools:srcCompat="@tools:sample/avatars" />
 
+                <Button
+                    android:id="@+id/idButtonFollowUser"
+                    android:layout_width="100dp"
+                    android:layout_height="50dp"
+                    android:layout_marginTop="5dp"
+                    android:layout_marginLeft="5dp"
+                    android:layout_marginBottom="5dp"
+                    android:layout_toRightOf="@id/avatarUserImageProfileView"
+                    android:backgroundTint="#FF9800"
+                    android:onClick="followUser"
+                    android:text="Seguir" />
+
                 <TextView
                     android:id="@+id/idMainInfoUser"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:layout_marginBottom="15dp"
-                    android:layout_marginRight="10dp"
                     android:layout_marginLeft="10dp"
+                    android:layout_marginTop="15dp"
+                    android:layout_marginRight="10dp"
+                    android:layout_marginBottom="15dp"
                     android:text="El usuario no ha escrito nada"
                     android:textSize="19sp" />
 
