@@ -14,6 +14,9 @@
             android:name=".activities.RegistroActivity"
             android:exported="true" />
         <activity
+            android:name=".activities.GamesProfileActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.LoginActivity"
             android:exported="true" />
         <activity
@@ -26,13 +29,13 @@
             android:name=".activities.ReviewsProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.SettingsActivity"
+            android:name=".activities.PrincipalActivity"
             android:exported="true" />
         <activity
             android:name=".activities.SocialActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.GamesProfileActivity"
+            android:name=".activities.SettingsActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
