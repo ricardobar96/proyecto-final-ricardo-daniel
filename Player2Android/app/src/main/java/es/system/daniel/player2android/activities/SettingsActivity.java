@@ -12,14 +12,18 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 import es.system.daniel.player2android.R;
 import es.system.daniel.player2android.connection.APIUtils;
+import es.system.daniel.player2android.modelo.Usuario;
 
 public class SettingsActivity extends AppCompatActivity {
+
+    Usuario usuarioLogin = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_settings);
         getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
     }
 
     @Override
@@ -33,26 +37,32 @@ public class SettingsActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menuGamesProfile:
                 Intent intentGames = new Intent(SettingsActivity.this, GamesProfileActivity.class);
+                intentGames.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentGames);
                 break;
             case R.id.menuMainProfile:
                 Intent intentMain = new Intent(SettingsActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentMain);
                 break;
             case R.id.menuSettingsProfile:
                 Intent intentSettings = new Intent(SettingsActivity.this, SettingsActivity.class);
+                intentSettings.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSettings);
                 break;
             case R.id.menuSocialProfile:
                 Intent intentSocial = new Intent(SettingsActivity.this, SocialActivity.class);
+                intentSocial.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSocial);
                 break;
             case R.id.menuReviewsProfile:
                 Intent intentReviews = new Intent(SettingsActivity.this, ReviewsProfileActivity.class);
+                intentReviews.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentReviews);
                 break;
             case R.id.menuReturnHome:
                 Intent intentHome = new Intent(SettingsActivity.this, MainActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;
         }

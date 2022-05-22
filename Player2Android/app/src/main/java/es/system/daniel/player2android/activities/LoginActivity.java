@@ -69,8 +69,7 @@ public class LoginActivity extends AppCompatActivity {
                     txtToken.setText(response.body());
                     Log.i("Funciona", response.body());
                     getUsuarioActual(nombre);
-                    Intent myIntent = new Intent(LoginActivity.this, PrincipalActivity.class);
-                    startActivity(myIntent);
+
 
                     /*PRUEBA GUARDAR DATOS INTERNAL STORAGE
 
@@ -149,6 +148,9 @@ public class LoginActivity extends AppCompatActivity {
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("usuarioId", usuarioActual.getId());
                     editor.commit();
+                    Intent myIntent = new Intent(LoginActivity.this, PrincipalActivity.class);
+                    myIntent.putExtra("usuarioLogin", usuarioActual);
+                    startActivity(myIntent);
                     //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
                     //startActivity(myIntent);
                 }

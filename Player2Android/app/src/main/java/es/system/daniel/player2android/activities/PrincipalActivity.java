@@ -18,9 +18,13 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.EditText;
 import android.widget.ListView;
@@ -36,6 +40,7 @@ import java.util.List;
 public class PrincipalActivity extends AppCompatActivity {
 
     UsuarioService usuarioService;
+    Usuario usuarioLogin = new Usuario();
     Usuario usuarioActual = new Usuario();
     List<Actividad> actividadList = new ArrayList<>();
     ListView listView;
@@ -46,6 +51,7 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         usuarioService = APIUtils.getUsuarioService();
         listView = (ListView)findViewById(R.id.actividadesListView);
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
         getUsuario();
     }
 
@@ -97,4 +103,21 @@ public class PrincipalActivity extends AppCompatActivity {
                         R.layout.tarjeta_actividad, actividadList));
     }
 
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menuprofile, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.menuMainProfile:
+                Intent intentMain = new Intent(PrincipalActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioLogin);
+                startActivity(intentMain);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
+    }
 }

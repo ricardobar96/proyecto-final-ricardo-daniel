@@ -33,12 +33,15 @@ public class MainProfileActivity extends AppCompatActivity {
     Usuario usuarioAjeno = new Usuario();
     Usuario usuarioActual = new Usuario();
     UsuarioService usuarioService;
+    Usuario usuarioLogin = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_mainprofile);
         getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
 
         usuarioAjeno = (Usuario) getIntent().getSerializableExtra("usuario");
         usuarioService = APIUtils.getUsuarioService();
@@ -52,13 +55,13 @@ public class MainProfileActivity extends AppCompatActivity {
 
         }
         if(usuarioAjeno==null){
-            usuarioActual = getUsuarioActual("ramon");
+            //usuarioActual = getUsuarioActual("ramon");
 
             TextView infoTextView = (TextView) this.findViewById(R.id.idMainInfoUser);
-            infoTextView.setText(usuarioActual.getDescripcion());
+            infoTextView.setText(usuarioLogin.getDescripcion());
 
             ImageView imgAvatar = (ImageView) this.findViewById(R.id.avatarUserImageProfileView);
-            Picasso.get().load(usuarioActual.getAvatar()).into(imgAvatar);
+            Picasso.get().load(usuarioLogin.getAvatar()).into(imgAvatar);
         }
     }
 
@@ -102,26 +105,32 @@ public class MainProfileActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menuGamesProfile:
                 Intent intentGames = new Intent(MainProfileActivity.this, GamesProfileActivity.class);
+                intentGames.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentGames);
                 break;
             case R.id.menuMainProfile:
                 Intent intentMain = new Intent(MainProfileActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentMain);
                 break;
             case R.id.menuSettingsProfile:
                 Intent intentSettings = new Intent(MainProfileActivity.this, SettingsActivity.class);
+                intentSettings.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSettings);
                 break;
             case R.id.menuReviewsProfile:
                 Intent intentReviews = new Intent(MainProfileActivity.this, ReviewsProfileActivity.class);
+                intentReviews.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentReviews);
                 break;
             case R.id.menuSocialProfile:
                 Intent intentSocial = new Intent(MainProfileActivity.this, SocialActivity.class);
+                intentSocial.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSocial);
                 break;
             case R.id.menuReturnHome:
                 Intent intentHome = new Intent(MainProfileActivity.this, MainActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;
         }

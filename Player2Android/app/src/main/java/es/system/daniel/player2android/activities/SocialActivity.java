@@ -25,6 +25,7 @@ import es.system.daniel.player2android.adapter.UsuarioAdapter;
 import es.system.daniel.player2android.connection.APIUtils;
 import es.system.daniel.player2android.connection.GameService;
 import es.system.daniel.player2android.connection.UsuarioService;
+import es.system.daniel.player2android.modelo.Review;
 import es.system.daniel.player2android.modelo.Usuario;
 import es.system.daniel.player2android.modelo.Videojuego;
 import retrofit2.Call;
@@ -39,9 +40,12 @@ public class SocialActivity extends AppCompatActivity {
     UsuarioService usuarioService;
     Usuario usuarioAjeno = new Usuario();
 
+    Usuario usuarioLogin = new Usuario();
+
     EditText searchUserText;
     String nameUser;
 
+    List<Usuario> listUsers = new ArrayList<Usuario>();
     List<Usuario> listFollowers = new ArrayList<Usuario>();
     List<Usuario> listFollowing = new ArrayList<Usuario>();
 
@@ -57,6 +61,8 @@ public class SocialActivity extends AppCompatActivity {
 
         listViewFollowers.setVisibility(View.GONE);
         listViewFollowing.setVisibility(View.GONE);
+
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
     }
 
     @Override
@@ -70,26 +76,32 @@ public class SocialActivity extends AppCompatActivity {
         switch(item.getItemId()){
             case R.id.menuGamesProfile:
                 Intent intentGames = new Intent(SocialActivity.this, GamesProfileActivity.class);
+                intentGames.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentGames);
                 break;
             case R.id.menuMainProfile:
                 Intent intentMain = new Intent(SocialActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentMain);
                 break;
             case R.id.menuSettingsProfile:
                 Intent intentSettings = new Intent(SocialActivity.this, SettingsActivity.class);
+                intentSettings.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSettings);
                 break;
             case R.id.menuReviewsProfile:
                 Intent intentReviews = new Intent(SocialActivity.this, ReviewsProfileActivity.class);
+                intentReviews.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentReviews);
                 break;
             case R.id.menuSocialProfile:
                 Intent intentSocial = new Intent(SocialActivity.this, SocialActivity.class);
+                intentSocial.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSocial);
                 break;
             case R.id.menuReturnHome:
                 Intent intentHome = new Intent(SocialActivity.this, MainActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;
         }
@@ -99,6 +111,7 @@ public class SocialActivity extends AppCompatActivity {
     public void showFollowing(View view){
         Call<List<Usuario>> call = usuarioService.getUsuarios();
 
+        listFollowers.clear();
         listViewFollowers.setVisibility(View.GONE);
         listViewFollowing.setVisibility(View.VISIBLE);
 
@@ -106,7 +119,15 @@ public class SocialActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                 if(response.isSuccessful()){
-                    listFollowing = response.body();
+                    listUsers = response.body();
+
+                    for (Usuario u : listUsers) {
+                        for(Usuario userF: u.getFollowers()){
+                            if(userF.getNombre().equals(usuarioLogin.getNombre())){
+                                listFollowing.add(u);
+                            }
+                        }
+                    }
 
                     listViewFollowing.setAdapter(
                             new UsuarioAdapter(SocialActivity.this,
@@ -123,6 +144,7 @@ public class SocialActivity extends AppCompatActivity {
     public void showFollowers(View view) {
         Call<List<Usuario>> call = usuarioService.getUsuarios();
 
+        listFollowing.clear();
         listViewFollowing.setVisibility(View.GONE);
         listViewFollowers.setVisibility(View.VISIBLE);
 
@@ -130,7 +152,15 @@ public class SocialActivity extends AppCompatActivity {
             @Override
             public void onResponse(Call<List<Usuario>> call, Response<List<Usuario>> response) {
                 if (response.isSuccessful()) {
-                    listFollowers = response.body();
+                    listUsers = response.body();
+
+                    for (Usuario u : listUsers) {
+                        for(Usuario userF: u.getFolloweds()){
+                            if(userF.getNombre().equals(usuarioLogin.getNombre())){
+                                listFollowers.add(u);
+                            }
+                        }
+                    }
 
                     listViewFollowers.setAdapter(
                             new UsuarioAdapter(SocialActivity.this,
@@ -177,6 +207,7 @@ public class SocialActivity extends AppCompatActivity {
 
                     Intent intent = new Intent(SocialActivity.this, MainProfileActivity.class);
                     intent.putExtra("usuario", usuarioAjeno);
+                    intent.putExtra("usuarioLogin", usuarioLogin);
                     startActivity(intent);
                 }
             }

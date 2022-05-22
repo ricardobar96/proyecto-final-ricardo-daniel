@@ -4,7 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import es.system.daniel.player2android.R;
 import es.system.daniel.player2android.modelo.Actividad;
 
+import android.content.Intent;
 import android.os.Bundle;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.widget.TextView;
 
 public class VideojuegoActivity extends AppCompatActivity {

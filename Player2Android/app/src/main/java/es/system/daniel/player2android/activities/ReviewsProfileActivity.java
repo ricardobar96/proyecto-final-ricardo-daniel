@@ -12,15 +12,21 @@ import android.widget.ListView;
 import androidx.appcompat.app.AppCompatActivity;
 
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.adapter.ActividadAdapter;
 import es.system.daniel.player2android.adapter.GameAdapter;
 import es.system.daniel.player2android.adapter.ReviewAdapter;
 import es.system.daniel.player2android.connection.APIUtils;
 import es.system.daniel.player2android.connection.GameService;
 import es.system.daniel.player2android.connection.ReviewService;
+import es.system.daniel.player2android.modelo.Actividad;
+import es.system.daniel.player2android.modelo.JuegoUsuario;
+import es.system.daniel.player2android.modelo.Pista;
 import es.system.daniel.player2android.modelo.Review;
+import es.system.daniel.player2android.modelo.Usuario;
 import es.system.daniel.player2android.modelo.Videojuego;
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -32,15 +38,21 @@ public class ReviewsProfileActivity extends AppCompatActivity {
 
     ReviewService reviewService;
     List<Review> listReview = new ArrayList<Review>();
+    List<Review> listReviewUser = new ArrayList<Review>();
+
+    Usuario usuarioLogin = new Usuario();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_reviewsprofile);
-        getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+        getWindow().getDecorView().setBackgroundColor((Color.rgb(139, 230, 146)));
 
         listViewReviews = (ListView) findViewById(R.id.reviewsProfileListView);
         reviewService = APIUtils.getReviewService();
+
+        usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
         getReviewsList();
     }
 
@@ -52,9 +64,14 @@ public class ReviewsProfileActivity extends AppCompatActivity {
                 if (response.isSuccessful()) {
                     listReview = response.body();
 
+                    for (Review r : listReview) {
+                        if (r.getUsuario().getNombre().equals(usuarioLogin.getNombre())) {
+                            listReviewUser.add(r);
+                        }
+                    }
                     listViewReviews.setAdapter(
                             new ReviewAdapter(ReviewsProfileActivity.this,
-                                    R.layout.tarjeta_review, listReview));
+                                    R.layout.tarjeta_review, listReviewUser));
                 }
             }
 
@@ -72,30 +89,36 @@ public class ReviewsProfileActivity extends AppCompatActivity {
         return true;
     }
 
-    public boolean onOptionsItemSelected(MenuItem item){
-        switch(item.getItemId()){
+    public boolean onOptionsItemSelected(MenuItem item) {
+        switch (item.getItemId()) {
             case R.id.menuGamesProfile:
                 Intent intentGames = new Intent(ReviewsProfileActivity.this, GamesProfileActivity.class);
+                intentGames.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentGames);
                 break;
             case R.id.menuMainProfile:
                 Intent intentMain = new Intent(ReviewsProfileActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentMain);
                 break;
             case R.id.menuSettingsProfile:
                 Intent intentSettings = new Intent(ReviewsProfileActivity.this, SettingsActivity.class);
+                intentSettings.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSettings);
                 break;
             case R.id.menuSocialProfile:
                 Intent intentSocial = new Intent(ReviewsProfileActivity.this, SocialActivity.class);
+                intentSocial.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentSocial);
                 break;
             case R.id.menuReviewsProfile:
                 Intent intentReviews = new Intent(ReviewsProfileActivity.this, ReviewsProfileActivity.class);
+                intentReviews.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentReviews);
                 break;
             case R.id.menuReturnHome:
                 Intent intentHome = new Intent(ReviewsProfileActivity.this, MainActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;
         }

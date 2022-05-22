@@ -23,7 +23,7 @@
             android:name=".activities.MainProfileActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.MainActivity"
+            android:name=".activities.SocialActivity"
             android:exported="true" />
         <activity
             android:name=".activities.VideojuegoActivity"
@@ -38,7 +38,7 @@
             android:name=".activities.SettingsActivity"
             android:exported="true" />
         <activity
-            android:name=".activities.SocialActivity"
+            android:name=".activities.MainActivity"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
