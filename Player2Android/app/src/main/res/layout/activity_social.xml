@@ -15,6 +15,7 @@
             android:layout_height="fill_parent">
 
             <LinearLayout
+                android:id="@+id/LinearLayout01"
                 android:layout_width="match_parent"
                 android:layout_height="match_parent"
                 android:layout_marginTop="10dp"
@@ -97,46 +98,38 @@
 
                 </RelativeLayout>
 
-                    <ListView
-                        android:id="@+id/FollowersProfileListView"
-                        android:layout_below="@id/RelativeLayoutButtonsSocial"
-                        android:background="@color/white"
-                        android:layout_gravity="center"
-                        android:layout_width="300dp"
-                        android:layout_height="300dp"
-                        android:layout_marginStart="1dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="50dp"
-                        android:layout_marginEnd="1dp"
-                        app:layout_constraintEnd_toEndOf="parent"
-                        app:layout_constraintHorizontal_bias="0.494"
-                        app:layout_constraintStart_toStartOf="parent"
-                        app:layout_constraintTop_toTopOf="parent">
-
-                    </ListView>
-
-                <ListView
-                    android:id="@+id/FollowingProfileListView"
-                    android:layout_below="@id/RelativeLayoutButtonsSocial"
-                    android:background="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="50dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.494"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </ListView>
-
             </LinearLayout>
 
         </RelativeLayout>
 
     </ScrollView>
+
+    <ListView
+        android:id="@+id/FollowersProfileListView"
+        android:background="@color/white"
+        android:layout_width="413dp"
+        android:layout_height="485dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/FollowingProfileListView"
+        android:background="@color/white"
+        android:layout_width="413dp"
+        android:layout_height="485dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="300dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

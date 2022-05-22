@@ -2,7 +2,8 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 
     <RelativeLayout
         android:layout_width="fill_parent"
@@ -12,16 +13,31 @@
 
         <TextView
             android:id="@+id/gameTextView"
+            android:background="@color/teal_700"
+            android:textColor="@color/white"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_gravity="center"
-            android:layout_marginTop="5dp"
-            android:background="@color/white"
-            android:minHeight="30dp"
-            android:text="Juego"
-            tools:ignore="MissingConstraints"
-            tools:layout_editor_absoluteX="19dp"
-            tools:layout_editor_absoluteY="15dp" />
+            android:layout_marginTop="25dp"
+            android:layout_marginRight="55dp"
+            android:text="Usuario"
+            android:textSize="19sp"
+            android:textStyle="bold"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.093"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
+
+        <ImageView
+            android:id="@+id/gameImageView"
+            android:layout_width="86dp"
+            android:layout_height="78dp"
+            android:layout_marginTop="16dp"
+            android:layout_toRightOf="@id/gameTextView"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.104"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:srcCompat="@tools:sample/avatars" />
 
     </RelativeLayout>
 

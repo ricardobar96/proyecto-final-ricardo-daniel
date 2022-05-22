@@ -5,10 +5,13 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+
+import com.squareup.picasso.Picasso;
 
 import java.util.List;
 
@@ -32,8 +35,11 @@ public class GameAdapter extends ArrayAdapter<Videojuego> {
         View rowView = inflater.inflate(R.layout.tarjeta_juego, parent, false);
 
         TextView txtgame = (TextView) rowView.findViewById(R.id.gameTextView);
+        ImageView imgGame = (ImageView) rowView.findViewById(R.id.gameImageView);
 
         txtgame.setText(String.format("%s", games.get(pos).getNombre()));
+
+        Picasso.get().load(games.get(pos).getImagen()).into(imgGame);
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override

@@ -25,7 +25,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
+                    android:layout_marginTop="10dp"
                     android:text="Opciones de filtrado:"
                     android:textSize="19sp"
                     android:textStyle="bold" />
@@ -42,7 +42,7 @@
                         android:layout_width="150dp"
                         android:layout_height="50dp"
                         android:layout_marginLeft="5dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginRight="30px"
                         android:hint="Nombre a filtrar"
                         android:minHeight="18dp" />
@@ -52,8 +52,8 @@
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:layout_marginLeft="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="15dp"
                         android:layout_toRightOf="@id/idSearchGamePIntro"
                         android:backgroundTint="#FF9800"
                         android:text="Filtrar" />
@@ -79,8 +79,8 @@
                         android:layout_height="wrap_content"
                         android:layout_gravity="center"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="25dp"
-                        android:layout_marginEnd="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginEnd="10dp"
                         android:text="Ordenar por:"
                         android:textSize="19sp"
                         android:textStyle="bold" />
@@ -92,9 +92,9 @@
                         android:layout_gravity="center"
                         android:layout_marginStart="1dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="1dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_toRightOf="@id/orderFilterPTextView"
                         android:spinnerMode="dialog"
                         app:layout_constraintBottom_toBottomOf="parent"
@@ -123,7 +123,7 @@
                         android:layout_height="wrap_content"
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="25dp"
-                        android:layout_marginTop="25dp"
+                        android:layout_marginTop="10dp"
                         android:layout_marginEnd="25dp"
                         android:text="Filtro:"
                         android:textSize="19sp"
@@ -136,8 +136,8 @@
                         android:layout_centerHorizontal="true"
                         android:layout_marginStart="1dp"
                         android:layout_marginLeft="10dp"
-                        android:layout_marginTop="20dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginTop="10dp"
+                        android:layout_marginBottom="10dp"
                         android:layout_marginEnd="1dp"
                         android:layout_toRightOf="@id/genreFilterPTextView"
                         android:spinnerMode="dialog"
@@ -179,7 +179,7 @@
                         android:layout_toRightOf="@id/yearFilterPTextView"
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="10dp"
-                        android:layout_marginBottom="25dp"
+                        android:layout_marginBottom="10dp"
                         android:gravity="center"
                         android:value="1996"
                         android:valueFrom="1996"
@@ -189,72 +189,69 @@
 
             </LinearLayout>
 
-            <LinearLayout
-                android:id="@+id/LinearLayoutDown"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
+            <RelativeLayout
+                android:id="@+id/RelativeLayoutButtonsSocial"
                 android:layout_below="@id/LinearLayoutUp"
-                android:orientation="vertical">
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:orientation="horizontal">
 
-                <TextView
-                    android:id="@+id/TextProgressProfile"
+                <Button
+                    android:id="@+id/idShowProgress"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="15dp"
-                    android:text="Juegos en progreso:"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:layout_alignParentLeft="true"
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="70px"
+                    android:backgroundTint="#FF9800"
+                    android:onClick="showProgressGames"
+                    android:text="En progreso" />
 
-                <ListView
-                    android:id="@+id/progressGamesListView"
-                    android:layout_below="@id/TextProgressProfile"
-                    android:background="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.494"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </ListView>
-
-                <TextView
-                    android:id="@+id/TextCompletedProfile"
+                <Button
+                    android:id="@+id/idShowCompleted"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:layout_below="@id/progressGamesListView"
-                    android:layout_gravity="center"
-                    android:layout_marginTop="25dp"
-                    android:text="Juegos completados:"
-                    android:textSize="19sp"
-                    android:textStyle="bold" />
+                    android:layout_marginTop="10dp"
+                    android:layout_marginRight="10px"
+                    android:layout_toRightOf="@id/idShowProgress"
+                    android:backgroundTint="#FF9800"
+                    android:onClick="showCompletedGames"
+                    android:text="Completados" />
 
-                <ListView
-                    android:id="@+id/completedGamesListView"
-                    android:layout_below="@id/TextProgressProfile"
-                    android:background="@color/white"
-                    android:layout_gravity="center"
-                    android:layout_width="300dp"
-                    android:layout_height="300dp"
-                    android:layout_marginStart="1dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginBottom="25dp"
-                    android:layout_marginEnd="1dp"
-                    app:layout_constraintEnd_toEndOf="parent"
-                    app:layout_constraintHorizontal_bias="0.494"
-                    app:layout_constraintStart_toStartOf="parent"
-                    app:layout_constraintTop_toTopOf="parent">
-
-                </ListView>
-
-            </LinearLayout>
+            </RelativeLayout>
 
         </RelativeLayout>
     </ScrollView>
+
+    <ListView
+        android:id="@+id/progressGamesListView"
+
+        android:background="@color/teal_700"
+        android:layout_width="413dp"
+        android:layout_height="485dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
+
+    <ListView
+        android:id="@+id/completedGamesListView"
+
+        android:background="@color/teal_700"
+        android:layout_width="413dp"
+        android:layout_height="485dp"
+        android:layout_marginStart="1dp"
+        android:layout_marginTop="355dp"
+        android:layout_marginEnd="1dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+    </ListView>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

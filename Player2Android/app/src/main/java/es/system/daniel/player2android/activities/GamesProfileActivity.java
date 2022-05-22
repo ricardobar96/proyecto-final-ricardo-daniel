@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ArrayAdapter;
 import android.widget.ListView;
 
@@ -65,11 +66,14 @@ public class GamesProfileActivity extends AppCompatActivity {
         listViewProgress = (ListView) findViewById(R.id.progressGamesListView);
         listViewCompleted = (ListView) findViewById(R.id.completedGamesListView);
         gameService = APIUtils.getGameService();
-        getProgressList();
-        getCompletedList();
+        listViewProgress.setVisibility(View.GONE);
+        listViewCompleted.setVisibility(View.GONE);
     }
 
-    public void getProgressList() {
+    public void showProgressGames(View view) {
+        listViewProgress.setVisibility(View.VISIBLE);
+        listViewCompleted.setVisibility(View.GONE);
+
         Call<List<Videojuego>> call = gameService.getGames();
         call.enqueue(new Callback<List<Videojuego>>() {
             @Override
@@ -90,7 +94,9 @@ public class GamesProfileActivity extends AppCompatActivity {
         });
     }
 
-    public void getCompletedList() {
+    public void showCompletedGames(View view) {
+        listViewProgress.setVisibility(View.GONE);
+        listViewCompleted.setVisibility(View.VISIBLE);
         Call<List<Videojuego>> call = gameService.getGames();
         call.enqueue(new Callback<List<Videojuego>>() {
             @Override

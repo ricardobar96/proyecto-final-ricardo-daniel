@@ -6,12 +6,16 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import java.util.List;
 
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
+
+import com.squareup.picasso.Picasso;
+
 import es.system.daniel.player2android.R;
 import es.system.daniel.player2android.modelo.Usuario;
 
@@ -33,8 +37,11 @@ public class UsuarioAdapter extends ArrayAdapter<Usuario> {
         View rowView = inflater.inflate(R.layout.tarjeta_usuario, parent, false);
 
         TextView txtusuario = (TextView) rowView.findViewById(R.id.profileUserTextView);
+        ImageView imgAvatar = (ImageView) rowView.findViewById(R.id.avatarUserImageView);
 
-        txtusuario.setText(String.format("%s, %s", usuarios.get(pos).getNombre(), usuarios.get(pos).getNombre()));
+        txtusuario.setText(String.format("%s", usuarios.get(pos).getNombre()));
+
+        Picasso.get().load(usuarios.get(pos).getAvatar()).into(imgAvatar);
 
         rowView.setOnClickListener(new View.OnClickListener() {
             @Override
