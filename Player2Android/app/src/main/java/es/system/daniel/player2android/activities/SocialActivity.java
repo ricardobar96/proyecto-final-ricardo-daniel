@@ -41,6 +41,8 @@ public class SocialActivity extends AppCompatActivity {
     Usuario usuarioAjeno = new Usuario();
 
     Usuario usuarioLogin = new Usuario();
+    Integer numberFollowers = 0;
+    Integer numberFollowing = 0;
 
     EditText searchUserText;
     String nameUser;
@@ -49,10 +51,16 @@ public class SocialActivity extends AppCompatActivity {
     List<Usuario> listFollowers = new ArrayList<Usuario>();
     List<Usuario> listFollowing = new ArrayList<Usuario>();
 
+    TextView textSeguidores;
+    TextView textSiguiendo;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_social);
+
+        textSeguidores = (TextView) this.findViewById(R.id.textSeguidores);
+        textSiguiendo = (TextView) this.findViewById(R.id.textSiguiendo);
 
         listViewFollowers = (ListView) findViewById(R.id.FollowersProfileListView);
         listViewFollowing = (ListView)findViewById(R.id.FollowingProfileListView);
@@ -123,6 +131,7 @@ public class SocialActivity extends AppCompatActivity {
         Call<List<Usuario>> call = usuarioService.getUsuarios();
 
         listFollowers.clear();
+        listFollowing.clear();
         listViewFollowers.setVisibility(View.GONE);
         listViewFollowing.setVisibility(View.VISIBLE);
 
@@ -136,9 +145,13 @@ public class SocialActivity extends AppCompatActivity {
                         for(Usuario userF: u.getFollowers()){
                             if(userF.getNombre().equals(usuarioLogin.getNombre())){
                                 listFollowing.add(u);
+                                numberFollowing += 1;
                             }
                         }
                     }
+
+                    textSiguiendo.setText("Siguiendo: " + numberFollowing);
+                    numberFollowing = 0;
 
                     listViewFollowing.setAdapter(
                             new UsuarioAdapter(SocialActivity.this,
@@ -156,8 +169,10 @@ public class SocialActivity extends AppCompatActivity {
         Call<List<Usuario>> call = usuarioService.getUsuarios();
 
         listFollowing.clear();
+        listFollowers.clear();
         listViewFollowing.setVisibility(View.GONE);
         listViewFollowers.setVisibility(View.VISIBLE);
+
 
         call.enqueue(new Callback<List<Usuario>>() {
             @Override
@@ -169,9 +184,13 @@ public class SocialActivity extends AppCompatActivity {
                         for(Usuario userF: u.getFolloweds()){
                             if(userF.getNombre().equals(usuarioLogin.getNombre())){
                                 listFollowers.add(u);
+                                numberFollowers += 1;
                             }
                         }
                     }
+
+                    textSeguidores.setText("Seguidores: " + numberFollowers);
+                    numberFollowers = 0;
 
                     listViewFollowers.setAdapter(
                             new UsuarioAdapter(SocialActivity.this,
