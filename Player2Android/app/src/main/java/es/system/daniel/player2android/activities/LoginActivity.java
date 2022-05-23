@@ -102,5 +102,9 @@ public class LoginActivity extends AppCompatActivity {
         return usuarioActual;
     }
 
+    public void returnMain(View view) {
+        Intent mainIntent = new Intent(LoginActivity.this,MainActivity.class);
+        startActivity(mainIntent);
+    }
 
 }

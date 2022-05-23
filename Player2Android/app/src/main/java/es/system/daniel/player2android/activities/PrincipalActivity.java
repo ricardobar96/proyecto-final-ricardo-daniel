@@ -44,6 +44,8 @@ public class PrincipalActivity extends AppCompatActivity {
     Usuario usuarioActual = new Usuario();
     List<Actividad> actividadList = new ArrayList<>();
     ListView listView;
+    boolean logueado;
+    Integer idUsuarioActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -51,7 +53,21 @@ public class PrincipalActivity extends AppCompatActivity {
         setContentView(R.layout.activity_principal);
         usuarioService = APIUtils.getUsuarioService();
         listView = (ListView)findViewById(R.id.actividadesListView);
+
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        /*
+        SharedPreferences preferences = getSharedPreferences("usuario",
+                Context.MODE_PRIVATE);
+        idUsuarioActual = preferences.getInt("usuarioId", 0);
+
+        logueado = false;
+
+        if(idUsuarioActual != 0){
+            logueado = true;
+        }
+        */
+
         getUsuario();
     }
 
@@ -106,16 +122,35 @@ public class PrincipalActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menuprofile, menu);
+        menuInflater.inflate(R.menu.menuhome, menu);
         return true;
     }
 
     public boolean onOptionsItemSelected(MenuItem item){
         switch(item.getItemId()){
             case R.id.menuMainProfile:
+                /*
+                if(logueado == false){
+                    Intent intentLogin = new Intent(PrincipalActivity.this, LoginActivity.class);
+                    startActivity(intentLogin);
+                }
+                */
                 Intent intentMain = new Intent(PrincipalActivity.this, MainProfileActivity.class);
                 intentMain.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentMain);
+                break;
+            case R.id.menuHome:
+                Intent intentHome = new Intent(PrincipalActivity.this, PrincipalActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioLogin);
+                startActivity(intentHome);
+                break;
+            case R.id.menuLogout:
+                SharedPreferences preferences = getSharedPreferences("usuario",
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                Intent intentLogout = new Intent(PrincipalActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
                 break;
         }
         return super.onOptionsItemSelected(item);

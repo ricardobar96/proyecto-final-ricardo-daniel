@@ -20,10 +20,14 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
 import android.util.Log;
+import android.view.Menu;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.widget.CheckBox;
 import android.widget.EditText;
@@ -97,6 +101,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         listViewPistas = (ListView)findViewById(R.id.pistasVideojuegoListView);
         reviewService = APIUtils.getReviewService();
         pistaService = APIUtils.getPistaService();
+
         getUsuario();
         getJuegoUsuario();
         getReviewsList();
@@ -343,5 +348,36 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
+    }
+
+    @Override
+    public boolean onCreateOptionsMenu(Menu menu) {
+        MenuInflater menuInflater = getMenuInflater();
+        menuInflater.inflate(R.menu.menuhome, menu);
+        return true;
+    }
+
+    public boolean onOptionsItemSelected(MenuItem item){
+        switch(item.getItemId()){
+            case R.id.menuMainProfile:
+                Intent intentMain = new Intent(VideojuegoActivity.this, MainProfileActivity.class);
+                intentMain.putExtra("usuarioLogin", usuarioActual);
+                startActivity(intentMain);
+                break;
+            case R.id.menuHome:
+                Intent intentHome = new Intent(VideojuegoActivity.this, PrincipalActivity.class);
+                intentHome.putExtra("usuarioLogin", usuarioActual);
+                startActivity(intentHome);
+                break;
+            case R.id.menuLogout:
+                SharedPreferences preferences = getSharedPreferences("usuario",
+                        Context.MODE_PRIVATE);
+                SharedPreferences.Editor editor = preferences.edit();
+                editor.clear();
+                Intent intentLogout = new Intent(VideojuegoActivity.this, LoginActivity.class);
+                startActivity(intentLogout);
+                break;
+        }
+        return super.onOptionsItemSelected(item);
     }
 }

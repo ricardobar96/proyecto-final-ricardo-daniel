@@ -234,11 +234,6 @@ public class SocialActivity extends AppCompatActivity {
                             break;
                         }
                     }
-                    SharedPreferences preferences = getSharedPreferences("usuario",
-                            Context.MODE_PRIVATE);
-                    SharedPreferences.Editor editor = preferences.edit();
-                    editor.putInt("usuarioId", (usuarioAjeno.getId() - 1));
-                    editor.commit();
 
                     Intent intent = new Intent(SocialActivity.this, MainProfileActivity.class);
                     intent.putExtra("usuario", usuarioAjeno);

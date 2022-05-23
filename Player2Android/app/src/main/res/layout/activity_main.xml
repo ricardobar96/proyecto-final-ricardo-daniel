@@ -6,43 +6,61 @@
     android:layout_height="match_parent"
     tools:context=".activities.MainActivity">
 
-    <Button
-        android:id="@+id/goRegistroButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:onClick="goRegistrarUsuario"
-        android:text="Registrarme"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.498"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <LinearLayout
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        android:orientation="vertical"
+        android:gravity="center"
+        android:background="#EDD898"
+        tools:ignore="MissingConstraints">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_gravity="center"
+            android:layout_marginBottom="105dp"
+            android:text="Player2"
+            android:textSize="89sp"
+            android:textColor="@color/purple_700"
+            android:textStyle="italic|bold" />
+        <Button
+            android:id="@+id/goLoginButton"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:text="Login"
+            android:backgroundTint="#DC7C75"
+            android:onClick="goLoginUsuario"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <ListView
-        android:id="@+id/usuariosListView"
-        android:layout_width="314dp"
-        android:layout_height="506dp"
-        android:layout_marginStart="1dp"
-        android:layout_marginTop="72dp"
-        android:layout_marginEnd="1dp"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.494"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <Button
+            android:id="@+id/goRegistroButton"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:onClick="goRegistrarUsuario"
+            android:text="Registro"
+            android:backgroundTint="#00BCD4"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.498"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
+        <Button
+            android:id="@+id/goHomeButton"
+            android:layout_width="250dp"
+            android:layout_height="80dp"
+            android:layout_marginTop="16dp"
+            android:text="Continuar como invitado"
+            android:backgroundTint="#FFC107"
+            android:onClick="goHomeGuest"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.049"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    </ListView>
-
-    <Button
-        android:id="@+id/goLoginButton"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="16dp"
-        android:text="Login"
-        android:onClick="goLoginUsuario"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.049"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

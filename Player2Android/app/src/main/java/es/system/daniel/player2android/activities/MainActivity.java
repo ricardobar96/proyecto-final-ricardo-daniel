@@ -70,4 +70,8 @@ public class MainActivity extends AppCompatActivity {
         Intent myIntent = new Intent(MainActivity.this, RegistroActivity.class);
         startActivity(myIntent);
     }
+    public void goHomeGuest(View view) {
+        Intent myIntent = new Intent(MainActivity.this, PrincipalActivity.class);
+        startActivity(myIntent);
+    }
 }

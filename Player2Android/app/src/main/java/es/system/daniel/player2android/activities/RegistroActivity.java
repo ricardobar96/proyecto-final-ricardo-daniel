@@ -56,4 +56,9 @@ public class RegistroActivity extends AppCompatActivity {
             }
         });
     }
+
+    public void returnMain(View view) {
+        Intent mainIntent = new Intent(RegistroActivity.this,MainActivity.class);
+        startActivity(mainIntent);
+    }
 }
