@@ -20,6 +20,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.os.Handler;
@@ -30,6 +31,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -61,6 +63,7 @@ public class VideojuegoActivity extends AppCompatActivity {
     TextView puntuacionTextView;
     TextView puntuacionMediaTextView;
     TextView horasJugadasTextView;
+    TextView descripcionVideojuegoTextView;
     ImageView videojuegoImageView;
     NumberPicker puntuacionNumberPicker;
     EditText horasJugadasEditText;
@@ -68,6 +71,7 @@ public class VideojuegoActivity extends AppCompatActivity {
     CheckBox empezadoCheckBox;
     ListView listViewReviews;
     ListView listViewPistas;
+    ScrollView videojuegoScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -88,11 +92,19 @@ public class VideojuegoActivity extends AppCompatActivity {
         horasJugadasEditText = (EditText) this.findViewById(R.id.horasJugadasEditText);
         completadoCheckBox = (CheckBox) this.findViewById(R.id.completadoCheckBox);
         empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
+        descripcionVideojuegoTextView = (TextView) this.findViewById(R.id.descripcionVideojuegoTextView);
+        videojuegoScrollView = (ScrollView) this.findViewById(R.id.videojuegoScrollView);
         puntuacionNumberPicker.setVisibility(View.GONE);
         horasJugadasEditText.setVisibility(View.GONE);
         completadoCheckBox.setVisibility(View.GONE);
         puntuacionTextView.setVisibility(View.GONE);
         horasJugadasTextView.setVisibility(View.GONE);
+
+        videojuegoScrollView.setVisibility(View.GONE);
+        /*tituloTextView.setVisibility(View.GONE);
+        videojuegoImageView.setVisibility(View.GONE);
+        puntuacionTextView.setVisibility(View.GONE);
+        puntuacionMediaTextView.setVisibility(View.GONE);*/
         listViewReviews = (ListView)findViewById(R.id.reviewsVideojuegoListView);
         listViewPistas = (ListView)findViewById(R.id.pistasVideojuegoListView);
         reviewService = APIUtils.getReviewService();
@@ -102,20 +114,10 @@ public class VideojuegoActivity extends AppCompatActivity {
         getReviewsList();
         getPistasList();
 
-        (new Handler()).postDelayed(this::prepararVideojuego, 2000);
+        (new Handler()).postDelayed(this::prepararVideojuego, 3000);
     }
 
     public void prepararVideojuego() {
-
-        TextView tituloTextView = (TextView) this.findViewById(R.id.tituloTextView);
-        TextView puntuacionTextView = (TextView) this.findViewById(R.id.puntuacionTextView);
-        TextView puntuacionMediaTextView = (TextView) this.findViewById(R.id.puntuacionMediaTextView);
-        TextView horasJugadasTextView = (TextView) this.findViewById(R.id.horasJugadasTextView);
-        ImageView videojuegoImageView = (ImageView) this.findViewById(R.id.videojuegoInfoImageView);
-        NumberPicker puntuacionNumberPicker = (NumberPicker) this.findViewById(R.id.puntuacionNumberPicker);
-        EditText horasJugadasEditText = (EditText) this.findViewById(R.id.horasJugadasEditText);
-        CheckBox completadoCheckBox = (CheckBox) this.findViewById(R.id.completadoCheckBox);
-        CheckBox empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
 
         boolean empezado = false;
         int numerVal = 0;
@@ -152,6 +154,14 @@ public class VideojuegoActivity extends AppCompatActivity {
         Picasso.get().load(actividad.getVideojuego().getImagen()).into(videojuegoImageView);
 
         tituloTextView.setText(actividad.videojuego.getNombre());
+        descripcionVideojuegoTextView.setText(actividad.getVideojuego().getDescripcion());
+
+
+        /**tituloTextView.setVisibility(View.VISIBLE);
+        videojuegoImageView.setVisibility(View.VISIBLE);
+        puntuacionTextView.setVisibility(View.VISIBLE);
+        puntuacionMediaTextView.setVisibility(View.VISIBLE);*/
+        videojuegoScrollView.setVisibility(View.VISIBLE);
 
         if (empezado) {
             puntuacionNumberPicker.setValue(juegoUsuarioActual.getPuntuacion());
@@ -343,5 +353,17 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
+    }
+
+    public void navegarCrearPista(View view) {
+        Intent myIntent = new Intent(VideojuegoActivity.this, CrearPistaActivity.class);
+        myIntent.putExtra("actividad", actividad);
+        startActivity(myIntent);
+    }
+
+    public void navegarCrearReview(View view) {
+        Intent myIntent = new Intent(VideojuegoActivity.this, CrearReviewActivity.class);
+        myIntent.putExtra("actividad", actividad);
+        startActivity(myIntent);
     }
 }

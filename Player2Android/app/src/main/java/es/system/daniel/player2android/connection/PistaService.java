@@ -18,4 +18,7 @@ import retrofit2.http.Path;
 public interface PistaService {
     @GET("v0/pista")
     Call<List<Pista>> getPistas();
+    @Headers({"Accept: application/json"})
+    @POST("v1/pista")
+    Call<Pista> addPista(@Body Pista pista, @Header("Authorization") String authHeader);
 }

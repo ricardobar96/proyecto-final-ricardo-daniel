@@ -11,6 +11,12 @@
         android:theme="@style/Theme.Player2Android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.CrearPistaActivity"
+            android:exported="true" />
+        <activity
+            android:name=".activities.CrearReviewActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.GamesProfileActivity"
             android:exported="true" />
         <activity
