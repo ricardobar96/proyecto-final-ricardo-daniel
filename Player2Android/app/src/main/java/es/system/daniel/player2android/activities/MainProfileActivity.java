@@ -11,6 +11,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.TextView;
@@ -36,6 +37,8 @@ public class MainProfileActivity extends AppCompatActivity {
     Usuario usuarioActual = new Usuario();
     UsuarioService usuarioService;
     Usuario usuarioLogin = new Usuario();
+    String token;
+    Integer idUsuarioActual;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -48,6 +51,11 @@ public class MainProfileActivity extends AppCompatActivity {
 
         usuarioAjeno = (Usuario) getIntent().getSerializableExtra("usuario");
         usuarioService = APIUtils.getUsuarioService();
+
+        SharedPreferences preferences = getSharedPreferences("usuario",
+                Context.MODE_PRIVATE);
+        token = preferences.getString("token", "");
+        idUsuarioActual = preferences.getInt("usuarioId", 0);
 
         if(usuarioAjeno!=null){
 
@@ -70,6 +78,12 @@ public class MainProfileActivity extends AppCompatActivity {
 
             buttonFolow.setVisibility(View.VISIBLE);
 
+            for(Usuario userF: usuarioAjeno.getFollowers()){
+                if(userF.getId() == idUsuarioActual){
+                    buttonFolow.setText("UNFOLLOW");
+                }
+            }
+
             TextView infoTextView = (TextView) this.findViewById(R.id.idMainInfoUser);
             infoTextView.setText(usuarioAjeno.getDescripcion());
 
@@ -81,13 +95,18 @@ public class MainProfileActivity extends AppCompatActivity {
 
             String color = usuarioLogin.getColor();
 
-            if(color.equals("LightSalmon")){
-                getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+            if(color!=null){
+                if(color.equals("LightSalmon")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+                }
+                if(color.equals("lightsteelblue")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+                }
+                if(color.equals("DarkSeaGreen")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+                }
             }
-            if(color.equals("lightsteelblue")){
-                getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
-            }
-            if(color.equals("DarkSeaGreen")){
+            else{
                 getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
             }
 
@@ -179,5 +198,56 @@ public class MainProfileActivity extends AppCompatActivity {
                 break;
         }
         return super.onOptionsItemSelected(item);
+    }
+
+    public void followUser(View view) {
+        try{
+            Log.i("ID 1: ", String.valueOf(idUsuarioActual));
+            Log.i("ID 2: ", String.valueOf(usuarioAjeno.getId()));
+
+            Usuario followUsuarioFollow = usuarioAjeno;
+
+            SharedPreferences preferences = getSharedPreferences("usuario",
+                    Context.MODE_PRIVATE);
+
+            for(Usuario userF: usuarioAjeno.getFollowers()){
+                if(userF.getId() == idUsuarioActual){
+                    Call<Usuario> call = usuarioService.unfollowUser(idUsuarioActual, followUsuarioFollow.getId(), token);
+                    call.enqueue(new Callback<Usuario>() {
+                        @Override
+                        public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                            if(response.isSuccessful()){
+                                finish();
+                            }
+                        }
+
+                        @Override
+                        public void onFailure(Call<Usuario> call, Throwable t) {
+                            Log.e("ERROR: ", t.getMessage());
+                            finish();
+                        }
+                    });
+                }
+            }
+
+            Call<Usuario> call = usuarioService.followUser(idUsuarioActual, followUsuarioFollow.getId(), token);
+            call.enqueue(new Callback<Usuario>() {
+                @Override
+                public void onResponse(Call<Usuario> call, Response<Usuario> response) {
+                    if(response.isSuccessful()){
+                        finish();
+                    }
+                }
+
+                @Override
+                public void onFailure(Call<Usuario> call, Throwable t) {
+                    Log.e("ERROR: ", t.getMessage());
+                    finish();
+                }
+            });
+        }
+        catch (Exception ex){
+            Log.e("ERROR: ", ex.getMessage());
+        }
     }
 }

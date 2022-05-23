@@ -48,7 +48,7 @@
 
                 <Button
                     android:id="@+id/idButtonFollowUser"
-                    android:layout_width="100dp"
+                    android:layout_width="130dp"
                     android:layout_height="50dp"
                     android:layout_marginTop="5dp"
                     android:layout_marginLeft="5dp"
@@ -56,7 +56,7 @@
                     android:layout_toRightOf="@id/avatarUserImageProfileView"
                     android:backgroundTint="#FF9800"
                     android:onClick="followUser"
-                    android:text="Seguir" />
+                    android:text="FOLLOW" />
 
                 <TextView
                     android:id="@+id/idMainInfoUser"

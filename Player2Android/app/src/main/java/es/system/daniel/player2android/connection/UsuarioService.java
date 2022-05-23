@@ -41,4 +41,12 @@ public interface UsuarioService {
 
     @DELETE("v1/usuario/{id}")
     Call<Usuario> deleteUsuario(@Path("id") Integer id, @Header("Authorization") String authHeader);
+
+    @Headers("Content-Type: application/json")
+    @POST("v1/usuario/{idUsuario}/follow/{idToFollow}")
+    Call<Usuario> followUser(@Path("idUsuario") Integer idUsuarioActual, @Path("idToFollow") Integer idUsuarioAjeno, @Header("Authorization") String authHeader);
+
+    @DELETE("v1/usuario/{idUsuario}/follow/{idToFollow}")
+    Call<Usuario> unfollowUser(@Path("idUsuario") Integer idUsuarioActual, @Path("idToFollow") Integer idUsuarioAjeno, @Header("Authorization") String authHeader);
+
 }
