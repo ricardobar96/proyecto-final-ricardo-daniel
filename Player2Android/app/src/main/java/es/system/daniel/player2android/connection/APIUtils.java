@@ -14,4 +14,14 @@ public class APIUtils {
         return RetrofitClient.getClient(API_URL).create(UsuarioService.class);
     }
 
+    public static JuegoUsuarioService getJuegoUsuarioService(){
+        return RetrofitClient.getClient(API_URL).create(JuegoUsuarioService.class);
+    }
+    public static ReviewService getReviewService(){
+        return RetrofitClient.getClient(API_URL).create(ReviewService.class);
+    }
+    public static PistaService getPistaService(){
+        return RetrofitClient.getClient(API_URL).create(PistaService.class);
+    }
+
 }

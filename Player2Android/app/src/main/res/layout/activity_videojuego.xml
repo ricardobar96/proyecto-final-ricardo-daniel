@@ -6,13 +6,218 @@
     android:layout_height="match_parent"
     tools:context=".activities.VideojuegoActivity">
 
-    <TextView
-        android:id="@+id/tituloTextView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="56dp"
-        android:text="TextView"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <ScrollView
+        android:layout_width="fill_parent"
+        android:layout_height="fill_parent"
+        tools:ignore="MissingConstraints"
+        tools:layout_editor_absoluteX="-39dp"
+        tools:layout_editor_absoluteY="495dp">
+
+
+
+        <RelativeLayout
+            android:layout_width="fill_parent"
+            android:layout_height="fill_parent">
+
+            <LinearLayout
+                android:id="@+id/iLayoutInfoUser"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="#97FFC107"
+                android:orientation="vertical"
+                android:gravity="center_horizontal">
+
+
+                <ImageView
+                    android:id="@+id/videojuegoInfoImageView"
+                    android:layout_width="114dp"
+                    android:layout_height="139dp"
+                    android:layout_marginLeft="25dp"
+                    android:layout_marginTop="0dp"
+                    android:layout_marginRight="50dp"
+                    android:layout_toLeftOf="@id/tituloTextView"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    app:layout_constraintHorizontal_bias="0.104"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintTop_toTopOf="parent"
+                    tools:srcCompat="@tools:sample/avatars" />
+
+                <TextView
+                    android:id="@+id/tituloTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="Título del videojuego"
+                    android:textSize="19sp"
+                    android:textStyle="bold" />
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <CheckBox
+                        android:id="@+id/empezadoCheckBox"
+                        android:layout_width="188dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginLeft="-2dp"
+                        android:layout_marginBottom="20dp"
+                        android:onClick="cambiarEmpezado"
+                        android:text="Empezado" />
+
+                    <CheckBox
+                        android:id="@+id/completadoCheckBox"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/empezadoCheckBox"
+                        android:text="Completado" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <EditText
+                        android:id="@+id/horasJugadasEditText"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_toRightOf="@id/horasJugadasTextView"
+                        android:inputType="number"
+                        android:text="32" />
+
+                    <TextView
+                        android:id="@+id/horasJugadasTextView"
+                        android:layout_width="188dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Horas Jugadas" />
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <NumberPicker
+                        android:id="@+id/puntuacionNumberPicker"
+                        android:layout_width="172dp"
+                        android:layout_height="50dp"
+                        android:layout_toRightOf="@id/puntuacionTextView"
+                        android:inputType="number"
+                        android:text="32" />
+
+                    <TextView
+                        android:id="@+id/puntuacionTextView"
+                        android:layout_width="188dp"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:text="Mi Puntuación" />
+
+                </RelativeLayout>
+
+                <RelativeLayout
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:gravity="center"
+                    android:orientation="horizontal">
+
+
+                    <TextView
+                        android:id="@+id/idGenre1"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_alignParentLeft="true"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="200px"
+                        android:layout_marginBottom="20dp"
+                        android:text="Puntuación Media:"
+                        android:textStyle="bold" />
+
+
+                    <TextView
+                        android:id="@+id/puntuacionMediaTextView"
+                        android:layout_width="wrap_content"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="20dp"
+                        android:layout_marginRight="200px"
+                        android:layout_marginBottom="20dp"
+                        android:layout_toRightOf="@id/idGenre1"
+                        android:text="7.47"
+                        android:textStyle="bold" />
+
+                </RelativeLayout>
+
+                <Button
+                    android:id="@+id/actualizarButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:onClick="actualizarJuegoUsuario"
+                    android:text="Actualizar" />
+
+                <TextView
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/reviewsTitleTextView"
+                    android:hint="Reviews" />
+
+                <ListView
+                    android:id="@+id/reviewsVideojuegoListView"
+                    android:layout_width="520dp"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:cacheColorHint="#00000000" />
+                <Button
+                    android:id="@+id/crearReviewButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:text="Hacer review" />
+                <TextView
+                    android:textSize="19sp"
+                    android:textStyle="bold"
+                    android:layout_width="fill_parent"
+                    android:layout_height="wrap_content"
+                    android:id="@+id/pistasTitleTextView"
+                    android:hint="Pistas" />
+
+                <ListView
+                    android:id="@+id/pistasVideojuegoListView"
+                    android:layout_width="match_parent"
+                    android:layout_height="300dp"
+                    android:layout_weight="1"
+                    android:cacheColorHint="#00000000" />
+                <Button
+                    android:id="@+id/crearPistaButton"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:background="#97FFC107"
+                    android:text="Hacer pista" />
+
+
+            </LinearLayout>
+
+
+        </RelativeLayout>
+
+
+
+    </ScrollView>
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

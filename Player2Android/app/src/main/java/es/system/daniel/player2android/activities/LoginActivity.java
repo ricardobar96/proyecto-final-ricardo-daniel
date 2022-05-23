@@ -39,7 +39,6 @@ public class LoginActivity extends AppCompatActivity {
     public void loginUsuario(View view) {
         EditText txtNombre = (EditText) this.findViewById(R.id.nombreEditText);
         EditText txtPwd = (EditText) this.findViewById(R.id.pwdEditText);
-        TextView txtToken = (TextView) this.findViewById(R.id.tokenTextView);
         String nombre = txtNombre.getText().toString();
 
         String pwd = txtPwd.getText().toString();
@@ -53,11 +52,8 @@ public class LoginActivity extends AppCompatActivity {
         call.enqueue(new Callback<String>() {
             @Override
             public void onResponse(Call<String> call, Response<String> response) {
-                Log.i("¿Funciona?", response.body());
                 if(response.isSuccessful()){
-                    txtToken.setText(response.body());
-                    Log.i("Funciona", response.body());
-                    getUsuarioActual(nombre);
+                    getUsuarioActual(nombre, response.body());
                     Intent myIntent = new Intent(LoginActivity.this,PrincipalActivity.class);
                     startActivity(myIntent);
                 }
@@ -71,7 +67,7 @@ public class LoginActivity extends AppCompatActivity {
         });
     }
 
-    public Usuario getUsuarioActual(String nombreUsuario) {
+    public Usuario getUsuarioActual(String nombreUsuario, String token) {
         Call<List<Usuario>> call = usuarioService.getUsuarios();
 
         call.enqueue(new Callback<List<Usuario>>() {
@@ -80,10 +76,7 @@ public class LoginActivity extends AppCompatActivity {
                 //Log.i("¿Funciona?", response.body());
                 if(response.isSuccessful()){
                     for (Usuario usuario : response.body()) {
-                        Log.i("Nombre usuario_", usuario.getNombre());
-                        Log.i("Nombre utilizado", nombreUsuario);
                         if (usuario.getNombre().equals(nombreUsuario)) {
-                            Log.i("Hecho", usuario.getNombre());
                             usuarioActual = usuario;
                             break;
                         }
@@ -92,6 +85,7 @@ public class LoginActivity extends AppCompatActivity {
                             Context.MODE_PRIVATE);
                     SharedPreferences.Editor editor = preferences.edit();
                     editor.putInt("usuarioId", usuarioActual.getId());
+                    editor.putString("token", token);
                     editor.commit();
                     //Intent myIntent = new Intent(AddAlumnoActivity.this,MainActivity.class);
                     //startActivity(myIntent);
