@@ -41,6 +41,7 @@ public class ReviewsProfileActivity extends AppCompatActivity {
     List<Review> listReviewUser = new ArrayList<Review>();
 
     Usuario usuarioLogin = new Usuario();
+    String color;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,7 +50,9 @@ public class ReviewsProfileActivity extends AppCompatActivity {
 
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
 
-        String color = usuarioLogin.getColor();
+        if(usuarioLogin != null){
+            color = usuarioLogin.getColor();
+        }
 
         if(color.equals("LightSalmon")){
             getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
@@ -57,7 +60,7 @@ public class ReviewsProfileActivity extends AppCompatActivity {
         if(color.equals("lightsteelblue")){
             getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
         }
-        if(color.equals("DarkSeaGreen")){
+        else{
             getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
         }
 
@@ -128,7 +131,7 @@ public class ReviewsProfileActivity extends AppCompatActivity {
                 startActivity(intentReviews);
                 break;
             case R.id.menuReturnHome:
-                Intent intentHome = new Intent(ReviewsProfileActivity.this, MainActivity.class);
+                Intent intentHome = new Intent(ReviewsProfileActivity.this, PrincipalActivity.class);
                 intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;

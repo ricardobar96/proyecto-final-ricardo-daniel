@@ -191,7 +191,7 @@ public class GamesProfileActivity extends AppCompatActivity {
                 startActivity(intentSocial);
                 break;
             case R.id.menuReturnHome:
-                Intent intentHome = new Intent(GamesProfileActivity.this, MainActivity.class);
+                Intent intentHome = new Intent(GamesProfileActivity.this, PrincipalActivity.class);
                 intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;

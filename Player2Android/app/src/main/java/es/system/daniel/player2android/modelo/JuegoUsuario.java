@@ -18,7 +18,7 @@ public class JuegoUsuario implements Serializable {
 
     private int puntuacion;
 
-    @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "yyyy-MM-dd")
+    @JsonFormat(shape=JsonFormat.Shape.STRING, pattern="yyyy-MM-dd")
     private Date fecha;
 
     public JuegoUsuario(){}

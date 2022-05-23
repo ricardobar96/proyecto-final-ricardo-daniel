@@ -53,13 +53,18 @@ public class MainProfileActivity extends AppCompatActivity {
 
             String color = usuarioAjeno.getColor();
 
-            if(color.equals("LightSalmon")){
-                getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+            if(color!=null){
+                if(color.equals("LightSalmon")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(230,146,146)));
+                }
+                if(color.equals("lightsteelblue")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
+                }
+                if(color.equals("DarkSeaGreen")){
+                    getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
+                }
             }
-            if(color.equals("lightsteelblue")){
-                getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
-            }
-            if(color.equals("DarkSeaGreen")){
+            else{
                 getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
             }
 
@@ -126,7 +131,14 @@ public class MainProfileActivity extends AppCompatActivity {
     @Override
     public boolean onCreateOptionsMenu(Menu menu) {
         MenuInflater menuInflater = getMenuInflater();
-        menuInflater.inflate(R.menu.menuprofile, menu);
+
+        if(usuarioAjeno!=null){
+            menuInflater.inflate(R.menu.menu_anotheruser, menu);
+        }
+        if(usuarioAjeno==null){
+            menuInflater.inflate(R.menu.menuprofile, menu);
+        }
+
         return true;
     }
 
@@ -158,9 +170,12 @@ public class MainProfileActivity extends AppCompatActivity {
                 startActivity(intentSocial);
                 break;
             case R.id.menuReturnHome:
-                Intent intentHome = new Intent(MainProfileActivity.this, MainActivity.class);
+                Intent intentHome = new Intent(MainProfileActivity.this, PrincipalActivity.class);
                 intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
+                break;
+            case R.id.menuReturnBack:
+                finish();
                 break;
         }
         return super.onOptionsItemSelected(item);

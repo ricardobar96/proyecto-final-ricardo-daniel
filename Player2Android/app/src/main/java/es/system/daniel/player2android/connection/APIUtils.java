@@ -26,4 +26,8 @@ public class APIUtils {
     public static JuegoUsuarioService getJuegoUsuarioService(){
         return RetrofitClient.getClient(API_URL).create(JuegoUsuarioService.class);
     }
+
+    public static PistaService getPistaService(){
+        return RetrofitClient.getClient(API_URL).create(PistaService.class);
+    }
 }

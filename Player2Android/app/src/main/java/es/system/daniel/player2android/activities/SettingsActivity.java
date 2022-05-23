@@ -32,7 +32,7 @@ public class SettingsActivity extends AppCompatActivity {
         if(color.equals("lightsteelblue")){
             getWindow().getDecorView().setBackgroundColor((Color. rgb(146,208,230)));
         }
-        if(color.equals("DarkSeaGreen")){
+        else{
             getWindow().getDecorView().setBackgroundColor((Color. rgb(139,230,146)));
         }
     }
@@ -72,7 +72,7 @@ public class SettingsActivity extends AppCompatActivity {
                 startActivity(intentReviews);
                 break;
             case R.id.menuReturnHome:
-                Intent intentHome = new Intent(SettingsActivity.this, MainActivity.class);
+                Intent intentHome = new Intent(SettingsActivity.this, PrincipalActivity.class);
                 intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;

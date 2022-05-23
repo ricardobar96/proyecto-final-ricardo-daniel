@@ -17,6 +17,8 @@ import java.util.List;
 import androidx.annotation.LayoutRes;
 import androidx.annotation.NonNull;
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.activities.GamesProfileActivity;
+import es.system.daniel.player2android.activities.MainProfileActivity;
 import es.system.daniel.player2android.activities.VideojuegoActivity;
 import es.system.daniel.player2android.modelo.Actividad;
 import es.system.daniel.player2android.modelo.Videojuego;
@@ -45,8 +47,18 @@ public class ActividadAdapter extends ArrayAdapter<Actividad> {
         imgAvatar.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent intent = new Intent(context, VideojuegoActivity.class);
-                intent.putExtra("actividad", actividades.get(pos));
+                Intent intent = new Intent(context, MainProfileActivity.class);
+                intent.putExtra("usuario", actividades.get(pos).getUsuario());
+                //intent.putExtra("actividad", actividades.get(pos));
+                context.startActivity(intent);
+            }
+        });
+        txtUsuario.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(context, MainProfileActivity.class);
+                intent.putExtra("usuario", actividades.get(pos).getUsuario());
+                //intent.putExtra("actividad", actividades.get(pos));
                 context.startActivity(intent);
             }
         });
