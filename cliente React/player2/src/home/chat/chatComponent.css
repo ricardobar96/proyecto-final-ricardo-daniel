@@ -1,0 +1,53 @@
+html{
+  height: 100%;
+}
+
+body{ 
+  height:100%;
+}
+.cuerpo {
+  height: 100%;
+}
+.mensajeEnviado {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+}
+.mensajeRecibido {
+  display: flex;
+  justify-content: flex-start;
+  width: 100%;
+}
+.fecha {
+  font-size: small;
+  margin-bottom: 1%;
+  margin-top: 1%;
+}
+.contenidoMensajeRecibido {
+  background-color: azure;
+  border-radius: 1%;
+  padding: 1%;
+  margin: 1%;
+  word-wrap: break-word;
+  overflow-wrap: break-word;
+  max-width: 50ch;
+  white-space: unset;
+}
+.contenidoMensajeEnviado {
+  background-color: green;
+  border-radius: 1%;
+  padding: 1%;
+  margin: 1%;
+  max-width: 50ch;
+  overflow-wrap: break-word;
+  white-space: unset;
+}
+.contenedorMensajes {
+  max-width: 100%;
+  max-height: 550px;
+  overflow-x: hidden;
+  overflow-y: scroll;
+}
+.formularioMensaje {
+  display: flex;
+}

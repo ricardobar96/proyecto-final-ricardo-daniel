@@ -1,0 +1,84 @@
+.register{
+    width: 100vw;
+    height: 100vh;
+    background-color: moccasin;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+.registerWrapper{
+    width: 70%;
+    height: 70%;
+    background-color: moccasin;
+    display: flex;
+    padding: 45px;
+}
+.registerLeft,.registerRight{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+.registerLogo{
+    font-size: 80px;
+    font-weight: 800;
+    color:orangered;
+    margin-bottom: 10px;
+}
+.registerInfo{
+    font-size: 30px;
+    font-weight: 700;
+    color:royalblue;
+    margin-bottom: 100px;
+}
+.registerAccountBox{
+    height: 200px;
+    padding: 20px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.returnBox{
+    height: 70px;
+    padding: 20px;
+    background-color: lightgoldenrodyellow;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+.registerInput{
+    height: 30px;
+    border-radius: 10px;
+    border: 1px solid goldenrod;
+    font-size: 18px;
+}
+.registerInput:focus{
+    outline:none;
+}
+.registerAccountButton{
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color: blueviolet;
+    color:white;
+    font-size: 20px;
+    font-weight: 500px;
+}
+.returnButton{
+    height: 50px;
+    border-radius: 10px;
+    border: none;
+    background-color:palevioletred;
+    color:white;
+    font-size: 20px;
+    font-weight: 500px;
+}
+
+.registerAccountButton:hover {
+    filter: brightness(120%);
+}
+
+.returnButton:hover {
+    filter: brightness(120%);
+}

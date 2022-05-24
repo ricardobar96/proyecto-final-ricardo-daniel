@@ -1,0 +1,115 @@
+body{
+    background-color: lightsteelblue
+}
+
+.juegosHome{
+    flex: 3;
+    padding: 50px;
+    height: calc(100vh);
+    background-color: lightsteelblue;
+}
+
+.title{
+    font-weight: bolder;
+    font-size: 24px;
+    color:black;
+}
+
+.progresoList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 5;
+    column-gap:0ch
+}
+
+li{
+    padding: 20px;
+    align-items: center;
+    cursor: pointer;
+}
+
+li:hover{
+    color:orangered;
+}
+
+.tendenciasList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+}
+
+.imageGameHome{
+    width: 120px;
+    height: 120px;
+    text-align: center;
+}
+
+.titleGameHome:hover{
+    color:orangered;
+}
+
+.titleGameHome{
+    color:white;
+    text-decoration: none;
+    text-align: center;
+    flex: 1;
+}
+
+.titleHomeBox{
+    width: 120px;
+    height: 60px;
+    position: relative;
+    background-color: darkslategray;
+    display: flex;
+}
+
+.juegosHomeBox{
+    align-items: center;
+}
+
+.nuevosList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;
+    flex-wrap: wrap
+}
+
+.tendenciasWrapper{
+    margin-top: 20px;
+}
+
+.nuevosWrapper{
+    margin-top: 20px;
+}
+
+.itemHome{
+    text-align: center;
+}
+
+.buttonCreate{
+    margin-top: 15px;
+    padding: 10px;
+    height: 50px;
+    width: 150px;
+    border-radius: 10px;
+    border: none;
+    background-color:limegreen;
+    color:white;
+    font-size: 15px;
+    font-weight: 500px;
+    margin-bottom: 50px;
+    cursor:pointer;
+}
+
+.buttonCreate:hover {
+    filter: brightness(150%);
+}
+
+.buttonCreateBox{
+    text-align: center;
+}

@@ -1,0 +1,60 @@
+.actividad{
+    flex: 7;
+    padding: 50px;
+    height: calc(100vh - 50px);
+    background-color: lightsteelblue;
+}
+
+.title{
+    font-weight: bolder;
+    font-size: 24px;
+    color:black;
+}
+
+.actividadWrapper{
+    padding: 20px;
+}
+
+.actividadList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+}
+
+.actividadItem{
+    align-items: center;
+    display: block;
+    padding: 15px;
+}
+
+.actividadLeft,.actividadRight{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+}
+
+.actividadRight{
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+    justify-content: space-between;
+}
+
+.actividadLeft{
+    background-color: white; 
+    border: solid;
+    width: 30px;
+    height: 30px;
+}
+
+.actividadTiempo{
+    margin-top: 0;
+    margin-left: 70%;
+    font-style: italic;
+}
+
+.actividadNombreUser,.actividadAccion{
+    font-size: 14px;
+    font-weight: bolder;
+    padding: 10px;
+}

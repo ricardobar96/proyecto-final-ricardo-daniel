@@ -1,0 +1,42 @@
+.buttonsSocialProfile{
+    text-align: center;
+    margin-top: 50px;
+}
+
+.socialProfileBox{
+    align-items: center;
+    margin: auto;
+}
+
+.socialProfileWrapper{
+    margin-top: 20px;
+}
+
+.socialProfileList{
+    display: inline-block;
+    flex-flow: column wrap;
+    column-count: 6;
+    list-style: none;
+}
+
+.itemSocialProfile{
+    list-style: none;
+    text-align: center;
+}
+
+.titleSocial{
+    font-weight: bolder;
+    font-size: 24px;
+    color:black;
+    text-align: center;
+}
+
+.searchbarSocial{
+    width: 15%;
+    height: 30px;
+    background-color: white;
+    border-radius: 30px;
+    display: flex;
+    margin-left: 50px;
+    margin-top: -70px;
+}
