@@ -2,6 +2,7 @@ package es.system.daniel.player2android.connection;
 
 import java.util.List;
 
+import es.system.daniel.player2android.modelo.JuegoUsuario;
 import es.system.daniel.player2android.modelo.Review;
 import es.system.daniel.player2android.modelo.Videojuego;
 import retrofit2.Call;
@@ -17,4 +18,7 @@ import retrofit2.http.Path;
 public interface ReviewService {
     @GET("v0/review")
     Call<List<Review>> getReviews();
+    @Headers({"Accept: application/json"})
+    @POST("v1/review")
+    Call<Review> addReview(@Body Review review, @Header("Authorization") String authHeader);
 }

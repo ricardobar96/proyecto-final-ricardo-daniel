@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Date;
 import java.util.List;
 
-public class Videojuego implements Serializable {
+public class Videojuego implements Comparable<Videojuego>, Serializable {
     private int id;
 
     private String descripcion;
@@ -117,5 +117,9 @@ public class Videojuego implements Serializable {
 
     public void setPuntuacion(float puntuacion) {
         this.puntuacion = puntuacion;
+    }
+    @Override
+    public int compareTo(Videojuego o) {
+        return getFecha().compareTo(o.getFecha());
     }
 }

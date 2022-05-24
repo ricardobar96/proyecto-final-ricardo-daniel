@@ -38,23 +38,15 @@ public class ReviewAdapter extends ArrayAdapter<Review> {
         View rowView = inflater.inflate(R.layout.tarjeta_review, parent, false);
 
         TextView txtreview = (TextView) rowView.findViewById(R.id.reviewTextView);
+        TextView txtInforeview = (TextView) rowView.findViewById(R.id.reviewInfoTextView);
         ImageView imgAvatar = (ImageView) rowView.findViewById(R.id.AvatarReviewImageView);
 
         txtreview.setText(String.format("%s, %s", reviews.get(pos).getTitulo(),
                 reviews.get(pos).getUsuario().getNombre()));
+        txtInforeview.setText(String.format("%s", reviews.get(pos).getContenido()));
         Picasso.get().load(reviews.get(pos).getUsuario().getAvatar()).into(imgAvatar);
 
-        txtreview.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(context, VideojuegoActivity.class);
-                intent.putExtra("juego", reviews.get(pos).getVideojuego());
-                //intent.putExtra("actividad", actividades.get(pos));
-                context.startActivity(intent);
-            }
-        });
-
-        imgAvatar.setOnClickListener(new View.OnClickListener() {
+        rowView.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(context, MainProfileActivity.class);

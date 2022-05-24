@@ -1,6 +1,7 @@
 package es.system.daniel.player2android.adapter;
 
 import android.content.Context;
+import android.content.Intent;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +17,7 @@ import com.squareup.picasso.Picasso;
 import java.util.List;
 
 import es.system.daniel.player2android.R;
+import es.system.daniel.player2android.activities.VideojuegoActivity;
 import es.system.daniel.player2android.modelo.Videojuego;
 
 public class GameAdapter extends ArrayAdapter<Videojuego> {
@@ -45,9 +47,9 @@ public class GameAdapter extends ArrayAdapter<Videojuego> {
             @Override
             public void onClick(View v) {
                 //start Activity usuario Form
-                //Intent intent = new Intent(context, usuarioActivity.class);
-                //intent.putExtra("usuario", usuarios.get(pos));
-                //context.startActivity(intent);
+                Intent intent = new Intent(context, VideojuegoActivity.class);
+                intent.putExtra("videojuego", games.get(pos));
+                context.startActivity(intent);
             }
         });
 

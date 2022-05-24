@@ -153,6 +153,11 @@ public class PrincipalActivity extends AppCompatActivity {
                 intentHome.putExtra("usuarioLogin", usuarioLogin);
                 startActivity(intentHome);
                 break;
+            case R.id.menuListaVideojuegos:
+                Intent intentJuegos = new Intent(PrincipalActivity.this, ListaVideojuegosActivity.class);
+                intentJuegos.putExtra("usuarioLogin", usuarioLogin);
+                startActivity(intentJuegos);
+                break;
             case R.id.menuLogout:
                 SharedPreferences preferences = getSharedPreferences("usuario",
                         Context.MODE_PRIVATE);

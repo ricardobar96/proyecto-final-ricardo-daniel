@@ -34,6 +34,7 @@ import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.ListView;
 import android.widget.NumberPicker;
+import android.widget.ScrollView;
 import android.widget.TextView;
 
 import com.squareup.picasso.Picasso;
@@ -59,12 +60,14 @@ public class VideojuegoActivity extends AppCompatActivity {
     List<Review> listReviewVideojuego = new ArrayList<>();
     List<Pista> listPistaVideojuego = new ArrayList<>();
     String token;
+    Videojuego videojuegoActual;
 
     // Elementos de la vista
     TextView tituloTextView;
     TextView puntuacionTextView;
     TextView puntuacionMediaTextView;
     TextView horasJugadasTextView;
+    TextView descripcionVideojuegoTextView;
     ImageView videojuegoImageView;
     NumberPicker puntuacionNumberPicker;
     EditText horasJugadasEditText;
@@ -72,6 +75,7 @@ public class VideojuegoActivity extends AppCompatActivity {
     CheckBox empezadoCheckBox;
     ListView listViewReviews;
     ListView listViewPistas;
+    ScrollView videojuegoScrollView;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -81,6 +85,11 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
         actividad = (Actividad) getIntent().getSerializableExtra("actividad");
+        if (actividad == null) {
+            videojuegoActual = (Videojuego) getIntent().getSerializableExtra("videojuego");
+        } else {
+            videojuegoActual = actividad.getVideojuego();
+        }
         usuarioService = APIUtils.getUsuarioService();
         juegoUsuarioService = APIUtils.getJuegoUsuarioService();
         tituloTextView = (TextView) this.findViewById(R.id.tituloTextView);
@@ -92,35 +101,32 @@ public class VideojuegoActivity extends AppCompatActivity {
         horasJugadasEditText = (EditText) this.findViewById(R.id.horasJugadasEditText);
         completadoCheckBox = (CheckBox) this.findViewById(R.id.completadoCheckBox);
         empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
+        descripcionVideojuegoTextView = (TextView) this.findViewById(R.id.descripcionVideojuegoTextView);
+        videojuegoScrollView = (ScrollView) this.findViewById(R.id.videojuegoScrollView2);
         puntuacionNumberPicker.setVisibility(View.GONE);
         horasJugadasEditText.setVisibility(View.GONE);
         completadoCheckBox.setVisibility(View.GONE);
         puntuacionTextView.setVisibility(View.GONE);
         horasJugadasTextView.setVisibility(View.GONE);
+
+        videojuegoScrollView.setVisibility(View.GONE);
+        /*tituloTextView.setVisibility(View.GONE);
+        videojuegoImageView.setVisibility(View.GONE);
+        puntuacionTextView.setVisibility(View.GONE);
+        puntuacionMediaTextView.setVisibility(View.GONE);*/
         listViewReviews = (ListView)findViewById(R.id.reviewsVideojuegoListView);
         listViewPistas = (ListView)findViewById(R.id.pistasVideojuegoListView);
         reviewService = APIUtils.getReviewService();
         pistaService = APIUtils.getPistaService();
-
         getUsuario();
         getJuegoUsuario();
         getReviewsList();
         getPistasList();
 
-        (new Handler()).postDelayed(this::prepararVideojuego, 2000);
+        (new Handler()).postDelayed(this::prepararVideojuego, 3000);
     }
 
     public void prepararVideojuego() {
-
-        TextView tituloTextView = (TextView) this.findViewById(R.id.tituloTextView);
-        TextView puntuacionTextView = (TextView) this.findViewById(R.id.puntuacionTextView);
-        TextView puntuacionMediaTextView = (TextView) this.findViewById(R.id.puntuacionMediaTextView);
-        TextView horasJugadasTextView = (TextView) this.findViewById(R.id.horasJugadasTextView);
-        ImageView videojuegoImageView = (ImageView) this.findViewById(R.id.videojuegoInfoImageView);
-        NumberPicker puntuacionNumberPicker = (NumberPicker) this.findViewById(R.id.puntuacionNumberPicker);
-        EditText horasJugadasEditText = (EditText) this.findViewById(R.id.horasJugadasEditText);
-        CheckBox completadoCheckBox = (CheckBox) this.findViewById(R.id.completadoCheckBox);
-        CheckBox empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
 
         boolean empezado = false;
         int numerVal = 0;
@@ -129,7 +135,7 @@ public class VideojuegoActivity extends AppCompatActivity {
 
         for (JuegoUsuario juegoUsuario : usuarioActual.getJuegoUsuarios()) {
             Log.i("JuegoUsuario", juegoUsuario.getFecha().toString());
-            if (juegoUsuario.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+            if (juegoUsuario.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                 Log.i("Funciona!", juegoUsuario.getVideojuego().getDescripcion());
                 Log.i("Fecha now", new Date().toString());
                 empezado = true;
@@ -139,7 +145,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         }
 
         for (JuegoUsuario juegoUsuario : juegoUsuarios) {
-            if (juegoUsuario.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+            if (juegoUsuario.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                 numerVal++;
                 puntuacionTotal += juegoUsuario.getPuntuacion();
             }
@@ -154,9 +160,17 @@ public class VideojuegoActivity extends AppCompatActivity {
         puntuacionNumberPicker.setMinValue(0);
         puntuacionNumberPicker.setMaxValue(10);
         empezadoCheckBox.setChecked(empezado);
-        Picasso.get().load(actividad.getVideojuego().getImagen()).into(videojuegoImageView);
+        Picasso.get().load(videojuegoActual.getImagen()).into(videojuegoImageView);
 
-        tituloTextView.setText(actividad.videojuego.getNombre());
+        tituloTextView.setText(videojuegoActual.getNombre());
+        descripcionVideojuegoTextView.setText(videojuegoActual.getDescripcion());
+
+
+        /**tituloTextView.setVisibility(View.VISIBLE);
+         videojuegoImageView.setVisibility(View.VISIBLE);
+         puntuacionTextView.setVisibility(View.VISIBLE);
+         puntuacionMediaTextView.setVisibility(View.VISIBLE);*/
+        videojuegoScrollView.setVisibility(View.VISIBLE);
 
         if (empezado) {
             puntuacionNumberPicker.setValue(juegoUsuarioActual.getPuntuacion());
@@ -222,7 +236,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         CheckBox empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
         if (empezadoCheckBox.isChecked()) {
             Videojuego videojuegoJuegoUsuario = new Videojuego();
-            videojuegoJuegoUsuario.setId(actividad.getVideojuego().getId());
+            videojuegoJuegoUsuario.setId(videojuegoActual.getId());
             Usuario usuarioJuegoUsuario = new Usuario();
             usuarioJuegoUsuario.setId(usuarioActual.getId());
             Call<JuegoUsuario> call = juegoUsuarioService.addJuegoUsuario(new JuegoUsuario(false, 0, videojuegoJuegoUsuario
@@ -276,7 +290,7 @@ public class VideojuegoActivity extends AppCompatActivity {
                     listReview = response.body();
 
                     for (Review r : listReview) {
-                        if (r.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+                        if (r.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                             listReviewVideojuego.add(r);
                         }
                     }
@@ -301,7 +315,7 @@ public class VideojuegoActivity extends AppCompatActivity {
                     listPista = response.body();
 
                     for (Pista p : listPista) {
-                        if (p.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+                        if (p.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                             listPistaVideojuego.add(p);
                         }
                     }
@@ -330,7 +344,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         juegoUsuarioPut.setUsuario(usuario);
 
         Videojuego videojuego = new Videojuego();
-        videojuego.setId(actividad.getVideojuego().getId());
+        videojuego.setId(videojuegoActual.getId());
         juegoUsuarioPut.setVideojuego(videojuego);
 
         Call<JuegoUsuario> call = juegoUsuarioService.updateJuegoUsuario(juegoUsuarioPut.getId(),
@@ -348,6 +362,18 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Log.e("ERROR: ", t.getMessage());
             }
         });
+    }
+
+    public void navegarCrearPista(View view) {
+        Intent myIntent = new Intent(VideojuegoActivity.this, CrearPistaActivity.class);
+        myIntent.putExtra("videojuego", videojuegoActual);
+        startActivity(myIntent);
+    }
+
+    public void navegarCrearReview(View view) {
+        Intent myIntent = new Intent(VideojuegoActivity.this, CrearReviewActivity.class);
+        myIntent.putExtra("videojuego", videojuegoActual);
+        startActivity(myIntent);
     }
 
     @Override
@@ -368,6 +394,11 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Intent intentHome = new Intent(VideojuegoActivity.this, PrincipalActivity.class);
                 intentHome.putExtra("usuarioLogin", usuarioActual);
                 startActivity(intentHome);
+                break;
+            case R.id.menuListaVideojuegos:
+                Intent intentJuegos = new Intent(VideojuegoActivity.this, ListaVideojuegosActivity.class);
+                intentJuegos.putExtra("usuarioLogin", usuarioActual);
+                startActivity(intentJuegos);
                 break;
             case R.id.menuLogout:
                 SharedPreferences preferences = getSharedPreferences("usuario",

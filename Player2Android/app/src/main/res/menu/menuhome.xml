@@ -10,6 +10,12 @@
         app:showAsAction="" />
 
     <item
+        android:id="@+id/menuListaVideojuegos"
+        android:orderInCategory="2"
+        android:title="Lista videojuegos"
+        app:showAsAction="" />
+
+    <item
         android:id="@+id/menuMainProfile"
         android:orderInCategory="3"
         android:title="Perfil"

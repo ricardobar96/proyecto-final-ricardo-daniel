@@ -2,7 +2,6 @@ package es.system.daniel.player2android.connection;
 
 
 import es.system.daniel.player2android.connection.retrofit.RetrofitClient;
-import es.system.daniel.player2android.modelo.JuegoUsuario;
 
 public class APIUtils {
 
@@ -15,19 +14,19 @@ public class APIUtils {
         return RetrofitClient.getClient(API_URL).create(UsuarioService.class);
     }
 
-    public static GameService getGameService(){
-        return RetrofitClient.getClient(API_URL).create(GameService.class);
-    }
-
-    public static ReviewService getReviewService(){
-        return RetrofitClient.getClient(API_URL).create(ReviewService.class);
-    }
-
     public static JuegoUsuarioService getJuegoUsuarioService(){
         return RetrofitClient.getClient(API_URL).create(JuegoUsuarioService.class);
     }
-
+    public static ReviewService getReviewService(){
+        return RetrofitClient.getClient(API_URL).create(ReviewService.class);
+    }
     public static PistaService getPistaService(){
         return RetrofitClient.getClient(API_URL).create(PistaService.class);
+    }
+    public static GameService getGameService(){
+        return RetrofitClient.getClient(API_URL).create(GameService.class);
+    }
+    public static GeneroService getGeneroService() {
+        return RetrofitClient.getClient(API_URL).create(GeneroService.class);
     }
 }

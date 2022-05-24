@@ -4,14 +4,16 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".activities.VideojuegoActivity">
+    tools:context=".activities.VideojuegoActivity"
+    android:background="#97FFC107">
 
     <ScrollView
         android:layout_width="fill_parent"
         android:layout_height="fill_parent"
         tools:ignore="MissingConstraints"
         tools:layout_editor_absoluteX="-39dp"
-        tools:layout_editor_absoluteY="495dp">
+        tools:layout_editor_absoluteY="495dp"
+        android:id="@+id/videojuegoScrollView2">
 
 
 
@@ -51,6 +53,14 @@
                     android:text="Título del videojuego"
                     android:textSize="19sp"
                     android:textStyle="bold" />
+                <TextView
+                    android:id="@+id/descripcionVideojuegoTextView"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_gravity="center"
+                    android:layout_marginTop="15dp"
+                    android:text="Descripción del videojuego"
+                    android:textSize="14sp" />
 
                 <RelativeLayout
                     android:layout_width="fill_parent"
@@ -92,7 +102,7 @@
                         android:layout_height="wrap_content"
                         android:layout_toRightOf="@id/horasJugadasTextView"
                         android:inputType="number"
-                        android:text="32" />
+                        android:text="0" />
 
                     <TextView
                         android:id="@+id/horasJugadasTextView"
@@ -155,7 +165,7 @@
                         android:layout_marginRight="200px"
                         android:layout_marginBottom="20dp"
                         android:layout_toRightOf="@id/idGenre1"
-                        android:text="7.47"
+                        android:text="5.0"
                         android:textStyle="bold" />
 
                 </RelativeLayout>
@@ -186,6 +196,7 @@
                     android:id="@+id/crearReviewButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="navegarCrearReview"
                     android:background="#97FFC107"
                     android:text="Hacer review" />
                 <TextView
@@ -206,6 +217,7 @@
                     android:id="@+id/crearPistaButton"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
+                    android:onClick="navegarCrearPista"
                     android:background="#97FFC107"
                     android:text="Hacer pista" />
 
