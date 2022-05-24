@@ -1,49 +1,73 @@
-﻿**Manual de usuario**
+<h1 align="center">Manual de usuario</h1>
+<br/>
+<h2 align="center">Red social de videojuegos, “Player2”</h1>
+<br/>
+<h2 align="center">IES Puerto de la Cruz - Telesforo Bravo</h1>
 
-**Red social de videojuegos, “Player2”**
+<br/>
+<br/>
+<h2 align="center">Autores:</h1>
+<h4 align="center">Ricardo Baloira Armas</h4>
+<h4 align="center">Daniel Barroso Rocío</h4>
 
-**\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_\_ \_\_\_\_\_**
+<br/>
+<br/>
 
-**IES Puerto de la Cruz - Telesforo Bravo**
+## **Índice:**
 
-**Autores:**
+[**1. Introducción**](#id1)
 
-Ricardo Baloira Armas Daniel Barroso Rocío
+[1.1 Vista principal](#id1.1)
 
-**Índice**
+[1.2 Login](#id1.2)
 
-1. [**Introducción](#_page2_x72.00_y72.00) **[3**](#_page2_x72.00_y72.00)**
-1. [Vista principal](#_page2_x72.00_y115.54) [3](#_page2_x72.00_y115.54)
-1. [Login](#_page2_x72.00_y570.92) [4](#_page2_x72.00_y570.92)
-1. [Registro](#_page3_x72.00_y380.24) [4](#_page3_x72.00_y380.24)
-1. [Cerrar sesión](#_page4_x72.00_y349.64) [5](#_page4_x72.00_y349.64)
-2. [**Vista Home](#_page5_x72.00_y72.00) **[6**](#_page5_x72.00_y72.00)**
+[1.3 Registro](#id1.3)
 
-[2.1 Listado de actividades](#_page5_x72.00_y115.54) [6](#_page5_x72.00_y115.54)
+[1.4 Cerrar sesión](#id1.4)
 
-3. [**Vista Videojuegos](#_page7_x72.00_y72.00) **[8**](#_page7_x72.00_y72.00)**
-1. [Listados](#_page7_x72.00_y115.54) [8](#_page7_x72.00_y115.54)
-1. [Opciones de filtro](#_page8_x72.00_y72.00) [9](#_page8_x72.00_y72.00)
-4. [**Ficha de un juego](#_page9_x72.00_y72.00) **[10**](#_page9_x72.00_y72.00)**
-   1. [Introducción](#_page9_x72.00_y115.54) [10](#_page9_x72.00_y115.54)
-   1. [Agregar a lista y puntuar](#_page11_x72.00_y72.00) [12](#_page11_x72.00_y72.00)
-   1. [Ver y publicar pistas](#_page12_x72.00_y72.00) [13](#_page12_x72.00_y72.00)
-   1. [Ver y publicar reviews](#_page13_x72.00_y72.00) [14](#_page13_x72.00_y72.00)
-5. [**Vistas del perfil](#_page14_x72.00_y72.00) **[15**](#_page14_x72.00_y72.00)**
-1. [Introducción](#_page14_x72.00_y115.54) [15](#_page14_x72.00_y115.54)
-1. [Vista Principal](#_page15_x72.00_y72.00) [16](#_page15_x72.00_y72.00)
-1. [Vista Videojuegos](#_page18_x72.00_y72.00) [20](#_page18_x72.00_y72.00)
-1. [Vista Social](#_page19_x72.00_y72.00) [21](#_page19_x72.00_y72.00)
-1. [Vista Reviews](#_page21_x72.00_y72.00) [23](#_page21_x72.00_y72.00)
-1. [Vista Ajustes](#_page22_x72.00_y72.00) [24](#_page22_x72.00_y72.00)
-1. **Introducción**
-1. **Vista principal**
+[**2. Vista Home**](#id2)
+
+[2.1 Listado de actividades](#id2.1)
+
+[**3. Vista Videojuegos**](#id3)
+
+[3.1 Listados](#id3.1)
+
+[3.2 Opciones de filtro](#id3.2)
+
+[**4. Ficha de un juego**](#id4)
+
+[4.1 Introducción](#id4.1)
+
+[4.2 Agregar a lista y puntuar](#id4.2)
+
+[4.3 Ver y publicar pistas](#id4.3)
+
+[4.4 Ver y publicar reviews](#id4.4)
+
+[**5. Vista Perfil**](#id5)
+
+[5.1 Introducción](#id5.1)
+
+[5.2 Vista Principal](#id5.2)
+
+[5.3 Vista Videojuegos](#id5.3)
+
+[5.4 Vista Social](#id5.4)
+
+[5.5 Vista Reviews](#id5.5)
+
+[5.6 Vista Ajustes](#id5.6)
+
+
+# **Introducción** <a name="id1"></a>
+## **Vista principal** <a name="id1.1"></a>
 
 Al acceder a Player2 el usuario será dirigido por defecto a esta vista donde se le mostrarán como dos únicas opciones acceder a la vista donde poder iniciar sesión (botón “LOGIN”) o acceder a la vista donde poder registrarse como un nuevo usuario (botón “REGISTRO”).
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.001.jpeg)
 
-2. **Login**
+## **Login** <a name="id1.2"></a>
 
 Al pulsar sobre el botón “LOGIN” en la vista principal el usuario accederá a esta vista, donde se le presentarán los siguientes elementos:
 
@@ -61,7 +85,7 @@ se han rellenado los campos “Nombre” y “Contraseña” con datos de un usu
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.002.jpeg)
 
-3. **Registro**
+## **Registro** <a name="id1.3"></a>
 
 Al pulsar sobre el botón “REGISTRO” en la vista principal el usuario accederá a esta vista, donde se le presentarán los siguientes elementos:
 
@@ -79,15 +103,15 @@ comprobación de que se han rellenado los campos “Nombre” y “Contraseña�
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.003.jpeg)
 
-4. **Cerrar sesión**
+## **Cerrar sesión** <a name="id1.4"></a>
 
 Para cerrar sesión el usuario deberá, desde cualquiera de las vistas ajenas a su perfil, seleccionar desde el menú (situado en la esquina superior derecha de la pantalla) la opción “Cerrar sesión”. De este modo, se cerrará la sesión actual y el usuario será dirigido a la vista del login.
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.004.png)![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.005.jpeg)
 
-2. **Vista Home**
+# **Vista Home** <a name="id2"></a>
 
-**2.1 Listado de actividades**
+## **2.1 Listado de actividades** <a name="id2.1"></a>
 
 En esta vista, a la cual accederá el usuario al iniciar sesión o al pulsar en el menú la opción “Home”, se muestran las últimas actividades, ordenadas de más antigua a más reciente, de aquellos usuarios a los que sigue el usuario. Estas actividades mostrarán, en función de la acción realizada por dicho usuario, el juego que él o ella agregó a su lista personal o acerca del cual publicó una review o pista, indicándose en la actividad además del título de dicho juego y la acción realizada la fecha en la cual tuvo lugar, junto al nombre y avatar del usuario en cuestión. Al clicar sobre este avatar o nombre de usuario se dirigirá al usuario al perfil del usuario que realizó la actividad, en tanto que si este pulsa sobre cualquier otro elemento de la actividad se le dirigirá a la ficha del juego sobre el cual se llevó a cabo la acción.
 
@@ -97,14 +121,14 @@ Si el usuario no sigue a ningún usuario solamente se le mostrará en este panta
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.007.jpeg)
 
-3. **Vista Videojuegos**
-1. **Listados**
+# **Vista Videojuegos** <a name="id3"></a>
+## **Listados** <a name="id3.1"></a>
 
 En esta vista, a la cual se accede mediante la opción de menú “Lista videojuegos”, se muestran listados los juegos existentes en la base de datos de Player2, los cuales podrá observar el usuario deslizando la lista hacia abajo y arriba y, si lo desea, observar la ficha de un juego en concreto haciendo clic sobre el juego en cuestión dentro de la lista.
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.008.jpeg)
 
-2. **Opciones de filtro**
+## **Opciones de filtro** <a name="id3.2"></a>
 
 En la parte superior de la vista se muestran distintas opciones de filtro, las cuales el usuario puede usar simultáneamente para, tras pulsar el botón “FILTRAR”, aplicar dichos filtros al listado y que de esta forma se muestren solo aquellos juegos que cumplan con los requisitos especificados. Estos filtros incluyen:
 
@@ -118,8 +142,8 @@ los géneros existentes en la base de datos para que de esta forma solo se muest
 
 Si el usuario desea eliminar los filtros efectuados y devolver el listado a su forma original, mostrando todos los juegos existentes en la base de datos, solo debe de pulsar el botón “QUITAR FILTROS”.
 
-4. **Ficha de un juego**
-1. **Introducción**
+# **Ficha de un juego** <a name="id4"></a>
+## **Introducción** <a name="id4.1"></a>
 
 En esta vista, a la que el usuario podrá acceder al hacer clic sobre el nombre o imagen de uno de los juegos mostrados en cualquier vista de la aplicación, se presentan los siguientes datos del juego:
 
@@ -146,7 +170,7 @@ el usuario tiene el juego dentro de su lista personal o pulsa el checkbox “Emp
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.009.jpeg)
 
-2. **Agregar a lista y puntuar**
+## **Agregar a lista y puntuar** <a name="id4.2"></a>
 
 Clicando sobre el checkbox mencionado en la sección anterior, “Empezado”, el usuario agregará el juego a su lista personal, apareciendo por consiguiente este registrado en la base de datos como uno de los juegos en progreso del usuario.
 
@@ -154,7 +178,7 @@ Al hacer clic sobre este checkbox aparecerá el checkbox para clasificar este ju
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.010.jpeg)
 
-3. **Ver y publicar pistas**
+## **Ver y publicar pistas** <a name="id4.3"></a>
 
 Bajo el título “Pistas” se mostrarán listadas las pistas publicadas por los usuarios de Player2 del juego en cuestión, mostrándose el título dado a la pista, autor y contenido. Clicando sobre la pista el usuario será redirigido al perfil de su autor.
 
@@ -164,7 +188,7 @@ Si pulsa sobre el botón “HACER PISTA” el usuario será dirigido a una vista
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.012.jpeg)
 
-4. **Ver y publicar reviews**
+## **Ver y publicar reviews** <a name="id4.4"></a>
 
 Bajo el título “Reviews” se mostrarán listadas las reviews publicadas por los usuarios de Player2 del juego en cuestión, mostrándose el título dado a la review, autor y contenido. Clicando sobre la pista el usuario será redirigido al perfil de su autor.
 
@@ -174,8 +198,8 @@ Si pulsa sobre el botón “HACER REVIEW” el usuario será dirigido a una vist
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.014.jpeg)
 
-5. **Vistas del perfil**
-1. **Introducción**
+# **Vistas del perfil** <a name="id5"></a>
+## **Introducción** <a name="id5.1"></a>
 
 Para acceder al perfil el usuario podrá, en el menú superior visible en todas las vistas de Player2 ajenas a las vistas del perfil, clicar sobre “Perfil”.
 
@@ -183,7 +207,7 @@ Para acceder al perfil el usuario podrá, en el menú superior visible en todas 
 
 Al hacerlo el usuario será dirigido a la vista principal de su perfil.
 
-2. **Vista Principal**
+## **Vista Principal** <a name="id5.2"></a>
 
 Esta vista, a la que el usuario accederá por defecto al visitar su perfil y también clicando sobre “Perfil” enel menú superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes cinco secciones:
 
@@ -215,7 +239,7 @@ Por último, señalar que en caso de visitar el usuario el perfil de otro usuari
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.017.jpeg)
 
-3. **Vista Videojuegos**
+## **Vista Videojuegos** <a name="id5.3"></a>
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Videojuegos” en la barra superior de las vistas encuadradas dentro del perfil, está compuesta por dos secciones:
 
@@ -229,7 +253,7 @@ botón “FILTRAR”, modificarán los juegos mostrados en el listado antes menc
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.018.jpeg)
 
-4. **Vista Social**
+## **Vista Social** <a name="id5.4"></a>
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Social” en el menú superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes secciones:
 
@@ -247,13 +271,13 @@ de búsqueda por medio de la cual el usuario podrá buscar un usuario concreto a
 
 que, al pulsar, muestran un listado de aquellos usuarios que siguen al usuario (“FOLLOWERS”) y un listado de aquellos usuarios a los que sigue el usuario (“FOLLOWING”), pudiendo alternar el usuario entre ambas listas presionando los botones correspondientes en todo momento. Al hacer clic sobre el nombre o avatar de un usuario de estas listas el usuario será dirigido al perfil de dicho usuario.
 
-5. **Vista Reviews**
+## **Vista Reviews** <a name="id5.5"></a>
 
 En esta vista, a la que el usuario podrá acceder al clicar sobre “Reviews” en el menú superior de las vistas encuadradas dentro del perfil, aparecen listadas todas las reviews publicadas por el usuario, mostrándose su título, nombre del autor y su avatar del que se ha realizado la review, a cuya ficha se puede acceder haciendo clic sobre cualquiera de los dos elementos, título e imagen. En caso de no haber realizado el usuario ninguna review se mostrará en su lugar un texto informando de ello.
 
 ![](Aspose.Words.d102de93-c17b-4bc9-bf72-2aee14cf3fea.020.jpeg)
 
-6. **Vista Ajustes**
+## **Vista Ajustes** <a name="id5.6"></a>
 
 Esta vista, a la que el usuario podrá acceder al clicar sobre “Ajustes” en el menú superior de las vistas encuadradas dentro del perfil, está compuesta por las siguientes secciones:
 
