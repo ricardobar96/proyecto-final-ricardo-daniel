@@ -26,7 +26,6 @@ import java.util.Date;
 public class CrearReviewActivity extends AppCompatActivity {
 
     String token;
-    Actividad actividad = new Actividad();
     Videojuego videojuego = new Videojuego();
     ReviewService reviewService;
     EditText tituloEditText;
@@ -42,8 +41,8 @@ public class CrearReviewActivity extends AppCompatActivity {
         token = preferences.getString("token", "");
         int usuarioId = preferences.getInt("usuarioId", 0);
         usuarioActual.setId(usuarioId);
-        actividad = (Actividad) getIntent().getSerializableExtra("actividad");
-        videojuego.setId(actividad.getVideojuego().getId());
+        Videojuego videojuegoIn = (Videojuego) getIntent().getSerializableExtra("videojuego");
+        videojuego.setId(videojuegoIn.getId());
         reviewService = APIUtils.getReviewService();
         tituloEditText = (EditText) findViewById(R.id.tituloReviewEditText);
         contenidoEditText = (EditText) findViewById(R.id.textoReviewEditText);

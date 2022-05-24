@@ -26,7 +26,6 @@ import java.util.Date;
 public class CrearPistaActivity extends AppCompatActivity {
 
     String token;
-    Actividad actividad = new Actividad();
     Videojuego videojuego = new Videojuego();
     PistaService pistaService;
     EditText tituloEditText;
@@ -42,8 +41,8 @@ public class CrearPistaActivity extends AppCompatActivity {
         token = preferences.getString("token", "");
         int usuarioId = preferences.getInt("usuarioId", 0);
         usuarioActual.setId(usuarioId);
-        actividad = (Actividad) getIntent().getSerializableExtra("actividad");
-        videojuego.setId(actividad.getVideojuego().getId());
+        Videojuego videojuegoIn = (Videojuego) getIntent().getSerializableExtra("videojuego");
+        videojuego.setId(videojuegoIn.getId());
         pistaService = APIUtils.getPistaService();
         tituloEditText = (EditText) findViewById(R.id.tituloPistaEditText);
         contenidoEditText = (EditText) findViewById(R.id.textoPistaEditText);

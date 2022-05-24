@@ -18,6 +18,7 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 import android.content.Context;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.util.Log;
@@ -92,9 +93,14 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         }
         Collections.sort(actividadList);
+        Collections.reverse(actividadList);
         listView.setAdapter(
         new ActividadAdapter(PrincipalActivity.this,
                 R.layout.tarjeta_actividad, actividadList));
+    }
+    public void navegarListaVideojuegos(View view) {
+        Intent myIntent = new Intent(PrincipalActivity.this, ListaVideojuegosActivity.class);
+        startActivity(myIntent);
     }
 
 }

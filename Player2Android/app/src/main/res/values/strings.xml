@@ -2,4 +2,9 @@
     <string name="app_name">Player2Android</string>
     <string name="nombre">Nombre</string>
     <string name="pwd">Contraseña</string>
+    <string-array name="ordenar_array">
+        <item>Fecha</item>
+        <item>Título</item>
+        <item>Puntuación</item>
+    </string-array>
 </resources>

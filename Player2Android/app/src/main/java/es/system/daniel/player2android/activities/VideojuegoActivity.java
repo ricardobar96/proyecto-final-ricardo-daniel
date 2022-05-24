@@ -57,6 +57,7 @@ public class VideojuegoActivity extends AppCompatActivity {
     List<Review> listReviewVideojuego = new ArrayList<>();
     List<Pista> listPistaVideojuego = new ArrayList<>();
     String token;
+    Videojuego videojuegoActual;
 
     // Elementos de la vista
     TextView tituloTextView;
@@ -81,6 +82,11 @@ public class VideojuegoActivity extends AppCompatActivity {
                 Context.MODE_PRIVATE);
         token = preferences.getString("token", "");
         actividad = (Actividad) getIntent().getSerializableExtra("actividad");
+        if (actividad == null) {
+            videojuegoActual = (Videojuego) getIntent().getSerializableExtra("videojuego");
+        } else {
+            videojuegoActual = actividad.getVideojuego();
+        }
         usuarioService = APIUtils.getUsuarioService();
         juegoUsuarioService = APIUtils.getJuegoUsuarioService();
         tituloTextView = (TextView) this.findViewById(R.id.tituloTextView);
@@ -126,7 +132,7 @@ public class VideojuegoActivity extends AppCompatActivity {
 
         for (JuegoUsuario juegoUsuario : usuarioActual.getJuegoUsuarios()) {
             Log.i("JuegoUsuario", juegoUsuario.getFecha().toString());
-            if (juegoUsuario.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+            if (juegoUsuario.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                 Log.i("Funciona!", juegoUsuario.getVideojuego().getDescripcion());
                 Log.i("Fecha now", new Date().toString());
                 empezado = true;
@@ -136,7 +142,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         }
 
         for (JuegoUsuario juegoUsuario : juegoUsuarios) {
-            if (juegoUsuario.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+            if (juegoUsuario.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                 numerVal++;
                 puntuacionTotal += juegoUsuario.getPuntuacion();
             }
@@ -151,10 +157,10 @@ public class VideojuegoActivity extends AppCompatActivity {
         puntuacionNumberPicker.setMinValue(0);
         puntuacionNumberPicker.setMaxValue(10);
         empezadoCheckBox.setChecked(empezado);
-        Picasso.get().load(actividad.getVideojuego().getImagen()).into(videojuegoImageView);
+        Picasso.get().load(videojuegoActual.getImagen()).into(videojuegoImageView);
 
-        tituloTextView.setText(actividad.videojuego.getNombre());
-        descripcionVideojuegoTextView.setText(actividad.getVideojuego().getDescripcion());
+        tituloTextView.setText(videojuegoActual.getNombre());
+        descripcionVideojuegoTextView.setText(videojuegoActual.getDescripcion());
 
 
         /**tituloTextView.setVisibility(View.VISIBLE);
@@ -227,7 +233,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         CheckBox empezadoCheckBox = (CheckBox) this.findViewById(R.id.empezadoCheckBox);
         if (empezadoCheckBox.isChecked()) {
             Videojuego videojuegoJuegoUsuario = new Videojuego();
-            videojuegoJuegoUsuario.setId(actividad.getVideojuego().getId());
+            videojuegoJuegoUsuario.setId(videojuegoActual.getId());
             Usuario usuarioJuegoUsuario = new Usuario();
             usuarioJuegoUsuario.setId(usuarioActual.getId());
             Call<JuegoUsuario> call = juegoUsuarioService.addJuegoUsuario(new JuegoUsuario(false, 0, videojuegoJuegoUsuario
@@ -281,7 +287,7 @@ public class VideojuegoActivity extends AppCompatActivity {
                     listReview = response.body();
 
                     for (Review r : listReview) {
-                        if (r.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+                        if (r.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                             listReviewVideojuego.add(r);
                         }
                     }
@@ -306,7 +312,7 @@ public class VideojuegoActivity extends AppCompatActivity {
                     listPista = response.body();
 
                     for (Pista p : listPista) {
-                        if (p.getVideojuego().getNombre().equals(actividad.getVideojuego().getNombre())) {
+                        if (p.getVideojuego().getNombre().equals(videojuegoActual.getNombre())) {
                             listPistaVideojuego.add(p);
                         }
                     }
@@ -335,7 +341,7 @@ public class VideojuegoActivity extends AppCompatActivity {
         juegoUsuarioPut.setUsuario(usuario);
 
         Videojuego videojuego = new Videojuego();
-        videojuego.setId(actividad.getVideojuego().getId());
+        videojuego.setId(videojuegoActual.getId());
         juegoUsuarioPut.setVideojuego(videojuego);
 
         Call<JuegoUsuario> call = juegoUsuarioService.updateJuegoUsuario(juegoUsuarioPut.getId(),
@@ -357,13 +363,13 @@ public class VideojuegoActivity extends AppCompatActivity {
 
     public void navegarCrearPista(View view) {
         Intent myIntent = new Intent(VideojuegoActivity.this, CrearPistaActivity.class);
-        myIntent.putExtra("actividad", actividad);
+        myIntent.putExtra("videojuego", videojuegoActual);
         startActivity(myIntent);
     }
 
     public void navegarCrearReview(View view) {
         Intent myIntent = new Intent(VideojuegoActivity.this, CrearReviewActivity.class);
-        myIntent.putExtra("actividad", actividad);
+        myIntent.putExtra("videojuego", videojuegoActual);
         startActivity(myIntent);
     }
 }

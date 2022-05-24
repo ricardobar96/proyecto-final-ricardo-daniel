@@ -11,6 +11,9 @@
         android:theme="@style/Theme.Player2Android"
         android:usesCleartextTraffic="true">
         <activity
+            android:name=".activities.ListaVideojuegosActivity"
+            android:exported="true" />
+        <activity
             android:name=".activities.CrearPistaActivity"
             android:exported="true" />
         <activity
@@ -41,8 +44,8 @@
             </intent-filter>
         </activity>
     </application>
-    <uses-permission android:name="android.permission.INTERNET" />
-
     <uses-permission android:name="android.permission.ACCESS_NETWORK_STATE" />
+
+    <uses-permission android:name="android.permission.INTERNET" />
 
 </manifest>
