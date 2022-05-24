@@ -1,0 +1,73 @@
+.profileLeft{
+    flex: 5;
+    padding: 20px;
+    height: calc(100%);
+    text-align:center;
+}
+
+.topGamesList{
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    display: flex;    
+}
+
+.topGamesBox{
+    align-items: center;
+    margin: auto;
+}
+
+.descriptionMainLeft{
+    background-color: white; 
+    border: solid;
+    width: 70px;
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    margin-left: 12px;
+}
+
+.contentDescription{
+    margin-top: -40px;
+    width: auto;
+    overflow-wrap: break-word;
+}
+
+.descriptionBox{
+    flex: 1;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    background-color: lightgoldenrodyellow;
+    padding: 15px;
+    justify-content: space-between;
+    width: 600px;
+    margin-top: -40px;
+}
+
+.genresContent{
+    background-color: lightgoldenrodyellow;
+    padding: 10px;
+    justify-content: space-evenly;
+    display: flex;
+}
+
+.valueGenres{
+    font-weight: bold;
+    font-size: 34px;
+    color: orangered
+}
+
+.genresList{
+    padding: 0;
+    margin-left: -50px;
+    list-style: none;
+}
+
+.titleFav{
+    font-weight: bolder;
+    font-size: 24px;
+    color:black;
+    margin-left: -40px;
+}

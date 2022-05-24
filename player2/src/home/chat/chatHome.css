@@ -1,0 +1,15 @@
+.usuarioLink {
+  display: flex;
+  background-color: bisque;
+  margin: 4%;
+  padding: 1%;
+  border-style: solid;
+}
+.avatar {
+    width: 100px;
+    height: 100px;
+}
+.avatar img {
+  max-height: 100%;
+  max-width: 100%;
+}
