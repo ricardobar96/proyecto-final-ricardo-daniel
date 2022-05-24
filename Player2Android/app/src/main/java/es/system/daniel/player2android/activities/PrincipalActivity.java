@@ -46,6 +46,7 @@ public class PrincipalActivity extends AppCompatActivity {
     ListView listView;
     boolean logueado;
     Integer idUsuarioActual;
+    TextView textActividadesNone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -55,6 +56,9 @@ public class PrincipalActivity extends AppCompatActivity {
         listView = (ListView)findViewById(R.id.actividadesListView);
 
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        textActividadesNone = (TextView) findViewById(R.id.actividadesNone);
+        textActividadesNone.setVisibility(View.GONE);
 
         /*
         SharedPreferences preferences = getSharedPreferences("usuario",
@@ -114,6 +118,11 @@ public class PrincipalActivity extends AppCompatActivity {
             }
         }
         Collections.sort(actividadList);
+
+        if(actividadList.size() == 0){
+            textActividadesNone.setVisibility(View.VISIBLE);
+        }
+
         listView.setAdapter(
                 new ActividadAdapter(PrincipalActivity.this,
                         R.layout.tarjeta_actividad, actividadList));

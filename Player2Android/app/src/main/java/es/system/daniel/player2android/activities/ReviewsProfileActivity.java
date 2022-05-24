@@ -7,7 +7,9 @@ import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
+import android.view.View;
 import android.widget.ListView;
+import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -42,6 +44,7 @@ public class ReviewsProfileActivity extends AppCompatActivity {
 
     Usuario usuarioLogin = new Usuario();
     String color;
+    TextView textReviewsNone;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -49,6 +52,9 @@ public class ReviewsProfileActivity extends AppCompatActivity {
         setContentView(R.layout.activity_reviewsprofile);
 
         usuarioLogin = (Usuario) getIntent().getSerializableExtra("usuarioLogin");
+
+        textReviewsNone = (TextView) findViewById(R.id.reviewsNone);
+        textReviewsNone.setVisibility(View.GONE);
 
         String color = usuarioLogin.getColor();
 
@@ -86,6 +92,11 @@ public class ReviewsProfileActivity extends AppCompatActivity {
                             listReviewUser.add(r);
                         }
                     }
+
+                    if(listReviewUser.size() == 0){
+                        textReviewsNone.setVisibility(View.VISIBLE);
+                    }
+
                     listViewReviews.setAdapter(
                             new ReviewAdapter(ReviewsProfileActivity.this,
                                     R.layout.tarjeta_review, listReviewUser));
